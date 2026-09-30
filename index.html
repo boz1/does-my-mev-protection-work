@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Private Sandwich Lookup</title>
+<title>Does My MEV Protection Work?</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&display=swap">
 <style>
@@ -57,16 +57,17 @@ footer{font-size:14px;color:var(--muted)}
 <body>
 
 <main>
-<h1>Private Sandwich Lookup</h1>
-<p class="small">Paste an Ethereum transaction hash. If a persistent bot sandwiched it after it was sent privately, you will see the attack, the order-flow auctions (OFAs) the transaction showed up in, and the bot behind it. The dataset is the one from <i>No Place to Hide: An Analysis on Protected Order Flow Sandwich Attacks</i> (<a href="https://arxiv.org/abs/2609.28115" target="_blank" rel="noopener">arXiv:2609.28115</a>).</p>
+<h1>Does my MEV protection work?</h1>
+<p class="small">Paste the hash of an Ethereum trade you sent through a private RPC or an order-flow auction (OFA). If a bot sandwiched it anyway, you will see the attack, the OFAs your transaction showed up in, and the bot behind it. The dataset is the one from <i>No Place to Hide: An Analysis on Protected Order Flow Sandwich Attacks</i> (<a href="https://arxiv.org/abs/2609.28115" target="_blank" rel="noopener">arXiv:2609.28115</a>).</p>
 
 <form id="f" autocomplete="off">
   <label for="q" class="muted small">tx&nbsp;hash:</label>
   <input id="q" name="q" spellcheck="false" placeholder="0x… (an Etherscan link works too)">
   <button id="go" type="submit">Look up</button>
 </form>
+<p class="small muted">Checks Ethereum trades only: the 30,607 private-flow sandwiches from the paper. Solana, Tron and Base are covered in the paper but not here.</p>
 <p class="examples muted">Try:
-  <a href="#0xa515be1564a357ce706487b35b21783d46d5c520497957e805d6459229d86e36">MEV-Share + MEVBlocker</a> ·
+  <a href="#0x05162b2f10dcb08a44d02f2479845315c32b635b2e1d0a2ebb8f45820a28d95a">MEV-Share + MEVBlocker</a> ·
   <a href="#0xfe0b01fe9966ff6abfe258b6c7e7b56b294ae73ce9dd49ccc18df93fcf583f23">Blink only</a> ·
   <a href="#0xa8d989fbcbace60b979b797c85896331bbecd398a54d4e16ac7d91da059ed1a3">MEVBlocker only</a> ·
   <a href="#0xf3e6a7f8e02291cb50cf7e4fcfe90d3c2b466c9ffbf09fc0b4fdaec51c96abd2">unattributed</a> ·
@@ -166,7 +167,7 @@ function render(rec, q){
   const priv=rec.V;
   const ty=TYPE[rec.t]||[rec.t,""];
   let head;
-  if(me) head=`<p class="verdict hit"><span class="blink">■</span> SANDWICHED.</p><p>This private transaction was sandwiched on <b>${rec.d}</b> by bot ${adl(rec.bot)} in a <b>${ty[0]}</b> attack.</p>`;
+  if(me) head=`<p class="verdict hit"><span class="blink">■</span> NO. THIS TRADE WAS SANDWICHED.</p><p>This transaction never reached the public mempool, and it was still sandwiched on <b>${rec.d}</b> by bot ${adl(rec.bot)} in a <b>${ty[0]}</b> attack.</p>`;
   else head=`<p class="verdict hit">■ ATTACKER TRANSACTION.</p><p>This is the <b>${role}</b> of a sandwich by bot ${adl(rec.bot)} on <b>${rec.d}</b>, against ${priv.length} private victim${priv.length===1?"":"s"}.</p>`;
 
   // diagram
@@ -216,6 +217,7 @@ function render(rec, q){
 
 async function lookup(raw, isExample){
   const m=String(raw).toLowerCase().match(/0x[0-9a-f]{64}/);
+  if(!m&&/^\s*[1-9A-HJ-NP-Za-km-z]{86,88}\s*$/.test(String(raw))){ out.innerHTML=`<p class="verdict">?</p><p>That looks like a Solana transaction signature. This tool checks Ethereum only. The paper measures 28.0M protected-flow sandwiches on Solana, but they are not in this lookup.</p>`; return; }
   if(!m){ out.innerHTML=`<p class="verdict">?</p><p>That is not a transaction hash. Paste 0x followed by 64 hex characters, or an Etherscan transaction link.</p>`; return; }
   const q=m[0]; $("q").value=q;
   if(location.hash!=="#"+q) history.replaceState(null,"","#"+q);
@@ -229,7 +231,7 @@ async function lookup(raw, isExample){
       const r=sh.find(x=>x.i===id);
       if(r&&(r.f.includes(q)||r.b.includes(q)||r.V.some(v=>v.h===q))){rec=r;break}
     }
-    if(!rec){ out.innerHTML=`<p class="verdict miss">□ NOT FOUND.</p><p class="mono small">${txl(q,true)}</p><p>This hash is not in the dataset. It is not among the 30,607 private-flow sandwiches by the 7 persistent bots, as a victim or as a leg. The transaction may have been public, may fall outside July 2023 to June 2026, may have traded on a DEX outside Uniswap V2–V4 and forks, or may have been hit by a bot below the paper's thresholds. See the scope note below.</p>`; return; }
+    if(!rec){ out.innerHTML=`<p class="verdict miss">□ NO SANDWICH FOUND IN OUR DATA.</p><p class="mono small">${txl(q,true)}</p><p>That does not mean your protection worked. This hash is not among the 30,607 private-flow sandwiches by the 7 persistent bots, as a victim or as a leg. The transaction may have been public, may fall outside July 2023 to June 2026, may have traded on a DEX outside Uniswap V2–V4 and forks, or may have been hit by a bot below the paper's thresholds. See the scope note below.</p>`; return; }
     render(rec,q);
     if(isExample) out.insertAdjacentHTML("afterbegin",`<p class="small muted">Example lookup from the dataset. Paste your own hash above.</p>`);
   }catch(e){ out.innerHTML=`<p class="verdict">!</p><p>The data files could not be loaded (${esc(e.message)}). Check your connection and press Look up again.</p>`; }
@@ -238,7 +240,7 @@ $("f").addEventListener("submit",e=>{e.preventDefault(); lookup($("q").value)});
 $("q").addEventListener("paste",e=>{const t=(e.clipboardData||window.clipboardData)?.getData("text"); if(t&&/0x[0-9a-fA-F]{64}/.test(t)){e.preventDefault(); lookup(t)}});
 window.addEventListener("hashchange",()=>{const h=location.hash.slice(1); if(h) lookup(h)});
 const h0=location.hash.slice(1);
-if(/^0x[0-9a-fA-F]{64}$/.test(h0)) lookup(h0); else lookup("0xa515be1564a357ce706487b35b21783d46d5c520497957e805d6459229d86e36",true);
+if(/^0x[0-9a-fA-F]{64}$/.test(h0)) lookup(h0); else lookup("0x05162b2f10dcb08a44d02f2479845315c32b635b2e1d0a2ebb8f45820a28d95a",true);
 })();
 </script>
 
