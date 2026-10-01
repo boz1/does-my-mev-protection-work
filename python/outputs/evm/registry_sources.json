@@ -1,0 +1,366 @@
+[
+  {
+    "url": "https://github.com/VeloraDEX/paraswap-dex-lib/blob/master/src/abi/solidly/SolidlyPair.json",
+    "sha256": "6305ae6ec64093b92525adb58a11b22de06f0e4241ff413f91fc55dc8b14e5e4"
+  },
+  {
+    "url": "https://github.com/VeloraDEX/paraswap-dex-lib/blob/master/src/abi/uniswap-v3/UniswapV3Pool.abi.json",
+    "sha256": "9d1766d41740ef26f2c06eaec0715f06cb0886c018c72a4e2a1f5d584b4b5024"
+  },
+  {
+    "url": "https://github.com/VeloraDEX/paraswap-dex-lib/blob/master/src/abi/pancakeswap-v3/PancakeswapV3Pool.abi.json",
+    "sha256": "00c2fb5e3a8ee952b3cc0454b26cb8af312acf8faa4088487bc1fa683eea6a5f"
+  },
+  {
+    "url": "https://github.com/VeloraDEX/paraswap-dex-lib/blob/master/src/abi/algebra-integral/AlgebraIntegralPool.abi.json",
+    "sha256": "7222ae86e1d80da9b7b8f5f4e0d6f078be6b3509a33bac87c97930461e69903e"
+  },
+  {
+    "url": "https://github.com/VeloraDEX/paraswap-dex-lib/blob/master/src/abi/uniswap-v4/pool-manager.abi.json",
+    "sha256": "ba44fab8ab961a2e6d76278c294c3dc2d2e1ad05d6f7d9902804b0ec453f52aa"
+  },
+  {
+    "url": "https://github.com/VeloraDEX/paraswap-dex-lib/blob/master/src/abi/BalancerV1Pool.json",
+    "sha256": "0e88a88b246bd5f6e97084c4cbcf73ff0a57f8f8aea2113ab77e099122a1217d"
+  },
+  {
+    "url": "https://github.com/VeloraDEX/paraswap-dex-lib/blob/master/src/abi/balancer-v2/vault.json",
+    "sha256": "c21b4368e365d28c24312df826307d25153c07e641316b73c418477b14444426"
+  },
+  {
+    "url": "https://github.com/VeloraDEX/paraswap-dex-lib/blob/master/src/abi/balancer-v3/vault-extension.json",
+    "sha256": "ce5c9dcbf02e746de7346d8e7c277e215b5c33a40e01d5480762ff09ac1d73df"
+  },
+  {
+    "url": "https://github.com/VeloraDEX/paraswap-dex-lib/blob/master/src/abi/curve-v1/StableSwap3Pool.json",
+    "sha256": "dc8c98c6fb26fddda78d8975dff55c03751da38bd7f7803aa6c894adea995df2"
+  },
+  {
+    "url": "https://github.com/VeloraDEX/paraswap-dex-lib/blob/master/src/abi/curve-v1/CurveV1StableNg.json",
+    "sha256": "c71cf68bd16e2529c4c99b430dba84bc7cab8c0a6553fee04c25b03c4a4ac9af"
+  },
+  {
+    "url": "https://github.com/VeloraDEX/paraswap-dex-lib/blob/master/src/abi/CurveV2.json",
+    "sha256": "0bd96c368d4bb3663c4d5b200e1a497f573afe8c2d2fa1b7590ed74e0a2eaec0"
+  },
+  {
+    "url": "https://github.com/VeloraDEX/paraswap-dex-lib/blob/master/src/abi/StablePool.json",
+    "sha256": "e4a6d1d05384feb23d5d564b7b8150a0ab25c41b5ea0e7943bf05e5228a77ebc"
+  },
+  {
+    "url": "https://github.com/VeloraDEX/paraswap-dex-lib/blob/master/src/abi/nerve/nerve-metapool.json",
+    "sha256": "09e4ca188c28f70ad7d2dfaa0b711b573ff594baae2d6148cdec047de5b2b93e"
+  },
+  {
+    "url": "https://github.com/VeloraDEX/paraswap-dex-lib/blob/master/src/abi/maverick-v1/pool.json",
+    "sha256": "d5ec8346622c73499bf11ed0d80aa51f664f0d340fb91bde7b5af1f3b770ad34"
+  },
+  {
+    "url": "https://github.com/VeloraDEX/paraswap-dex-lib/blob/master/src/abi/maverick-v2/MaverickV2Pool.json",
+    "sha256": "239af910e444f0d407305351500f64a984dceb25130434ceffbe00231c3ccd5d"
+  },
+  {
+    "url": "https://github.com/VeloraDEX/paraswap-dex-lib/blob/master/src/abi/fluid-dex/fluid-dex.abi.json",
+    "sha256": "057e76c6016c0532d1c9e60e5d04afaa4f63b0e16be10a41a433a2945de44eac"
+  },
+  {
+    "url": "https://github.com/VeloraDEX/paraswap-dex-lib/blob/master/src/abi/woo-fi-v2/WooPPV2.abi.json",
+    "sha256": "5b17df2176b4b277a99a46081bb4d3ebafc9afde4ef6685b45343e7360f2b9bc"
+  },
+  {
+    "url": "https://github.com/VeloraDEX/paraswap-dex-lib/blob/master/src/abi/paraswap-limit-orders/AugustusRFQ.abi.json",
+    "sha256": "f506c534b5ad5e3de08249cef66f3eb2cad31dfdd6e69557b65493241cc9f0a3"
+  },
+  {
+    "url": "https://github.com/VeloraDEX/paraswap-dex-lib/blob/master/src/abi/dexalot/DexalotMainnetRFQ.json",
+    "sha256": "09d40b88bf9cccf4fe79910ef6d830454ade3e87a0a17ce4f541f1b4c1ab5e42"
+  },
+  {
+    "url": "https://github.com/VeloraDEX/paraswap-dex-lib/blob/master/src/abi/angle-transmuter/Transmuter.json",
+    "sha256": "5ac17ba5af15c349431d0ee6088cfad6c2aba074e412a5a1772ba545687d96dd"
+  },
+  {
+    "url": "https://github.com/VeloraDEX/paraswap-dex-lib/blob/master/src/abi/sdai/PSM3.abi.json",
+    "sha256": "2c4493c5c99643fd87bf636e3cc40b79bb4506e1032c321dda5c26cd8ec9dfb5"
+  },
+  {
+    "url": "https://github.com/VeloraDEX/paraswap-dex-lib/blob/master/src/abi/IParaswap.json",
+    "sha256": "e8408ddeb5ba643bea6e9baf78c7c4bf71d170f390f6b96f38cf56a702f7da19"
+  },
+  {
+    "url": "https://github.com/VeloraDEX/paraswap-dex-lib/blob/master/src/abi/DirectSwap.json",
+    "sha256": "6af67254e802e639551c5ae72e4897d0c6d495464e36fb29ce9a420c61052366"
+  },
+  {
+    "url": "https://github.com/VeloraDEX/paraswap-dex-lib/blob/master/src/abi/dodo-v2-proxy.json",
+    "sha256": "8e4d60fb995a7bde1743517152e918dc1848492bbd58041de605bcbce036bc47"
+  },
+  {
+    "url": "https://github.com/VeloraDEX/paraswap-dex-lib/blob/master/src/abi/curve-v1-factory/CurveV1Router.abi.json",
+    "sha256": "b717ef3e7bf5209760db68b08e52de9113cea7cafb178850fbd12c632b53d754"
+  },
+  {
+    "url": "https://github.com/VeloraDEX/paraswap-dex-lib/blob/master/src/abi/ERC4626.json",
+    "sha256": "0621c351c3e47035863bdbadf54e10632ec1f3b59399f850e2af4b750dfad85f"
+  },
+  {
+    "url": "https://github.com/VeloraDEX/paraswap-dex-lib/blob/master/src/abi/ekubo-v3/core.json",
+    "sha256": "6eeee647c421adfda46de9829ac023f0229abc5a638fc793896833eade3f0baa"
+  },
+  {
+    "url": "https://github.com/aerodrome-finance/contracts/blob/main/contracts/interfaces/IPool.sol",
+    "sha256": "ad63fe778576d4117d319ff7e1bf7a65d573cd19ddc1bbd5ea2adee5f1d891a6"
+  },
+  {
+    "url": "https://github.com/DODOEX/contractV2/blob/main/contracts/DODOVendingMachine/impl/DVMTrader.sol",
+    "sha256": "3cd5bd2a0277d156024bb16414b53c5745e43573260bee2d0ec286b35174bc67"
+  },
+  {
+    "url": "https://github.com/DODOEX/dodo-smart-contract/blob/master/contracts/impl/Trader.sol",
+    "sha256": "1cbf7bb2639b4ca5798577ecee878d3b6a6718744b3392cd9f335f78170d44bd"
+  },
+  {
+    "url": "https://github.com/cowprotocol/contracts/blob/main/src/contracts/GPv2Settlement.sol",
+    "sha256": "6a84f5494a012a0196f61b92f61804bd6138c21e30dc0390dc8a11d51b067a66"
+  },
+  {
+    "url": "https://github.com/0xProject/protocol/blob/development/contracts/zero-ex/contracts/src/features/interfaces/INativeOrdersEvents.sol",
+    "sha256": "2584bfd209ebd1cfdf6ffafa613a635d3e21d5abb34eec54b6e607f0bd3f105d"
+  },
+  {
+    "url": "https://github.com/shipyard-software/clipper-dex-contracts/blob/main/contracts/ClipperExchangeInterface.sol",
+    "sha256": "c769790edfdcb0e48c171c0b16cfff336aa60a9299cbd127b0236eeee9545ef3"
+  },
+  {
+    "url": "https://github.com/pancakeswap/infinity-core/blob/main/src/pool-cl/interfaces/ICLPoolManager.sol",
+    "sha256": "d2a488219dd1f4c6ce12bcb7234f692cb658384a61859a3b52ebb3a125edb2c5"
+  },
+  {
+    "url": "https://github.com/pancakeswap/infinity-core/blob/main/src/pool-bin/interfaces/IBinPoolManager.sol",
+    "sha256": "cd1d173cfebea734f0a9badf9762c7706f36d3c04e2ca991ba02d9cb1d85575b"
+  },
+  {
+    "url": "https://github.com/Uniswap/v1-contracts/blob/master/contracts/uniswap_exchange.vy",
+    "sha256": "0ec61e17c9d46d178c97443ee5c18d04eb7a8cac84179ad664b14da52d333a8f"
+  },
+  {
+    "url": "https://github.com/VeloraDEX/paraswap-dex-lib/blob/master/src/dex/uniswap-v2/config.ts",
+    "sha256": "8e2efe9cb447d213820bab60febe251ed4bcf4a9d678a8e36d72a280a3e49d02"
+  },
+  {
+    "url": "https://github.com/VeloraDEX/paraswap-dex-lib/blob/master/src/dex/uniswap-v3/config.ts",
+    "sha256": "9934fe7698a7e35945f954740bdf002c7944b660d450b206fd60ecebfa871b61"
+  },
+  {
+    "url": "https://github.com/VeloraDEX/paraswap-dex-lib/blob/master/src/dex/solidly/config.ts",
+    "sha256": "33592913780a9eafa0756918e3b2b46faa8ac19f6176efd8fa8118c0b6ded78a"
+  },
+  {
+    "url": "https://github.com/VeloraDEX/paraswap-dex-lib/blob/master/src/dex/solidly-v3/config.ts",
+    "sha256": "193348d16c59d94cc24d11a62afa7ee1b9eaa9cfe42e309b498567eebbace029"
+  },
+  {
+    "url": "https://github.com/VeloraDEX/paraswap-dex-lib/blob/master/src/dex/algebra/config.ts",
+    "sha256": "961b6f82030b675638926ec266519af8bd985218049b32dfdd14e6570ab4d4bf"
+  },
+  {
+    "url": "https://github.com/VeloraDEX/paraswap-dex-lib/blob/master/src/dex/algebra-integral/config.ts",
+    "sha256": "3cb4312ac46a21d4fa1646b464078b4d62b2f3eae128645824cf3fcc4061e607"
+  },
+  {
+    "url": "https://github.com/VeloraDEX/paraswap-dex-lib/blob/master/src/dex/pancakeswap-v3/config.ts",
+    "sha256": "93a7511204377ef076c1b3d3556ed062d95137d97de465a709c744b1095e4df0"
+  },
+  {
+    "url": "https://github.com/VeloraDEX/paraswap-dex-lib/blob/master/src/dex/uniswap-v4/config.ts",
+    "sha256": "1220bbc78e5b7e1b3998655915f64bd151fc5998d0086b2a7422ead5771e1860"
+  },
+  {
+    "url": "https://github.com/VeloraDEX/paraswap-dex-lib/blob/master/src/dex/balancer-v2/config.ts",
+    "sha256": "b77e32dc5d22e393453eefdb8e34236c1b3829af19ed8531604f5450e6b332b6"
+  },
+  {
+    "url": "https://github.com/VeloraDEX/paraswap-dex-lib/blob/master/src/dex/balancer-v3/config.ts",
+    "sha256": "26aef536ec6a39925ffb95e18021f809a192edaa7916314ddaec9e65f621802e"
+  },
+  {
+    "url": "https://github.com/VeloraDEX/paraswap-dex-lib/blob/master/src/dex/swaap-v2/config.ts",
+    "sha256": "55c102ce4860027ea4cecc246e03242aacdbf5e1329fd0baf6e9e886d6bdc097"
+  },
+  {
+    "url": "https://github.com/VeloraDEX/paraswap-dex-lib/blob/master/src/dex/woo-fi-v2/config.ts",
+    "sha256": "5f59d4d01d5112c19794001eea3d90f0189ce164db27b4b54388204e449621a8"
+  },
+  {
+    "url": "https://github.com/VeloraDEX/paraswap-dex-lib/blob/master/src/dex/fluid-dex/config.ts",
+    "sha256": "b8da05c7e55e36e893eb6c16a4340bab856fdcfa6392941d1db19c31940df0d5"
+  },
+  {
+    "url": "https://github.com/VeloraDEX/paraswap-dex-lib/blob/master/src/dex/paraswap-limit-orders/config.ts",
+    "sha256": "04032dd7f6e7b1146323548328cdd8d2b8e866a3e07fc5441e39678fe1a125aa"
+  },
+  {
+    "url": "https://github.com/VeloraDEX/paraswap-dex-lib/blob/master/src/dex/pancakeswap-infinity/config.ts",
+    "sha256": "047d6897e83abec6419d09ad79ce77faaf4223ea58a463d30405d734ee3c5c0b"
+  },
+  {
+    "url": "https://sourcify.dev/server/v2/contract/1/0x4ebdf703948ddcea3b11f675b4d1fba9d2414a14?fields=abi",
+    "sha256": "14566705c65b682979abe2777a9e53250f35dfd3c53f25ea4eab680a93f74d45"
+  },
+  {
+    "url": "https://sourcify.dev/server/v2/contract/8453/0xf0f0f0f0fb0d738452efd03a28e8be14c76d5f73?fields=abi",
+    "sha256": "2a1bd6b3b66dfe26c4f282dbdb164b59f93d74422e46f1ecbc0a8ab70dbda275"
+  },
+  {
+    "url": "https://sourcify.dev/server/v2/contract/1/0x6131b5fae19ea4f9d964eac0408e4408b66337b5?fields=abi",
+    "sha256": "d3488e614dc25242523f8e972771cd6271240eaeda2b1d72eb937c97068754f2"
+  },
+  {
+    "url": "https://sourcify.dev/server/v2/contract/1/0x7a819fa46734a49d0112796f9377e024c350fb26?fields=abi",
+    "sha256": "451ed1fa31c31827435e136f51361e70f01ccd09f57b40dd00b88b77b0b2a177"
+  },
+  {
+    "url": "https://sourcify.dev/server/v2/contract/8453/0x4efbd630205dd9b987c3bcbee257600abc1e3c11?fields=abi",
+    "sha256": "128642f1497aa8740488f42fe5402211b22b6b6ba5ab8c5990ba45fb5090e4d2"
+  },
+  {
+    "url": "https://sourcify.dev/server/v2/contract/8453/0xba1333333333a1ba1108e8412f11850a5c319ba9?fields=abi",
+    "sha256": "8686b8692c0136c5448ad6393d24459b2d66a4c0f69efcad455e319384ebfaa2"
+  },
+  {
+    "url": "https://sourcify.dev/server/v2/contract/1/0x958942af77dcd973b815b2a16bd88a5134c46888?fields=abi",
+    "sha256": "8e792c8322bdfc53f2c18152ca771b4c5a375cb2214f1c580008249d94e0ab78"
+  },
+  {
+    "url": "https://sourcify.dev/server/v2/contract/1/0x111111125421ca6dc452d289314280a0f8842a65?fields=abi",
+    "sha256": "6a94d8d03512438a4a68254631696aeb1e9ce986c713efdb8c0424bc44884e0b"
+  },
+  {
+    "url": "https://sourcify.dev/server/v2/contract/8453/0x55555522005bcae1c2424d474bfd5ed477749e3e?fields=abi",
+    "sha256": "9b497b4bb95c9bb6053815fda3ab94845a691c70bdaa23d944cce07af7e3131a"
+  },
+  {
+    "url": "https://github.com/hashflownetwork/x-protocol/blob/main/evm/contracts/interfaces/IHashflowPool.sol",
+    "sha256": "abbf909609dba67e432f29ce0d403ab58853949eb0cfc8bc818fe02508a2882d"
+  },
+  {
+    "url": "https://github.com/bancorprotocol/carbon-contracts/blob/dev/contracts/carbon/Strategies.sol",
+    "sha256": "9b78c3b5a610621dae759452e1771c14bb5bc649d080dfb196b3ff53e4410d89"
+  },
+  {
+    "url": "https://github.com/bancorprotocol/contracts-v3/blob/master/contracts/network/BancorNetwork.sol",
+    "sha256": "71d75a29e63b20461b23ab509770b97e74bed5a070cec5a9fe854cf4bc91373a"
+  },
+  {
+    "url": "https://github.com/rubicondefi/rubicon_protocol/blob/master/contracts/RubiconMarket.sol",
+    "sha256": "20a766fdbd6fc7cdd7358dd4d0f79334e63ac4335053e6b4c7ed47e6442177ed"
+  },
+  {
+    "url": "https://github.com/lfj-gg/joe-v2/blob/main/src/interfaces/ILBPair.sol",
+    "sha256": "f78e7b08feef4e705418b65f540a8586fad6c3b4d9a4e0ee9de998d055f04e41"
+  },
+  {
+    "url": "https://github.com/euler-xyz/euler-swap/blob/master/src/libraries/SwapLib.sol",
+    "sha256": "5bef0d240bd4d662cd123238dc6dd1cb546b1471c6e7b8bffea9af4617fb76a6"
+  },
+  {
+    "url": "https://github.com/dfx-finance/protocol-v2/blob/main/src/Curve.sol",
+    "sha256": "55520b71c748e04d53a3097d4b9d1e1c96ad0cc34b095ea05b3796dc14513f9f"
+  },
+  {
+    "url": "https://github.com/SmarDex-Dev/smart-contracts/blob/main/contracts/core/interfaces/ISmardexPair.sol",
+    "sha256": "c4fd937df3ea48f45a0bfff2d13137bd3773f07c5040008f2244f96e8c0c7e36"
+  },
+  {
+    "url": "https://github.com/wombat-exchange/v1-core/blob/master/contracts/wombat-core/pool/Pool.sol",
+    "sha256": "00745473d10fbc4d34db574388085551cca7999f9d29338c0f14879abf4437cb"
+  },
+  {
+    "url": "https://github.com/mstable/mStable-contracts/blob/master/contracts/masset/Masset.sol",
+    "sha256": "75828095030d58e0fad4b6221d4cbe778e950e10adb12172cdc8a05de9c48d05"
+  },
+  {
+    "url": "https://github.com/EkuboProtocol/evm-contracts/blob/main/src/Core.sol",
+    "sha256": "6f7ded29b8d07da3c89dd4f56cddf702d9ceb94442ead48f25a6dd026f38c045"
+  },
+  {
+    "url": "https://sourcify.dev/server/v2/contract/1/0x5979458912f80b96d30d4220af8e2e4925a33320?fields=sources,abi",
+    "sha256": "2f6e3d148f4621facd950cb6f99be877a9d845f6e889abf272657b821ab7d65e"
+  },
+  {
+    "url": "https://sourcify.dev/server/v2/contract/1/0xe0e0e08a6a4b9dc7bd67bcb7aade5cf48157d444?fields=sources,abi",
+    "sha256": "ccc0173c6ee501fb70b71ed42089dbc36b08601d3ffc26ab24e38d1655fd77f6"
+  },
+  {
+    "url": "https://sourcify.dev/server/v2/contract/8453/0x5d2806b9af9e9f740b55eda02a8484af5805803a?fields=sources,abi",
+    "sha256": "eb14745c00b3adc6b422bbac6387bb429e78aadf65ef76ec94f308dc4130d9e2"
+  },
+  {
+    "url": "https://github.com/duneanalytics/spellbook/blob/main/dbt_subprojects/dex/models/trades/base/dex_base_base_trades.sql",
+    "sha256": "c79de6bc4245d0d5ba05938ddd4171718b49e3bad010efe9f3523d443d6e2937"
+  },
+  {
+    "url": "https://github.com/duneanalytics/spellbook/blob/main/dbt_subprojects/dex/models/trades/ethereum/dex_ethereum_base_trades.sql",
+    "sha256": "55d10640aee02d29d5fcdb30b5fcd98836e93bf437b632eb0fbd8f80f254e98d"
+  },
+  {
+    "url": "https://github.com/VeloraDEX/paraswap-dex-lib/blob/master/src/abi/weth.abi.json",
+    "sha256": "6c40236211d64e8095e372a115936c0271bca1e18b3d8d28d1d26854a8ce8cb2"
+  },
+  {
+    "url": "https://sourcify.dev/server/v2/contract/1/0x655edce464cc797526600a462a8154650eee4b77?fields=abi",
+    "sha256": "cb3f62be1a78c5fbdf8fb6749098d3f5ae89ab7abeed7d1120019c85cb7dc85a"
+  },
+  {
+    "url": "https://github.com/Instadapp/fluid-contracts-public/blob/main/contracts/protocols/dexLite/other/events.sol",
+    "sha256": "5b767d47ad9b8bb2beb37c9d2180dbe343f9ba4600d2595b007e8c891acbddf7"
+  },
+  {
+    "url": "https://github.com/Instadapp/fluid-contracts-public/blob/main/contracts/protocols/dexLite/core/main.sol",
+    "sha256": "7aacc2c45d659f68e19230f801c028a98a38cfa42adf48bab493fca2fea226c8"
+  },
+  {
+    "url": "https://github.com/Instadapp/fluid-contracts-public/blob/main/contracts/protocols/dexLite/core/coreInternals.sol",
+    "sha256": "09e143e3ac9f58112d74e81242f9bee5366ce7a1c9bed77399277540d4ed9035"
+  },
+  {
+    "url": "https://github.com/Instadapp/fluid-contracts-public/blob/main/contracts/libraries/dexLiteSlotsLink.sol",
+    "sha256": "5dc438abb4859e305d9a64ecef7311b4e2d6302815f29fb90be397c7231f0ecf"
+  },
+  {
+    "url": "https://github.com/makerdao/dss-lite-psm/blob/master/src/DssLitePsm.sol",
+    "sha256": "502eed38778ac29758959cadbb3d2f36aa3af21144e7374483795581a6279ce8"
+  },
+  {
+    "url": "https://github.com/makerdao/dss-psm/blob/master/src/psm.sol",
+    "sha256": "ca34ad07195dda30707eaeb0a1fb887b3e1b4b6bc5b583c5548d5f2f6286f1b4"
+  },
+  {
+    "url": "https://sourcify.dev/server/v2/contract/1/0x89b78cfa322f6c5de0abceecab66aee45393cc5a?fields=abi,compilation",
+    "sha256": "e1707cfe7c043ec5513f4dc88694c5f89f422900428c639932561308fc2f7870"
+  },
+  {
+    "url": "https://sourcify.dev/server/v2/contract/1/0xae8999da4d81cb81b42288b12176fe20d7ead578?fields=compilation,sources",
+    "sha256": "8e853d8562bda15dd1a93c7162305339a43c84f3a32d6844680764714c075623"
+  },
+  {
+    "url": "https://sourcify.dev/server/v2/contract/1/0x20f6ee51340adeed01a59b0e65cb3703f3dc860c?fields=compilation,sources",
+    "sha256": "99a827457e1b9c5cb326dfe07cc7c6621cbf4a59c0e3e3e4422d10aceae48661"
+  },
+  {
+    "url": "https://github.com/VeloraDEX/paraswap-dex-lib/blob/master/src/dex/fluid-dex-lite/config.ts",
+    "sha256": "9fa1e8ae7c52ab92792f3bfdc36d72dac8db6ee7c6193690a22ff519f57ec25e"
+  },
+  {
+    "url": "https://sourcify.dev/server/v2/contract/1/0x410b72ccfeacbb20a31785edaa358d25a07e143d?fields=compilation,sources",
+    "sha256": "163a80bba400fe0867e7bf76abfeecfda6cb489983fd65b5cc6cff2d8bf3d10c"
+  },
+  {
+    "url": "https://sourcify.dev/server/v2/contract/8453/0x20f6ee51340adeed01a59b0e65cb3703f3dc860c?fields=compilation,sources",
+    "sha256": "35377bf7d1f6c691f428b58c76100ff4f245d95da89eb04ad8f7454f783bbbfa"
+  },
+  {
+    "url": "https://sourcify.dev/server/v2/contract/1/0x5d1a34369686ae59ac97ae4e1df5635ffda9ee7c?fields=compilation,sources",
+    "sha256": "8209cb8b486f51f33e8a843518eeec4f91c2201121cdf63740462fe6985d8ed3"
+  }
+]

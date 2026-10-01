@@ -1,0 +1,13 @@
+2023-10-10 · solana · within-block tight · shared front/back fee payer 6RfaufkM…1YB8qz
+Slots 222,669,934
+
+FRONT  1GuJUnoE…UYLEkj  block/slot=222669934 index=455  from 6RfaufkM…1YB8qz
+       0.158673523 WSOL → 106141040.17138162 DFrJxDoL…uTKcTk  [Raydium AMM v4]
+VICTIM 2ar2x3an…y9if19  block/slot=222669934 index=456  from GGADZRXt…NYnGxV
+       0.7 WSOL → 457855254.62376151 DFrJxDoL…uTKcTk  [Raydium AMM v4]
+BACK   3KwhkMNu…DQ15FP  block/slot=222669934 index=457  from 6RfaufkM…1YB8qz
+       106141040.17138162 DFrJxDoL…uTKcTk → 0.163749394 WSOL  [Raydium AMM v4]
+
+Front→back index distance: 2; 1 transactions strictly between; 0 not listed in this row.
+
+Swap coverage is limited to the installed decoders; unknown activity is retained in JSON.

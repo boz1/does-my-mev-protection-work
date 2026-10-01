@@ -1,0 +1,205 @@
+{
+  "chain": "ethereum",
+  "chain_id": 1,
+  "tx_hash": "0xe51984071a286beb817de1692b86bda5f22d33ec45eda7f52bd77b4552fbc7ae",
+  "block_number": 26094298,
+  "block_hash": "0x449e603287d390d9f1fce846efa798593a0193fd7931164bcedc0bca3dff910e",
+  "transaction_index": 167,
+  "transaction_sender": "0x24b0bc3c4df06a63bd714281d37befda1185c510",
+  "transaction_to": "0x111111125421ca6dc452d289314280a0f8842a65",
+  "status": "success",
+  "swaps": [
+    {
+      "log_index": 606,
+      "event": "Swap(address,address,address,uint256,uint256,uint256,uint256)",
+      "adapter": "balancer_v3",
+      "venue_type": "amm",
+      "emitter": "0xba1333333333a1ba1108e8412f11850a5c319ba9",
+      "pool": "0x571bea0e99e139cd0b6b7d9352ca872dfe0d72dd",
+      "pool_id": null,
+      "protocol": "Balancer v3",
+      "protocol_verified": true,
+      "verification": "registered_emitter",
+      "factory": null,
+      "sender": null,
+      "recipient": null,
+      "inputs": [
+        {
+          "address": "0x4a220e6096b25eadb88358cb44068a3248254675",
+          "is_native": false,
+          "symbol": "QNT",
+          "decimals": 18,
+          "amount_raw": "167835143127619377",
+          "amount": "0.167835143127619377"
+        }
+      ],
+      "outputs": [
+        {
+          "address": "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599",
+          "is_native": false,
+          "symbol": "WBTC",
+          "decimals": 8,
+          "amount_raw": "60150",
+          "amount": "0.0006015"
+        }
+      ],
+      "input": {
+        "address": "0x4a220e6096b25eadb88358cb44068a3248254675",
+        "is_native": false,
+        "symbol": "QNT",
+        "decimals": 18,
+        "amount_raw": "167835143127619377",
+        "amount": "0.167835143127619377"
+      },
+      "output": {
+        "address": "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599",
+        "is_native": false,
+        "symbol": "WBTC",
+        "decimals": 8,
+        "amount_raw": "60150",
+        "amount": "0.0006015"
+      },
+      "amount_scope": "executed_event; may differ from net wallet receipts for taxed tokens",
+      "evidence": {
+        "source": "receipt_log",
+        "topic0": "0x0874b2d545cb271cdbda4e093020c452328b24af12382ed62c4d00f5c26709db",
+        "fields": {
+          "amountIn": "167835143127619377",
+          "amountOut": "60150",
+          "swapFeePercentage": "3000000000000000",
+          "swapFeeAmount": "503505429382859",
+          "pool": "0x571bea0e99e139cd0b6b7d9352ca872dfe0d72dd",
+          "tokenIn": "0x4a220e6096b25eadb88358cb44068a3248254675",
+          "tokenOut": "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599"
+        }
+      },
+      "vault": "0xba1333333333a1ba1108e8412f11850a5c319ba9"
+    },
+    {
+      "log_index": 610,
+      "event": "anonymous Ekubo Swap",
+      "adapter": "ekubo_v3",
+      "venue_type": "amm",
+      "emitter": "0x00000000000014aa86c5d3c41765bb24e11bd701",
+      "pool": "0x00000000000014aa86c5d3c41765bb24e11bd701",
+      "pool_id": "0xe29d7ac1555e569de7a2234d234758e0e8768d50fa7c54c963d31df96876279f",
+      "protocol": "Ekubo v3",
+      "protocol_verified": true,
+      "factory": null,
+      "verification": "registered_emitter_and_trace_key_hash",
+      "sender": "0xd26f20001a72a18c002b00e6710000d68700ce00",
+      "recipient": null,
+      "inputs": [
+        {
+          "address": "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599",
+          "is_native": false,
+          "symbol": "WBTC",
+          "decimals": 8,
+          "amount_raw": "60150",
+          "amount": "0.0006015"
+        }
+      ],
+      "outputs": [
+        {
+          "address": "0xdac17f958d2ee523a2206206994597c13d831ec7",
+          "is_native": false,
+          "symbol": "USDT",
+          "decimals": 6,
+          "amount_raw": "50221076",
+          "amount": "50.221076"
+        }
+      ],
+      "input": {
+        "address": "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599",
+        "is_native": false,
+        "symbol": "WBTC",
+        "decimals": 8,
+        "amount_raw": "60150",
+        "amount": "0.0006015"
+      },
+      "output": {
+        "address": "0xdac17f958d2ee523a2206206994597c13d831ec7",
+        "is_native": false,
+        "symbol": "USDT",
+        "decimals": 6,
+        "amount_raw": "50221076",
+        "amount": "50.221076"
+      },
+      "pool_key": {
+        "token0": "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599",
+        "token1": "0xdac17f958d2ee523a2206206994597c13d831ec7",
+        "config": "0x0000000000000000000000000000000000000000004189374bc6a7f08000137c"
+      },
+      "amount_scope": "executed_pool_event_and_matching_call_return",
+      "evidence": {
+        "source": "receipt_log_and_call_trace",
+        "topic0": null,
+        "data": "0xd26f20001a72a18c002b00e6710000d68700ce00e29d7ac1555e569de7a2234d234758e0e8768d50fa7c54c963d31df96876279f0000000000000000000000000000eaf6fffffffffffffffffffffffffd01afec800000073a138a54dc0202c30066aa090000000000000000000000026bcd5394",
+        "trace_address": [
+          1,
+          5,
+          0,
+          0,
+          0
+        ]
+      }
+    }
+  ],
+  "conversions": [],
+  "settlements": [],
+  "route_summaries": [],
+  "non_swap_events": [],
+  "undecoded_events": [],
+  "unclassified_logs": [
+    {
+      "log_index": 600,
+      "emitter": "0xbbbbbbb520d69a9775e85b458c58c648259fad5f",
+      "topics": [
+        "0xadd7095becdaa725f0f33243630938c861b0bba83dfd217d4055701aa768ec2e",
+        "0x00000000000000000000000000000000e281af65c3cdfe53be58c63b53476e44"
+      ],
+      "data": "0x"
+    },
+    {
+      "log_index": 601,
+      "emitter": "0xbeb0009aca35087ce7ccf11637e24dd1aad3bf2a",
+      "topics": [
+        "0x7199b4a4e868be23324b6c68ae97411fef576cbaac785d28fcd301e2a8b0715a",
+        "0x000000000000000000000000c4d50263c1e89b65b63c830ff93fadc957064fa4",
+        "0x00000000000000000000000000000000e281af65c3cdfe53be58c63b53476e44",
+        "0x00000000000000000000000000000000e281af65c3cdfe53be58c63b53476e74"
+      ],
+      "data": "0x000000000000000000000000000000000000000000000000349b932a6226956e000000000000000000000000a0b86991c6218b36c1d19d4a2e9eb0ce3606eb480000000000000000000000004a220e6096b25eadb88358cb44068a32482546750000000000000000000000000000000000000000000000000000000002faf0800000000000000000000000000000000000000000000000000254449fb3c6e6f50000000000000000000000000000000000000000000000000000000000000000"
+    },
+    {
+      "log_index": 603,
+      "emitter": "0xbeb0009aca35087ce7ccf11637e24dd1aad3bf2a",
+      "topics": [
+        "0x58073e86a8de5387bf042457ea63e46957d2ef816d9d85c90aff5a3661681ef1",
+        "0x00000000000000000000000000000000e281af65c3cdfe53be58c63b53476e44",
+        "0x00000000000000000000000000000000e281af65c3cdfe53be58c63b53476e74",
+        "0x00000000000000000000000011111605ef067242653c980b8f6f1ffe50305afe"
+      ],
+      "data": "0x000000000000000000000000a0b86991c6218b36c1d19d4a2e9eb0ce3606eb480000000000000000000000004a220e6096b25eadb88358cb44068a32482546750000000000000000000000000000000000000000000000000000000002faf0800000000000000000000000000000000000000000000000000254449fb3c6e6f5000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+    },
+    {
+      "log_index": 605,
+      "emitter": "0x000000000022d473030f116ddee9f6b43ac78ba3",
+      "topics": [
+        "0xda9fa7c1b00402c17d0161b249b1ab8bbec047c5a52207b9c112deffd817036b",
+        "0x00000000000000000000000011111605ef067242653c980b8f6f1ffe50305afe",
+        "0x0000000000000000000000004a220e6096b25eadb88358cb44068a3248254675",
+        "0x0000000000000000000000005c6fb490bdfd3246eb0bb062c168decaf4bd9fdd"
+      ],
+      "data": "0x0000000000000000000000000000000000000000000000000254452c66f2d7310000000000000000000000000000000000000000000000000000000000000000"
+    }
+  ],
+  "warnings": [],
+  "coverage": {
+    "all_swaps_guaranteed": false,
+    "decoded_swap_events": 2,
+    "undecoded_recognized_events": 0,
+    "unclassified_log_count": 4,
+    "scope": "implemented executed event schemas; unknown/eventless contracts may require additional adapters"
+  }
+}

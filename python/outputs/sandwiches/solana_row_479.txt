@@ -1,0 +1,16 @@
+2024-01-15 · solana · cross-block (interleaved roles) · shared front/back fee payer DCAK8tuw…vyvYbm
+Slots 242,025,164, 242,025,166, 242,025,168, 242,025,169
+
+FRONT  3CDywYPv…zGZeZA  block/slot=242025164 index=271  from DCAK8tuw…vyvYbm
+       5.990000005 WSOL → 9166.5796 4vcRuMfp…FVboWv  [Raydium AMM v4]
+VICTIM 614gQieq…cv9JYn  block/slot=242025166 index=1033  from FThCGQEZ…mGZXQj
+       5 WSOL → 7349.95063 4vcRuMfp…FVboWv  [Raydium AMM v4]
+FRONT  4vWbJqbn…mW8fZ9  block/slot=242025168 index=108  from DCAK8tuw…vyvYbm
+       5.990000005 WSOL → 8493.03352 4vcRuMfp…FVboWv  [Raydium AMM v4]
+BACK   49pn5wfC…CkyUmp  block/slot=242025169 index=638  from DCAK8tuw…vyvYbm
+       9166.5796 4vcRuMfp…FVboWv → 6.18818205 WSOL  [Raydium AMM v4]
+
+Cross-block transaction distance not calculated.
+WARNING: Front/victim/back roles interleave; see execution_order for the actual sequence
+
+Swap coverage is limited to the installed decoders; unknown activity is retained in JSON.

@@ -1,0 +1,950 @@
+{
+  "chains": {
+    "ethereum": 1,
+    "base": 8453
+  },
+  "event_schemas": [
+    {
+      "adapter": "v2",
+      "event": "Swap(address,uint256,uint256,uint256,uint256,address)",
+      "topic0": "0xd78ad95fa46c994b6551d0da85fc275fe613ce37657fb8d5e3d130840159d822",
+      "source": "https://github.com/VeloraDEX/paraswap-dex-lib/blob/master/src/abi/solidly/SolidlyPair.json",
+      "indexed_fields": [
+        "sender",
+        "to"
+      ]
+    },
+    {
+      "adapter": "v3",
+      "event": "Swap(address,address,int256,int256,uint160,uint128,int24)",
+      "topic0": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67",
+      "source": "https://github.com/VeloraDEX/paraswap-dex-lib/blob/master/src/abi/uniswap-v3/UniswapV3Pool.abi.json",
+      "indexed_fields": [
+        "sender",
+        "recipient"
+      ]
+    },
+    {
+      "adapter": "pancake_v3",
+      "event": "Swap(address,address,int256,int256,uint160,uint128,int24,uint128,uint128)",
+      "topic0": "0x19b47279256b2a23a1665c810c8d55a1758940ee09377d4f8d26497a3577dc83",
+      "source": "https://github.com/VeloraDEX/paraswap-dex-lib/blob/master/src/abi/pancakeswap-v3/PancakeswapV3Pool.abi.json",
+      "indexed_fields": [
+        "sender",
+        "recipient"
+      ]
+    },
+    {
+      "adapter": "algebra_integral",
+      "event": "Swap(address,address,int256,int256,uint160,uint128,int24,uint24,uint24)",
+      "topic0": "0x121cb44ee54098b1a04743c487e7460d8dd429b27f88b1f4d4767396e1a59f79",
+      "source": "https://github.com/VeloraDEX/paraswap-dex-lib/blob/master/src/abi/algebra-integral/AlgebraIntegralPool.abi.json",
+      "indexed_fields": [
+        "sender",
+        "recipient"
+      ]
+    },
+    {
+      "adapter": "v4",
+      "event": "Swap(bytes32,address,int128,int128,uint160,uint128,int24,uint24)",
+      "topic0": "0x40e9cecb9f5f1f1c5b9c97dec2917b7ee92e57ba5563708daca94dd84ad7112f",
+      "source": "https://github.com/VeloraDEX/paraswap-dex-lib/blob/master/src/abi/uniswap-v4/pool-manager.abi.json",
+      "indexed_fields": [
+        "id",
+        "sender"
+      ]
+    },
+    {
+      "adapter": "balancer_v1",
+      "event": "LOG_SWAP(address,address,address,uint256,uint256)",
+      "topic0": "0x908fb5ee8f16c6bc9bc3690973819f32a4d4b10188134543c88706e0e1d43378",
+      "source": "https://github.com/VeloraDEX/paraswap-dex-lib/blob/master/src/abi/BalancerV1Pool.json",
+      "indexed_fields": [
+        "caller",
+        "tokenIn",
+        "tokenOut"
+      ]
+    },
+    {
+      "adapter": "balancer_v2",
+      "event": "Swap(bytes32,address,address,uint256,uint256)",
+      "topic0": "0x2170c741c41531aec20e7c107c24eecfdd15e69c9bb0a8dd37b1840b9e0b207b",
+      "source": "https://github.com/VeloraDEX/paraswap-dex-lib/blob/master/src/abi/balancer-v2/vault.json",
+      "indexed_fields": [
+        "poolId",
+        "tokenIn",
+        "tokenOut"
+      ]
+    },
+    {
+      "adapter": "balancer_v3",
+      "event": "Swap(address,address,address,uint256,uint256,uint256,uint256)",
+      "topic0": "0x0874b2d545cb271cdbda4e093020c452328b24af12382ed62c4d00f5c26709db",
+      "source": "https://github.com/VeloraDEX/paraswap-dex-lib/blob/master/src/abi/balancer-v3/vault-extension.json",
+      "indexed_fields": [
+        "pool",
+        "tokenIn",
+        "tokenOut"
+      ]
+    },
+    {
+      "adapter": "curve",
+      "event": "TokenExchange(address,int128,uint256,int128,uint256)",
+      "topic0": "0x8b3e96f2b889fa771c53c981b40daf005f63f637f1869f707052d15a3dd97140",
+      "source": "https://github.com/VeloraDEX/paraswap-dex-lib/blob/master/src/abi/curve-v1/StableSwap3Pool.json",
+      "indexed_fields": [
+        "buyer"
+      ]
+    },
+    {
+      "adapter": "curve",
+      "event": "TokenExchangeUnderlying(address,int128,uint256,int128,uint256)",
+      "topic0": "0xd013ca23e77a65003c2c659c5442c00c805371b7fc1ebd4c206c41d1536bd90b",
+      "source": "https://github.com/VeloraDEX/paraswap-dex-lib/blob/master/src/abi/curve-v1/CurveV1StableNg.json",
+      "indexed_fields": [
+        "buyer"
+      ]
+    },
+    {
+      "adapter": "curve",
+      "event": "TokenExchange(address,uint256,uint256,uint256,uint256)",
+      "topic0": "0xb2e76ae99761dc136e598d4a629bb347eccb9532a5f8bbd72e18467c3c34cc98",
+      "source": "https://github.com/VeloraDEX/paraswap-dex-lib/blob/master/src/abi/CurveV2.json",
+      "indexed_fields": [
+        "buyer"
+      ]
+    },
+    {
+      "adapter": "saddle",
+      "event": "TokenSwap(address,uint256,uint256,uint128,uint128)",
+      "topic0": "0xc6c1e0630dbe9130cc068028486c0d118ddcea348550819defd5cb8c257f8a38",
+      "source": "https://github.com/VeloraDEX/paraswap-dex-lib/blob/master/src/abi/StablePool.json",
+      "indexed_fields": [
+        "buyer"
+      ]
+    },
+    {
+      "adapter": "saddle",
+      "event": "TokenSwapUnderlying(address,uint256,uint256,uint128,uint128)",
+      "topic0": "0x6617207207e397b41fc98016d8c9febb7223f44c355db66ad429730f2b950a60",
+      "source": "https://github.com/VeloraDEX/paraswap-dex-lib/blob/master/src/abi/nerve/nerve-metapool.json",
+      "indexed_fields": [
+        "buyer"
+      ]
+    },
+    {
+      "adapter": "maverick_v1",
+      "event": "Swap(address,address,bool,bool,uint256,uint256,int32)",
+      "topic0": "0x3b841dc9ab51e3104bda4f61b41e4271192d22cd19da5ee6e292dc8e2744f713",
+      "source": "https://github.com/VeloraDEX/paraswap-dex-lib/blob/master/src/abi/maverick-v1/pool.json",
+      "indexed_fields": []
+    },
+    {
+      "adapter": "maverick_v2",
+      "event": "PoolSwap(address,address,(uint256,bool,bool,int32),uint256,uint256)",
+      "topic0": "0x103ed084e94a44c8f5f6ba8e3011507c41063177e29949083c439777d8d63f60",
+      "source": "https://github.com/VeloraDEX/paraswap-dex-lib/blob/master/src/abi/maverick-v2/MaverickV2Pool.json",
+      "indexed_fields": []
+    },
+    {
+      "adapter": "fluid",
+      "event": "Swap(bool,uint256,uint256,address)",
+      "topic0": "0xdc004dbca4ef9c966218431ee5d9133d337ad018dd5b5c5493722803f75c64f7",
+      "source": "https://github.com/VeloraDEX/paraswap-dex-lib/blob/master/src/abi/fluid-dex/fluid-dex.abi.json",
+      "indexed_fields": []
+    },
+    {
+      "adapter": "woo",
+      "event": "WooSwap(address,address,uint256,uint256,address,address,address,uint256,uint256)",
+      "topic0": "0x0e8e403c2d36126272b08c75823e988381d9dc47f2f0a9a080d95f891d95c469",
+      "source": "https://github.com/VeloraDEX/paraswap-dex-lib/blob/master/src/abi/woo-fi-v2/WooPPV2.abi.json",
+      "indexed_fields": [
+        "fromToken",
+        "toToken",
+        "to"
+      ]
+    },
+    {
+      "adapter": "paraswap_rfq",
+      "event": "OrderFilled(bytes32,address,address,uint256,address,address,uint256)",
+      "topic0": "0x6621486d9c28838df4a87d2cca5007bc2aaf6a5b5de083b1db8faf709302c473",
+      "source": "https://github.com/VeloraDEX/paraswap-dex-lib/blob/master/src/abi/paraswap-limit-orders/AugustusRFQ.abi.json",
+      "indexed_fields": [
+        "orderHash",
+        "maker",
+        "taker"
+      ]
+    },
+    {
+      "adapter": "dexalot",
+      "event": "SwapExecuted(uint256,address,address,address,address,uint256,uint256)",
+      "topic0": "0xf37a3bd5c0f7f8527446af48a2a8fd5711deb58baa1a2747c3cb8dce6e9bb483",
+      "source": "https://github.com/VeloraDEX/paraswap-dex-lib/blob/master/src/abi/dexalot/DexalotMainnetRFQ.json",
+      "indexed_fields": []
+    },
+    {
+      "adapter": "angle",
+      "event": "Swap(address,address,uint256,uint256,address,address)",
+      "topic0": "0x73adcdbf2d8fee0c1221daefef436a92c3c640e97ff2941e744bf5eef1ab346f",
+      "source": "https://github.com/VeloraDEX/paraswap-dex-lib/blob/master/src/abi/angle-transmuter/Transmuter.json",
+      "indexed_fields": [
+        "tokenIn",
+        "tokenOut",
+        "from"
+      ]
+    },
+    {
+      "adapter": "psm3",
+      "event": "Swap(address,address,address,address,uint256,uint256,uint256)",
+      "topic0": "0xdba43ee9916cb156cc32a5d3406e87341e568126a46815294073ba25c9400246",
+      "source": "https://github.com/VeloraDEX/paraswap-dex-lib/blob/master/src/abi/sdai/PSM3.abi.json",
+      "indexed_fields": [
+        "assetIn",
+        "assetOut",
+        "receiver"
+      ]
+    },
+    {
+      "adapter": "paraswap_summary",
+      "event": "Swapped(bytes16,address,address,address,address,uint256,uint256,uint256)",
+      "topic0": "0x680ad12fcfabafe9b1f08214caef968eb651cf010bee4a2824adfaec965903e8",
+      "source": "https://github.com/VeloraDEX/paraswap-dex-lib/blob/master/src/abi/IParaswap.json",
+      "indexed_fields": [
+        "beneficiary",
+        "srcToken",
+        "destToken"
+      ]
+    },
+    {
+      "adapter": "paraswap_summary",
+      "event": "Swapped2(bytes16,address,uint256,address,address,address,address,uint256,uint256,uint256)",
+      "topic0": "0x974dd0442e0b8c00fdbaae504edea1412d63bc110294a98b3c61ddcd0e703aa8",
+      "source": "https://github.com/VeloraDEX/paraswap-dex-lib/blob/master/src/abi/IParaswap.json",
+      "indexed_fields": [
+        "beneficiary",
+        "srcToken",
+        "destToken"
+      ]
+    },
+    {
+      "adapter": "paraswap_summary",
+      "event": "SwappedDirect(bytes16,address,uint256,address,uint8,address,address,address,uint256,uint256,uint256)",
+      "topic0": "0xd2d73da2b5fd52cd654d8fd1b514ad57355bad741de639e3a1c3a20dd9f17347",
+      "source": "https://github.com/VeloraDEX/paraswap-dex-lib/blob/master/src/abi/DirectSwap.json",
+      "indexed_fields": [
+        "beneficiary",
+        "srcToken",
+        "destToken"
+      ]
+    },
+    {
+      "adapter": "paraswap_summary",
+      "event": "SwappedV3(bytes16,address,uint256,address,address,address,address,uint256,uint256,uint256)",
+      "topic0": "0xe00361d207b252a464323eb23d45d42583e391f2031acdd2e9fa36efddd43cb0",
+      "source": "https://github.com/VeloraDEX/paraswap-dex-lib/blob/master/src/abi/DirectSwap.json",
+      "indexed_fields": [
+        "beneficiary",
+        "srcToken",
+        "destToken"
+      ]
+    },
+    {
+      "adapter": "dodo_summary",
+      "event": "OrderHistory(address,address,address,uint256,uint256)",
+      "topic0": "0x92ceb067a9883c85aba061e46b9edf505a0d6e81927c4b966ebed543a5221787",
+      "source": "https://github.com/VeloraDEX/paraswap-dex-lib/blob/master/src/abi/dodo-v2-proxy.json",
+      "indexed_fields": []
+    },
+    {
+      "adapter": "curve_summary",
+      "event": "Exchange(address,address,address[11],uint256[5][5],address[5],uint256,uint256)",
+      "topic0": "0x56d0661e240dfb199ef196e16e6f42473990366314f0226ac978f7be3cd9ee83",
+      "source": "https://github.com/VeloraDEX/paraswap-dex-lib/blob/master/src/abi/curve-v1-factory/CurveV1Router.abi.json",
+      "indexed_fields": [
+        "sender",
+        "receiver"
+      ]
+    },
+    {
+      "adapter": "erc4626",
+      "event": "Deposit(address,address,uint256,uint256)",
+      "topic0": "0xdcbc1c05240f31ff3ad067ef1ee35ce4997762752e3a095284754544f4c709d7",
+      "source": "https://github.com/VeloraDEX/paraswap-dex-lib/blob/master/src/abi/ERC4626.json",
+      "indexed_fields": [
+        "sender",
+        "owner"
+      ]
+    },
+    {
+      "adapter": "erc4626",
+      "event": "Withdraw(address,address,address,uint256,uint256)",
+      "topic0": "0xfbde797d201c681b91056529119e0b02407c7bb96a4a2c75c01fc9667232c8db",
+      "source": "https://github.com/VeloraDEX/paraswap-dex-lib/blob/master/src/abi/ERC4626.json",
+      "indexed_fields": [
+        "sender",
+        "receiver",
+        "owner"
+      ]
+    },
+    {
+      "adapter": "solidly",
+      "event": "Swap(address,address,uint256,uint256,uint256,uint256)",
+      "topic0": "0xb3e2773606abfd36b5bd91394b3a54d1398336c65005baf7bf7a05efeffaf75b",
+      "source": "https://github.com/aerodrome-finance/contracts/blob/main/contracts/interfaces/IPool.sol",
+      "indexed_fields": [
+        "sender",
+        "to"
+      ]
+    },
+    {
+      "adapter": "dodo_v2",
+      "event": "DODOSwap(address,address,uint256,uint256,address,address)",
+      "topic0": "0xc2c0245e056d5fb095f04cd6373bc770802ebd1e6c918eb78fdef843cdb37b0f",
+      "source": "https://github.com/DODOEX/contractV2/blob/main/contracts/DODOVendingMachine/impl/DVMTrader.sol",
+      "indexed_fields": []
+    },
+    {
+      "adapter": "dodo_v1",
+      "event": "SellBaseToken(address,uint256,uint256)",
+      "topic0": "0xd8648b6ac54162763c86fd54bf2005af8ecd2f9cb273a5775921fd7f91e17b2d",
+      "source": "https://github.com/DODOEX/dodo-smart-contract/blob/master/contracts/impl/Trader.sol",
+      "indexed_fields": [
+        "seller"
+      ]
+    },
+    {
+      "adapter": "dodo_v1",
+      "event": "BuyBaseToken(address,uint256,uint256)",
+      "topic0": "0xe93ad76094f247c0dafc1c61adc2187de1ac2738f7a3b49cb20b2263420251a3",
+      "source": "https://github.com/DODOEX/dodo-smart-contract/blob/master/contracts/impl/Trader.sol",
+      "indexed_fields": [
+        "buyer"
+      ]
+    },
+    {
+      "adapter": "cow",
+      "event": "Trade(address,address,address,uint256,uint256,uint256,bytes)",
+      "topic0": "0xa07a543ab8a018198e99ca0184c93fe9050a79400a0a723441f84de1d972cc17",
+      "source": "https://github.com/cowprotocol/contracts/blob/main/src/contracts/GPv2Settlement.sol",
+      "indexed_fields": [
+        "owner"
+      ]
+    },
+    {
+      "adapter": "zeroex",
+      "event": "LimitOrderFilled(bytes32,address,address,address,address,address,uint128,uint128,uint128,uint256,bytes32)",
+      "topic0": "0xab614d2b738543c0ea21f56347cf696a3a0c42a7cbec3212a5ca22a4dcff2124",
+      "source": "https://github.com/0xProject/protocol/blob/development/contracts/zero-ex/contracts/src/features/interfaces/INativeOrdersEvents.sol",
+      "indexed_fields": []
+    },
+    {
+      "adapter": "zeroex",
+      "event": "RfqOrderFilled(bytes32,address,address,address,address,uint128,uint128,bytes32)",
+      "topic0": "0x829fa99d94dc4636925b38632e625736a614c154d55006b7ab6bea979c210c32",
+      "source": "https://github.com/0xProject/protocol/blob/development/contracts/zero-ex/contracts/src/features/interfaces/INativeOrdersEvents.sol",
+      "indexed_fields": []
+    },
+    {
+      "adapter": "clipper",
+      "event": "Swapped(address,address,address,uint256,uint256,bytes)",
+      "topic0": "0x4be05c8d54f5e056ab2cfa033e9f582057001268c3e28561bb999d35d2c8f2c8",
+      "source": "https://github.com/shipyard-software/clipper-dex-contracts/blob/main/contracts/ClipperExchangeInterface.sol",
+      "indexed_fields": []
+    },
+    {
+      "adapter": "clipper",
+      "event": "Swapped(address,address,address,uint256,uint256,bytes)",
+      "topic0": "0x4be05c8d54f5e056ab2cfa033e9f582057001268c3e28561bb999d35d2c8f2c8",
+      "source": "https://sourcify.dev/server/v2/contract/1/0x655edce464cc797526600a462a8154650eee4b77?fields=abi",
+      "indexed_fields": [
+        "inAsset",
+        "outAsset",
+        "recipient"
+      ]
+    },
+    {
+      "adapter": "infinity_cl",
+      "event": "Swap(bytes32,address,int128,int128,uint160,uint128,int24,uint24,uint16)",
+      "topic0": "0x04206ad2b7c0f463bff3dd4f33c5735b0f2957a351e4f79763a4fa9e775dd237",
+      "source": "https://github.com/pancakeswap/infinity-core/blob/main/src/pool-cl/interfaces/ICLPoolManager.sol",
+      "indexed_fields": [
+        "id",
+        "sender"
+      ]
+    },
+    {
+      "adapter": "infinity_bin",
+      "event": "Swap(bytes32,address,int128,int128,uint24,uint24,uint16)",
+      "topic0": "0x3e8aae37f890eb1f9d63dd4d2062f3f0be757848a0f0760e4f3e53dad556e861",
+      "source": "https://github.com/pancakeswap/infinity-core/blob/main/src/pool-bin/interfaces/IBinPoolManager.sol",
+      "indexed_fields": [
+        "id",
+        "sender"
+      ]
+    },
+    {
+      "adapter": "v1",
+      "event": "TokenPurchase(address,uint256,uint256)",
+      "topic0": "0xcd60aa75dea3072fbc07ae6d7d856b5dc5f4eee88854f5b4abf7b680ef8bc50f",
+      "source": "https://github.com/Uniswap/v1-contracts/blob/master/contracts/uniswap_exchange.vy",
+      "indexed_fields": [
+        "buyer",
+        "eth_sold",
+        "tokens_bought"
+      ]
+    },
+    {
+      "adapter": "v1",
+      "event": "EthPurchase(address,uint256,uint256)",
+      "topic0": "0x7f4091b46c33e918a0f3aa42307641d17bb67029427a5369e54b353984238705",
+      "source": "https://github.com/Uniswap/v1-contracts/blob/master/contracts/uniswap_exchange.vy",
+      "indexed_fields": [
+        "buyer",
+        "tokens_sold",
+        "eth_bought"
+      ]
+    },
+    {
+      "adapter": "weth",
+      "event": "Deposit(address,uint256)",
+      "topic0": "0xe1fffcc4923d04b559f4d29a8bfc6cda04eb5b0d3c460751c2402c5c5cc9109c",
+      "source": "https://github.com/VeloraDEX/paraswap-dex-lib/blob/master/src/abi/weth.abi.json",
+      "indexed_fields": [
+        "dst"
+      ]
+    },
+    {
+      "adapter": "weth",
+      "event": "Withdrawal(address,uint256)",
+      "topic0": "0x7fcf532c15f0a6db0bd6d0e038bea71d30d808c7d98cb3bf7268a95bf5081b65",
+      "source": "https://github.com/VeloraDEX/paraswap-dex-lib/blob/master/src/abi/weth.abi.json",
+      "indexed_fields": [
+        "src"
+      ]
+    },
+    {
+      "adapter": "curve",
+      "event": "TokenExchange(address,uint256,uint256,uint256,uint256,uint256,uint256)",
+      "topic0": "0x143f1f8e861fbdeddd5b46e844b7d3ac7b86a122f36e8c463859ee6811b1f29c",
+      "source": "https://sourcify.dev/server/v2/contract/1/0x4ebdf703948ddcea3b11f675b4d1fba9d2414a14?fields=abi",
+      "indexed_fields": [
+        "buyer"
+      ]
+    },
+    {
+      "adapter": "elfomofi",
+      "event": "ElfomoTrade(uint256,uint256,address,address,address,address,uint256,uint256)",
+      "topic0": "0xbe65a3f1f381da16732df786f571604a72b7c122cff3ae2b355566ddf01e2528",
+      "source": "https://sourcify.dev/server/v2/contract/8453/0xf0f0f0f0fb0d738452efd03a28e8be14c76d5f73?fields=abi",
+      "indexed_fields": [
+        "quoteId",
+        "partnerId"
+      ]
+    },
+    {
+      "adapter": "kyber_summary",
+      "event": "Swapped(address,address,address,address,uint256,uint256)",
+      "topic0": "0xd6d4f5681c246c9f42c203e287975af1601f8df8035a9251f79aab5c8f09e2f8",
+      "source": "https://sourcify.dev/server/v2/contract/1/0x6131b5fae19ea4f9d964eac0408e4408b66337b5?fields=abi",
+      "indexed_fields": []
+    },
+    {
+      "adapter": "rfq_order",
+      "event": "OrderFilledRFQ(bytes32,address,address,address,address,uint256,uint256)",
+      "topic0": "0x71cea972ff7e532f1478ece362ee7d7e5be0654905843c97ecca781a3a0c9d4a",
+      "source": "https://sourcify.dev/server/v2/contract/1/0x7a819fa46734a49d0112796f9377e024c350fb26?fields=abi",
+      "indexed_fields": [
+        "maker",
+        "taker"
+      ]
+    },
+    {
+      "adapter": "rfq_extended",
+      "event": "OrderFilledRFQ(uint256,uint256,address,address,address,uint256,uint256,uint256,uint256,bool,bytes,bytes32,string)",
+      "topic0": "0xe7c1f00eaa8c1c5478b959f890b147151abbedd56f57564f5a1dfad358a56a94",
+      "source": "https://sourcify.dev/server/v2/contract/8453/0x4efbd630205dd9b987c3bcbee257600abc1e3c11?fields=abi",
+      "indexed_fields": [
+        "rfqId",
+        "makerAsset",
+        "takerAsset"
+      ]
+    },
+    {
+      "adapter": "balancer_buffer",
+      "event": "Unwrap(address,uint256,uint256,bytes32)",
+      "topic0": "0xeeb740c90bf2b18c9532eb7d473137767036d893dff3e009f32718f821b2a4c0",
+      "source": "https://sourcify.dev/server/v2/contract/8453/0xba1333333333a1ba1108e8412f11850a5c319ba9?fields=abi",
+      "indexed_fields": [
+        "wrappedToken"
+      ]
+    },
+    {
+      "adapter": "balancer_buffer",
+      "event": "Wrap(address,uint256,uint256,bytes32)",
+      "topic0": "0x3771d13c67011e31e12031c54bb59b0bf544a80b81d280a3711e172aa8b7f47b",
+      "source": "https://sourcify.dev/server/v2/contract/8453/0xba1333333333a1ba1108e8412f11850a5c319ba9?fields=abi",
+      "indexed_fields": [
+        "wrappedToken"
+      ]
+    },
+    {
+      "adapter": "v4_hook_summary",
+      "event": "HookSwap(bytes32,address,int256,int256,uint24)",
+      "topic0": "0x6150bb53cd76c5702d6074239fc7b6c2a5495d339eb122fdc06252f3efdbbc1b",
+      "source": "https://sourcify.dev/server/v2/contract/1/0x958942af77dcd973b815b2a16bd88a5134c46888?fields=abi",
+      "indexed_fields": [
+        "poolId",
+        "sender"
+      ]
+    },
+    {
+      "adapter": "oneinch_limit",
+      "event": "OrderFilled(bytes32,uint256)",
+      "topic0": "0xfec331350fce78ba658e082a71da20ac9f8d798a99b3c79681c8440cbfe77e07",
+      "source": "https://sourcify.dev/server/v2/contract/1/0x111111125421ca6dc452d289314280a0f8842a65?fields=abi",
+      "indexed_fields": []
+    },
+    {
+      "adapter": "tessera",
+      "event": "TesseraTrade(address,address,uint256,uint256,address)",
+      "topic0": "0x97ba0cd8ff13f074b3b1aeace7fa3bf7fe54bdf2d728b6a097e901073b2bad6a",
+      "source": "https://sourcify.dev/server/v2/contract/8453/0x55555522005bcae1c2424d474bfd5ed477749e3e?fields=abi",
+      "indexed_fields": []
+    },
+    {
+      "adapter": "hashflow",
+      "event": "Trade(address,address,bytes32,address,address,uint256,uint256)",
+      "topic0": "0x34f57786fb01682fb4eec88d340387ef01a168fe345ea5b76f709d4e560c10eb",
+      "source": "https://github.com/hashflownetwork/x-protocol/blob/main/evm/contracts/interfaces/IHashflowPool.sol",
+      "indexed_fields": []
+    },
+    {
+      "adapter": "carbon",
+      "event": "TokensTraded(address,address,address,uint256,uint256,uint128,bool)",
+      "topic0": "0x95f3b01351225fea0e69a46f68b164c9dea10284f12cd4a907ce66510ab7af6a",
+      "source": "https://github.com/bancorprotocol/carbon-contracts/blob/dev/contracts/carbon/Strategies.sol",
+      "indexed_fields": [
+        "trader",
+        "sourceToken",
+        "targetToken"
+      ]
+    },
+    {
+      "adapter": "bancor_v3",
+      "event": "TokensTraded(bytes32,address,address,uint256,uint256,uint256,uint256,uint256,address)",
+      "topic0": "0x5c02c2bb2d1d082317eb23916ca27b3e7c294398b60061a2ad54f1c3c018c318",
+      "source": "https://github.com/bancorprotocol/contracts-v3/blob/master/contracts/network/BancorNetwork.sol",
+      "indexed_fields": [
+        "contextId",
+        "sourceToken",
+        "targetToken"
+      ]
+    },
+    {
+      "adapter": "rubicon",
+      "event": "LogTake(bytes32,bytes32,address,address,address,address,uint128,uint128,uint64)",
+      "topic0": "0x3383e3357c77fd2e3a4b30deea81179bc70a795d053d14d5b7f2f01d0fd4596f",
+      "source": "https://github.com/rubicondefi/rubicon_protocol/blob/master/contracts/RubiconMarket.sol",
+      "indexed_fields": [
+        "pair",
+        "maker",
+        "taker"
+      ]
+    },
+    {
+      "adapter": "liquidity_book",
+      "event": "Swap(address,address,uint24,bytes32,bytes32,uint24,bytes32,bytes32)",
+      "topic0": "0xad7d6f97abf51ce18e17a38f4d70e975be9c0708474987bb3e26ad21bd93ca70",
+      "source": "https://github.com/lfj-gg/joe-v2/blob/main/src/interfaces/ILBPair.sol",
+      "indexed_fields": [
+        "sender",
+        "to"
+      ]
+    },
+    {
+      "adapter": "euler",
+      "event": "Swap(address,uint256,uint256,uint256,uint256,uint256,uint256,uint112,uint112,address)",
+      "topic0": "0x8337ab1cd063c6a0121e4b67ad00ec5640783101bb89ad879ffb0fe28b503e95",
+      "source": "https://github.com/euler-xyz/euler-swap/blob/master/src/libraries/SwapLib.sol",
+      "indexed_fields": [
+        "sender",
+        "to"
+      ]
+    },
+    {
+      "adapter": "dfx",
+      "event": "Trade(address,address,address,uint256,uint256,int128)",
+      "topic0": "0x887adc1b38cfb756ed025ea6acd9382fbd376ede6c34bc6fa738284b09275468",
+      "source": "https://github.com/dfx-finance/protocol-v2/blob/main/src/Curve.sol",
+      "indexed_fields": [
+        "trader",
+        "origin",
+        "target"
+      ]
+    },
+    {
+      "adapter": "smardex",
+      "event": "Swap(address,address,int256,int256)",
+      "topic0": "0xa4228e1eb11eb9b31069d9ed20e7af9a010ca1a02d4855cee54e08e188fcc32c",
+      "source": "https://github.com/SmarDex-Dev/smart-contracts/blob/main/contracts/core/interfaces/ISmardexPair.sol",
+      "indexed_fields": [
+        "sender",
+        "to"
+      ]
+    },
+    {
+      "adapter": "wombat",
+      "event": "Swap(address,address,address,uint256,uint256,address)",
+      "topic0": "0x54787c404bb33c88e86f4baf88183a3b0141d0a848e6a9f7a13b66ae3a9b73d1",
+      "source": "https://github.com/wombat-exchange/v1-core/blob/master/contracts/wombat-core/pool/Pool.sol",
+      "indexed_fields": [
+        "sender",
+        "to"
+      ]
+    },
+    {
+      "adapter": "mstable",
+      "event": "Swapped(address,address,address,uint256,uint256,address)",
+      "topic0": "0x1eeaa4acf3c225a4033105c2647625dbb298dec93b14e16253c4231e26c02b1d",
+      "source": "https://github.com/mstable/mStable-contracts/blob/master/contracts/masset/Masset.sol",
+      "indexed_fields": [
+        "swapper"
+      ]
+    },
+    {
+      "adapter": "propamm",
+      "event": "Swapped(address,address,address,uint256,uint256,address)",
+      "topic0": "0x1eeaa4acf3c225a4033105c2647625dbb298dec93b14e16253c4231e26c02b1d",
+      "source": "https://sourcify.dev/server/v2/contract/1/0x5979458912f80b96d30d4220af8e2e4925a33320?fields=sources,abi",
+      "indexed_fields": [
+        "sender",
+        "tokenIn",
+        "tokenOut"
+      ]
+    },
+    {
+      "adapter": "fluid_lite",
+      "event": "LogSwap(uint256,uint256)",
+      "topic0": "0xfbce846c23a724e6e61161894819ec46c90a8d3dd96e90e7342c6ef49ffb539c",
+      "source": "https://github.com/Instadapp/fluid-contracts-public/blob/main/contracts/protocols/dexLite/other/events.sol",
+      "indexed_fields": []
+    },
+    {
+      "adapter": "native_rfq",
+      "event": "RFQTrade(address,address,address,uint256,uint256,bytes16,address)",
+      "topic0": "0xc82975a4eae9f14416813a0bd7312edf547928cd25ae9b8597ee4c92fa6862d2",
+      "source": "https://sourcify.dev/server/v2/contract/1/0x5d1a34369686ae59ac97ae4e1df5635ffda9ee7c?fields=compilation,sources",
+      "indexed_fields": []
+    },
+    {
+      "adapter": "maker_psm",
+      "event": "BuyGem(address,uint256,uint256)",
+      "topic0": "0x085d06ecf4c34b237767a31c0888e121d89546a77f186f1987c6b8715e1a8caa",
+      "source": "https://github.com/makerdao/dss-lite-psm/blob/master/src/DssLitePsm.sol",
+      "indexed_fields": [
+        "owner"
+      ]
+    },
+    {
+      "adapter": "maker_psm",
+      "event": "SellGem(address,uint256,uint256)",
+      "topic0": "0xef75f5a47cc9a929968796ceb84f19e7541617b4577f2c228ea95200e1572081",
+      "source": "https://github.com/makerdao/dss-lite-psm/blob/master/src/DssLitePsm.sol",
+      "indexed_fields": [
+        "owner"
+      ]
+    },
+    {
+      "adapter": "paraswap_summary",
+      "event": "BoughtV3(bytes16,address,uint256,address,address,address,address,uint256,uint256,uint256)",
+      "topic0": "0x4cc7e95e48af62690313a0733e93308ac9a73326bc3c29f1788b1191c376d5b6",
+      "source": "https://github.com/VeloraDEX/paraswap-dex-lib/blob/master/src/abi/IParaswap.json",
+      "indexed_fields": [
+        "beneficiary",
+        "srcToken",
+        "destToken"
+      ]
+    },
+    {
+      "adapter": "v3utils_summary",
+      "event": "Swap(address,address,uint256,uint256)",
+      "topic0": "0xfa2dda1cc1b86e41239702756b13effbc1a092b5c57e3ad320fbe4f3b13fe235",
+      "source": "https://sourcify.dev/server/v2/contract/1/0xae8999da4d81cb81b42288b12176fe20d7ead578?fields=compilation,sources",
+      "indexed_fields": [
+        "tokenIn",
+        "tokenOut"
+      ]
+    },
+    {
+      "adapter": "dexaggregator_summary",
+      "event": "Swap(address,address,address,address,uint256,uint256,uint256,uint256,uint256,bytes32,address[],address[],uint256[])",
+      "topic0": "0xac98876c63e9e95442ed72d8ca81d9a5c922f18616dc2b8b155416310b898dd9",
+      "source": "https://sourcify.dev/server/v2/contract/1/0x20f6ee51340adeed01a59b0e65cb3703f3dc860c?fields=compilation,sources",
+      "indexed_fields": []
+    }
+  ],
+  "anonymous_schemas": [
+    {
+      "adapter": "ekubo_v1",
+      "event": "anonymous 116-byte packed Swap",
+      "requires": "registered core and successful matching call trace",
+      "source": "https://github.com/EkuboProtocol/evm-contracts"
+    },
+    {
+      "adapter": "ekubo_v3",
+      "event": "anonymous 116-byte packed Swap",
+      "requires": "registered core and successful matching call trace",
+      "source": "https://github.com/EkuboProtocol/evm-contracts"
+    }
+  ],
+  "factories": {
+    "1": {
+      "0x5c69bee701ef814a2b6a3edd4b1652cb9cc5aa6f": {
+        "name": "UniswapV2",
+        "family": "v2",
+        "source": "https://github.com/VeloraDEX/paraswap-dex-lib/blob/master/src/dex/uniswap-v2/config.ts"
+      },
+      "0x9deb29c9a4c7a88a3c0257393b7f3335338d9a9d": {
+        "name": "DefiSwap",
+        "family": "v2",
+        "source": "https://github.com/VeloraDEX/paraswap-dex-lib/blob/master/src/dex/uniswap-v2/config.ts"
+      },
+      "0x1097053fd2ea711dad45caccc45eff7548fcb362": {
+        "name": "PancakeSwapV2",
+        "family": "v2",
+        "source": "https://github.com/VeloraDEX/paraswap-dex-lib/blob/master/src/dex/uniswap-v2/config.ts"
+      },
+      "0xc0aee478e3658e2610c5f7a4a2e1777ce9e4f2ac": {
+        "name": "SushiSwap",
+        "family": "v2",
+        "source": "https://github.com/VeloraDEX/paraswap-dex-lib/blob/master/src/dex/uniswap-v2/config.ts"
+      },
+      "0x115934131916c8b277dd010ee02de363c09d037c": {
+        "name": "ShibaSwap",
+        "family": "v2",
+        "source": "https://github.com/VeloraDEX/paraswap-dex-lib/blob/master/src/dex/uniswap-v2/config.ts"
+      },
+      "0xee3e9e46e34a27dc755a63e2849c9913ee1a06e2": {
+        "name": "Verse",
+        "family": "v2",
+        "source": "https://github.com/VeloraDEX/paraswap-dex-lib/blob/master/src/dex/uniswap-v2/config.ts"
+      },
+      "0x1f98431c8ad98523631ae4a59f267346ea31f984": {
+        "name": "UniswapV3",
+        "family": "v3",
+        "source": "https://github.com/VeloraDEX/paraswap-dex-lib/blob/master/src/dex/uniswap-v3/config.ts"
+      },
+      "0xbaceb8ec6b9355dfc0269c18bac9d6e2bdc29c4f": {
+        "name": "SushiSwapV3",
+        "family": "v3",
+        "source": "https://github.com/VeloraDEX/paraswap-dex-lib/blob/master/src/dex/uniswap-v3/config.ts"
+      },
+      "0x70fe4a44ea505cfa3a57b95cf2862d4fd5f0f687": {
+        "name": "SolidlyV3",
+        "family": "v3",
+        "source": "https://github.com/VeloraDEX/paraswap-dex-lib/blob/master/src/dex/solidly-v3/config.ts"
+      },
+      "0x44b7fbd4d87149efa5347c451e74b9fd18e89c55": {
+        "name": "Supernova",
+        "family": "algebra_integral",
+        "source": "https://github.com/VeloraDEX/paraswap-dex-lib/blob/master/src/dex/algebra-integral/config.ts"
+      },
+      "0x0bfbcf9fa4f9c56b0f40a671ad40e0805a091865": {
+        "name": "PancakeswapV3",
+        "family": "pancake_v3",
+        "source": "https://github.com/VeloraDEX/paraswap-dex-lib/blob/master/src/dex/pancakeswap-v3/config.ts"
+      }
+    },
+    "8453": {
+      "0x8909dc15e40173ff4699343b6eb8132c65e18ec6": {
+        "name": "UniswapV2",
+        "family": "v2",
+        "source": "https://github.com/VeloraDEX/paraswap-dex-lib/blob/master/src/dex/uniswap-v2/config.ts"
+      },
+      "0x3e84d913803b02a4a7f027165e8ca42c14c0fde7": {
+        "name": "Alien",
+        "family": "v2",
+        "source": "https://github.com/VeloraDEX/paraswap-dex-lib/blob/master/src/dex/uniswap-v2/config.ts"
+      },
+      "0x33128a8fc17869897dce68ed026d694621f6fdfd": {
+        "name": "UniswapV3",
+        "family": "v3",
+        "source": "https://github.com/VeloraDEX/paraswap-dex-lib/blob/master/src/dex/uniswap-v3/config.ts"
+      },
+      "0xc35dadb65012ec5796536bd9864ed8773abc74c4": {
+        "name": "SushiSwapV3",
+        "family": "v3",
+        "source": "https://github.com/VeloraDEX/paraswap-dex-lib/blob/master/src/dex/uniswap-v3/config.ts"
+      },
+      "0x0fd83557b2be93617c9c1c1b6fd549401c74558c": {
+        "name": "AlienBaseV3",
+        "family": "v3",
+        "source": "https://github.com/VeloraDEX/paraswap-dex-lib/blob/master/src/dex/uniswap-v3/config.ts"
+      },
+      "0x5e7bb104d84c7cb9b682aac2f3d509f5f406809a": {
+        "name": "AerodromeSlipstream",
+        "family": "v3",
+        "source": "https://github.com/VeloraDEX/paraswap-dex-lib/blob/master/src/dex/uniswap-v3/config.ts"
+      },
+      "0xade65c38cd4849adba595a4323a8c7ddfe89716a": {
+        "name": "AerodromeSlipstreamNewFactory",
+        "family": "v3",
+        "source": "https://github.com/VeloraDEX/paraswap-dex-lib/blob/master/src/dex/uniswap-v3/config.ts"
+      },
+      "0xf8f2eb4940cfe7d13603dddd87f123820fc061ef": {
+        "name": "AerodromeSlipstreamFactory3",
+        "family": "v3",
+        "source": "https://github.com/VeloraDEX/paraswap-dex-lib/blob/master/src/dex/uniswap-v3/config.ts"
+      },
+      "0x420dd381b31aef6683db6b902084cb0ffece40da": {
+        "name": "Aerodrome",
+        "family": "solidly",
+        "source": "https://github.com/VeloraDEX/paraswap-dex-lib/blob/master/src/dex/solidly/config.ts"
+      },
+      "0xed8db60acc29e14bc867a497d94ca6e3ceb5ec04": {
+        "name": "Equalizer",
+        "family": "solidly",
+        "source": "https://github.com/VeloraDEX/paraswap-dex-lib/blob/master/src/dex/solidly/config.ts"
+      },
+      "0x70fe4a44ea505cfa3a57b95cf2862d4fd5f0f687": {
+        "name": "SolidlyV3",
+        "family": "v3",
+        "source": "https://github.com/VeloraDEX/paraswap-dex-lib/blob/master/src/dex/solidly-v3/config.ts"
+      },
+      "0xc5396866754799b9720125b104ae01d935ab9c7b": {
+        "name": "QuickSwapV4",
+        "family": "algebra_integral",
+        "source": "https://github.com/VeloraDEX/paraswap-dex-lib/blob/master/src/dex/algebra-integral/config.ts"
+      },
+      "0x0bfbcf9fa4f9c56b0f40a671ad40e0805a091865": {
+        "name": "PancakeswapV3",
+        "family": "pancake_v3",
+        "source": "https://github.com/VeloraDEX/paraswap-dex-lib/blob/master/src/dex/pancakeswap-v3/config.ts"
+      },
+      "0xb5620f90e803c7f957a9ef351b8db3c746021bea": {
+        "name": "SwapBasedV3",
+        "family": "pancake_v3",
+        "source": "https://github.com/VeloraDEX/paraswap-dex-lib/blob/master/src/dex/pancakeswap-v3/config.ts"
+      }
+    }
+  },
+  "registered_emitters": {
+    "1": {
+      "0xbbcb91440523216e2b87052a99f69c604a7b6e00": [
+        "Fluid Dex Lite",
+        "fluid_lite"
+      ],
+      "0x5d1a34369686ae59ac97ae4e1df5635ffda9ee7c": [
+        "Native RFQ",
+        "native_rfq"
+      ],
+      "0xf6e72db5454dd049d0788e411b06cfaf16853042": [
+        "Maker/Sky Lite PSM",
+        "maker_psm"
+      ],
+      "0x89b78cfa322f6c5de0abceecab66aee45393cc5a": [
+        "Maker PSM USDC",
+        "maker_psm"
+      ],
+      "0xae8999da4d81cb81b42288b12176fe20d7ead578": [
+        "Revert V3Utils",
+        "v3utils_summary"
+      ],
+      "0x410b72ccfeacbb20a31785edaa358d25a07e143d": [
+        "Revert V3Utils",
+        "v3utils_summary"
+      ],
+      "0x20f6ee51340adeed01a59b0e65cb3703f3dc860c": [
+        "DexAggregator",
+        "dexaggregator_summary"
+      ],
+      "0x000000000004444c5dc75cb358380d2e3de08a90": [
+        "Uniswap v4",
+        "v4"
+      ],
+      "0xba12222222228d8ba445958a75a0704d566bf2c8": [
+        "Balancer v2",
+        "balancer_v2"
+      ],
+      "0xba1333333333a1ba1108e8412f11850a5c319ba9": [
+        "Balancer v3",
+        "balancer_v3"
+      ],
+      "0x9008d19f58aabd9ed0d60971565aa8510560ab41": [
+        "CoW Protocol",
+        "cow"
+      ],
+      "0xdef1c0ded9bec7f1a1670819833240f027b25eff": [
+        "0x Exchange Proxy",
+        "zeroex"
+      ],
+      "0xe92b586627cca7a83dc919cc7127196d70f55a06": [
+        "Velora/ParaSwap RFQ",
+        "paraswap_rfq"
+      ],
+      "0xe0e0e08a6a4b9dc7bd67bcb7aade5cf48157d444": [
+        "Ekubo v1",
+        "ekubo"
+      ],
+      "0x00000000000014aa86c5d3c41765bb24e11bd701": [
+        "Ekubo v3",
+        "ekubo"
+      ],
+      "0x111111125421ca6dc452d289314280a0f8842a65": [
+        "1inch Limit Order Protocol",
+        "oneinch_limit"
+      ],
+      "0x5979458912f80b96d30d4220af8e2e4925a33320": [
+        "Fermi",
+        "propamm"
+      ]
+    },
+    "8453": {
+      "0x20f6ee51340adeed01a59b0e65cb3703f3dc860c": [
+        "DexAggregator",
+        "dexaggregator_summary"
+      ],
+      "0x498581ff718922c3f8e6a244956af099b2652b2b": [
+        "Uniswap v4",
+        "v4"
+      ],
+      "0xba12222222228d8ba445958a75a0704d566bf2c8": [
+        "Balancer v2",
+        "balancer_v2"
+      ],
+      "0xba1333333333a1ba1108e8412f11850a5c319ba9": [
+        "Balancer v3",
+        "balancer_v3"
+      ],
+      "0x5520385bfcf07ec87c4c53a7d8d65595dff69fa4": [
+        "WOOFi v2",
+        "woo"
+      ],
+      "0xdef1c0ded9bec7f1a1670819833240f027b25eff": [
+        "0x Exchange Proxy",
+        "zeroex"
+      ],
+      "0x9008d19f58aabd9ed0d60971565aa8510560ab41": [
+        "CoW Protocol",
+        "cow"
+      ],
+      "0x111111125421ca6dc452d289314280a0f8842a65": [
+        "1inch Limit Order Protocol",
+        "oneinch_limit"
+      ],
+      "0x55555522005bcae1c2424d474bfd5ed477749e3e": [
+        "Tessera",
+        "tessera"
+      ],
+      "0xf0f0f0f0fb0d738452efd03a28e8be14c76d5f73": [
+        "ElfomoFi",
+        "elfomofi"
+      ],
+      "0x5d2806b9af9e9f740b55eda02a8484af5805803a": [
+        "Manta AMM v2",
+        "propamm"
+      ]
+    }
+  },
+  "all_swaps_guaranteed": false
+}

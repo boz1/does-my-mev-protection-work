@@ -1,0 +1,1837 @@
+{
+  "checked_at": "2026-10-01",
+  "registry_source": "https://lite-api.jup.ag/swap/v1/program-id-to-label",
+  "notes": "All 106 snapshot program IDs have explicit handlers: 105 exchange/conversion programs plus Scorch pricing. This is program coverage, not complete instruction coverage or measured transaction recall. Unknown instructions and insufficient execution evidence remain visible.",
+  "registry_programs": 106,
+  "implemented_registry_programs": 106,
+  "registry_exchange_adapters": 105,
+  "registry_pricing_handlers": 1,
+  "implemented_programs": 111,
+  "implemented_exchange_programs": 110,
+  "named_instruction_variants": 210,
+  "implemented_programs_outside_registry": [
+    {
+      "program_id": "5quBtoiQqxF9Jv6KYKctB59NT3gtJD2Y65kdnB1Uev3h",
+      "dex": "Raydium Stable",
+      "instructions": [
+        "swap_base_in",
+        "swap_base_out"
+      ]
+    },
+    {
+      "program_id": "EewxydAPCCVuNEyrVN68PuSYdQ7wKn27V9Gjeoi8dy3S",
+      "dex": "Lifinity v1",
+      "instructions": [
+        "swap"
+      ]
+    },
+    {
+      "program_id": "2wT8Yq49kHgDzXuPxZSaeLaH1qbmGXtEyPy64bL7aD3c",
+      "dex": "Lifinity v2",
+      "instructions": [
+        "swap"
+      ]
+    },
+    {
+      "program_id": "SCoRcH8c2dpjvcJD6FiPbCSQyQgu3PcUAWj2Xxx3mqn",
+      "dex": "Scorch",
+      "instructions": [
+        "swap_compact",
+        "swap"
+      ]
+    },
+    {
+      "program_id": "goonERTdGsjnkZqWuVjs73BZ3Pb9qoCUdBUL17BnS5j",
+      "dex": "GoonFi v1",
+      "instructions": [
+        "swap_tag_2"
+      ]
+    }
+  ],
+  "programs_without_live_swap_validation": [
+    {
+      "program_id": "EewxydAPCCVuNEyrVN68PuSYdQ7wKn27V9Gjeoi8dy3S",
+      "dex": "Lifinity v1"
+    },
+    {
+      "program_id": "HYEXCHtHkBagdStcJCp3xbbb9B7sdMdWXFNj6mdsG4hn",
+      "dex": "Hylo Exchange"
+    },
+    {
+      "program_id": "save8RQVPMWNTzU18t3GBvBkN9hT7jsGjiCQ28FpD9H",
+      "dex": "Perena Star v2"
+    }
+  ],
+  "registry_entries_without_same_program_adapter": [],
+  "registry_entries": [
+    {
+      "program_id": "DEXYosS6oEGvk8uCDayvwEZz4qEyDJRf9nFgYCaqPMTm",
+      "label": "1DEX",
+      "status": "implemented_exchange_adapter",
+      "instructions": [
+        "swap_exact_amount_in"
+      ],
+      "live_validated_instructions": [
+        "swap_exact_amount_in"
+      ],
+      "instructions_without_live_validation": []
+    },
+    {
+      "program_id": "AMM55ShdkoGRB5jVYPjWziwk8m5MpwyDgsMWHaMSQWH6",
+      "label": "Aldrin",
+      "status": "implemented_exchange_adapter",
+      "instructions": [
+        "swap"
+      ],
+      "live_validated_instructions": [
+        "swap"
+      ],
+      "instructions_without_live_validation": []
+    },
+    {
+      "program_id": "CURVGoZn8zycx6FXwwevgBTB2gVvdbGTEpvMJDbgs2t4",
+      "label": "Aldrin V2",
+      "status": "implemented_exchange_adapter",
+      "instructions": [
+        "swap"
+      ],
+      "live_validated_instructions": [
+        "swap"
+      ],
+      "instructions_without_live_validation": []
+    },
+    {
+      "program_id": "ALPHAQmeA7bjrVuccPsYPiCvsi428SNwte66Srvs4pHA",
+      "label": "AlphaQ",
+      "status": "implemented_exchange_adapter",
+      "instructions": [
+        "swap_tag_12"
+      ],
+      "live_validated_instructions": [
+        "swap_tag_12"
+      ],
+      "instructions_without_live_validation": []
+    },
+    {
+      "program_id": "AQU1FRd7papthgdrwPTTq5JacJh8YtwEXaBfKU3bTz45",
+      "label": "Aquifer",
+      "status": "implemented_exchange_adapter",
+      "instructions": [
+        "swap_tag_1"
+      ],
+      "live_validated_instructions": [
+        "swap_tag_1"
+      ],
+      "instructions_without_live_validation": []
+    },
+    {
+      "program_id": "Archer8kgiavM61GyusMzaaS2ft5sALtNsD1HxkUPMhy",
+      "label": "Archer",
+      "status": "implemented_exchange_adapter",
+      "instructions": [
+        "swap_tag_15"
+      ],
+      "live_validated_instructions": [
+        "swap_tag_15"
+      ],
+      "instructions_without_live_validation": []
+    },
+    {
+      "program_id": "B72M6nyCLFgWiJtAN4naUTminMiTmyGcEqQHXwVeRdht",
+      "label": "BinaryFi",
+      "status": "implemented_exchange_adapter",
+      "instructions": [
+        "swap_tag_8"
+      ],
+      "live_validated_instructions": [
+        "swap_tag_8"
+      ],
+      "instructions_without_live_validation": []
+    },
+    {
+      "program_id": "BiSoNHVpsVZW2F7rx2eQ59yQwKxzU5NvBcmKshCSUypi",
+      "label": "BisonFi",
+      "status": "implemented_exchange_adapter",
+      "instructions": [
+        "swap_tag_2",
+        "swap_tag_7",
+        "swap_signed_quote"
+      ],
+      "live_validated_instructions": [
+        "swap_signed_quote",
+        "swap_tag_2",
+        "swap_tag_7"
+      ],
+      "instructions_without_live_validation": []
+    },
+    {
+      "program_id": "2DNbzPochEcyCcWMbL4d9S3u9QqQEj5bbe6cSZFvKsbh",
+      "label": "BisonFi Predict",
+      "status": "implemented_exchange_adapter",
+      "instructions": [
+        "swap_tag_5",
+        "swap_tag_14"
+      ],
+      "live_validated_instructions": [
+        "swap_tag_14",
+        "swap_tag_5"
+      ],
+      "instructions_without_live_validation": []
+    },
+    {
+      "program_id": "BSwp6bEBihVLdqJRKGgzjcGLHkcTuzmSo1TQkHepzH8p",
+      "label": "Bonkswap",
+      "status": "implemented_exchange_adapter",
+      "instructions": [
+        "swap"
+      ],
+      "live_validated_instructions": [
+        "swap"
+      ],
+      "instructions_without_live_validation": []
+    },
+    {
+      "program_id": "boop8hVGQGqehUK2iVEMEnMrL5RbjywRzHKBmBE7ry4",
+      "label": "Boop.fun",
+      "status": "implemented_exchange_adapter",
+      "instructions": [
+        "buy_token",
+        "sell_token"
+      ],
+      "live_validated_instructions": [
+        "buy_token",
+        "sell_token"
+      ],
+      "instructions_without_live_validation": []
+    },
+    {
+      "program_id": "REALQqNEomY6cQGZJUGwywTBD2UmDT32rZcNnfxQ5N2",
+      "label": "Byreal",
+      "status": "implemented_exchange_adapter",
+      "instructions": [
+        "swap",
+        "swap_v2",
+        "swap_v3_dyn"
+      ],
+      "live_validated_instructions": [
+        "swap_v2",
+        "swap_v3_dyn"
+      ],
+      "instructions_without_live_validation": [
+        "swap"
+      ]
+    },
+    {
+      "program_id": "CarrotwivhMpDnm27EHmRLeQ683Z1PufuqEmBZvD282s",
+      "label": "Carrot",
+      "status": "implemented_exchange_adapter",
+      "instructions": [
+        "issue",
+        "redeem"
+      ],
+      "live_validated_instructions": [
+        "redeem"
+      ],
+      "instructions_without_live_validation": [
+        "issue"
+      ]
+    },
+    {
+      "program_id": "CLMM9tUoggJu2wagPkkqs9eFG4BWhVBZWkP1qv3Sp7tR",
+      "label": "Crema",
+      "status": "implemented_exchange_adapter",
+      "instructions": [
+        "swap",
+        "swap_with_partner"
+      ],
+      "live_validated_instructions": [
+        "swap_with_partner"
+      ],
+      "instructions_without_live_validation": [
+        "swap"
+      ]
+    },
+    {
+      "program_id": "H8W3ctz92svYg6mkn1UtGfu2aQr2fnUFHM1RhScEtQDt",
+      "label": "Cropper",
+      "status": "implemented_exchange_adapter",
+      "instructions": [
+        "swap"
+      ],
+      "live_validated_instructions": [
+        "swap"
+      ],
+      "instructions_without_live_validation": []
+    },
+    {
+      "program_id": "fUSioN9YKKSa3CUC2YUc4tPkHJ5Y6XW1yz8y6F7qWz9",
+      "label": "DefiTuna",
+      "status": "implemented_exchange_adapter",
+      "instructions": [
+        "swap",
+        "two_hop_swap"
+      ],
+      "live_validated_instructions": [
+        "swap"
+      ],
+      "instructions_without_live_validation": [
+        "two_hop_swap"
+      ]
+    },
+    {
+      "program_id": "DNL1tgEj3nJovHw9jtyCCQD3arssCJzkmpDizknwzey4",
+      "label": "Denali",
+      "status": "implemented_exchange_adapter",
+      "instructions": [
+        "swap_exact_in"
+      ],
+      "live_validated_instructions": [
+        "swap_exact_in"
+      ],
+      "instructions_without_live_validation": []
+    },
+    {
+      "program_id": "DRVSpZ2YUYYKgZP8XtLhAGtT1zYSCKzeHfb4DgRnrgqD",
+      "label": "Deriverse",
+      "status": "implemented_exchange_adapter",
+      "instructions": [
+        "swap"
+      ],
+      "live_validated_instructions": [
+        "swap"
+      ],
+      "instructions_without_live_validation": []
+    },
+    {
+      "program_id": "DSwpgjMvXhtGn6BsbqmacdBZyfLj6jSWf3HJpdJtmg6N",
+      "label": "DexLab",
+      "status": "implemented_exchange_adapter",
+      "instructions": [
+        "swap"
+      ],
+      "live_validated_instructions": [
+        "swap"
+      ],
+      "instructions_without_live_validation": []
+    },
+    {
+      "program_id": "dbcij3LWUppWqq96dh6gJWwBifmcGfLSB5D4DuSMaqN",
+      "label": "Dynamic Bonding Curve",
+      "status": "implemented_exchange_adapter",
+      "instructions": [
+        "swap",
+        "swap2",
+        "swap2_with_transfer_hook"
+      ],
+      "live_validated_instructions": [
+        "swap2"
+      ],
+      "instructions_without_live_validation": [
+        "swap",
+        "swap2_with_transfer_hook"
+      ]
+    },
+    {
+      "program_id": "FLiNTXPwppyoJabCoxc2uiiRygAHpmMXajiDXo2Ub1z",
+      "label": "Flint",
+      "status": "implemented_exchange_adapter",
+      "instructions": [
+        "swap_tag_6"
+      ],
+      "live_validated_instructions": [
+        "swap_tag_6"
+      ],
+      "instructions_without_live_validation": []
+    },
+    {
+      "program_id": "FLUX6xBayGxLX9UcimVRxXFMHH6q43mAbRvDzSpCsvfK",
+      "label": "Flux",
+      "status": "implemented_exchange_adapter",
+      "instructions": [
+        "swap_tag_3"
+      ],
+      "live_validated_instructions": [
+        "swap_tag_3"
+      ],
+      "instructions_without_live_validation": []
+    },
+    {
+      "program_id": "FLUXubRmkEi2q6K3Y9kBPg9248ggaZVsoSFhtJHSrm1X",
+      "label": "FluxBeam",
+      "status": "implemented_exchange_adapter",
+      "instructions": [
+        "swap"
+      ],
+      "live_validated_instructions": [
+        "swap"
+      ],
+      "instructions_without_live_validation": []
+    },
+    {
+      "program_id": "gatorLx9aC1e5ZWAXscv5QRKiLXnLPLXjftVc81h1Hr",
+      "label": "GatorSwap",
+      "status": "implemented_exchange_adapter",
+      "instructions": [
+        "swap",
+        "swap_signed_quote"
+      ],
+      "live_validated_instructions": [
+        "swap",
+        "swap_signed_quote"
+      ],
+      "instructions_without_live_validation": []
+    },
+    {
+      "program_id": "srAMMzfVHVAtgSJc8iH6CfKzuWuUTzLHVCE81QU1rgi",
+      "label": "Gavel",
+      "status": "implemented_exchange_adapter",
+      "instructions": [
+        "swap"
+      ],
+      "live_validated_instructions": [
+        "swap"
+      ],
+      "instructions_without_live_validation": []
+    },
+    {
+      "program_id": "goonuddtQRrWqqn5nFyczVKaie28f3kDkHWkHtURSLE",
+      "label": "GoonFi V2",
+      "status": "implemented_exchange_adapter",
+      "instructions": [
+        "swap_tag_1"
+      ],
+      "live_validated_instructions": [
+        "swap_tag_1"
+      ],
+      "instructions_without_live_validation": []
+    },
+    {
+      "program_id": "GAMMA7meSFWaBXF25oSUgmGRwaW6sCMFLmBNiMSdbHVT",
+      "label": "GooseFX GAMMA",
+      "status": "implemented_exchange_adapter",
+      "instructions": [
+        "swap_base_input",
+        "swap_base_output",
+        "oracle_based_swap_base_input"
+      ],
+      "live_validated_instructions": [
+        "oracle_based_swap_base_input"
+      ],
+      "instructions_without_live_validation": [
+        "swap_base_input",
+        "swap_base_output"
+      ]
+    },
+    {
+      "program_id": "Gswppe6ERWKpUTXvRPfXdzHhiCyJvLadVvXGfdpBqcE1",
+      "label": "Guacswap",
+      "status": "implemented_exchange_adapter",
+      "instructions": [
+        "swap"
+      ],
+      "live_validated_instructions": [
+        "swap"
+      ],
+      "instructions_without_live_validation": []
+    },
+    {
+      "program_id": "HADRoNbLovyqhCsocfYQYB7QdfCAAinN9HTePvBCVDQ8",
+      "label": "Hadron",
+      "status": "implemented_exchange_adapter",
+      "instructions": [
+        "swap_tag_3"
+      ],
+      "live_validated_instructions": [
+        "swap_tag_3"
+      ],
+      "instructions_without_live_validation": []
+    },
+    {
+      "program_id": "HEAVENoP2qxoeuF8Dj2oT1GHEnu49U5mJYkdeC8BAX2o",
+      "label": "Heaven",
+      "status": "implemented_exchange_adapter",
+      "instructions": [
+        "buy",
+        "sell",
+        "create_standard_liquidity_pool"
+      ],
+      "live_validated_instructions": [
+        "buy",
+        "create_standard_liquidity_pool",
+        "sell"
+      ],
+      "instructions_without_live_validation": []
+    },
+    {
+      "program_id": "treaf4wWBBty3fHdyBpo35Mz84M8k3heKXmjmi9vFt5",
+      "label": "Helium Network",
+      "status": "implemented_exchange_adapter",
+      "instructions": [
+        "redeem_v0"
+      ],
+      "live_validated_instructions": [
+        "redeem_v0"
+      ],
+      "instructions_without_live_validation": []
+    },
+    {
+      "program_id": "HumaXepHnjaRCpjYTokxY4UtaJcmx41prQ8cxGmFC5fn",
+      "label": "Huma",
+      "status": "implemented_exchange_adapter",
+      "instructions": [
+        "deposit",
+        "make_initial_deposit",
+        "instant_withdraw",
+        "instant_withdraw_privileged",
+        "withdraw_after_pool_closure"
+      ],
+      "live_validated_instructions": [
+        "deposit",
+        "instant_withdraw_privileged"
+      ],
+      "instructions_without_live_validation": [
+        "instant_withdraw",
+        "make_initial_deposit",
+        "withdraw_after_pool_closure"
+      ]
+    },
+    {
+      "program_id": "9H6tua7jkLhdm3w8BvgpTn5LZNU7g4ZynDmCiNN3q6Rp",
+      "label": "HumidiFi",
+      "status": "implemented_exchange_adapter",
+      "instructions": [
+        "swap_obfuscated",
+        "swap_signed_quote"
+      ],
+      "live_validated_instructions": [
+        "swap_obfuscated",
+        "swap_signed_quote"
+      ],
+      "instructions_without_live_validation": []
+    },
+    {
+      "program_id": "HYEXCHtHkBagdStcJCp3xbbb9B7sdMdWXFNj6mdsG4hn",
+      "label": "Hylo Exchange",
+      "status": "implemented_exchange_adapter",
+      "instructions": [
+        "swap_lst_to_lst",
+        "swap_lst_to_usdc",
+        "swap_usdc_to_lst",
+        "swap_lst_to_usdc_all",
+        "swap_exo_to_usdc",
+        "swap_usdc_to_exo",
+        "swap_exo_to_usdc_all"
+      ],
+      "live_validated_instructions": [],
+      "instructions_without_live_validation": [
+        "swap_exo_to_usdc",
+        "swap_exo_to_usdc_all",
+        "swap_lst_to_lst",
+        "swap_lst_to_usdc",
+        "swap_lst_to_usdc_all",
+        "swap_usdc_to_exo",
+        "swap_usdc_to_lst"
+      ]
+    },
+    {
+      "program_id": "HyaB3W9q6XdA5xwpU4XnSZV94htfmbmqJXZcEbRaJutt",
+      "label": "Invariant",
+      "status": "implemented_exchange_adapter",
+      "instructions": [
+        "swap"
+      ],
+      "live_validated_instructions": [
+        "swap"
+      ],
+      "instructions_without_live_validation": []
+    },
+    {
+      "program_id": "jupZ4m2GqUCJ5iueMfzQf8khFfH31d4XAQt3RzCT9Vd",
+      "label": "JupLend AMM",
+      "status": "implemented_exchange_adapter",
+      "instructions": [
+        "swap_in",
+        "swap_out"
+      ],
+      "live_validated_instructions": [
+        "swap_in"
+      ],
+      "instructions_without_live_validation": [
+        "swap_out"
+      ]
+    },
+    {
+      "program_id": "jup3YeL8QhtSx1e253b2FDvsMNC87fDrgQZivbrndc9",
+      "label": "Jupiter Lend Earn",
+      "status": "implemented_exchange_adapter",
+      "instructions": [
+        "deposit",
+        "mint",
+        "deposit_with_min_amount_out",
+        "withdraw",
+        "redeem",
+        "withdraw_with_max_shares_burn",
+        "redeem_with_min_amount_out"
+      ],
+      "live_validated_instructions": [
+        "deposit",
+        "redeem",
+        "withdraw"
+      ],
+      "instructions_without_live_validation": [
+        "deposit_with_min_amount_out",
+        "mint",
+        "redeem_with_min_amount_out",
+        "withdraw_with_max_shares_burn"
+      ]
+    },
+    {
+      "program_id": "fd3nMFYTQjX1yr5ER8u7tPdHJB7qt8RpDpNtLQX2Br5",
+      "label": "JupiterRfqV2",
+      "status": "implemented_exchange_adapter",
+      "instructions": [
+        "fill_exact_in"
+      ],
+      "live_validated_instructions": [
+        "fill_exact_in"
+      ],
+      "instructions_without_live_validation": []
+    },
+    {
+      "program_id": "3TK9D8aoBFYjYZtKCjciPrVrRStsnvo7KmpcJqDavpaU",
+      "label": "Kipseli",
+      "status": "implemented_exchange_adapter",
+      "instructions": [
+        "swap_v3"
+      ],
+      "live_validated_instructions": [
+        "swap_v3"
+      ],
+      "instructions_without_live_validation": []
+    },
+    {
+      "program_id": "BQEJZUB4CzoT6UhRffoCkqCyqQNrCPCSGHcPEmsdbEsX",
+      "label": "LemmingsFi",
+      "status": "implemented_exchange_adapter",
+      "instructions": [
+        "swap"
+      ],
+      "live_validated_instructions": [
+        "swap"
+      ],
+      "instructions_without_live_validation": []
+    },
+    {
+      "program_id": "MSwapi3WhNKMUGm9YrxGhypgUEt7wYQH3ZgG32XoWzH",
+      "label": "M Swap",
+      "status": "implemented_exchange_adapter",
+      "instructions": [
+        "swap"
+      ],
+      "live_validated_instructions": [
+        "swap"
+      ],
+      "instructions_without_live_validation": []
+    },
+    {
+      "program_id": "MNFSTqtC93rEfYHB6hF82sKdZpUDFWkViLByLd1k1Ms",
+      "label": "Manifest",
+      "status": "implemented_exchange_adapter",
+      "instructions": [
+        "swap",
+        "swap_v2",
+        "batch_update"
+      ],
+      "live_validated_instructions": [
+        "swap",
+        "swap_v2"
+      ],
+      "instructions_without_live_validation": [
+        "batch_update"
+      ]
+    },
+    {
+      "program_id": "MERLuDFBMmsHnsBPZw2sDQZHvXFMwp8EdjudcU2HKky",
+      "label": "Mercurial",
+      "status": "implemented_exchange_adapter",
+      "instructions": [
+        "exchange"
+      ],
+      "live_validated_instructions": [
+        "exchange"
+      ],
+      "instructions_without_live_validation": []
+    },
+    {
+      "program_id": "FUTARELBfJfQ8RDGhg1wdhddq1odMAJUePHFuBYfUxKq",
+      "label": "MetaDAO",
+      "status": "implemented_exchange_adapter",
+      "instructions": [
+        "spot_swap"
+      ],
+      "live_validated_instructions": [
+        "spot_swap"
+      ],
+      "instructions_without_live_validation": []
+    },
+    {
+      "program_id": "Eo7WjKq67rjJQSZxS6z3YkapzY3eMj6Xy8X5EQVn5UaB",
+      "label": "Meteora",
+      "status": "implemented_exchange_adapter",
+      "instructions": [
+        "swap"
+      ],
+      "live_validated_instructions": [
+        "swap"
+      ],
+      "instructions_without_live_validation": []
+    },
+    {
+      "program_id": "cpamdpZCGKUy5JxQXB4dcpGPiikHawvSWAd6mEn1sGG",
+      "label": "Meteora DAMM v2",
+      "status": "implemented_exchange_adapter",
+      "instructions": [
+        "swap",
+        "swap2"
+      ],
+      "live_validated_instructions": [
+        "swap",
+        "swap2"
+      ],
+      "instructions_without_live_validation": []
+    },
+    {
+      "program_id": "LBUZKhRxPF3XUpBCjp4YzTKgLccjZhTSDM9YuVaPwxo",
+      "label": "Meteora DLMM",
+      "status": "implemented_exchange_adapter",
+      "instructions": [
+        "swap",
+        "swap2",
+        "swap_exact_out",
+        "swap_exact_out2",
+        "swap_with_price_impact",
+        "swap_with_price_impact2"
+      ],
+      "live_validated_instructions": [
+        "swap",
+        "swap2",
+        "swap_exact_out2"
+      ],
+      "instructions_without_live_validation": [
+        "swap_exact_out",
+        "swap_with_price_impact",
+        "swap_with_price_impact2"
+      ]
+    },
+    {
+      "program_id": "Bvs46DPFxiFE6YHxLDLD6QAUcmy51FyRVPZJusPxLk3j",
+      "label": "Metric",
+      "status": "implemented_exchange_adapter",
+      "instructions": [
+        "swap_tag_1"
+      ],
+      "live_validated_instructions": [
+        "swap_tag_1"
+      ],
+      "instructions_without_live_validation": []
+    },
+    {
+      "program_id": "MoonCVVNZFSYkqNXP6bxHLPL6QQJiMagDL3qcqUQTrG",
+      "label": "Moonit",
+      "status": "implemented_exchange_adapter",
+      "instructions": [
+        "buy",
+        "sell",
+        "buy_with_be_authority"
+      ],
+      "live_validated_instructions": [
+        "buy",
+        "sell"
+      ],
+      "instructions_without_live_validation": [
+        "buy_with_be_authority"
+      ]
+    },
+    {
+      "program_id": "obriQD1zbpyLz95G5n7nJe6a4DPjpFwa5XYPoNm113y",
+      "label": "Obric V2",
+      "status": "implemented_exchange_adapter",
+      "instructions": [
+        "swap",
+        "swap2"
+      ],
+      "live_validated_instructions": [
+        "swap",
+        "swap2"
+      ],
+      "instructions_without_live_validation": []
+    },
+    {
+      "program_id": "HBVw6bZtcCaezhcBrmfyXBSBRWCdv72271xQ4GPvms2z",
+      "label": "Obsidian",
+      "status": "implemented_exchange_adapter",
+      "instructions": [
+        "swap_tag_1"
+      ],
+      "live_validated_instructions": [
+        "swap_tag_1"
+      ],
+      "instructions_without_live_validation": []
+    },
+    {
+      "program_id": "omnixgS8fnqHfCcTGKWj6JtKjzpJZ1Y5y9pyFkQDkYE",
+      "label": "Omnipair",
+      "status": "implemented_exchange_adapter",
+      "instructions": [
+        "swap"
+      ],
+      "live_validated_instructions": [
+        "swap"
+      ],
+      "instructions_without_live_validation": []
+    },
+    {
+      "program_id": "opnb2LAfJYbRMAHHvqjCwQxanZn7ReEHp1k81EohpZb",
+      "label": "OpenBook V2",
+      "status": "implemented_exchange_adapter",
+      "instructions": [
+        "place_take_order",
+        "place_order",
+        "place_order_pegged",
+        "place_orders",
+        "cancel_all_and_place_orders"
+      ],
+      "live_validated_instructions": [
+        "place_take_order"
+      ],
+      "instructions_without_live_validation": [
+        "cancel_all_and_place_orders",
+        "place_order",
+        "place_order_pegged",
+        "place_orders"
+      ]
+    },
+    {
+      "program_id": "DjVE6JNiYqPL2QXyCUUh8rNjHrbz9hXHNYt99MQ59qw1",
+      "label": "Orca V1",
+      "status": "implemented_exchange_adapter",
+      "instructions": [
+        "swap"
+      ],
+      "live_validated_instructions": [
+        "swap"
+      ],
+      "instructions_without_live_validation": []
+    },
+    {
+      "program_id": "9W959DqEETiGZocYWCQPaJ6sBmUzgfxXfqGeTEdp3aQP",
+      "label": "Orca V2",
+      "status": "implemented_exchange_adapter",
+      "instructions": [
+        "swap"
+      ],
+      "live_validated_instructions": [
+        "swap"
+      ],
+      "instructions_without_live_validation": []
+    },
+    {
+      "program_id": "HpNfyc2Saw7RKkQd8nEL4khUcuPhQ7WwY1B2qjx8jxFq",
+      "label": "PancakeSwap",
+      "status": "implemented_exchange_adapter",
+      "instructions": [
+        "swap",
+        "swap_v2"
+      ],
+      "live_validated_instructions": [
+        "swap",
+        "swap_v2"
+      ],
+      "instructions_without_live_validation": []
+    },
+    {
+      "program_id": "PSwapMdSai8tjrEXcxFeQth87xC4rRsa4VA5mhGhXkP",
+      "label": "Penguin",
+      "status": "implemented_exchange_adapter",
+      "instructions": [
+        "swap"
+      ],
+      "live_validated_instructions": [
+        "swap"
+      ],
+      "instructions_without_live_validation": []
+    },
+    {
+      "program_id": "NUMERUNsFCP3kuNmWZuXtm1AaQCPj9uw6Guv2Ekoi5P",
+      "label": "Perena",
+      "status": "implemented_exchange_adapter",
+      "instructions": [
+        "swap_exact_in",
+        "swap_exact_out",
+        "swap_exact_in_hinted",
+        "swap_exact_out_hinted"
+      ],
+      "live_validated_instructions": [
+        "swap_exact_in"
+      ],
+      "instructions_without_live_validation": [
+        "swap_exact_in_hinted",
+        "swap_exact_out",
+        "swap_exact_out_hinted"
+      ]
+    },
+    {
+      "program_id": "save8RQVPMWNTzU18t3GBvBkN9hT7jsGjiCQ28FpD9H",
+      "label": "Perena Star V2",
+      "status": "implemented_exchange_adapter",
+      "instructions": [
+        "execute_share_swap"
+      ],
+      "live_validated_instructions": [],
+      "instructions_without_live_validation": [
+        "execute_share_swap"
+      ]
+    },
+    {
+      "program_id": "PERPHjGBqRHArX4DySjwM6UJHiR3sWAatqfdBS2qQJu",
+      "label": "Perps",
+      "status": "implemented_exchange_adapter",
+      "instructions": [
+        "swap2",
+        "swap_with_token_ledger"
+      ],
+      "live_validated_instructions": [
+        "swap_with_token_ledger"
+      ],
+      "instructions_without_live_validation": [
+        "swap2"
+      ]
+    },
+    {
+      "program_id": "PhoeNiXZ8ByJGLkxNfZRnkUfjvmuYqLR89jjFHGqdXY",
+      "label": "Phoenix",
+      "status": "implemented_exchange_adapter",
+      "instructions": [
+        "swap",
+        "swap_with_free_funds",
+        "place_limit_order",
+        "place_limit_order_with_free_funds"
+      ],
+      "live_validated_instructions": [
+        "swap"
+      ],
+      "instructions_without_live_validation": [
+        "place_limit_order",
+        "place_limit_order_with_free_funds",
+        "swap_with_free_funds"
+      ]
+    },
+    {
+      "program_id": "6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P",
+      "label": "Pump.fun",
+      "status": "implemented_exchange_adapter",
+      "instructions": [
+        "buy",
+        "sell",
+        "buy_exact_sol_in",
+        "buy_v2",
+        "sell_v2",
+        "buy_exact_quote_in_v2"
+      ],
+      "live_validated_instructions": [
+        "buy",
+        "buy_exact_quote_in_v2",
+        "buy_exact_sol_in",
+        "buy_v2",
+        "sell",
+        "sell_v2"
+      ],
+      "instructions_without_live_validation": []
+    },
+    {
+      "program_id": "pAMMBay6oceH9fJKBRHGP5D4bD4sWpmSwMn52FMfXEA",
+      "label": "Pump.fun Amm",
+      "status": "implemented_exchange_adapter",
+      "instructions": [
+        "buy",
+        "buy_exact_quote_in",
+        "sell"
+      ],
+      "live_validated_instructions": [
+        "buy",
+        "buy_exact_quote_in",
+        "sell"
+      ],
+      "instructions_without_live_validation": []
+    },
+    {
+      "program_id": "QuaNtZsgYRe5Z9Bk4LZ4cTD9tbkVoyCNf1R2BN9bBDv",
+      "label": "Quantum",
+      "status": "implemented_exchange_adapter",
+      "instructions": [
+        "swap_tag_7"
+      ],
+      "live_validated_instructions": [
+        "swap_tag_7"
+      ],
+      "instructions_without_live_validation": []
+    },
+    {
+      "program_id": "QUayE6nexQWYNZAEqfN8FxoNwQDSu3CAzT2qq9J1ArG",
+      "label": "Quay",
+      "status": "implemented_exchange_adapter",
+      "instructions": [
+        "swap_tag_32"
+      ],
+      "live_validated_instructions": [
+        "swap_tag_32"
+      ],
+      "instructions_without_live_validation": []
+    },
+    {
+      "program_id": "675kPX9MHTjS2zt1qfr1NYHuzeLXfQM9H24wFSUt1Mp8",
+      "label": "Raydium",
+      "status": "implemented_exchange_adapter",
+      "instructions": [
+        "swap_base_in",
+        "swap_base_out",
+        "swap_base_in_v2",
+        "swap_base_out_v2"
+      ],
+      "live_validated_instructions": [
+        "swap_base_in",
+        "swap_base_in_v2",
+        "swap_base_out"
+      ],
+      "instructions_without_live_validation": [
+        "swap_base_out_v2"
+      ]
+    },
+    {
+      "program_id": "CAMMCzo5YL8w4VFF8KVHrK22GGUsp5VTaW7grrKgrWqK",
+      "label": "Raydium CLMM",
+      "status": "implemented_exchange_adapter",
+      "instructions": [
+        "swap",
+        "swap_v2"
+      ],
+      "live_validated_instructions": [
+        "swap",
+        "swap_v2"
+      ],
+      "instructions_without_live_validation": []
+    },
+    {
+      "program_id": "CPMMoo8L3F4NbTegBCKVNunggL7H1ZpdTHKxQB5qKP1C",
+      "label": "Raydium CP",
+      "status": "implemented_exchange_adapter",
+      "instructions": [
+        "swap_base_input",
+        "swap_base_output"
+      ],
+      "live_validated_instructions": [
+        "swap_base_input"
+      ],
+      "instructions_without_live_validation": [
+        "swap_base_output"
+      ]
+    },
+    {
+      "program_id": "LanMV9sAd7wArD4vJFi2qDdfnVhFxYSUg6eADduJ3uj",
+      "label": "Raydium Launchlab",
+      "status": "implemented_exchange_adapter",
+      "instructions": [
+        "buy_exact_in",
+        "buy_exact_out",
+        "sell_exact_in",
+        "sell_exact_out"
+      ],
+      "live_validated_instructions": [
+        "buy_exact_in",
+        "buy_exact_out",
+        "sell_exact_in"
+      ],
+      "instructions_without_live_validation": [
+        "sell_exact_out"
+      ]
+    },
+    {
+      "program_id": "riptK81hDxhe5pW5jSzSM9iRA8azgEgLJ4dXkPtBS7j",
+      "label": "Riptide",
+      "status": "implemented_exchange_adapter",
+      "instructions": [
+        "swap_tag_2"
+      ],
+      "live_validated_instructions": [
+        "swap_tag_2"
+      ],
+      "instructions_without_live_validation": []
+    },
+    {
+      "program_id": "runnrXXdsSRkdueCRYxKDvSWfv6nAnrG5dcM29qj1HA",
+      "label": "RunnerRodeo",
+      "status": "implemented_exchange_adapter",
+      "instructions": [
+        "swap"
+      ],
+      "live_validated_instructions": [
+        "swap"
+      ],
+      "instructions_without_live_validation": []
+    },
+    {
+      "program_id": "SSwpkEEcbUqx4vtoEByFjSkhKdCT862DNVb52nZg1UZ",
+      "label": "Saber",
+      "status": "implemented_exchange_adapter",
+      "instructions": [
+        "swap"
+      ],
+      "live_validated_instructions": [
+        "swap"
+      ],
+      "instructions_without_live_validation": []
+    },
+    {
+      "program_id": "DecZY86MU5Gj7kppfUCEmd4LbXXuyZH1yHaP2NTqdiZB",
+      "label": "Saber (Decimals)",
+      "status": "implemented_exchange_adapter",
+      "instructions": [
+        "deposit",
+        "withdraw"
+      ],
+      "live_validated_instructions": [
+        "deposit",
+        "withdraw"
+      ],
+      "instructions_without_live_validation": []
+    },
+    {
+      "program_id": "SP12tWFxD9oJsVWNavTTBZvMbA6gkAmxtVgxdqvyvhY",
+      "label": "Sanctum",
+      "status": "implemented_exchange_adapter",
+      "instructions": [
+        "deposit_sol",
+        "withdraw_sol"
+      ],
+      "live_validated_instructions": [
+        "deposit_sol"
+      ],
+      "instructions_without_live_validation": [
+        "withdraw_sol"
+      ]
+    },
+    {
+      "program_id": "SPMBzsVUuoHA4Jm6KunbsotaahvVikZs1JyTW6iJvbn",
+      "label": "Sanctum",
+      "status": "implemented_exchange_adapter",
+      "instructions": [
+        "deposit_sol",
+        "withdraw_sol"
+      ],
+      "live_validated_instructions": [
+        "deposit_sol"
+      ],
+      "instructions_without_live_validation": [
+        "withdraw_sol"
+      ]
+    },
+    {
+      "program_id": "SPoo1Ku8WFXoNDMHPsrGSTSG1Y47rzgn41SLUNakuHy",
+      "label": "Sanctum",
+      "status": "implemented_exchange_adapter",
+      "instructions": [
+        "deposit_sol",
+        "withdraw_sol"
+      ],
+      "live_validated_instructions": [
+        "deposit_sol"
+      ],
+      "instructions_without_live_validation": [
+        "withdraw_sol"
+      ]
+    },
+    {
+      "program_id": "stkitrT1Uoy18Dk1fTrgPw8W6MVzoCfYoAFT4MLsmhq",
+      "label": "Sanctum",
+      "status": "implemented_exchange_adapter",
+      "instructions": [
+        "stake_wrapped_sol",
+        "withdraw_wrapped_sol"
+      ],
+      "live_validated_instructions": [
+        "stake_wrapped_sol",
+        "withdraw_wrapped_sol"
+      ],
+      "instructions_without_live_validation": []
+    },
+    {
+      "program_id": "5ocnV1qiCgaQR8Jb8xWnVbApfaygJ8tNoZfgPwsgx9kx",
+      "label": "Sanctum Infinity",
+      "status": "implemented_exchange_adapter",
+      "instructions": [
+        "swap_exact_in",
+        "swap_exact_out",
+        "add_liquidity",
+        "remove_liquidity",
+        "swap_exact_in_v2",
+        "swap_exact_out_v2"
+      ],
+      "live_validated_instructions": [
+        "swap_exact_in",
+        "swap_exact_in_v2"
+      ],
+      "instructions_without_live_validation": [
+        "add_liquidity",
+        "remove_liquidity",
+        "swap_exact_out",
+        "swap_exact_out_v2"
+      ]
+    },
+    {
+      "program_id": "pegVkBpfR9GFi5Jaa9YXAHACyM9CzCNvhc5bf8GWNyW",
+      "label": "Sanctum Prop S",
+      "status": "implemented_exchange_adapter",
+      "instructions": [
+        "swap"
+      ],
+      "live_validated_instructions": [
+        "swap"
+      ],
+      "instructions_without_live_validation": []
+    },
+    {
+      "program_id": "so1f7APRw5pJ5iNJrM9g5X9tQgXzk8kMUnXxDNdt99b",
+      "label": "Sanctum SOLS",
+      "status": "implemented_exchange_adapter",
+      "instructions": [
+        "deposit_wrapped_sol"
+      ],
+      "live_validated_instructions": [
+        "deposit_wrapped_sol"
+      ],
+      "instructions_without_live_validation": []
+    },
+    {
+      "program_id": "SSwapUtytfBdBn1b9NUGG6foMVPtcWgpRU32HToDUZr",
+      "label": "Saros",
+      "status": "implemented_exchange_adapter",
+      "instructions": [
+        "swap"
+      ],
+      "live_validated_instructions": [
+        "swap"
+      ],
+      "instructions_without_live_validation": []
+    },
+    {
+      "program_id": "1qbkdrr3z4ryLA7pZykqxvxWPoeifcVKo6ZG9CfkvVE",
+      "label": "Saros DLMM",
+      "status": "implemented_exchange_adapter",
+      "instructions": [
+        "swap"
+      ],
+      "live_validated_instructions": [
+        "swap"
+      ],
+      "instructions_without_live_validation": []
+    },
+    {
+      "program_id": "SCALEwAvEK5gtkdHiFzXfPgtk2YwJxPDzaV3aDmR7tA",
+      "label": "Scale Amm",
+      "status": "implemented_exchange_adapter",
+      "instructions": [
+        "buy",
+        "sell"
+      ],
+      "live_validated_instructions": [
+        "buy",
+        "sell"
+      ],
+      "instructions_without_live_validation": []
+    },
+    {
+      "program_id": "SCALEWoRSpVZpMRqHEcDfNvBh3nUSe34jDr9r689gLa",
+      "label": "Scale Vmm",
+      "status": "implemented_exchange_adapter",
+      "instructions": [
+        "buy",
+        "sell"
+      ],
+      "live_validated_instructions": [
+        "buy",
+        "sell"
+      ],
+      "instructions_without_live_validation": []
+    },
+    {
+      "program_id": "ojh19ojaKduoJZuaJADhcVGp4xt1TcdAvZmpVsCorch",
+      "label": "Scorch",
+      "status": "implemented_pricing_handler",
+      "instructions": [
+        "pricing_cpi"
+      ],
+      "live_validated_instructions": [
+        "pricing_cpi"
+      ],
+      "instructions_without_live_validation": []
+    },
+    {
+      "program_id": "SoLFiHG9TfgtdUXUjWAxi3LtvYuFyDLVhBWxdMZxyCe",
+      "label": "SolFi",
+      "status": "implemented_exchange_adapter",
+      "instructions": [
+        "swap_tag_7"
+      ],
+      "live_validated_instructions": [
+        "swap_tag_7"
+      ],
+      "instructions_without_live_validation": []
+    },
+    {
+      "program_id": "SV2EYYJyRz2YhfXwXnhNAevDEui5Q6yrfyo13WtupPF",
+      "label": "SolFi V2",
+      "status": "implemented_exchange_adapter",
+      "instructions": [
+        "swap_tag_7"
+      ],
+      "live_validated_instructions": [
+        "swap_tag_7"
+      ],
+      "instructions_without_live_validation": []
+    },
+    {
+      "program_id": "endoLNCKTqDn8gSVnN2hDdpgACUPWHZTwoYnnMybpAT",
+      "label": "Solayer",
+      "status": "implemented_exchange_adapter",
+      "instructions": [
+        "delegate",
+        "delegate_no_init",
+        "undelegate",
+        "undelegate_no_init"
+      ],
+      "live_validated_instructions": [
+        "undelegate",
+        "undelegate_no_init"
+      ],
+      "instructions_without_live_validation": [
+        "delegate",
+        "delegate_no_init"
+      ]
+    },
+    {
+      "program_id": "6dMXqGZ3ga2dikrYS9ovDXgHGh5RUsb2RTUj6hrQXhk6",
+      "label": "Stabble CLMM",
+      "status": "implemented_exchange_adapter",
+      "instructions": [
+        "swap_v2"
+      ],
+      "live_validated_instructions": [
+        "swap_v2"
+      ],
+      "instructions_without_live_validation": []
+    },
+    {
+      "program_id": "swapNyd8XiQwJ6ianp9snpu4brUqFxadzvHebnAXjJZ",
+      "label": "Stabble Stable Swap",
+      "status": "implemented_exchange_adapter",
+      "instructions": [
+        "swap",
+        "swap_v2"
+      ],
+      "live_validated_instructions": [
+        "swap_v2"
+      ],
+      "instructions_without_live_validation": [
+        "swap"
+      ]
+    },
+    {
+      "program_id": "swapFpHZwjELNnjvThjajtiVmkz3yPQEHjLtka2fwHW",
+      "label": "Stabble Weighted Swap",
+      "status": "implemented_exchange_adapter",
+      "instructions": [
+        "swap",
+        "swap_v2"
+      ],
+      "live_validated_instructions": [
+        "swap_v2"
+      ],
+      "instructions_without_live_validation": [
+        "swap"
+      ]
+    },
+    {
+      "program_id": "ghosty4ZU1Qk1HN7Ymz4pZ15QfspzJZgSYFkdKN6ZLK",
+      "label": "Stableswap",
+      "status": "implemented_exchange_adapter",
+      "instructions": [
+        "swap"
+      ],
+      "live_validated_instructions": [
+        "swap"
+      ],
+      "instructions_without_live_validation": []
+    },
+    {
+      "program_id": "Dooar9JkhdZ7J3LHN3A7YCuoGRUggXhQaG4kijfLGU2j",
+      "label": "StepN",
+      "status": "implemented_exchange_adapter",
+      "instructions": [
+        "swap"
+      ],
+      "live_validated_instructions": [
+        "swap"
+      ],
+      "instructions_without_live_validation": []
+    },
+    {
+      "program_id": "9VX8EKBg6vM6tA68xaDsPkbrx26XConZjkQmhVApUptc",
+      "label": "TaurusFi",
+      "status": "implemented_exchange_adapter",
+      "instructions": [
+        "swap_tag_8"
+      ],
+      "live_validated_instructions": [
+        "swap_tag_8"
+      ],
+      "instructions_without_live_validation": []
+    },
+    {
+      "program_id": "TessVdML9pBGgG9yGks7o4HewRaXVAMuoVj4x83GLQH",
+      "label": "TesseraV",
+      "status": "implemented_exchange_adapter",
+      "instructions": [
+        "swap_tag_16",
+        "swap_tag_17"
+      ],
+      "live_validated_instructions": [
+        "swap_tag_16",
+        "swap_tag_17"
+      ],
+      "instructions_without_live_validation": []
+    },
+    {
+      "program_id": "SwaPpA9LAaLfeLi3a68M4DjnLqgtticKg6CnyNwgAC8",
+      "label": "Token Swap",
+      "status": "implemented_exchange_adapter",
+      "instructions": [
+        "swap"
+      ],
+      "live_validated_instructions": [
+        "swap"
+      ],
+      "instructions_without_live_validation": []
+    },
+    {
+      "program_id": "8ZoPDsvLWXthQaZz6aJJEWNFBZKk2ePuygi6LHT7F7Hh",
+      "label": "Trench",
+      "status": "implemented_exchange_adapter",
+      "instructions": [
+        "buy",
+        "buy_exact_out",
+        "sell"
+      ],
+      "live_validated_instructions": [
+        "buy",
+        "sell"
+      ],
+      "instructions_without_live_validation": [
+        "buy_exact_out"
+      ]
+    },
+    {
+      "program_id": "CURVEmPpijXDTNdqrA9PGP1io2rkgiVXH26xdXVGLLfz",
+      "label": "Trends",
+      "status": "implemented_exchange_adapter",
+      "instructions": [
+        "swap"
+      ],
+      "live_validated_instructions": [
+        "swap"
+      ],
+      "instructions_without_live_validation": []
+    },
+    {
+      "program_id": "2rU1oCHtQ7WJUvy15tKtFvxdYNNSc3id7AzUcjeFSddo",
+      "label": "VaultLiquidUnstake",
+      "status": "implemented_exchange_adapter",
+      "instructions": [
+        "buy_lst"
+      ],
+      "live_validated_instructions": [
+        "buy_lst"
+      ],
+      "instructions_without_live_validation": []
+    },
+    {
+      "program_id": "5U3EU2ubXtK84QcRjWVmYt9RaDyA8gKxdUrPFXmZyaki",
+      "label": "Virtuals",
+      "status": "implemented_exchange_adapter",
+      "instructions": [
+        "buy",
+        "sell"
+      ],
+      "live_validated_instructions": [
+        "sell"
+      ],
+      "instructions_without_live_validation": [
+        "buy"
+      ]
+    },
+    {
+      "program_id": "vVoLTRjQmtFpiYoegx285Ze4gsLJ8ZxgFKVcuvmG1a8",
+      "label": "Voltr",
+      "status": "implemented_exchange_adapter",
+      "instructions": [
+        "deposit_vault",
+        "instant_withdraw_vault"
+      ],
+      "live_validated_instructions": [
+        "deposit_vault",
+        "instant_withdraw_vault"
+      ],
+      "instructions_without_live_validation": []
+    },
+    {
+      "program_id": "FW6zUqn4iKRaeopwwhwsquTY6ABWLLgjxtrC3VPnaWBf",
+      "label": "WhaleStreet",
+      "status": "implemented_exchange_adapter",
+      "instructions": [
+        "swap_2b04ed0b1ac91e62"
+      ],
+      "live_validated_instructions": [
+        "swap_2b04ed0b1ac91e62"
+      ],
+      "instructions_without_live_validation": []
+    },
+    {
+      "program_id": "whirLbMiicVdio4qvUfM5KAg6Ct8VwpYzGff3uctyCc",
+      "label": "Whirlpool",
+      "status": "implemented_exchange_adapter",
+      "instructions": [
+        "swap",
+        "swap_v2",
+        "two_hop_swap",
+        "two_hop_swap_v2"
+      ],
+      "live_validated_instructions": [
+        "swap",
+        "swap_v2"
+      ],
+      "instructions_without_live_validation": [
+        "two_hop_swap",
+        "two_hop_swap_v2"
+      ]
+    },
+    {
+      "program_id": "WooFif76YGRNjk1pA8wCsN67aQsD9f9iLsz4NcJ1AVb",
+      "label": "Woofi",
+      "status": "implemented_exchange_adapter",
+      "instructions": [
+        "swap"
+      ],
+      "live_validated_instructions": [
+        "swap"
+      ],
+      "instructions_without_live_validation": []
+    },
+    {
+      "program_id": "StaKE6XNKVVhG8Qu9hDJBqCW3eRe7MDGLz17nJZetLT",
+      "label": "XOrca",
+      "status": "implemented_exchange_adapter",
+      "instructions": [
+        "stake"
+      ],
+      "live_validated_instructions": [
+        "stake"
+      ],
+      "instructions_without_live_validation": []
+    },
+    {
+      "program_id": "ZERor4xhbUycZ6gb9ntrhqscUcZmAbQDjEAtCf4hbZY",
+      "label": "ZeroFi",
+      "status": "implemented_exchange_adapter",
+      "instructions": [
+        "swap_v4"
+      ],
+      "live_validated_instructions": [
+        "swap_v4"
+      ],
+      "instructions_without_live_validation": []
+    }
+  ],
+  "on_chain_idl_sources": {
+    "fUSioN9YKKSa3CUC2YUc4tPkHJ5Y6XW1yz8y6F7qWz9": {
+      "name": "DefiTuna",
+      "idl_account": "GmsDDp7nRhoG254GCxEnHKpj1gLMt59XtrpTkQKpaXGR",
+      "owner": "fUSioN9YKKSa3CUC2YUc4tPkHJ5Y6XW1yz8y6F7qWz9",
+      "file": "defituna.json",
+      "sha256": "79da258e611d5b7e27d3185643e593dd0de4e1901e4b0cbce9b8988ef6827f34"
+    },
+    "HumaXepHnjaRCpjYTokxY4UtaJcmx41prQ8cxGmFC5fn": {
+      "name": "Huma",
+      "idl_account": "EztXxP1g7piiRcGeUhSiovZxXxsENzppui4kzU5uDfU8",
+      "owner": "HumaXepHnjaRCpjYTokxY4UtaJcmx41prQ8cxGmFC5fn",
+      "file": "huma.json",
+      "sha256": "0b80162e16cae7b92848f87b28497f1411cbcd338a4404adeb5e610ab0923724"
+    },
+    "treaf4wWBBty3fHdyBpo35Mz84M8k3heKXmjmi9vFt5": {
+      "name": "Helium Network",
+      "idl_account": "9xac9fKux8HBnFPNaxMEXyV3neUQBFzrLpvsAC5URn6x",
+      "owner": "treaf4wWBBty3fHdyBpo35Mz84M8k3heKXmjmi9vFt5",
+      "file": "helium_network.json",
+      "sha256": "12fa8f3533e2cc18d26dc775838651fa2292af55694318cb2d80acd236c76b95"
+    },
+    "8ZoPDsvLWXthQaZz6aJJEWNFBZKk2ePuygi6LHT7F7Hh": {
+      "name": "Trench",
+      "idl_account": "5Es7QfT2JqRqiHyfy8nLz2s5D3aNkUmoXhu3WdPj7aRJ",
+      "owner": "8ZoPDsvLWXthQaZz6aJJEWNFBZKk2ePuygi6LHT7F7Hh",
+      "file": "trench.json",
+      "sha256": "71e123862528394ab8be9e91bf09b4bd69c79a18d1b4a97c8e129cbb17053a05"
+    },
+    "5U3EU2ubXtK84QcRjWVmYt9RaDyA8gKxdUrPFXmZyaki": {
+      "name": "Virtuals",
+      "idl_account": "8iCP6E88NaDx4SfrUeWNRU8jbr1j4fSy73VwNrzouChm",
+      "owner": "5U3EU2ubXtK84QcRjWVmYt9RaDyA8gKxdUrPFXmZyaki",
+      "file": "virtuals.json",
+      "sha256": "3bdf7b76d3c306765fa52b3d06aceb715d5530bc568d94ad99b62860b7a0b028"
+    },
+    "SCALEwAvEK5gtkdHiFzXfPgtk2YwJxPDzaV3aDmR7tA": {
+      "name": "Scale Amm",
+      "idl_account": "6j8EWkCswWM9dWTPcQbCfqYHqEFi6wpXy3Dc2DBWNbhn",
+      "owner": "SCALEwAvEK5gtkdHiFzXfPgtk2YwJxPDzaV3aDmR7tA",
+      "file": "scale_amm.json",
+      "sha256": "7d44f805215b651e07a5176103c37e4fd713e96156ccfde72fbaf58bca70afff"
+    },
+    "WooFif76YGRNjk1pA8wCsN67aQsD9f9iLsz4NcJ1AVb": {
+      "name": "Woofi",
+      "idl_account": "4jnshyUHBJ4pWs9nYmmtq9epQHUaprEXSmWZsNX2NH7i",
+      "owner": "WooFif76YGRNjk1pA8wCsN67aQsD9f9iLsz4NcJ1AVb",
+      "file": "woofi.json",
+      "sha256": "e2be1a4e98af9a65e7c6f12a3c252be9a510da2d79dbf0e5360e13559c214925"
+    },
+    "CarrotwivhMpDnm27EHmRLeQ683Z1PufuqEmBZvD282s": {
+      "name": "Carrot",
+      "idl_account": "F6tjCEJbdARLtBt7CK1nCFDYatp2gFAPwpiUMvyGE1Xr",
+      "owner": "CarrotwivhMpDnm27EHmRLeQ683Z1PufuqEmBZvD282s",
+      "file": "carrot.json",
+      "sha256": "532462cae864e5ee35cbd2762d461c3aaa8c7b9ecc778f51f1fa884d6ab18aab"
+    },
+    "MSwapi3WhNKMUGm9YrxGhypgUEt7wYQH3ZgG32XoWzH": {
+      "name": "M Swap",
+      "idl_account": "8QFK5ctrB8vDhK2mMeuPqBPvp2hjbsUAyAG2ENWbLn5W",
+      "owner": "MSwapi3WhNKMUGm9YrxGhypgUEt7wYQH3ZgG32XoWzH",
+      "file": "m_swap.json",
+      "sha256": "2ff58b56306841d13273fe8f638a71cbb558b13dd18e1c0ed38d06049f32abcc"
+    },
+    "PERPHjGBqRHArX4DySjwM6UJHiR3sWAatqfdBS2qQJu": {
+      "name": "Perps",
+      "idl_account": "38GK1i4cQPAxqrbfKX4RRMNfXpKRn5PgLFHVJeXm1C8Y",
+      "owner": "PERPHjGBqRHArX4DySjwM6UJHiR3sWAatqfdBS2qQJu",
+      "file": "perps.json",
+      "sha256": "9e29411850d443e990dfae93d9c1efcec8b2b8c8c816ef5821492204874b0484"
+    },
+    "DecZY86MU5Gj7kppfUCEmd4LbXXuyZH1yHaP2NTqdiZB": {
+      "name": "Saber (Decimals)",
+      "idl_account": "7Pjjp5aSsgiEzr4ZCFdwLnuqGCfG9atG7MgrfaRtwepT",
+      "owner": "DecZY86MU5Gj7kppfUCEmd4LbXXuyZH1yHaP2NTqdiZB",
+      "file": "saber_(decimals).json",
+      "sha256": "63c1b848399d61d4a91fb6351c961f889a211b33c5e41dc62da1f650f08f20e1"
+    },
+    "vVoLTRjQmtFpiYoegx285Ze4gsLJ8ZxgFKVcuvmG1a8": {
+      "name": "Voltr",
+      "idl_account": "GAcnubAR2kPywHSKaLukecmhzS1Hop629VNtpsq73z85",
+      "owner": "vVoLTRjQmtFpiYoegx285Ze4gsLJ8ZxgFKVcuvmG1a8",
+      "file": "voltr.json",
+      "sha256": "355f1e49cb97a9141a925c11151fa43533a052cef7ae143663e63d713ea9ef64"
+    },
+    "HYEXCHtHkBagdStcJCp3xbbb9B7sdMdWXFNj6mdsG4hn": {
+      "name": "Hylo Exchange",
+      "idl_account": "43rLJBs9dsDVinGbzjrCu1RrVuVqm1zCDUszshMzs5uY",
+      "owner": "HYEXCHtHkBagdStcJCp3xbbb9B7sdMdWXFNj6mdsG4hn",
+      "file": "hylo_exchange.json",
+      "sha256": "948fd1dc25a80b90ac3ffeb331f5438cd2f976438949ea7cd78e313d9e8cee0b"
+    },
+    "jupZ4m2GqUCJ5iueMfzQf8khFfH31d4XAQt3RzCT9Vd": {
+      "name": "JupLend AMM",
+      "idl_account": "84tF4Ms1Q7aUsDDW8HeuKm3BCMYhDFH6mf852PdTwYro",
+      "owner": "jupZ4m2GqUCJ5iueMfzQf8khFfH31d4XAQt3RzCT9Vd",
+      "file": "juplend_amm.json",
+      "sha256": "b5612edb625c0203030b8dfe7c73a5b29cca5e2e69aa685d7ba81c298372e6bd"
+    },
+    "FUTARELBfJfQ8RDGhg1wdhddq1odMAJUePHFuBYfUxKq": {
+      "name": "MetaDAO",
+      "idl_account": "Cgg4TGESEzsewehRcFnbDaGmBznwkH23Ro1HqWz5VdtG",
+      "owner": "FUTARELBfJfQ8RDGhg1wdhddq1odMAJUePHFuBYfUxKq",
+      "file": "metadao.json",
+      "sha256": "385fce09744805d9ed8b51e1b9384baa9ad26dde1ea82c50bfe13739b4e070d0"
+    },
+    "save8RQVPMWNTzU18t3GBvBkN9hT7jsGjiCQ28FpD9H": {
+      "name": "Perena Star V2",
+      "idl_account": "Cikg8QzgZapdoHxt7ajxJLxySxDzYKYLDHNe64rZTZfY",
+      "owner": "save8RQVPMWNTzU18t3GBvBkN9hT7jsGjiCQ28FpD9H",
+      "file": "perena_star_v2.json",
+      "sha256": "057e70ef40ce00ce333a6afbe203a0ed9ffbd9c70dce2fa104b5fcffb9e5160e"
+    },
+    "omnixgS8fnqHfCcTGKWj6JtKjzpJZ1Y5y9pyFkQDkYE": {
+      "name": "Omnipair",
+      "idl_account": "4EjYPP6Jiyzn8Kx8K5rNi2ACbb7f7i47F58uAbvuLoX9",
+      "owner": "omnixgS8fnqHfCcTGKWj6JtKjzpJZ1Y5y9pyFkQDkYE",
+      "file": "omnipair.json",
+      "sha256": "783f12357f6c6712c449cf2b2c9069d447c3bedb05f26ba834c1c9852f0ac831"
+    },
+    "Gswppe6ERWKpUTXvRPfXdzHhiCyJvLadVvXGfdpBqcE1": {
+      "name": "Guacswap",
+      "idl_account": "BBvVcNCC2X4qp4gTUCTxfkMt5VteNG2ynEmahmdCcEUK",
+      "owner": "Gswppe6ERWKpUTXvRPfXdzHhiCyJvLadVvXGfdpBqcE1",
+      "file": "guacswap.json",
+      "sha256": "400d38fbfbc34ce7e45968891ccb7d4c3476cb1e38897617f577e7bb3e100e45"
+    },
+    "SCALEWoRSpVZpMRqHEcDfNvBh3nUSe34jDr9r689gLa": {
+      "name": "Scale Vmm",
+      "idl_account": "EiFkLpJdXocvbrZKh6LoRRMs3ZwKvZ1JuUpRePgco1rd",
+      "owner": "SCALEWoRSpVZpMRqHEcDfNvBh3nUSe34jDr9r689gLa",
+      "file": "scale_vmm.json",
+      "sha256": "c747324eb6f4b519f40e53f83da47e9089e4810070c67c5af04f5900486906cd"
+    },
+    "CURVEmPpijXDTNdqrA9PGP1io2rkgiVXH26xdXVGLLfz": {
+      "name": "Trends",
+      "idl_account": "A66SjFD23xu9WSUp9kn4nPohwyejWfutmrrTLjfowBSs",
+      "owner": "CURVEmPpijXDTNdqrA9PGP1io2rkgiVXH26xdXVGLLfz",
+      "file": "trends.json",
+      "sha256": "0aa314eb351c1d98506a2badbecd8fe32422d32ee40fecd246c86710c4e57833"
+    },
+    "fd3nMFYTQjX1yr5ER8u7tPdHJB7qt8RpDpNtLQX2Br5": {
+      "name": "JupiterRfqV2",
+      "idl_account": "34UvKvH4bmtoG7X3kLYVpfhpuvTTDdXkA93gN4pQ8Q8P",
+      "owner": "fd3nMFYTQjX1yr5ER8u7tPdHJB7qt8RpDpNtLQX2Br5",
+      "file": "jupiterrfqv2.json",
+      "sha256": "f471f46118bdec9133f5e7c234208b42fbc4658172a7c65f5e3e1f31c492f510"
+    },
+    "ghosty4ZU1Qk1HN7Ymz4pZ15QfspzJZgSYFkdKN6ZLK": {
+      "name": "Stableswap",
+      "idl_account": "FzB8t8tWBTEp1XbwXwPzNthUXc4RuJTfUYY51cXUWzny",
+      "owner": "ghosty4ZU1Qk1HN7Ymz4pZ15QfspzJZgSYFkdKN6ZLK",
+      "file": "stableswap.json",
+      "sha256": "a78ff8afa0d56b8123eb401cfea6407da5af14daa8e4663a1f30d3cb8544fc66"
+    },
+    "REALQqNEomY6cQGZJUGwywTBD2UmDT32rZcNnfxQ5N2": {
+      "name": "Byreal",
+      "idl_account": "6WEaY6LvFDGwzb2k9po2PnSYUL2a78biakjjR5aMQSCo",
+      "owner": "REALQqNEomY6cQGZJUGwywTBD2UmDT32rZcNnfxQ5N2",
+      "file": "byreal.json",
+      "sha256": "a330bf99e66e5c7712ade84d9dd929de4d60fa2a183821efb7dae11f41fce6a5"
+    }
+  },
+  "code_references": [
+    {
+      "file": "deriverse.rs",
+      "url": "https://raw.githubusercontent.com/deriverse/okx-deriverse/main/programs/dex-solana/src/adapters/deriverse.rs",
+      "sha256": "06193f4f48700a461d3349a613e2102d730dfe35c05be4266c8fdb4a7f324bd4"
+    },
+    {
+      "file": "plasma_tree.json",
+      "url": "https://api.github.com/repos/Ellipsis-Labs/plasma/git/trees/master?recursive=1",
+      "sha256": "4a17bf10d15ffbff57ef9914bf703b8a255d60cf9d0e1b5085a577ec575cdc3a"
+    },
+    {
+      "file": "gavel_swap.rs",
+      "url": "https://raw.githubusercontent.com/sevenlabs-hq/carbon/main/decoders/gavel-decoder/src/instructions/swap.rs",
+      "sha256": "af7989e1396b1243f780479254be92177e2a208f46ed867bebe99d12af5ffe2e"
+    },
+    {
+      "file": "token_swap_instruction.rs",
+      "url": "https://raw.githubusercontent.com/solana-labs/solana-program-library/master/token-swap/program/src/instruction.rs",
+      "sha256": "20d2b8ad19b124633a6479573cbe6afb4158552f163a56589321925114544948"
+    },
+    {
+      "url": "https://github.com/Ellipsis-Labs/plasma/blob/master/program/src/program/processor/swap.rs",
+      "sha256": "b5e3e72a52267ae349cf7511bacd0c9498056718997b92bc55959b6a6bd42283"
+    },
+    {
+      "url": "https://github.com/Ellipsis-Labs/plasma/blob/master/program/src/program/instruction.rs",
+      "sha256": "1230a5e13035a4a374ec6e26bcfff8ed9a781f2e3e9d6b5753292b837ef3aa5a"
+    },
+    {
+      "url": "https://github.com/solana-program/token/blob/main/interface/src/instruction.rs",
+      "sha256": "4f26ecac09a04fd307adb52024061996fff3b660c12693bb050313eedeed2fcc"
+    },
+    {
+      "url": "https://github.com/anza-xyz/agave/blob/master/transaction-status/src/parse_token.rs",
+      "sha256": "50370cf477d4d526960a226a945f712426c059f220fd4c84f63f493da64d88c0"
+    },
+    {
+      "url": "https://github.com/jup-ag/lemmingsfi-jupiter/blob/main/src/lib.rs",
+      "sha256": "9f0c68fbf435ccd59d1b9a4ea561af8f91c91265d79e768fab0e2d107cc1eeeb"
+    },
+    {
+      "url": "https://github.com/jup-ag/carrot-sdk/blob/main/amm/src/lib.rs",
+      "sha256": "b5242cc6963293ce87a85a4cdb052b8838fee3757744312eff15b320df41591c"
+    },
+    {
+      "url": "https://github.com/Instadapp/fluid-solana-programs/blob/main/programs/lending/src/state/context.rs",
+      "sha256": "6cd28ebdafa4d5588171346e9925dd07026cddbfa11748a5f7ec80bd69b85bf0"
+    },
+    {
+      "url": "https://github.com/solayer-labs/jupiter-amm-integration/blob/main/src/amms/amm.rs",
+      "sha256": "cd46c3917d0fb4a899a85b26308439831ac1ce3f7be4ab4470b39ddbddc1371f"
+    },
+    {
+      "url": "https://github.com/orca-so/xorca/blob/main/rust-client/src/generated/instructions/stake.rs",
+      "sha256": "bb92881620158974af05151508a555ffc41c1d132a3bfaa74a45d452b8af5c9f"
+    },
+    {
+      "url": "https://github.com/igneous-labs/stakedex-sdk/blob/master/interfaces/stakedex_interface/idl.json",
+      "sha256": "98a5a35c0599426758d3860629cc1e0ac866971af461afd831613c7c80ebd500"
+    },
+    {
+      "url": "https://github.com/igneous-labs/sanctum-spl-stake-pool/blob/sanctum-spl-pool-deploy/stake-pool/program/src/instruction.rs",
+      "sha256": "dde9426eff860f4abc65310de69c6610e9195bf1650fd349bab9eb739f2ff206"
+    },
+    {
+      "url": "https://github.com/igneous-labs/inf-1.5/blob/master/idl/inf_controller.json",
+      "sha256": "ab1a6f28b03ac063b98c13338007c00803fd797653ff8ae711588baa3da48ad9"
+    },
+    {
+      "url": "https://github.com/igneous-labs/S/blob/master/idl/s_controller.json",
+      "sha256": "5c68522396c501f3aab3a3972a479ab52596583de597b6c6703bb542c3567749"
+    }
+  ],
+  "new_adapter_validation": {
+    "exchange_programs": 28,
+    "programs_with_real_execution_fixtures": 28,
+    "pricing_programs": 1,
+    "fixture_case_count": 39,
+    "opaque_layouts": "Verified against saved executions and account ownership. Tags and byte/account sizes are constrained; raw instruction amounts do not determine executed amounts."
+  },
+  "live_cli_checks": [
+    {
+      "fixture": "registry_flint_tczv8l4s.json",
+      "signature": "tcZv8L4s8bfxDq4vThAAth58LRRVu2VUBWNHQZzMYxGtfxY3Wp91QkvzYhsUKZ1GGNATV2cCqRwDWVMgdEKtcFy",
+      "swaps": 4,
+      "non_swap_instructions": 0,
+      "undecoded_swaps": 0,
+      "matches_saved_fixture": true
+    },
+    {
+      "fixture": "registry_jupiter_lend_earn_23yskgbf.json",
+      "signature": "23ySKGBf8b5nCW5VEBpy1nvmT8CV4dXGAxdwhEr4v5iZM1YwdtfLaBujqjUAAq5TZD8uPBedUbBNTCnNgm6FuVC2",
+      "swaps": 2,
+      "non_swap_instructions": 0,
+      "undecoded_swaps": 0,
+      "matches_saved_fixture": true
+    },
+    {
+      "fixture": "registry_scorch_pricing.json",
+      "signature": "24kzLnmeHdQK3Zb2XnrgqBuyhW8p42R1fSWRLFMKVh2Mom9MhMBqyTqSeA5wnSWmR9fUrBTRSisFa4WjKaA716PS",
+      "swaps": 3,
+      "non_swap_instructions": 1,
+      "undecoded_swaps": 0,
+      "matches_saved_fixture": true
+    }
+  ],
+  "test_validation": {
+    "command": "python3 -m unittest discover -s tests -p 'test_solana*.py'",
+    "tests_passed": 91
+  }
+}

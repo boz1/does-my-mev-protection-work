@@ -1,0 +1,1914 @@
+{
+  "snapshot_date": "2026-10-01",
+  "scope": "Targeted real transaction samples from both supplied mainnet RPCs. Passing these samples is not proof of complete chain coverage.",
+  "all_swaps_guaranteed": false,
+  "transaction_count": 151,
+  "chains": {
+    "base": {
+      "transactions": 67,
+      "swaps": 230,
+      "undecoded_recognized_events": 0,
+      "unclassified_logs": 548,
+      "adapters": {
+        "v3": 78,
+        "rfq_extended": 5,
+        "maverick_v2": 6,
+        "pancake_v3": 19,
+        "solidly": 8,
+        "fluid": 2,
+        "elfomofi": 6,
+        "v4": 44,
+        "v2": 13,
+        "oneinch_limit": 5,
+        "algebra_integral": 9,
+        "infinity_cl": 9,
+        "liquidity_book": 4,
+        "curve": 2,
+        "maverick_v1": 6,
+        "tessera": 3,
+        "dfx": 1,
+        "propamm": 3,
+        "balancer_v3": 2,
+        "woo": 3,
+        "paraswap_rfq": 1,
+        "balancer_v2": 1
+      }
+    },
+    "ethereum": {
+      "transactions": 84,
+      "swaps": 247,
+      "undecoded_recognized_events": 0,
+      "unclassified_logs": 507,
+      "adapters": {
+        "v3": 40,
+        "carbon": 3,
+        "v2": 26,
+        "curve": 33,
+        "euler": 3,
+        "balancer_v1": 7,
+        "balancer_v2": 5,
+        "maverick_v2": 4,
+        "hashflow": 5,
+        "dodo_v2": 6,
+        "v4": 56,
+        "smardex": 3,
+        "pancake_v3": 6,
+        "dodo_v1": 3,
+        "fluid": 5,
+        "oneinch_limit": 9,
+        "bancor_v3": 3,
+        "v1": 2,
+        "ekubo_v1": 1,
+        "ekubo_v3": 6,
+        "algebra_integral": 3,
+        "balancer_v3": 6,
+        "rfq_order": 3,
+        "propamm": 3,
+        "rfq_extended": 3,
+        "solidly": 1,
+        "liquidity_book": 1,
+        "saddle": 1
+      }
+    }
+  },
+  "event_schemas": 64,
+  "anonymous_schemas": 2,
+  "adapter_families": 53,
+  "observed_adapter_families": [
+    "algebra_integral",
+    "balancer_buffer",
+    "balancer_v1",
+    "balancer_v2",
+    "balancer_v3",
+    "bancor_v3",
+    "carbon",
+    "cow",
+    "curve",
+    "curve_summary",
+    "dfx",
+    "dodo_v1",
+    "dodo_v2",
+    "ekubo_v1",
+    "ekubo_v3",
+    "elfomofi",
+    "erc4626",
+    "euler",
+    "fluid",
+    "hashflow",
+    "infinity_cl",
+    "kyber_summary",
+    "liquidity_book",
+    "maverick_v1",
+    "maverick_v2",
+    "oneinch_limit",
+    "pancake_v3",
+    "paraswap_rfq",
+    "paraswap_summary",
+    "propamm",
+    "psm3",
+    "rfq_extended",
+    "rfq_order",
+    "saddle",
+    "smardex",
+    "solidly",
+    "tessera",
+    "v1",
+    "v2",
+    "v3",
+    "v4",
+    "v4_hook_summary",
+    "weth",
+    "woo"
+  ],
+  "not_observed_in_live_sample": [
+    "angle",
+    "clipper",
+    "dexalot",
+    "dodo_summary",
+    "infinity_bin",
+    "mstable",
+    "rubicon",
+    "wombat",
+    "zeroex"
+  ],
+  "fixture_count": 22,
+  "decoded_events_by_category": {
+    "swaps": {
+      "algebra_integral": 12,
+      "balancer_v1": 7,
+      "balancer_v2": 6,
+      "balancer_v3": 8,
+      "bancor_v3": 3,
+      "carbon": 3,
+      "curve": 35,
+      "dfx": 1,
+      "dodo_v1": 3,
+      "dodo_v2": 6,
+      "ekubo_v1": 1,
+      "ekubo_v3": 6,
+      "elfomofi": 6,
+      "euler": 3,
+      "fluid": 7,
+      "hashflow": 5,
+      "infinity_cl": 9,
+      "liquidity_book": 5,
+      "maverick_v1": 6,
+      "maverick_v2": 10,
+      "oneinch_limit": 14,
+      "pancake_v3": 25,
+      "paraswap_rfq": 1,
+      "propamm": 6,
+      "rfq_extended": 8,
+      "rfq_order": 3,
+      "saddle": 1,
+      "smardex": 3,
+      "solidly": 9,
+      "tessera": 3,
+      "v1": 2,
+      "v2": 39,
+      "v3": 118,
+      "v4": 100,
+      "woo": 3
+    },
+    "conversions": {
+      "balancer_buffer": 8,
+      "erc4626": 9,
+      "psm3": 2,
+      "weth": 99
+    },
+    "settlements": {
+      "cow": 9
+    },
+    "route_summaries": {
+      "curve_summary": 3,
+      "kyber_summary": 30,
+      "paraswap_summary": 4,
+      "v4_hook_summary": 1
+    },
+    "non_swap_events": {
+      "v4": 2
+    }
+  },
+  "unresolved_recognized_events": [],
+  "known_gaps": [
+    "Eventless and unknown/custom contracts",
+    "Some historical protocol versions, Native RFQ pools, Metric, AirSwap, and 0x Settler RFQ",
+    "Unsupported hook-specific accounting; pool amounts can differ from wallet settlement",
+    "Schema-only adapters have not all been exercised on live transactions"
+  ],
+  "transactions": [
+    {
+      "chain": "base",
+      "hash": "0x021aeb6b69da2b6ccc52e1af1e1f1938df18fe92be9aeae4bf02db3ce589871e",
+      "block_number": 52000895,
+      "swap_count": 1,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "v3"
+      ]
+    },
+    {
+      "chain": "base",
+      "hash": "0x09b6873b31b52b058689d29ddb88fed049f1ff70f8ee23eb1f5ed596dfd5bb3b",
+      "block_number": 52000897,
+      "swap_count": 4,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "maverick_v2",
+        "rfq_extended",
+        "v3"
+      ]
+    },
+    {
+      "chain": "base",
+      "hash": "0x0bcbc46dcc71519aa3dc2016e49a58e72401c6f1adca22b846601ce87d7628a7",
+      "block_number": 52000873,
+      "swap_count": 6,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "elfomofi",
+        "fluid",
+        "pancake_v3",
+        "solidly",
+        "v3"
+      ]
+    },
+    {
+      "chain": "base",
+      "hash": "0x0f93e57092bb116299265ae59c4dec99d1bb5667195ee0ef23c39921b1a96ccc",
+      "block_number": 52000225,
+      "swap_count": 2,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "v3"
+      ]
+    },
+    {
+      "chain": "base",
+      "hash": "0x110524478bf445cd8fc4b605e17199096540a437d868bce4354ca5ab20f7ee2f",
+      "block_number": 52000415,
+      "swap_count": 2,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "rfq_extended",
+        "v3"
+      ]
+    },
+    {
+      "chain": "base",
+      "hash": "0x1130ac9ee62bc412a2298a04c077261c78280b08baded4291428662b3707e2a2",
+      "block_number": 52000801,
+      "swap_count": 3,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "pancake_v3",
+        "v2",
+        "v4"
+      ]
+    },
+    {
+      "chain": "base",
+      "hash": "0x128d91194422615d8fdd6ab858484deff333b1eb618639be1712d0e89c305d81",
+      "block_number": 52000801,
+      "swap_count": 1,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "solidly"
+      ]
+    },
+    {
+      "chain": "base",
+      "hash": "0x1666b0f4b105095a7017767341dbc37c4ac9663687c1b7fcd3a267bb0b392991",
+      "block_number": 51999904,
+      "swap_count": 1,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "rfq_extended"
+      ]
+    },
+    {
+      "chain": "base",
+      "hash": "0x16d2f5196e2d3e36cd0ac56ed0bafddf6833f18c5d2585d94a3a9683b4d86fe6",
+      "block_number": 52000796,
+      "swap_count": 4,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "oneinch_limit",
+        "v3"
+      ]
+    },
+    {
+      "chain": "base",
+      "hash": "0x21c8d3909dd168ca0f0b13305d02f4e77f3f23d12a458c8dcef1ad0b7a236c24",
+      "block_number": 52000898,
+      "swap_count": 2,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "solidly",
+        "v3"
+      ]
+    },
+    {
+      "chain": "base",
+      "hash": "0x2284345e28dcde0b1cff5fa6933ae2de8ded52bda412222ec30f18625d225da5",
+      "block_number": 52000886,
+      "swap_count": 6,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "oneinch_limit",
+        "pancake_v3",
+        "v3",
+        "v4"
+      ]
+    },
+    {
+      "chain": "base",
+      "hash": "0x246512fb8f93ad005385e249ae83e6e2be28c8eec60cab389a0b6b756367fddc",
+      "block_number": 52000840,
+      "swap_count": 2,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "pancake_v3",
+        "v4"
+      ]
+    },
+    {
+      "chain": "base",
+      "hash": "0x2537f0243e33ff564551b3939733c731ce0a220948551eb86fe02f3996da9280",
+      "block_number": 52000881,
+      "swap_count": 6,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "pancake_v3",
+        "v3",
+        "v4"
+      ]
+    },
+    {
+      "chain": "base",
+      "hash": "0x304d4310bf92d534022837b10104c01a7eb3685d2851d7d80ea3b511046a932f",
+      "block_number": 52000801,
+      "swap_count": 2,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "algebra_integral",
+        "v4"
+      ]
+    },
+    {
+      "chain": "base",
+      "hash": "0x35dc2fc14338e003a082852bf19ab7ea168d212c5c758fcd329537c4b57c710b",
+      "block_number": 52000831,
+      "swap_count": 15,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "infinity_cl",
+        "pancake_v3",
+        "v3",
+        "v4"
+      ]
+    },
+    {
+      "chain": "base",
+      "hash": "0x3a26b870663224e9eca86a6237aed720c954fcfdf22f8715638edd61e482c14e",
+      "block_number": 52000491,
+      "swap_count": 3,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "liquidity_book",
+        "v2"
+      ]
+    },
+    {
+      "chain": "base",
+      "hash": "0x3a5592dc72320d86759fa68e76a1fd379a21e7bc73944fb96eb2992e34c2a093",
+      "block_number": 52000870,
+      "swap_count": 1,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "algebra_integral"
+      ]
+    },
+    {
+      "chain": "base",
+      "hash": "0x3c7f8b013f2bf875cc6fec2a85e6e46a0182cc2d9ae74af9d7860166259e9b9e",
+      "block_number": 52000865,
+      "swap_count": 2,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "v4"
+      ]
+    },
+    {
+      "chain": "base",
+      "hash": "0x49194cde5c641c6b3683a982fee54e31408d378beee26b21f42e6b15973fd0df",
+      "block_number": 52000832,
+      "swap_count": 3,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "v3",
+        "v4"
+      ]
+    },
+    {
+      "chain": "base",
+      "hash": "0x4ad51fc6cd1e38b827e43b2793306027e414373c61b3ac5b294b28687c76ff8d",
+      "block_number": 52000833,
+      "swap_count": 2,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "curve"
+      ]
+    },
+    {
+      "chain": "base",
+      "hash": "0x4c95bfcac4ea0ec0fead2fdce7a5d6dfca99cf3cd29b9d850fa456534bc99831",
+      "block_number": 52000830,
+      "swap_count": 1,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "v2"
+      ]
+    },
+    {
+      "chain": "base",
+      "hash": "0x4d34959fe219036d54de194db7e655e9f5945af87ab16469b1c56a868a30c21b",
+      "block_number": 52000867,
+      "swap_count": 5,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "maverick_v1",
+        "v2",
+        "v3"
+      ]
+    },
+    {
+      "chain": "base",
+      "hash": "0x4df91fb639d6f209d41c140b663eb0c983739a778eb96b90e015e637e77cc65c",
+      "block_number": 52000768,
+      "swap_count": 3,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "liquidity_book",
+        "maverick_v1",
+        "v4"
+      ]
+    },
+    {
+      "chain": "base",
+      "hash": "0x501b31566b601eff2d2d7d88a64dc150ddec162b791a0e485020bd32032c5623",
+      "block_number": 51999901,
+      "swap_count": 2,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "oneinch_limit",
+        "v3"
+      ]
+    },
+    {
+      "chain": "base",
+      "hash": "0x561cbedbfd3ff05fef7d33df00548dbfacb2fc1950cc93d5e09a3b04c2249a01",
+      "block_number": 52000825,
+      "swap_count": 5,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "elfomofi",
+        "fluid",
+        "solidly",
+        "v3"
+      ]
+    },
+    {
+      "chain": "base",
+      "hash": "0x5651516c6434c9b9121ded71ba7bd66f9aa54d46ecaae66b4fa5de345721740d",
+      "block_number": 52000823,
+      "swap_count": 1,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "v2"
+      ]
+    },
+    {
+      "chain": "base",
+      "hash": "0x681c19c10d573248de941a6b3204eafeeb88ff2403301bdf75d1fc1696d7c49f",
+      "block_number": 52000888,
+      "swap_count": 1,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "v3"
+      ]
+    },
+    {
+      "chain": "base",
+      "hash": "0x6a14e58aaa367a29d257ce0e6f0fae7476e6f6444fba8d50b1a80950de32be0a",
+      "block_number": 52000877,
+      "swap_count": 2,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "algebra_integral",
+        "v3"
+      ]
+    },
+    {
+      "chain": "base",
+      "hash": "0x70e2f787cfbb87770d30b7d8cd3581f1bad267992ffb747919cbbc14cfaa13bf",
+      "block_number": 52000806,
+      "swap_count": 6,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "algebra_integral",
+        "maverick_v1",
+        "rfq_extended",
+        "v4"
+      ]
+    },
+    {
+      "chain": "base",
+      "hash": "0x72df531cf4c4b2c85552076f0a6d3e32311151abf840a0de4eb3f70483511eb6",
+      "block_number": 52000833,
+      "swap_count": 3,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "algebra_integral",
+        "v3",
+        "v4"
+      ]
+    },
+    {
+      "chain": "base",
+      "hash": "0x736c2aac4c44e70e27e414bd6cef6709c86dd0f3da7d525b44a9087e82974c14",
+      "block_number": 51999901,
+      "swap_count": 2,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "tessera",
+        "v3"
+      ]
+    },
+    {
+      "chain": "base",
+      "hash": "0x7b65a13db07a8f81af8ae258cbe9fb844ad57c45b142b868f28ac0480c9356fd",
+      "block_number": 52000848,
+      "swap_count": 1,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "solidly"
+      ]
+    },
+    {
+      "chain": "base",
+      "hash": "0x7da567875f1fab53851c81afff24fa67cbd0390dafda1f70301534d2c9113c95",
+      "block_number": 52000864,
+      "swap_count": 1,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "v3"
+      ]
+    },
+    {
+      "chain": "base",
+      "hash": "0x804d451efeda1d0307b4ac9e4f655475624c7e30fa5327a555f4b72c3852ea3a",
+      "block_number": 52000772,
+      "swap_count": 6,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "algebra_integral",
+        "dfx",
+        "pancake_v3",
+        "v3"
+      ]
+    },
+    {
+      "chain": "base",
+      "hash": "0x85586fa9eac3dcaa0228a8195057c14a5008fb362c6a7c902e742f86596349ea",
+      "block_number": 52000802,
+      "swap_count": 2,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "infinity_cl",
+        "v4"
+      ]
+    },
+    {
+      "chain": "base",
+      "hash": "0x86421f5404a0437dcb8115429ae8b9cba8fecdf814ff55fcedbf22c6a2c6a5f0",
+      "block_number": 52000843,
+      "swap_count": 46,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "algebra_integral",
+        "balancer_v3",
+        "infinity_cl",
+        "maverick_v1",
+        "maverick_v2",
+        "pancake_v3",
+        "propamm",
+        "solidly",
+        "v2",
+        "v3",
+        "v4",
+        "woo"
+      ]
+    },
+    {
+      "chain": "base",
+      "hash": "0x87d706708049cb49f01546b7addb8fee2341073a26bc7b232798b935d2650e30",
+      "block_number": 52000678,
+      "swap_count": 1,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "tessera"
+      ]
+    },
+    {
+      "chain": "base",
+      "hash": "0x89d6710ecd11a2712610cd89e6f89beb1f715c4af4a2c5a7f1d9669e1f22b43d",
+      "block_number": 52000870,
+      "swap_count": 2,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "v3"
+      ]
+    },
+    {
+      "chain": "base",
+      "hash": "0x8cd0441754158caf97fbd61a542cc8eeb44efe28d10313ef3c9a1b14f0629892",
+      "block_number": 52000888,
+      "swap_count": 4,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "propamm",
+        "v3",
+        "v4"
+      ]
+    },
+    {
+      "chain": "base",
+      "hash": "0x8d6f946034b5d2dbcb06ffe5ae522006cda778efe4a7319508322372857d5d09",
+      "block_number": 52000801,
+      "swap_count": 3,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "v3",
+        "v4"
+      ]
+    },
+    {
+      "chain": "base",
+      "hash": "0x8d8eb1a20585387f9a25ee3bf981be081dde5b48f35d5ac9015a9f9185aeafa7",
+      "block_number": 52000836,
+      "swap_count": 1,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "v3"
+      ]
+    },
+    {
+      "chain": "base",
+      "hash": "0x8f7cabc7d1a173dad0a562f74fb43ef8e51f7449365fc3e31a80ee265c75842a",
+      "block_number": 52000821,
+      "swap_count": 3,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "infinity_cl",
+        "maverick_v2",
+        "v4"
+      ]
+    },
+    {
+      "chain": "base",
+      "hash": "0x93ced30c9bdd083d4bb1e807fd57fb821d90c05faccf09b9285e2d17cac49abd",
+      "block_number": 52000801,
+      "swap_count": 2,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "pancake_v3",
+        "v3"
+      ]
+    },
+    {
+      "chain": "base",
+      "hash": "0x9e75bfc18abeca98ec7844f0dfc5c36bda5dd0d600dcfe933173dd853ab5af9a",
+      "block_number": 52000901,
+      "swap_count": 2,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "v3",
+        "v4"
+      ]
+    },
+    {
+      "chain": "base",
+      "hash": "0x9f5b560c090dff541bd454de91a8ef4c4cdc7ce03cc0d7f888271977d2717956",
+      "block_number": 52000285,
+      "swap_count": 7,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "elfomofi",
+        "pancake_v3",
+        "v3",
+        "v4"
+      ]
+    },
+    {
+      "chain": "base",
+      "hash": "0xa6576539f06e23c39a65b9a3f8b6a76f6cabbbe02a7b441a50b9c07692d3424f",
+      "block_number": 52000854,
+      "swap_count": 4,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "infinity_cl",
+        "v2",
+        "v4"
+      ]
+    },
+    {
+      "chain": "base",
+      "hash": "0xadd86120d26f5676e892f46fc7680a2bf63001a04f06a03d657c8ba84b75b0cc",
+      "block_number": 52000841,
+      "swap_count": 0,
+      "undecoded_recognized_events": 0,
+      "adapters": []
+    },
+    {
+      "chain": "base",
+      "hash": "0xafb40f2fafb1fbbac9f918752d84101c346acb2bd6efed29f5b4ddd85af59169",
+      "block_number": 52000901,
+      "swap_count": 2,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "elfomofi",
+        "v2"
+      ]
+    },
+    {
+      "chain": "base",
+      "hash": "0xb1a10e2690c67ed5baea1eb555f5b6393240e14c40ecc5a49023f24882f8c478",
+      "block_number": 52000412,
+      "swap_count": 4,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "liquidity_book",
+        "maverick_v2",
+        "v3"
+      ]
+    },
+    {
+      "chain": "base",
+      "hash": "0xb780676f6aa5e6d75cfe647583f31b467794f5f5232ef1a992db5d0999f57a84",
+      "block_number": 52000830,
+      "swap_count": 1,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "v2"
+      ]
+    },
+    {
+      "chain": "base",
+      "hash": "0xc94bdbc207aafad0bde3c974a268a232169de5a3db28be0a7b1a1c06120b4e8c",
+      "block_number": 52000893,
+      "swap_count": 2,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "elfomofi",
+        "v3"
+      ]
+    },
+    {
+      "chain": "base",
+      "hash": "0xcbcbd1d611d66b7f531350fe2132196ec6c1ae383ab201fd7c37158e6a5f7317",
+      "block_number": 51999899,
+      "swap_count": 2,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "propamm",
+        "v4"
+      ]
+    },
+    {
+      "chain": "base",
+      "hash": "0xcd5a0eb3dd55902ff2edf6a29b0c15c2205d5698dd5fe011f0bdb49e800ce33b",
+      "block_number": 52000340,
+      "swap_count": 2,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "oneinch_limit",
+        "v3"
+      ]
+    },
+    {
+      "chain": "base",
+      "hash": "0xcd71f035b0c74d8013acdabc0185820d46b2043b77ba5cc9e46ba6199c40b91c",
+      "block_number": 52000898,
+      "swap_count": 2,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "infinity_cl",
+        "v3"
+      ]
+    },
+    {
+      "chain": "base",
+      "hash": "0xd5b76e6dbd1b898efacb51b38cfd6a4f19e45c7039bb19ff215092e0eae4cf44",
+      "block_number": 51999897,
+      "swap_count": 2,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "elfomofi",
+        "pancake_v3"
+      ]
+    },
+    {
+      "chain": "base",
+      "hash": "0xd9771311ac20471e094b6b2c05b324ce7a60219c051e7dbc8200f6ff0c3122ef",
+      "block_number": 52000840,
+      "swap_count": 1,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "paraswap_rfq"
+      ]
+    },
+    {
+      "chain": "base",
+      "hash": "0xdd60be90c82e4e138e90e94c2911eb3bef28ef9f72629c82e71da8da69f05609",
+      "block_number": 52000864,
+      "swap_count": 1,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "v2"
+      ]
+    },
+    {
+      "chain": "base",
+      "hash": "0xe149e9da49730cb648e17a226d19e489e4e099d0f590188db1e0d008473bcd20",
+      "block_number": 52000885,
+      "swap_count": 1,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "rfq_extended"
+      ]
+    },
+    {
+      "chain": "base",
+      "hash": "0xe68b4efccf0e6208482a287f7a39740ddd2e022dd384e61bbd8d0406c1ca76e1",
+      "block_number": 52000290,
+      "swap_count": 2,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "tessera",
+        "v3"
+      ]
+    },
+    {
+      "chain": "base",
+      "hash": "0xea0cbf3acfbbf63b3d5d9be7b63028925b478a24bc0c3884264a6869ce74023b",
+      "block_number": 52000854,
+      "swap_count": 4,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "balancer_v3",
+        "v2",
+        "v3"
+      ]
+    },
+    {
+      "chain": "base",
+      "hash": "0xeb9ca57c660013d02add2926d5a30c5319b8e3e7a7b7caa5fb048a07e098ce3d",
+      "block_number": 52000900,
+      "swap_count": 1,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "pancake_v3"
+      ]
+    },
+    {
+      "chain": "base",
+      "hash": "0xed11a4b3aa3c7f549d90eead12241671f9b0ab48b7c2fa6c62c8215bf966c0df",
+      "block_number": 52000900,
+      "swap_count": 7,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "algebra_integral",
+        "maverick_v1",
+        "maverick_v2",
+        "v3",
+        "v4"
+      ]
+    },
+    {
+      "chain": "base",
+      "hash": "0xf23f662aa08036a2e5e15b10f96f470dadb5824f5d6c07239b5498d0f495f42c",
+      "block_number": 52000820,
+      "swap_count": 3,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "v3",
+        "v4"
+      ]
+    },
+    {
+      "chain": "base",
+      "hash": "0xf4a81a547a4699901456f0be6c18468a771246721c5bcb6ce8e0c231b6816f1c",
+      "block_number": 52000880,
+      "swap_count": 3,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "solidly",
+        "v3"
+      ]
+    },
+    {
+      "chain": "base",
+      "hash": "0xf4e55e979379c664fd87d995033adbbce81ad9b0a7fdb69fee62b5c91e604355",
+      "block_number": 52000901,
+      "swap_count": 1,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "v3"
+      ]
+    },
+    {
+      "chain": "base",
+      "hash": "0xf5abd1ecae64dbbc7d3bac540bc96d93fdbfcb46689937d9afa170554b46025c",
+      "block_number": 52000878,
+      "swap_count": 3,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "balancer_v2",
+        "pancake_v3",
+        "solidly"
+      ]
+    },
+    {
+      "chain": "base",
+      "hash": "0xfba4912504d56b5415b2bb651f07b044990fd5cb1ce76e3c5054c265a816d676",
+      "block_number": 52000834,
+      "swap_count": 2,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "woo"
+      ]
+    },
+    {
+      "chain": "ethereum",
+      "hash": "0x08731400563b0a0afb1a278a36acda43b64871e652e0d8558c3457103ed2592a",
+      "block_number": 26094267,
+      "swap_count": 2,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "v3"
+      ]
+    },
+    {
+      "chain": "ethereum",
+      "hash": "0x0945dee150ff80df44559ac464a592b405c7b2f9f26421a587cc8089e9fcb58f",
+      "block_number": 26094340,
+      "swap_count": 1,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "carbon"
+      ]
+    },
+    {
+      "chain": "ethereum",
+      "hash": "0x0c9b132894b670e32274e220403cb65e85224e67ab8e766d3ef6137f3fc281be",
+      "block_number": 26094267,
+      "swap_count": 4,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "curve",
+        "v2"
+      ]
+    },
+    {
+      "chain": "ethereum",
+      "hash": "0x0f53b3a4e9988fe186e9aa40c6277c0de733abb06dae1050c1fc997c4550127c",
+      "block_number": 26093643,
+      "swap_count": 3,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "curve",
+        "euler"
+      ]
+    },
+    {
+      "chain": "ethereum",
+      "hash": "0x10969851870c1175e974cf16ad1b585d4b6372d451d8c8ae2bc96493f6906273",
+      "block_number": 26094293,
+      "swap_count": 4,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "balancer_v1",
+        "balancer_v2",
+        "v3"
+      ]
+    },
+    {
+      "chain": "ethereum",
+      "hash": "0x11be73c150e3f433c2e0df156490ec19123ae4360aefaf97343746eef34814c9",
+      "block_number": 26094213,
+      "swap_count": 2,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "curve"
+      ]
+    },
+    {
+      "chain": "ethereum",
+      "hash": "0x14dbf00f046ce013ccec8c81acee686cbd3715042056959d616ec7d919ad601a",
+      "block_number": 26094301,
+      "swap_count": 1,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "curve"
+      ]
+    },
+    {
+      "chain": "ethereum",
+      "hash": "0x18a629c1968358d828081d67054049d479ddaf479eb72c6dfb29a57fcadb7beb",
+      "block_number": 26094253,
+      "swap_count": 1,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "maverick_v2"
+      ]
+    },
+    {
+      "chain": "ethereum",
+      "hash": "0x1e48bd5d3f9631e8808bce3e7f315395d71e378c9ebf66d6f2d08cfb0058b867",
+      "block_number": 26093371,
+      "swap_count": 3,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "curve",
+        "hashflow",
+        "v3"
+      ]
+    },
+    {
+      "chain": "ethereum",
+      "hash": "0x1fb759ec30bb00147e6d3ac7137985a15e801bbc0f2ba53416242befda18130a",
+      "block_number": 26094300,
+      "swap_count": 1,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "dodo_v2"
+      ]
+    },
+    {
+      "chain": "ethereum",
+      "hash": "0x204cb6b34a48b2d10c464706dd8bb752a4cae8e042514fe3be71f301fdd221e2",
+      "block_number": 26094266,
+      "swap_count": 2,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "v2",
+        "v4"
+      ]
+    },
+    {
+      "chain": "ethereum",
+      "hash": "0x26a0339c9bc7d16962178c002aef15459a928e5711bec46ce003f6ffc334b58c",
+      "block_number": 26094302,
+      "swap_count": 1,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "v2"
+      ]
+    },
+    {
+      "chain": "ethereum",
+      "hash": "0x2904574f3e459ebf87ff5cc7d92ba8149178084bb424f4fe13e30cd4b0b7e0d3",
+      "block_number": 26094225,
+      "swap_count": 5,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "dodo_v2",
+        "v3",
+        "v4"
+      ]
+    },
+    {
+      "chain": "ethereum",
+      "hash": "0x2d53fefa87a3640069dc7a91e6ac23b9ed81b45ca3e54b4e6195b7616922d372",
+      "block_number": 26093424,
+      "swap_count": 18,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "balancer_v2",
+        "curve",
+        "pancake_v3",
+        "smardex",
+        "v2",
+        "v3",
+        "v4"
+      ]
+    },
+    {
+      "chain": "ethereum",
+      "hash": "0x2e1153ad36610e9929e5136cad90df18e683a443a69ed0bbf60d40c7ce526d42",
+      "block_number": 26094058,
+      "swap_count": 2,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "dodo_v1",
+        "v3"
+      ]
+    },
+    {
+      "chain": "ethereum",
+      "hash": "0x335b1a19f4f4f69e43975b96b9562b99abb36a7257f7d250b8e03c70467c0aee",
+      "block_number": 26094205,
+      "swap_count": 2,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "fluid",
+        "hashflow"
+      ]
+    },
+    {
+      "chain": "ethereum",
+      "hash": "0x3613ffff8d95d3d0f0c9e45cd19ec80dcc9050a7a2d297b2e5d7e0660a2f1b87",
+      "block_number": 26093371,
+      "swap_count": 1,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "oneinch_limit"
+      ]
+    },
+    {
+      "chain": "ethereum",
+      "hash": "0x387eec6145f1d3ad39cc3dcc728564a9433319acc9284deccea28804d256e587",
+      "block_number": 26094357,
+      "swap_count": 3,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "bancor_v3",
+        "v3",
+        "v4"
+      ]
+    },
+    {
+      "chain": "ethereum",
+      "hash": "0x3c606d3dac766067ee52fd37b21ad6714d8e5ff3da7b9c8bcc7f288f937d8858",
+      "block_number": 26094202,
+      "swap_count": 2,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "v2",
+        "v4"
+      ]
+    },
+    {
+      "chain": "ethereum",
+      "hash": "0x3f25736b68efeeb6978f700e117a6d21aec5b057c8507cdb82c1be53c2ebf576",
+      "block_number": 26094255,
+      "swap_count": 4,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "dodo_v2",
+        "v1",
+        "v3",
+        "v4"
+      ]
+    },
+    {
+      "chain": "ethereum",
+      "hash": "0x40b856e36b0d95313d1788ecb293ef632c85bace9c0bca306f7e7b7d7455fc30",
+      "block_number": 26094266,
+      "swap_count": 2,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "v4"
+      ]
+    },
+    {
+      "chain": "ethereum",
+      "hash": "0x414cef64aac253782d1eb52cc80dc4aa6b47af81d90ab5ade3a632f7b717c76e",
+      "block_number": 26094268,
+      "swap_count": 3,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "dodo_v2",
+        "ekubo_v1",
+        "v4"
+      ]
+    },
+    {
+      "chain": "ethereum",
+      "hash": "0x4572113ff0b6827528ebfe3cc7e3295d61b29444130d73ac83a2659f91c73e0e",
+      "block_number": 26094301,
+      "swap_count": 0,
+      "undecoded_recognized_events": 0,
+      "adapters": []
+    },
+    {
+      "chain": "ethereum",
+      "hash": "0x46b96a63ce103120eadfdce6869b17b56150fd6b8a665b440f161df83328694b",
+      "block_number": 26094236,
+      "swap_count": 2,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "v2",
+        "v4"
+      ]
+    },
+    {
+      "chain": "ethereum",
+      "hash": "0x49b72852a874a2eb0b35cc55f82453b17fbd929e1d1939c93830f5c8c90dcb8c",
+      "block_number": 26094366,
+      "swap_count": 5,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "dodo_v1",
+        "v3",
+        "v4"
+      ]
+    },
+    {
+      "chain": "ethereum",
+      "hash": "0x4f60fbd8575431c3acaceafd694310221d56902e8a76bef9ca55b71cd5afc13a",
+      "block_number": 26093755,
+      "swap_count": 4,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "carbon",
+        "curve",
+        "v2",
+        "v3"
+      ]
+    },
+    {
+      "chain": "ethereum",
+      "hash": "0x4f92e931a95839d8f0504385b204b874233f69cce00468ad653ca9d58c551e03",
+      "block_number": 26094273,
+      "swap_count": 3,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "pancake_v3",
+        "v4"
+      ]
+    },
+    {
+      "chain": "ethereum",
+      "hash": "0x4fdf3f14c0dcf5f3cc86f68c2067be4c1a4a2fbff0b9c4fb92863d6f2f26dcf0",
+      "block_number": 26094297,
+      "swap_count": 11,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "curve",
+        "ekubo_v3",
+        "fluid",
+        "v4"
+      ]
+    },
+    {
+      "chain": "ethereum",
+      "hash": "0x529362fa677737cce611152050a8fdec6125ed88c75c7cd98f4383028c25398a",
+      "block_number": 26094302,
+      "swap_count": 3,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "ekubo_v3",
+        "pancake_v3",
+        "v4"
+      ]
+    },
+    {
+      "chain": "ethereum",
+      "hash": "0x52a170389a38ca6d1802bf3b08aaa7949668f18c4f7392c6de32c8f82e087b70",
+      "block_number": 26094242,
+      "swap_count": 2,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "curve"
+      ]
+    },
+    {
+      "chain": "ethereum",
+      "hash": "0x55dfe55e392c30e2005850ce0111f334dcee164173c3b2dc6006f7418ed12cb3",
+      "block_number": 26093990,
+      "swap_count": 2,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "hashflow",
+        "oneinch_limit"
+      ]
+    },
+    {
+      "chain": "ethereum",
+      "hash": "0x56ddf8bd2ca02c507a99e43debeae988d4d103dfeb7bbcc1a428d5c469040eaa",
+      "block_number": 26094074,
+      "swap_count": 12,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "algebra_integral",
+        "balancer_v1",
+        "balancer_v3",
+        "curve",
+        "euler",
+        "hashflow",
+        "v2",
+        "v3",
+        "v4"
+      ]
+    },
+    {
+      "chain": "ethereum",
+      "hash": "0x623aa01030a7bb38aff25f9625907efc1d83ea3cc4b531d8d12ce825e2c3087f",
+      "block_number": 26094228,
+      "swap_count": 1,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "balancer_v1"
+      ]
+    },
+    {
+      "chain": "ethereum",
+      "hash": "0x668f6ca119a20e8d9cb1f814fabeedba18fe24c7bd448d2b3c17a1a4034114e7",
+      "block_number": 26093941,
+      "swap_count": 3,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "oneinch_limit",
+        "rfq_order",
+        "v3"
+      ]
+    },
+    {
+      "chain": "ethereum",
+      "hash": "0x6904a3514b43cbbe5a14257bc79d87db3b88ed215bb7afeeb77b4012a97cef34",
+      "block_number": 26094283,
+      "swap_count": 5,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "algebra_integral",
+        "oneinch_limit",
+        "v2",
+        "v4"
+      ]
+    },
+    {
+      "chain": "ethereum",
+      "hash": "0x6a0d5fb6ef4d580d494a004c64fe616f1fbcdf2aee7ad6d95c2b9307da9393e9",
+      "block_number": 26094160,
+      "swap_count": 4,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "euler",
+        "fluid",
+        "v2",
+        "v4"
+      ]
+    },
+    {
+      "chain": "ethereum",
+      "hash": "0x6a288df1462d7c7177f29db64274318103c266a6042a9ea1435ba244b4ab07e9",
+      "block_number": 26094239,
+      "swap_count": 1,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "pancake_v3"
+      ]
+    },
+    {
+      "chain": "ethereum",
+      "hash": "0x6de41c853e760eca89be42b284abd371a648a39b9845fd17f092d9807ab1b4ce",
+      "block_number": 26093756,
+      "swap_count": 3,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "bancor_v3",
+        "v3"
+      ]
+    },
+    {
+      "chain": "ethereum",
+      "hash": "0x6e231d4fce67d0f7ac3c57078cfce4dab940e6bbd52a353ab9a98aaa3f560f41",
+      "block_number": 26094302,
+      "swap_count": 1,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "v4"
+      ]
+    },
+    {
+      "chain": "ethereum",
+      "hash": "0x6e74faaff529af74d9a3ac6752ffd68c8c6c90b6f076a672005815c0fb16238c",
+      "block_number": 26094204,
+      "swap_count": 2,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "balancer_v3",
+        "curve"
+      ]
+    },
+    {
+      "chain": "ethereum",
+      "hash": "0x7306eaf64f2ba00fc765d3f56134275b45ec3f8c6474b1c48a0045f729707682",
+      "block_number": 26094202,
+      "swap_count": 1,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "v4"
+      ]
+    },
+    {
+      "chain": "ethereum",
+      "hash": "0x7c97a4a65b1c6eee8033df77194f327d265f2d06bf11f3018a5d1b1c62f507ee",
+      "block_number": 26094254,
+      "swap_count": 4,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "maverick_v2",
+        "v3",
+        "v4"
+      ]
+    },
+    {
+      "chain": "ethereum",
+      "hash": "0x8a4e892ac972cdfa48cb08cf1d130e1bfc2d29fe2a4386692d64a7e238a6c42c",
+      "block_number": 26094205,
+      "swap_count": 2,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "propamm",
+        "v2"
+      ]
+    },
+    {
+      "chain": "ethereum",
+      "hash": "0x8d944be68f642affc5729686df4ce85e105cf35973111824ea51ea954d25d7c9",
+      "block_number": 26094253,
+      "swap_count": 3,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "algebra_integral",
+        "v3",
+        "v4"
+      ]
+    },
+    {
+      "chain": "ethereum",
+      "hash": "0x8f6b3a6fdc326c67a1a19c342302126e74fb43361c8811aecebf30241c62024c",
+      "block_number": 26093427,
+      "swap_count": 2,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "bancor_v3",
+        "v3"
+      ]
+    },
+    {
+      "chain": "ethereum",
+      "hash": "0x8f824a674dd030a3bfc67eb60c54de3710e93fd88896c2c7a11aa3e4bae7ba41",
+      "block_number": 26094221,
+      "swap_count": 3,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "maverick_v2",
+        "v2",
+        "v3"
+      ]
+    },
+    {
+      "chain": "ethereum",
+      "hash": "0x93580a8ec4ad3f5b48b04962abcc0009af22830c7f67db6689fd3765d7b9c1db",
+      "block_number": 26094209,
+      "swap_count": 3,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "ekubo_v3",
+        "maverick_v2",
+        "v3"
+      ]
+    },
+    {
+      "chain": "ethereum",
+      "hash": "0x97fdf57029d64956d4e233a2cce5d0177dfd263df3d1d969cac05d9f1ee6db32",
+      "block_number": 26094260,
+      "swap_count": 1,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "rfq_order"
+      ]
+    },
+    {
+      "chain": "ethereum",
+      "hash": "0x9a7aaf3d2a6615db56ee49348566b2f8d9ed5e3d19198a77579fb025e932558b",
+      "block_number": 26094286,
+      "swap_count": 4,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "balancer_v1",
+        "curve",
+        "v3"
+      ]
+    },
+    {
+      "chain": "ethereum",
+      "hash": "0x9f7022384f9c4a3786ee2e1890bbc3b52108423279bede23d24f41c29162b575",
+      "block_number": 26094205,
+      "swap_count": 2,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "curve",
+        "v4"
+      ]
+    },
+    {
+      "chain": "ethereum",
+      "hash": "0xa6920cb9cbd18c575cebe1728ee9d8ddbb961bb1d71ed17bb2287bfa2d8be13c",
+      "block_number": 26094210,
+      "swap_count": 7,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "balancer_v1",
+        "balancer_v2",
+        "v2",
+        "v3",
+        "v4"
+      ]
+    },
+    {
+      "chain": "ethereum",
+      "hash": "0xa7a3df77e6d3828e6bbf6b1529e61bbcd27fb39b857a7cd84bd2e1ec465f684a",
+      "block_number": 26094050,
+      "swap_count": 2,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "dodo_v2",
+        "rfq_extended"
+      ]
+    },
+    {
+      "chain": "ethereum",
+      "hash": "0xa8ab4442cfc653ab29afc20482b85c3f175df743379a52d38b6ddaa609a5720e",
+      "block_number": 26094226,
+      "swap_count": 2,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "curve"
+      ]
+    },
+    {
+      "chain": "ethereum",
+      "hash": "0xac5ac4d0ad8824d2b1fc48d1661b548a74eadcb84ee3cf45b881c161a289c584",
+      "block_number": 26093871,
+      "swap_count": 1,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "oneinch_limit"
+      ]
+    },
+    {
+      "chain": "ethereum",
+      "hash": "0xafa23b415e1ea802281e76c6b92572fb85d1f13d3593fd3ea12fac3fc9507ca8",
+      "block_number": 26094204,
+      "swap_count": 4,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "ekubo_v3",
+        "oneinch_limit",
+        "pancake_v3",
+        "v3"
+      ]
+    },
+    {
+      "chain": "ethereum",
+      "hash": "0xaff2db684583c1fd34f26489cac399b28f8002c5deb265564d0425a0c39be41a",
+      "block_number": 26094302,
+      "swap_count": 3,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "v2",
+        "v3",
+        "v4"
+      ]
+    },
+    {
+      "chain": "ethereum",
+      "hash": "0xb1de4744b3a84a7b8a9330f5705909c382e5cc3bfddccd428a61aee00ec08cb1",
+      "block_number": 26094370,
+      "swap_count": 1,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "oneinch_limit"
+      ]
+    },
+    {
+      "chain": "ethereum",
+      "hash": "0xb6ec70801a6ebe76d1aeb90cb6b084e179f41bcf9dd3fa46b1d96cd38a48be0d",
+      "block_number": 26094358,
+      "swap_count": 3,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "smardex",
+        "v2"
+      ]
+    },
+    {
+      "chain": "ethereum",
+      "hash": "0xb81aba0e8e84b7e79f6536c3fb7279bbcd0a23176bbe0fa962dadb4fce8de826",
+      "block_number": 26094223,
+      "swap_count": 1,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "fluid"
+      ]
+    },
+    {
+      "chain": "ethereum",
+      "hash": "0xb9fb90d2266ee224c419b6b766d35812e7bc3efb4f8bb5218adcc9428b768e46",
+      "block_number": 26093428,
+      "swap_count": 2,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "propamm",
+        "v4"
+      ]
+    },
+    {
+      "chain": "ethereum",
+      "hash": "0xbc10f85f10f67081229c8058f4524c11f55674c87d27c16aba5cb979e9e8869e",
+      "block_number": 26094423,
+      "swap_count": 2,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "propamm",
+        "v4"
+      ]
+    },
+    {
+      "chain": "ethereum",
+      "hash": "0xbdc394fa523ae9d8a27b55a33f3e9ebf826f75958d9cebf88b62695732c5b0bc",
+      "block_number": 26094251,
+      "swap_count": 2,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "solidly",
+        "v2"
+      ]
+    },
+    {
+      "chain": "ethereum",
+      "hash": "0xbde889e0241a1a63bcc401d7b5031ff5a65abe677e8bb024d5f96fd0c393c049",
+      "block_number": 26094254,
+      "swap_count": 1,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "balancer_v3"
+      ]
+    },
+    {
+      "chain": "ethereum",
+      "hash": "0xc170dc4bfa1838c4937fd18c87355caef5d7790fe1dce28f8b9de4978e8b7d33",
+      "block_number": 26094370,
+      "swap_count": 2,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "hashflow",
+        "v3"
+      ]
+    },
+    {
+      "chain": "ethereum",
+      "hash": "0xc26ddbbb6086f6bb019a386edfdbccd1520e10df85de17660dde0d45bf4fa034",
+      "block_number": 26093452,
+      "swap_count": 2,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "rfq_extended",
+        "v4"
+      ]
+    },
+    {
+      "chain": "ethereum",
+      "hash": "0xc273b363651dddfd6826d632a28b700aef54215e01ca2609ebfb8947e936a6fb",
+      "block_number": 26094237,
+      "swap_count": 1,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "v4"
+      ]
+    },
+    {
+      "chain": "ethereum",
+      "hash": "0xc4f1548c47bb1830c4604b4a46fefbc2ef53ff77ade5667786fd1e9565bc589e",
+      "block_number": 26093437,
+      "swap_count": 3,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "carbon",
+        "v3",
+        "v4"
+      ]
+    },
+    {
+      "chain": "ethereum",
+      "hash": "0xc6190e17730a77273bbf2443145c6fc5725566bc1a28292357fec230b10f7b43",
+      "block_number": 26094233,
+      "swap_count": 2,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "v3",
+        "v4"
+      ]
+    },
+    {
+      "chain": "ethereum",
+      "hash": "0xd2292e6c055112f830433dbddea8baf96d4a44b8d988520767213fc49aa708e7",
+      "block_number": 26093388,
+      "swap_count": 3,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "oneinch_limit",
+        "rfq_order",
+        "v3"
+      ]
+    },
+    {
+      "chain": "ethereum",
+      "hash": "0xd39b3f3876a0fd1e5f5236445762f305497fed369fea2f38261013429a5e8e45",
+      "block_number": 26094332,
+      "swap_count": 3,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "rfq_extended",
+        "v3",
+        "v4"
+      ]
+    },
+    {
+      "chain": "ethereum",
+      "hash": "0xd4f1bb2bf768c84d97e7d1b5bd865de07b4b9f90102a0b03dc9325811a81d3e5",
+      "block_number": 26094026,
+      "swap_count": 2,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "liquidity_book",
+        "v4"
+      ]
+    },
+    {
+      "chain": "ethereum",
+      "hash": "0xd95aac0abba6e5a81af30b0a7ffae68c9213b89444e0af501a9f9012c4e59232",
+      "block_number": 26093454,
+      "swap_count": 5,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "balancer_v3",
+        "dodo_v1",
+        "ekubo_v3",
+        "pancake_v3",
+        "v2"
+      ]
+    },
+    {
+      "chain": "ethereum",
+      "hash": "0xd9936bf9426a500cea8091c5b863e88c74df418cbe79bc58f66c0e289bb96d34",
+      "block_number": 26094276,
+      "swap_count": 3,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "balancer_v2",
+        "curve",
+        "v4"
+      ]
+    },
+    {
+      "chain": "ethereum",
+      "hash": "0xda848ff27dd70dd1cc6acde9f2fec4cbbe8a1cbc2e68ea36e7890c6b91b39e51",
+      "block_number": 26094203,
+      "swap_count": 2,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "dodo_v2",
+        "v4"
+      ]
+    },
+    {
+      "chain": "ethereum",
+      "hash": "0xdb336d62d02b266ae32e8858402e00e4f94cdc32d49eda3c3d07db4a365ef3ec",
+      "block_number": 26093634,
+      "swap_count": 3,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "saddle",
+        "v3"
+      ]
+    },
+    {
+      "chain": "ethereum",
+      "hash": "0xdc2fc6cb58fb26e7769a92c4d787e1e38dc91bb553be6c26f42f99766e48d9be",
+      "block_number": 26094209,
+      "swap_count": 3,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "balancer_v1",
+        "curve",
+        "v4"
+      ]
+    },
+    {
+      "chain": "ethereum",
+      "hash": "0xdcea6c761bb884f1aa8b43dbfa8ab611c116fd807ac45f68ba97bc36276aabd5",
+      "block_number": 26094284,
+      "swap_count": 1,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "v4"
+      ]
+    },
+    {
+      "chain": "ethereum",
+      "hash": "0xde3b446c2949ad5ecc16ec28d4c3474250b580ca128e888671f1a56830eae39d",
+      "block_number": 26094240,
+      "swap_count": 2,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "v1",
+        "v2"
+      ]
+    },
+    {
+      "chain": "ethereum",
+      "hash": "0xe380f4ceb5b98cffdbbc2cf50127d78c61c1cf53bb27ae8838a15232d7e3a1dd",
+      "block_number": 26094229,
+      "swap_count": 8,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "balancer_v3",
+        "v3",
+        "v4"
+      ]
+    },
+    {
+      "chain": "ethereum",
+      "hash": "0xe51984071a286beb817de1692b86bda5f22d33ec45eda7f52bd77b4552fbc7ae",
+      "block_number": 26094298,
+      "swap_count": 2,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "balancer_v3",
+        "ekubo_v3"
+      ]
+    },
+    {
+      "chain": "ethereum",
+      "hash": "0xed3ef48d8187d34231120413ae2b5c67134df7a92f28d72aad1b95698d2c585e",
+      "block_number": 26094202,
+      "swap_count": 2,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "v3",
+        "v4"
+      ]
+    },
+    {
+      "chain": "ethereum",
+      "hash": "0xed44df1c76ad62d26c54d84fae3e7858a69d68d58a16569fc97dc1436bde77d3",
+      "block_number": 26094251,
+      "swap_count": 3,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "fluid",
+        "v3",
+        "v4"
+      ]
+    },
+    {
+      "chain": "ethereum",
+      "hash": "0xf0c1830073ce6d233317ca73c7181e48b2ab951119c712cf1fadc3d585f0add8",
+      "block_number": 26094234,
+      "swap_count": 5,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "curve"
+      ]
+    },
+    {
+      "chain": "ethereum",
+      "hash": "0xf3f41767ec04973092e1669b94bb9af973ba5a30a0bc50d10b3aaf82bd963b97",
+      "block_number": 26094227,
+      "swap_count": 3,
+      "undecoded_recognized_events": 0,
+      "adapters": [
+        "balancer_v2",
+        "curve",
+        "v2"
+      ]
+    }
+  ],
+  "validation": {
+    "evm_unit_tests_passed": 32,
+    "solana_regression_tests_passed": 91,
+    "offline_real_transaction_fixtures": 22,
+    "live_cli_and_offline_replay": [
+      "base",
+      "ethereum"
+    ]
+  },
+  "swap_adapter_families": 42,
+  "live_observed_swap_adapter_families": 35
+}
