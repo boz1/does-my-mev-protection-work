@@ -4,7 +4,7 @@
 Python API: summarize_sandwich(front, back, victims, chain="solana"). Front
 and back may each be a string or a list. CLI accepts JSONL, website JSON shards,
 Solana binary parts and --row N, an inline --row-json value, or explicit legs. RPCs come from
-SOLANA_RPC_URL, BASE_RPC_URL, or ETHEREUM_RPC_URL. See SANDWICH_SUMMARIES.md.
+SOLANA_RPC_URL, BASE_RPC_URL, ETHEREUM_RPC_URL, or TRON_RPC_URL. See SANDWICH_SUMMARIES.md.
 """
 from __future__ import annotations
 
@@ -23,7 +23,7 @@ import solana_decode_swaps as solana
 import sandwich_dataset as dataset
 
 
-CHAINS = ('solana', 'base', 'ethereum')
+CHAINS = ('solana', 'base', 'ethereum', 'tron')
 ROLES = ('front', 'back', 'victim')  # The input file's order, NOT execution order.
 FORMAT = 'sandwich-raw-v1'
 TxGroup = str | Sequence[str]
@@ -36,7 +36,7 @@ class SummaryError(ValueError):
 def normalize_row(row: Sequence | dict, chain: str = 'solana') -> list[list[str]]:
     """Validate all legs and preserve multiple fronts, backs and victims."""
     if chain not in CHAINS:
-        raise SummaryError('Chain must be solana, base, or ethereum')
+        raise SummaryError('Chain must be solana, base, ethereum, or tron')
     try:
         row = dataset.row_from_record(row)
     except dataset.DatasetError as exc:
@@ -59,9 +59,10 @@ def normalize_row(row: Sequence | dict, chain: str = 'solana') -> list[list[str]
                 except (ValueError, TypeError):
                     raise SummaryError('Invalid Solana transaction signature') from None
             else:
-                if not re.fullmatch(r'0x[0-9a-fA-F]{64}', tx_hash):
-                    raise SummaryError('EVM hashes must be 0x followed by 64 hexadecimal digits')
-                tx_hash = tx_hash.lower()
+                try:
+                    tx_hash = evm.normalize_tx_hash(tx_hash, chain)
+                except evm.DecodeError as exc:
+                    raise SummaryError(str(exc)) from None
             if tx_hash in seen:
                 raise SummaryError('A transaction appears more than once in the row')
             seen.add(tx_hash)
@@ -117,7 +118,7 @@ def fetch_sandwich(front: TxGroup, back: TxGroup, victims: TxGroup, *,
     if timeout <= 0 or not 1 <= workers <= 16:
         raise SummaryError('Timeout must be positive and workers must be between 1 and 16')
     url = rpc_url or os.environ.get(chain.upper() + '_RPC_URL')
-    if not url and chain != 'solana':
+    if not url and chain in ('base', 'ethereum'):
         url = os.environ.get('EVM_RPC_URL')
     if not url:
         raise SummaryError('Set ' + chain.upper() + '_RPC_URL or pass rpc_url')
@@ -314,6 +315,8 @@ def summarize_bundle(raw_bundle: dict) -> dict:
     dates = sorted({x['date'] for x in legs if x['date']})
     candidates = sorted({x['sender'] for x in front if x['sender']} & {x['sender'] for x in back if x['sender']})
     warnings = []
+    if chain == 'tron':
+        warnings.append('TRON token metadata and factory membership use latest state; raw swap amounts and block positions come from the original transaction receipts.')
     if classified['victims_enclosed'] is False:
         warnings.append('The supplied legs are not enclosed by a front transaction and a back transaction in ledger order')
     elif classified['strict_role_order'] is False:

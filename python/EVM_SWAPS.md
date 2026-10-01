@@ -1,14 +1,18 @@
 # Decode swaps on Base and Ethereum
 
-Three chain entry scripts are provided:
+Four chain entry scripts are provided:
 
 | Chain | Entry script | RPC environment variable |
 | --- | --- | --- |
 | Solana | `solana_decode_swaps.py` | `SOLANA_RPC_URL` |
 | Base | `base_decode_swaps.py` | `BASE_RPC_URL` |
 | Ethereum | `ethereum_decode_swaps.py` | `ETHEREUM_RPC_URL` |
+| TRON | `tron_decode_swaps.py` | `TRON_RPC_URL` |
 
-Base and Ethereum share `evm_decode_swaps.py`; keep it beside their entry scripts.
+Base, Ethereum and TRON share `evm_decode_swaps.py`; keep it beside their entry scripts.
+TRON enables a separate set of TVM-compatible event layouts and uses latest-state
+metadata; see [TRON_SWAPS.md](TRON_SWAPS.md). The historical calls and broader
+EVM venue catalog described below apply to Base and Ethereum.
 The EVM decoder uses Python 3.10+ and the standard library only. Solana has its
 own two adapter modules; see [SOLANA_SWAPS.md](SOLANA_SWAPS.md). All RPC requests
 are read-only. No wallet, signing, or additional API subscription is needed.

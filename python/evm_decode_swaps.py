@@ -1,15 +1,16 @@
 #!/usr/bin/env python3
-"""Decode executed EVM swap events on Ethereum and Base (Python 3.10+, stdlib only).
+"""Decode executed swap events on Ethereum, Base and TRON (Python 3.10+, stdlib only).
 
 Amounts come from receipt events or successful executed calls, never router
-quotes or calldata limits. Historical metadata and traces are saved with
---raw-output so the same transaction can be decoded without RPC access.
+quotes or calldata limits. Metadata (historical on EVM, latest on TRON) and
+traces are saved with --raw-output for replay without RPC access.
 """
 from __future__ import annotations
 
 import argparse
 from dataclasses import dataclass
 from functools import lru_cache
+import hashlib
 import json
 import os
 from pathlib import Path
@@ -85,9 +86,64 @@ def selector(signature: str) -> str:
 
 ZERO = '0x' + '0' * 40
 NATIVE = '0x' + 'e' * 40
-CHAIN_IDS = {'ethereum': 1, 'base': 8453}
+TRON_CHAIN_ID = 0x2b6653dc
+CHAIN_IDS = {'ethereum': 1, 'base': 8453, 'tron': TRON_CHAIN_ID}
 WETH = {1: '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2',
-        8453: '0x4200000000000000000000000000000000000006'}
+        8453: '0x4200000000000000000000000000000000000006',
+        TRON_CHAIN_ID: '0x891cdb91d149f23b1a45d9c5ca78a88d0cb44c18'}
+TRON_FAMILIES = frozenset(('v2', 'v3', 'tron_v1', 'curve', 'saddle', 'weth'))
+_BASE58 = '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz'
+
+
+def normalize_tx_hash(value: str, chain: str | None = None) -> str:
+    if chain == 'tron' and isinstance(value, str) and re.fullmatch(r'[0-9a-fA-F]{64}', value):
+        value = '0x' + value
+    if not isinstance(value, str) or not re.fullmatch(r'0x[0-9a-fA-F]{64}', value):
+        raise DecodeError('Transaction hash must be 0x followed by 64 hexadecimal digits (TRON also accepts bare txIDs)')
+    return value.lower()
+
+
+def tron_address_hex(value: str) -> str:
+    """Accept JSON-RPC 20-byte hex, TRON 41-prefixed hex, or Base58Check."""
+    if isinstance(value, str) and re.fullmatch(r'(?:0x)?41[0-9a-fA-F]{40}', value):
+        return '0x' + value[-40:].lower()
+    if isinstance(value, str) and len(value) == 34 and value.startswith('T'):
+        try:
+            number = 0
+            for char in value:
+                number = number * 58 + _BASE58.index(char)
+            raw = number.to_bytes(25, 'big')
+        except (ValueError, OverflowError):
+            raise DecodeError('Invalid TRON Base58Check address') from None
+        checksum = hashlib.sha256(hashlib.sha256(raw[:-4]).digest()).digest()[:4]
+        if raw[0] != 0x41 or raw[-4:] != checksum:
+            raise DecodeError('Invalid TRON address prefix or checksum')
+        return '0x' + raw[1:21].hex()
+    return address(value)
+
+
+def tron_address_base58(value: str) -> str:
+    raw = b'\x41' + bytes.fromhex(tron_address_hex(value)[2:])
+    raw += hashlib.sha256(hashlib.sha256(raw).digest()).digest()[:4]
+    number, encoded = int.from_bytes(raw, 'big'), ''
+    while number:
+        number, digit = divmod(number, 58)
+        encoded = _BASE58[digit] + encoded
+    return encoded
+
+
+def _add_tron_addresses(value: Any) -> None:
+    """Keep canonical hex keys for dataset matching; add display addresses."""
+    if isinstance(value, list):
+        for child in value:
+            _add_tron_addresses(child)
+    elif isinstance(value, dict):
+        for key, child in list(value.items()):
+            if key in ('address', 'pool', 'emitter', 'factory', 'sender', 'recipient',
+                       'transaction_sender', 'transaction_to') and isinstance(child, str) and re.fullmatch(r'0x[0-9a-fA-F]{40}', child):
+                value[key + '_base58'] = tron_address_base58(child)
+            elif isinstance(child, (dict, list)):
+                _add_tron_addresses(child)
 
 
 def hex_bytes(value: str) -> bytes:
@@ -274,6 +330,7 @@ class Rpc:
         if not url.startswith(('https://', 'http://')):
             raise RpcError('RPC URL must use HTTP or HTTPS')
         self.url, self.timeout, self.retries, self._id = url, timeout, retries, 0
+        self.retry_rpc_codes: set[int] = set()
 
     def call(self, method: str, params: list) -> Any:
         if method not in self.ALLOWED:
@@ -291,6 +348,9 @@ class Rpc:
                     raise RpcError(method + ': invalid RPC response')
                 if result.get('error'):
                     code = result['error'].get('code', 'unknown')
+                    if method == 'eth_call' and code in self.retry_rpc_codes and attempt < self.retries:
+                        time.sleep(0.25 * (attempt + 1))
+                        continue
                     # Revert details and server messages can contain URLs; retain the code only.
                     raise RpcError(f'{method}: RPC error {code}')
                 if 'result' not in result:
@@ -309,9 +369,15 @@ class Metadata:
         self.bundle, self.rpc = bundle, rpc
         self.block = bundle['receipt']['blockNumber']
         self.chain_id = quantity(bundle['chain_id'])
+        # java-tron eth_call only supports latest state. Even object-form block
+        # references execute at latest; never label these calls as historical.
+        self.call_block = 'latest' if self.chain_id == TRON_CHAIN_ID else self.block
+        self.state_label = 'Latest-state' if self.chain_id == TRON_CHAIN_ID else 'Historical'
         self.cache = bundle.setdefault('metadata', {'calls': {}, 'logs': {}})
         self.cache.setdefault('calls', {})
         self.cache.setdefault('logs', {})
+        if self.chain_id == TRON_CHAIN_ID:
+            self.cache['state_scope'] = 'latest'
 
     def call(self, contract: str, signature: str, args: tuple = (), returns: tuple = ('address',)) -> Any:
         contract = address(contract)
@@ -319,18 +385,20 @@ class Metadata:
         key = contract + ':' + data
         if key not in self.cache['calls']:
             if self.rpc is None:
-                raise MetadataError('Historical metadata is not saved: ' + signature)
+                raise MetadataError(self.state_label + ' metadata is not saved: ' + signature)
             try:
-                value = self.rpc.call('eth_call', [{'to': contract, 'data': data}, self.block])
+                value = self.rpc.call('eth_call', [{'to': contract, 'data': data}, self.call_block])
                 self.cache['calls'][key] = {'result': value}
+                if self.chain_id == TRON_CHAIN_ID:
+                    self.cache['calls'][key]['block_tag'] = 'latest'
             except RpcError as exc:
                 self.cache['calls'][key] = {'error': str(exc)}
         record = self.cache['calls'][key]
         if 'error' in record:
-            raise MetadataError('Historical call unavailable: ' + signature)
+            raise MetadataError(self.state_label + ' call unavailable: ' + signature)
         raw = hex_bytes(record['result'])
         if not raw:
-            raise MetadataError('Empty historical response: ' + signature)
+            raise MetadataError('Empty ' + self.state_label.lower() + ' response: ' + signature)
         values = abi_decode(list(returns), raw)
         return values[0] if len(values) == 1 else values
 
@@ -340,7 +408,7 @@ class Metadata:
                 return self.call(contract, signature, args, returns)
             except DecodeError:
                 pass
-        raise MetadataError('Historical metadata unavailable: ' + ', '.join(signatures))
+        raise MetadataError(self.state_label + ' metadata unavailable: ' + ', '.join(signatures))
 
     def trace(self) -> dict:
         if 'trace' not in self.bundle and 'trace_error' not in self.bundle and self.rpc:
@@ -357,7 +425,8 @@ class Metadata:
         if amount < 0:
             raise DecodeError('Negative token amount')
         native = contract in (NATIVE, ZERO)
-        decimals, symbol = (18, 'ETH') if native else (None, None)
+        native_info = (6, 'TRX') if self.chain_id == TRON_CHAIN_ID else (18, 'ETH')
+        decimals, symbol = native_info if native else (None, None)
         if not native:
             try:
                 decimals = self.call(contract, 'decimals()', returns=('uint8',))
@@ -475,6 +544,38 @@ EMITTERS = {
 }
 
 # Additional verified event schemas.
+TRON_SOURCES = {
+    'events': 'https://github.com/sun-protocol/transactionAnalysis/blob/master/Events_For_Liquidity_And_Exchange.md',
+    'v1': 'https://docs.sun.io/protocols/sunswap-v1/reference/contract/',
+    'v2': 'https://github.com/sunswapteam/sunswap2.0-contracts',
+    'v3': 'https://docs.sun.io/protocols/sunswap-v3/reference/contract/',
+    'curve': 'https://docs.sun.io/protocols/suncurve/reference/contract/',
+    'metadata': 'https://developers.tron.network/reference/eth_call',
+}
+FACTORIES[TRON_CHAIN_ID] = {
+    tron_address_hex(a): {'name': name, 'family': family, 'source': TRON_SOURCES[source]}
+    for a, name, family, source in (
+        ('TXk8rQSAvPvBBNtqSoY6nCfsXWCSSpTVQF', 'SunSwapV1', 'tron_v1', 'v1'),
+        ('TKWJdrQkqHisa1X8HUdHEfREvTzw4pMAaY', 'SunSwapV2', 'v2', 'v2'),
+        ('TThJt8zaJzJMhCEScH7zWKnp5buVZqys9x', 'SunSwapV3', 'v3', 'v3'),
+    )
+}
+# Current and legacy pools listed by SUN's contract/event documentation.
+EMITTERS[TRON_CHAIN_ID] = {tron_address_hex(a): ('SunCurve', 'curve') for a in (
+    'THJCvwFmu6uDqKY59JbULHDgfddy2Zojty', 'TNTfaTpkdd4AQDeqr8SGG7tgdkdjdhbP5c',
+    'TKcEU8ekq2ZoFzLSGFYCUY6aocJBX9X31b', 'TAUGwRhmCP518Bm4VBqv7hDun9fg8kYjC4',
+    'TS8d3ZrSxiGZkqhJqMzFKHEC1pjaowFMBJ', 'TE7SB1v9vRbYRe5aJMWQWp9yfE2k9hnn3s',
+    'TKBqNLyGJRQbpuMhaT49qG7adcxxmFaVxd', 'TLssvTsY4YZeDPwemQvUzLdoqhFCbVxDGo',
+    'TExeaZuD5YPi747PN5yEwk3Ro9eT2jJfB6', 'TGG5AWMNjssDtLgsHg2QSN8CTwVTCHQMF6',
+    'TNU9LfegfzLcJo2ZxTQXDYE2uh7JuxZfnP', 'TSbahrnT5sJwjCzN6LPa1pE5d9pdVwRQ1E',
+    'TLZacPrPKfrfbsimu5dDdrgMT16m9cnpL9', 'TKVsYedAY23WFchBniU7kcx1ybJnmRSbGt',
+    'TQx6CdLHqjwVmJ45ecRzodKfVumAsdoRXH',
+)}
+EVENTS += [
+    Event('tron_v1', 'TokenPurchase', (('buyer', 'address', True), ('trx_sold', 'uint256', True), ('tokens_bought', 'uint256', True)), TRON_SOURCES['events']),
+    Event('tron_v1', 'TrxPurchase', (('buyer', 'address', True), ('tokens_sold', 'uint256', True), ('trx_bought', 'uint256', True)), TRON_SOURCES['events']),
+]
+
 EVENTS += [
     Event('curve', 'TokenExchange', (('buyer', 'address', True), ('sold_id', 'uint256', False), ('tokens_sold', 'uint256', False), ('bought_id', 'uint256', False), ('tokens_bought', 'uint256', False), ('fee', 'uint256', False), ('packed_price_scale', 'uint256', False)), 'https://sourcify.dev/server/v2/contract/1/0x4ebdf703948ddcea3b11f675b4d1fba9d2414a14?fields=abi'),
     Event('elfomofi', 'ElfomoTrade', (('quoteId', 'uint256', True), ('partnerId', 'uint256', True), ('executor', 'address', False), ('receiver', 'address', False), ('fromToken', 'address', False), ('toToken', 'address', False), ('fromAmount', 'uint256', False), ('toAmount', 'uint256', False)), 'https://sourcify.dev/server/v2/contract/8453/0xf0f0f0f0fb0d738452efd03a28e8be14c76d5f73?fields=abi'),
@@ -746,25 +847,28 @@ def identify_pool(meta: Metadata, pool: str, family: str, tokens: tuple[str, str
         if tokens:
             result['verification'] = 'historical_pool_interface'
         return result
-    result['verification'] = 'historical_pool_interface'
+    result['verification'] = 'latest_pool_interface' if meta.chain_id == TRON_CHAIN_ID else 'historical_pool_interface'
     try:
-        factory = meta.call(pool, 'factory()')
+        factory = meta.call(pool, 'factoryAddress()' if family == 'tron_v1' else 'factory()')
     except DecodeError:
         return result
     result['factory'] = factory
     registered = FACTORIES.get(meta.chain_id, {}).get(factory)
-    if not registered:
+    if not registered or (meta.chain_id == TRON_CHAIN_ID and registered['family'] != family):
         return result
     a, b = tokens
     candidates = []
-    if family in ('v2', 'solidly', 'euler'):
+    if family == 'tron_v1':
+        candidates.append(('getExchange(address)', (b,)))
+    elif family in ('v2', 'solidly', 'euler'):
         candidates.append(('getPair(address,address)', (a, b)))
-        try:
-            stable = meta.call(pool, 'stable()', returns=('bool',))
-            candidates += [(fn, (a, b, int(stable))) for fn in (
-                'getPool(address,address,bool)', 'getPair(address,address,bool)')]
-        except DecodeError:
-            pass
+        if meta.chain_id != TRON_CHAIN_ID:
+            try:
+                stable = meta.call(pool, 'stable()', returns=('bool',))
+                candidates += [(fn, (a, b, int(stable))) for fn in (
+                    'getPool(address,address,bool)', 'getPair(address,address,bool)')]
+            except DecodeError:
+                pass
     elif family in ('v3', 'pancake_v3', 'algebra_integral'):
         if 'Slipstream' in registered['name'] or registered['name'] == 'SolidlyV3':
             try:
@@ -786,7 +890,7 @@ def identify_pool(meta: Metadata, pool: str, family: str, tokens: tuple[str, str
             resolved.append(found)
             if found == pool:
                 result.update(protocol=registered['name'], protocol_verified=True,
-                              verification='registered_factory_membership')
+                              verification='registered_factory_membership_latest_state' if meta.chain_id == TRON_CHAIN_ID else 'registered_factory_membership')
                 return result
         except DecodeError:
             pass
@@ -949,6 +1053,15 @@ def decode_event(event: Event, log: dict, meta: Metadata) -> tuple[str, dict] | 
             inputs, outputs, sender = [(tokens[0], d['payBase'])], [(tokens[1], d['receiveQuote'])], d['seller']
         else:
             inputs, outputs = [(tokens[1], d['payQuote'])], [(tokens[0], d['receiveBase'])]
+    elif family == 'tron_v1':
+        erc20 = meta.call(pool, 'tokenAddress()')
+        if erc20 in (NATIVE, ZERO):
+            raise DecodeError('SunSwap V1 pool declares a native/zero token')
+        tokens = (NATIVE, erc20)
+        if name == 'TokenPurchase':
+            inputs, outputs = [(NATIVE, d['trx_sold'])], [(erc20, d['tokens_bought'])]
+        else:
+            inputs, outputs = [(erc20, d['tokens_sold'])], [(NATIVE, d['trx_bought'])]
     elif family == 'v1':
         erc20 = meta.call(pool, 'tokenAddress()')
         if name == 'TokenPurchase':
@@ -1084,7 +1197,7 @@ def decode_event(event: Event, log: dict, meta: Metadata) -> tuple[str, dict] | 
         category, kind = 'conversions', 'vault_share_conversion'
     elif family == 'weth':
         if pool != WETH[meta.chain_id]:
-            raise DecodeError('Deposit/Withdrawal emitter is not this chain\'s canonical WETH')
+            raise DecodeError('Deposit/Withdrawal emitter is not this chain\'s canonical wrapped native token')
         inputs, outputs = ([(NATIVE, d['wad'])], [(pool, d['wad'])]) if name == 'Deposit' else ([(pool, d['wad'])], [(NATIVE, d['wad'])])
         category, kind = 'conversions', 'wrap' if name == 'Deposit' else 'unwrap'
         if not d['wad']:
@@ -1126,7 +1239,8 @@ def decode_event(event: Event, log: dict, meta: Metadata) -> tuple[str, dict] | 
         raise DecodeError('Event exchanges a token for itself')
     identity = identify_pool(meta, pool, family, tokens if family not in ('v4', 'infinity_cl', 'infinity_bin') else None)
     if family == 'weth':
-        identity.update(protocol='WETH', protocol_verified=True, verification='registered_emitter')
+        identity.update(protocol='WTRX' if meta.chain_id == TRON_CHAIN_ID else 'WETH',
+                        protocol_verified=True, verification='registered_emitter')
     input_details, output_details = [meta.token(a, n) for a, n in inputs], [meta.token(a, n) for a, n in outputs]
     result = {'log_index': quantity(log['logIndex']), 'event': event.signature,
               'adapter': family, 'venue_type': kind, 'emitter': pool,
@@ -1190,15 +1304,17 @@ def decode_ekubo(log: dict, meta: Metadata) -> dict:
 
 def fetch_transaction(tx_hash: str, rpc_url: str, chain: str | None = None,
                       timeout: float = 30, trace: bool = False) -> tuple[dict, Rpc]:
-    if not re.fullmatch(r'0x[0-9a-fA-F]{64}', tx_hash):
-        raise DecodeError('Transaction hash must be 0x followed by 64 hexadecimal digits')
-    tx_hash = tx_hash.lower()
+    tx_hash = normalize_tx_hash(tx_hash, chain)
     rpc = Rpc(rpc_url, timeout)
     chain_id = quantity(rpc.call('eth_chainId', []))
     if chain_id not in CHAIN_IDS.values():
-        raise DecodeError('RPC is not Ethereum mainnet (1) or Base mainnet (8453)')
+        raise DecodeError('RPC is not Ethereum, Base, or TRON mainnet')
     if chain and CHAIN_IDS[chain] != chain_id:
         raise DecodeError('RPC chain ID does not match --chain')
+    if chain_id == TRON_CHAIN_ID:
+        # TRON constant calls can fail transiently with node execution errors.
+        # Retry a bounded number of times; never substitute guessed metadata.
+        rpc.retry_rpc_codes = {-32000}
     receipt = rpc.call('eth_getTransactionReceipt', [tx_hash])
     if receipt is None:
         raise DecodeError('Receipt not found: transaction is pending, unknown, or on another chain')
@@ -1248,6 +1364,10 @@ def decode_transaction(bundle: dict, rpc: Rpc | None = None) -> dict:
               'warnings': [], 'coverage': {'all_swaps_guaranteed': False,
               'decoded_swap_events': 0, 'undecoded_recognized_events': 0, 'unclassified_log_count': 0,
               'scope': 'implemented executed event schemas; unknown/eventless contracts may require additional adapters'}}
+    if chain_id == TRON_CHAIN_ID:
+        result['metadata_scope'] = 'latest_state'
+        result['warnings'].append('TRON eth_call uses latest state: token identities, decimals, symbols and factory membership are current-state metadata, not historical snapshots. Raw swap amounts come from the transaction receipt.')
+        _add_tron_addresses(result)
     if result['status'] != 'success':
         return result
     meta = Metadata(bundle, rpc)
@@ -1263,6 +1383,7 @@ def decode_transaction(bundle: dict, rpc: Rpc | None = None) -> dict:
         topics = log.get('topics', [])
         raw = {'log_index': idx, 'emitter': log['address'], 'topics': topics, 'data': log.get('data', '0x')}
         specs = EVENT_BY_TOPIC.get(topics[0].lower(), []) if topics else []
+        specs = [s for s in specs if (s.family in TRON_FAMILIES if chain_id == TRON_CHAIN_ID else s.family != 'tron_v1')]
         if not topics and EMITTERS.get(chain_id, {}).get(log['address'].lower(), ('', ''))[1] == 'ekubo':
             try:
                 result['swaps'].append(decode_ekubo(log, meta))
@@ -1302,50 +1423,60 @@ def decode_transaction(bundle: dict, rpc: Rpc | None = None) -> dict:
         current = rpc.call('eth_getBlockByNumber', [receipt['blockNumber'], False])
         if not current or current.get('hash') != receipt['blockHash']:
             raise DecodeError('Block reorganized during metadata lookup; retry the transaction')
+    if chain_id == TRON_CHAIN_ID:
+        _add_tron_addresses(result)
     return result
 
 
-def protocol_catalog() -> dict:
-    return {'chains': CHAIN_IDS, 'event_schemas': [
+def protocol_catalog(chain: str | None = None) -> dict:
+    tron_only = chain == 'tron'
+    result = {'chains': {'tron': TRON_CHAIN_ID} if tron_only else CHAIN_IDS, 'event_schemas': [
         {'adapter': e.family, 'event': e.signature, 'topic0': e.topic, 'source': e.source,
          'indexed_fields': [name for name, _, indexed in e.fields if indexed]}
-        for e in EVENTS if e.name not in ('Initialize', 'PoolInitialized')],
+        for e in EVENTS if e.name not in ('Initialize', 'PoolInitialized') and (not tron_only or e.family in TRON_FAMILIES)],
         'anonymous_schemas': [
             {'adapter': 'ekubo_' + version, 'event': 'anonymous 116-byte packed Swap',
              'requires': 'registered core and successful matching call trace',
              'source': 'https://github.com/EkuboProtocol/evm-contracts'}
-            for version in ('v1', 'v3')],
-        'factories': FACTORIES, 'registered_emitters': EMITTERS,
+            for version in (() if tron_only else ('v1', 'v3'))],
+        'factories': {TRON_CHAIN_ID: FACTORIES[TRON_CHAIN_ID]} if tron_only else FACTORIES,
+        'registered_emitters': {TRON_CHAIN_ID: EMITTERS[TRON_CHAIN_ID]} if tron_only else EMITTERS,
         'all_swaps_guaranteed': False}
+    if tron_only:
+        result.update(metadata_scope='latest_state', sources=TRON_SOURCES,
+                      wrapped_native_token=WETH[TRON_CHAIN_ID])
+    return result
 
 
 def main(argv: list[str] | None = None, default_chain: str | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('tx_hash', nargs='?')
     parser.add_argument('--chain', choices=CHAIN_IDS, default=default_chain)
-    parser.add_argument('--rpc-url', help='RPC URL; prefer BASE_RPC_URL / ETHEREUM_RPC_URL / EVM_RPC_URL')
+    parser.add_argument('--rpc-url', help='RPC URL; prefer BASE_RPC_URL / ETHEREUM_RPC_URL / TRON_RPC_URL')
     parser.add_argument('--timeout', type=float, default=30)
     parser.add_argument('--from-json', type=Path, help='Decode a previously saved raw bundle offline')
-    parser.add_argument('--raw-output', type=Path, help='Save receipt, transaction and historical metadata')
+    parser.add_argument('--raw-output', type=Path, help='Save receipt, transaction and decoder metadata')
     parser.add_argument('--output', type=Path)
     parser.add_argument('--trace', action='store_true', help='Request an optional read-only call trace')
     parser.add_argument('--list-protocols', action='store_true')
     args = parser.parse_args(argv)
     try:
         if args.list_protocols:
-            output, bundle = protocol_catalog(), None
+            output, bundle = protocol_catalog(args.chain), None
         elif args.from_json:
             bundle = json.loads(args.from_json.read_text())
             if args.chain and quantity(bundle['chain_id']) != CHAIN_IDS[args.chain]:
                 raise DecodeError('Saved bundle does not match --chain')
-            if args.tx_hash and args.tx_hash.lower() != bundle['transaction']['hash'].lower():
+            if args.tx_hash and normalize_tx_hash(args.tx_hash, args.chain or ('tron' if quantity(bundle['chain_id']) == TRON_CHAIN_ID else None)) != bundle['transaction']['hash'].lower():
                 raise DecodeError('Saved bundle does not match the requested transaction hash')
             output = decode_transaction(bundle)
         else:
             if not args.tx_hash:
                 parser.error('provide a transaction hash or --from-json')
             env_name = args.chain.upper() + '_RPC_URL' if args.chain else 'EVM_RPC_URL'
-            url = args.rpc_url or os.environ.get(env_name) or os.environ.get('EVM_RPC_URL')
+            url = args.rpc_url or os.environ.get(env_name)
+            if not url and args.chain != 'tron':
+                url = os.environ.get('EVM_RPC_URL')
             if not url:
                 parser.error('set ' + env_name + ' or pass --rpc-url')
             bundle, rpc = fetch_transaction(args.tx_hash, url, args.chain, args.timeout, args.trace)

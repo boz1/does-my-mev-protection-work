@@ -11,7 +11,7 @@ import summarize_sandwich as sandwich
 
 class RpcConfigurationTests(unittest.TestCase):
     def test_evm_requires_an_explicit_rpc_or_environment_variable(self):
-        for chain in ('base', 'ethereum'):
+        for chain in ('base', 'ethereum', 'tron'):
             with self.subTest(chain=chain), patch.dict(os.environ, {}, clear=True), \
                  patch('sys.stderr', new_callable=io.StringIO), patch.object(evm, 'fetch_transaction') as fetch:
                 with self.assertRaises(SystemExit) as caught:
@@ -28,7 +28,7 @@ class RpcConfigurationTests(unittest.TestCase):
             fetch.assert_not_called()
 
     def test_summarizer_requires_rpc_configuration_on_every_chain(self):
-        for chain in ('solana', 'base', 'ethereum'):
+        for chain in ('solana', 'base', 'ethereum', 'tron'):
             hashes = [solana.b58encode(bytes([n]) * 64) if chain == 'solana' else '0x' + f'{n:064x}'
                       for n in (1, 2, 3)]
             with self.subTest(chain=chain), patch.dict(os.environ, {}, clear=True), \

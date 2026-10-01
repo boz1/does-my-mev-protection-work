@@ -99,7 +99,7 @@ def run_audit(path: str | Path, *, chain: str, state: str | Path, rpc_url: str |
     if chain != 'solana' and any(dataset.input_format(p, input_format) == 'solana-binary' for p in paths):
         raise dataset.DatasetError('Solana binary parts require --chain solana')
     url = rpc_url or os.environ.get(chain.upper() + '_RPC_URL')
-    if not url and chain != 'solana':
+    if not url and chain in ('base', 'ethereum'):
         url = os.environ.get('EVM_RPC_URL')
     if not url:
         raise dataset.DatasetError('Set ' + chain.upper() + '_RPC_URL or pass --rpc-url')
@@ -177,7 +177,7 @@ def run_audit(path: str | Path, *, chain: str, state: str | Path, rpc_url: str |
                                 result = cache[tx_hash]
                                 if _incomplete(result):
                                     issues.append({'hash': tx_hash, 'kind': result['status'] if result['status'] == 'fetch_error' else 'unresolved_swap'})
-                                pool_key = expected_pool.lower() if expected_pool and chain != 'solana' else expected_pool
+                                pool_key = (summary.evm.tron_address_hex(expected_pool) if chain == 'tron' else expected_pool.lower()) if expected_pool and chain != 'solana' else expected_pool
                                 if pool_key and pool_key not in result['pools']:
                                     issues.append({'hash': tx_hash, 'kind': 'expected_pool_not_decoded', 'pool': expected_pool})
                             if issues:
@@ -233,7 +233,7 @@ def main(argv=None) -> int:
     parser.add_argument('--max-transactions', type=int, default=100, help='New checks this run; 0 means unlimited (default 100)')
     parser.add_argument('--workers', type=int, default=4)
     parser.add_argument('--timeout', type=float, default=30)
-    parser.add_argument('--rpc-url', help='Prefer SOLANA_RPC_URL, BASE_RPC_URL or ETHEREUM_RPC_URL')
+    parser.add_argument('--rpc-url', help='Prefer SOLANA_RPC_URL, BASE_RPC_URL, ETHEREUM_RPC_URL or TRON_RPC_URL')
     parser.add_argument('--raw-dir', type=Path, help='Optionally save full transaction evidence; can use substantial disk space')
     parser.add_argument('--retry-incomplete', action='store_true', help='Rescan inputs and retry fetch failures and unresolved recognized swaps')
     parser.add_argument('--report', type=Path, help='Save the JSON report instead of printing it')
