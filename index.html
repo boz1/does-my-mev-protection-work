@@ -39,7 +39,9 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
 
 .search{display:flex;gap:10px;align-items:center;margin:22px 0 6px;flex-wrap:wrap}
 label.qlabel{font-size:13px;color:var(--muted);flex:none}
-input#q{flex:1 1 260px;min-width:0;border:none;border-bottom:1px solid var(--muted);background:transparent;padding:5px 2px;font:14px var(--mono);color:var(--fg)}
+select#chain-sel{border:none;border-bottom:1px solid var(--muted);background:transparent;padding:5px 2px;font:14px var(--sans);color:var(--fg);flex:none;cursor:pointer}
+select#chain-sel:focus-visible{outline:none;border-bottom-color:var(--fg)}
+input#q{flex:1 1 220px;min-width:0;border:none;border-bottom:1px solid var(--muted);background:transparent;padding:5px 2px;font:14px var(--mono);color:var(--fg)}
 input#q:focus-visible{outline:none;border-bottom-color:var(--fg)}
 button#go{border:1px solid var(--fg);background:transparent;color:var(--fg);border-radius:3px;padding:7px 14px;font:14px var(--sans);cursor:pointer;flex:none}
 button#go:hover{background:var(--fg);color:var(--bg)}
@@ -71,31 +73,67 @@ footer p{max-width:58ch}
 
 <main>
 <h1>Does my MEV protection work?</h1>
-<p>Paste an Ethereum tx hash to check whether it was sandwiched as private order flow.</p>
+<p>Paste a tx hash to check whether it was sandwiched as private order flow.</p>
 
 <form id="f" autocomplete="off" class="search">
+  <label for="chain-sel" class="qlabel">chain</label>
+  <select id="chain-sel">
+    <option value="ethereum">Ethereum</option>
+    <option value="base">Base</option>
+    <option value="tron">Tron</option>
+  </select>
   <label for="q" class="qlabel">tx hash</label>
   <input id="q" name="q" spellcheck="false" placeholder="0x…">
   <button id="go" type="submit">Look up</button>
 </form>
-<p class="scope">Ethereum only, Jul 2023–Jun 2026.</p>
+<p class="scope" id="scope"></p>
 
 <div id="out" aria-live="polite"><p class="muted">Loading…</p></div>
 
 <footer>
-<p>Dataset: 30,607 private-flow sandwiches by 7 persistent bots, Uniswap V2–V4 only, from Heimbach, Solmaz, Öz, Ferreira Torres. <i>No Place to Hide: An Analysis on Protected Order Flow Sandwich Attacks.</i> <a href="https://arxiv.org/abs/2609.28115" target="_blank" rel="noopener">arXiv:2609.28115</a>, 2026. OFA labels are positive evidence only — a missing label doesn't rule a route out. Lookups run in your browser against the published files.</p>
+<p>From Heimbach, Solmaz, Öz, Ferreira Torres. <i>No Place to Hide: An Analysis on Protected Order Flow Sandwich Attacks.</i> <a href="https://arxiv.org/abs/2609.28115" target="_blank" rel="noopener">arXiv:2609.28115</a>, 2026. OFA attribution (MEV-Share, MEVBlocker, Blink, Merkle) is available for Ethereum only; a missing label doesn't rule a route out. Lookups run in your browser against the published files.</p>
 </footer>
 </main>
 
 <script>
 (()=>{
-const NS=64, ES="https://etherscan.io";
+/* Chain registry. Each entry is a self-contained shard set: idx/s directory,
+   shard count, dataset size (for the scope line), and explorer link builders.
+   Ethereum, Base and Tron hashes are all 0x + 64 hex, indistinguishable by
+   format alone, so the chain dropdown picks the dataset explicitly instead of
+   guessing. `fallback` is a second shard set checked when the primary one has
+   no match — used for eth_reorg, which holds the same kind of private txs,
+   just exposed through a chain reorg instead of an OFA leak. Tron addresses
+   are stored here as raw hex (no safe hex->base58 conversion without a
+   library), so addrUrl is left unset and they render as plain text. */
+const CHAINS={
+  ethereum:{
+    label:"Ethereum", idx:"ethereum/idx", s:"ethereum/s", ns:64, count:30607,
+    fallback:{idx:"eth_reorg/idx", s:"eth_reorg/s", ns:64},
+    txUrl:h=>`https://etherscan.io/tx/${h}`,
+    addrUrl:h=>`https://etherscan.io/address/${h}`,
+  },
+  base:{
+    label:"Base", idx:"base/idx", s:"base/s", ns:64, count:1889,
+    txUrl:h=>`https://basescan.org/tx/${h}`,
+    addrUrl:h=>`https://basescan.org/address/${h}`,
+  },
+  tron:{
+    label:"Tron", idx:"tron/idx", s:"tron/s", ns:64, count:38567, bareHex:true,
+    txUrl:h=>`https://tronscan.org/#/transaction/${h.slice(2)}`,
+  },
+};
 const $=id=>document.getElementById(id), out=$("out");
 const cache={};
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const short=h=>h.slice(0,6)+"…"+h.slice(-4);
-const txl=(h,full)=>`<a href="${ES}/tx/${h}" target="_blank" rel="noopener">${full?h:short(h)}</a>`;
-const adl=(h,full)=>h?`<a href="${ES}/address/${h}" target="_blank" rel="noopener">${full?h:short(h)}</a>`:"native ETH";
+let chain=CHAINS.ethereum;
+const txl=(h,full)=>`<a href="${chain.txUrl(h)}" target="_blank" rel="noopener">${full?h:short(h)}</a>`;
+const adl=(h,full)=>{
+  if(!h) return "native ETH";
+  if(!chain.addrUrl) return `<span class="mono">${full?h:short(h)}</span>`;
+  return `<a href="${chain.addrUrl(h)}" target="_blank" rel="noopener">${full?h:short(h)}</a>`;
+};
 const n0=x=>Number(x).toLocaleString("en-US");
 function load(u){ if(!cache[u]) cache[u]=fetch(u).then(r=>{if(!r.ok) throw new Error(r.status); return r.json()}).catch(e=>{delete cache[u]; throw e}); return cache[u]; }
 const DEC={WETH:18,ETH:18,USDC:6,USDT:6};
@@ -135,17 +173,18 @@ function seqHTML(rec,q,X,Y){
   return rows.join("");
 }
 
-function render(rec, q){
+function render(rec, q, viaReorg){
   const inTok=rec.fin==="token0"?rec.t0:rec.t1, outTok=rec.fin==="token0"?rec.t1:rec.t0;
   const X=inTok[1], Y=outTok[1];
   const me=rec.V.find(v=>v.h===q);
   const role=rec.f.includes(q)?"front leg":"back leg";
   const priv=rec.V;
   const ty=TYPE[rec.t]||rec.t;
+  const via=viaReorg?" · exposed via chain reorg":"";
 
   const head=me
-    ? `<p class="verdict hit">Sandwiched</p><p class="meta"><b>${rec.d}</b> · bot ${adl(rec.bot)} · ${ty} attack</p>`
-    : `<p class="verdict">Attacker leg</p><p class="meta">${role}, bot ${adl(rec.bot)}, <b>${rec.d}</b>, against ${priv.length} private victim${priv.length===1?"":"s"}</p>`;
+    ? `<p class="verdict hit">Sandwiched</p><p class="meta"><b>${rec.d}</b> · bot ${adl(rec.bot)} · ${ty} attack${via}</p>`
+    : `<p class="verdict">Attacker leg</p><p class="meta">${role}, bot ${adl(rec.bot)}, <b>${rec.d}</b>, against ${priv.length} private victim${priv.length===1?"":"s"}${via}</p>`;
 
   const vics=priv.map(v=>`<div class="vic"><p class="hash mono">${v.h===q?"▶ ":""}${txl(v.h)}</p><p class="reason">${reason(v.L,priv.length===1)}</p></div>`).join("");
 
@@ -155,29 +194,56 @@ function render(rec, q){
   ${vics||'<p class="muted small">No private victims.</p>'}`;
 }
 
+function parseHash(raw, c){
+  const s=String(raw).toLowerCase();
+  const m=s.match(/0x[0-9a-f]{64}/);
+  if(m) return m[0];
+  if(c.bareHex){ const b=s.match(/\b[0-9a-f]{64}\b/); if(b) return "0x"+b[0]; }
+  return null;
+}
+
+async function searchSet(idxDir, sDir, ns, q){
+  const idx=await load(`${idxDir}/${q[2]}.json`);
+  const ids=idx[q.slice(2,18)];
+  if(!ids) return null;
+  for(const id of ids){
+    const sh=await load(`${sDir}/${id%ns}.json`);
+    const r=sh.find(x=>x.i===id);
+    if(r&&(r.f.includes(q)||r.b.includes(q)||r.V.some(v=>v.h===q))) return r;
+  }
+  return null;
+}
+
+function updateScope(){
+  $("scope").textContent=`${n0(chain.count)} private-flow sandwiches on ${chain.label}.`;
+  $("q").placeholder=chain.bareHex?"hex id…":"0x…";
+}
+
 async function lookup(raw){
-  const m=String(raw).toLowerCase().match(/0x[0-9a-f]{64}/);
-  if(!m&&/^\s*[1-9A-HJ-NP-Za-km-z]{86,88}\s*$/.test(String(raw))){ out.innerHTML=`<p class="verdict">Unsupported</p><p>That looks like a Solana signature. This tool checks Ethereum only.</p>`; return; }
-  if(!m){ out.innerHTML=`<p class="verdict">Invalid</p><p>That is not a transaction hash. Paste 0x followed by 64 hex characters, or an Etherscan link.</p>`; return; }
-  const q=m[0]; $("q").value=q;
+  const q=parseHash(raw, chain);
+  if(!q){
+    if(/^\s*[1-9A-HJ-NP-Za-km-z]{86,88}\s*$/.test(String(raw))){ out.innerHTML=`<p class="verdict">Unsupported</p><p>That looks like a Solana signature. This tool covers Ethereum, Base and Tron.</p>`; return; }
+    out.innerHTML=`<p class="verdict">Invalid</p><p>That is not a ${chain.label} transaction hash. Paste it directly, or an explorer link.</p>`; return;
+  }
+  $("q").value=q;
   if(location.hash!=="#"+q) history.replaceState(null,"","#"+q);
   out.innerHTML=`<p class="muted small">searching ${short(q)}…</p>`;
   try{
-    const idx=await load(`idx/${q[2]}.json`);
-    const ids=idx[q.slice(2,18)];
-    let rec=null;
-    if(ids) for(const id of ids){
-      const sh=await load(`s/${id%NS}.json`);
-      const r=sh.find(x=>x.i===id);
-      if(r&&(r.f.includes(q)||r.b.includes(q)||r.V.some(v=>v.h===q))){rec=r;break}
+    let rec=await searchSet(chain.idx, chain.s, chain.ns, q);
+    let viaReorg=false;
+    if(!rec&&chain.fallback){
+      rec=await searchSet(chain.fallback.idx, chain.fallback.s, chain.fallback.ns, q);
+      viaReorg=!!rec;
     }
-    if(!rec){ out.innerHTML=`<p class="verdict clear">No match</p><p class="mono small">${txl(q,true)}</p><p class="muted small">Not among the 30,607 private-flow sandwiches. A missing hash does not mean your protection worked — it may have been public, outside the paper's window, on a different DEX, or hit by a smaller bot.</p>`; return; }
-    render(rec,q);
+    if(!rec){ out.innerHTML=`<p class="verdict clear">No match</p><p class="mono small">${txl(q,true)}</p><p class="muted small">Not among the ${n0(chain.count)} ${chain.label} private-flow sandwiches in this dataset. A missing hash does not mean your protection worked — it may have been public, outside the paper's window, on a different DEX, or hit by a smaller bot.</p>`; return; }
+    render(rec,q,viaReorg);
   }catch(e){ out.innerHTML=`<p class="verdict">Error</p><p class="muted small">Could not load data (${esc(e.message)}). Try again.</p>`; }
 }
+$("chain-sel").addEventListener("change",e=>{ chain=CHAINS[e.target.value]; updateScope(); });
 $("f").addEventListener("submit",e=>{e.preventDefault(); lookup($("q").value)});
-$("q").addEventListener("paste",e=>{const t=(e.clipboardData||window.clipboardData)?.getData("text"); if(t&&/0x[0-9a-fA-F]{64}/.test(t)){e.preventDefault(); lookup(t)}});
+$("q").addEventListener("paste",e=>{const t=(e.clipboardData||window.clipboardData)?.getData("text"); if(t&&/(0x)?[0-9a-fA-F]{64}/.test(t)){e.preventDefault(); lookup(t)}});
 window.addEventListener("hashchange",()=>{const h=location.hash.slice(1); if(h) lookup(h)});
+updateScope();
 const h0=location.hash.slice(1);
 if(/^0x[0-9a-fA-F]{64}$/.test(h0)) lookup(h0); else lookup("0x05162b2f10dcb08a44d02f2479845315c32b635b2e1d0a2ebb8f45820a28d95a");
 })();
