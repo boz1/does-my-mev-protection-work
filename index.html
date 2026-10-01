@@ -3,97 +3,92 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Does My MEV Protection Work?</title>
+<title>Does my MEV protection work?</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&display=swap">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap">
 <style>
-/* Layout: one plain left-aligned column, like a 1997 university lookup page. Serif prose, monospace data, blue links, hr rules. */
+/* Plain text report. No borders, no boxes, no tables, no cards. Whitespace does the structuring. */
 :root{
-  --bg:#ffffff; --fg:#111111; --muted:#5f5f66; --rule:#9a9aa2;
-  --link:#0000ee; --visited:#551a8b; --alert:#b00000; --ok:#1d6b1d; --mark:#fff3a8;
-  --serif:"Times New Roman",Times,"Liberation Serif",serif;
-  --mono:"IBM Plex Mono",ui-monospace,"Courier New",monospace;
+  --bg:#ffffff; --fg:#1a1a1a; --muted:#6e6e6e;
+  --red:#b3261e; --green:#1e6b3a;
+  --sans:"Public Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
+  color-scheme:light;
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
-  --bg:#121214; --fg:#e4e4e6; --muted:#9b9ba3; --rule:#4a4a52;
-  --link:#8fb4ff; --visited:#c7a2ff; --alert:#ff7a7a; --ok:#7fd67f; --mark:#4a4214; color-scheme:dark}}
-:root[data-theme="dark"]{
-  --bg:#121214; --fg:#e4e4e6; --muted:#9b9ba3; --rule:#4a4a52;
-  --link:#8fb4ff; --visited:#c7a2ff; --alert:#ff7a7a; --ok:#7fd67f; --mark:#4a4214; color-scheme:dark}
-body{background:var(--bg);color:var(--fg);font:17px/1.45 var(--serif);padding-block:28px 48px;padding-inline:16px}
-main{max-width:78ch}
-h1{font-size:1.9rem;margin:0 0 .2em;text-wrap:balance}
-h2{font-size:1.2rem;margin:1.6em 0 .4em}
-p{margin:.5em 0;max-width:68ch}
-a{color:var(--link)} a:visited{color:var(--visited)}
-a:focus-visible,button:focus-visible,input:focus-visible{outline:2px dotted var(--fg);outline-offset:2px}
-hr{border:0;border-top:1px solid var(--rule);margin:1.4em 0}
-code,.mono,pre,input,button,table{font-family:var(--mono);font-size:14px}
+  --bg:#121212; --fg:#ededed; --muted:#9a9a9a; --red:#ff7a6e; --green:#78d696; color-scheme:dark;
+}}
+:root[data-theme="dark"]{ --bg:#121212; --fg:#ededed; --muted:#9a9a9a; --red:#ff7a6e; --green:#78d696; color-scheme:dark; }
+body{
+  margin:0;background:var(--bg);color:var(--fg);
+  font:16px/1.6 var(--sans);
+  padding-inline:18px;
+  padding-block:calc(36px + env(safe-area-inset-top,0px)) calc(56px + env(safe-area-inset-bottom,0px));
+}
+main{max-width:620px;margin-inline:auto}
+h1{font-size:1.4rem;line-height:1.3;margin:0 0 14px;font-weight:700;text-wrap:balance}
+p{margin:.6em 0;max-width:58ch}
+b{font-weight:700}
+a{color:inherit;text-decoration:underline;text-decoration-color:var(--muted);text-underline-offset:2px}
+a:hover{text-decoration-color:currentColor}
+a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--fg);outline-offset:2px}
 .muted{color:var(--muted)}
-form{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:.8em 0}
-input{flex:1 1 30ch;min-width:0;padding:4px 6px;border:2px inset var(--rule);background:var(--bg);color:var(--fg)}
-button{padding:3px 12px;border:2px outset var(--rule);background:var(--bg);color:var(--fg);cursor:pointer}
-button:active{border-style:inset}
-.examples{font-size:15px}
-.examples a{font-family:var(--mono);font-size:13px}
-.verdict{font:600 1.35rem/1.3 var(--mono);margin:.4em 0}
-.verdict.hit{color:var(--alert)} .verdict.miss{color:var(--ok)}
-.scroll{overflow-x:auto}
-pre{margin:.6em 0;line-height:1.55;white-space:pre}
-pre .you{background:var(--mark)}
-table{border-collapse:collapse;margin:.4em 0}
-td,th{text-align:left;vertical-align:top;padding:2px 14px 2px 0;font-variant-numeric:tabular-nums}
-th{font-weight:600;color:var(--muted);white-space:nowrap}
-.vic{margin:1em 0 1.2em;padding-left:12px;border-left:3px double var(--rule)}
-.tag{font-family:var(--mono);font-size:13px;border:1px solid var(--fg);padding:0 4px;white-space:nowrap}
-.tag.off{border-style:dashed;color:var(--muted);border-color:var(--muted)}
-.small{font-size:15px}
-.blink{animation:b 1.1s steps(1) 3}
-@keyframes b{50%{opacity:0}}
-@media (prefers-reduced-motion:reduce){.blink{animation:none}}
-footer{font-size:14px;color:var(--muted)}
+.small{font-size:13px}
+.mono{font-family:var(--mono)}
+
+.search{display:flex;gap:10px;align-items:center;margin:22px 0 6px;flex-wrap:wrap}
+label.qlabel{font-size:13px;color:var(--muted);flex:none}
+input#q{flex:1 1 260px;min-width:0;border:none;border-bottom:1px solid var(--muted);background:transparent;padding:5px 2px;font:14px var(--mono);color:var(--fg)}
+input#q:focus-visible{outline:none;border-bottom-color:var(--fg)}
+button#go{border:1px solid var(--fg);background:transparent;color:var(--fg);border-radius:3px;padding:7px 14px;font:14px var(--sans);cursor:pointer;flex:none}
+button#go:hover{background:var(--fg);color:var(--bg)}
+.scope{font-size:13px;color:var(--muted);margin:0 0 8px}
+
+.verdict{font:700 1.15rem var(--sans);margin:28px 0 4px}
+.verdict.hit{color:var(--red)}
+.verdict.clear{color:var(--green)}
+.meta{font-size:13.5px;color:var(--muted);margin:0 0 20px}
+.meta b{color:var(--fg);font-weight:500}
+
+.label{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin:24px 0 8px}
+.block-label{font-size:12.5px;color:var(--muted);margin:14px 0 6px}
+.block-label:first-child{margin-top:0}
+.seq-row{display:flex;gap:12px;flex-wrap:wrap;align-items:baseline;padding:3px 0;font-size:14px}
+.seq-row .role{width:52px;flex:none;color:var(--muted);font-weight:600;text-transform:uppercase;font-size:11.5px;letter-spacing:.04em}
+.seq-row .you{color:var(--red);font-weight:700}
+.gap-note{font-size:13px;color:var(--muted);margin:6px 0}
+
+.vic{margin:0 0 14px}
+.vic .hash{font-size:14px}
+.vic .reason{font-size:13.5px;color:var(--muted);margin-top:2px}
+
+footer{margin-top:40px;font-size:13px;color:var(--muted)}
+footer p{max-width:58ch}
 </style>
 </head>
 <body>
 
 <main>
 <h1>Does my MEV protection work?</h1>
-<p class="small">Paste the hash of an Ethereum trade you sent through a private RPC or an order-flow auction (OFA). If a bot sandwiched it anyway, you will see the attack, the OFAs your transaction showed up in, and the bot behind it. The dataset is the one from <i>No Place to Hide: An Analysis on Protected Order Flow Sandwich Attacks</i> (<a href="https://arxiv.org/abs/2609.28115" target="_blank" rel="noopener">arXiv:2609.28115</a>).</p>
+<p>Paste an Ethereum tx hash to check whether it was sandwiched as private order flow.</p>
 
-<form id="f" autocomplete="off">
-  <label for="q" class="muted small">tx&nbsp;hash:</label>
-  <input id="q" name="q" spellcheck="false" placeholder="0x… (an Etherscan link works too)">
+<form id="f" autocomplete="off" class="search">
+  <label for="q" class="qlabel">tx hash</label>
+  <input id="q" name="q" spellcheck="false" placeholder="0x…">
   <button id="go" type="submit">Look up</button>
 </form>
-<p class="small muted">Checks Ethereum trades only: the 30,607 private-flow sandwiches from the paper. Solana, Tron and Base are covered in the paper but not here.</p>
-<p class="examples muted">Try:
-  <a href="#0x05162b2f10dcb08a44d02f2479845315c32b635b2e1d0a2ebb8f45820a28d95a">MEV-Share + MEVBlocker</a> ·
-  <a href="#0xfe0b01fe9966ff6abfe258b6c7e7b56b294ae73ce9dd49ccc18df93fcf583f23">Blink only</a> ·
-  <a href="#0xa8d989fbcbace60b979b797c85896331bbecd398a54d4e16ac7d91da059ed1a3">MEVBlocker only</a> ·
-  <a href="#0xf3e6a7f8e02291cb50cf7e4fcfe90d3c2b466c9ffbf09fc0b4fdaec51c96abd2">unattributed</a> ·
-  <a href="#0x781a64cede408850aeb0727635d4f9de95024c14ec2f477e10942fc4d0999a2c">a bot's front leg</a>
-</p>
-<hr>
+<p class="scope">Ethereum only, Jul 2023–Jun 2026.</p>
+
 <div id="out" aria-live="polite"><p class="muted">Loading…</p></div>
-<hr>
+
 <footer>
-<p><b>Scope.</b> 30,607 sandwiches by 7 persistent bots against 39,461 private Ethereum swaps, 1 July 2023 to 30 June 2026 (Table 3 of the paper). Uniswap V2–V4 and identical forks only. A transaction counts as private if it never reached the public mempool according to the Flashbots mempool archive. Public-mempool sandwiches, reorg-exposed sandwiches, bots below the persistence thresholds, and other chains are not in this dataset. If your hash is missing here, that does not mean you were not sandwiched.</p>
-<p><b>OFA labels</b> are positive evidence only: a label means the transaction appears in that provider's records. Coverage: MEV-Share 2022-02 to 2026-07 (Dune, data browser and event stream combined), MEVBlocker 2023-04 to 2026-07, Blink from BuilderNet bundle data 2025-08 to 2026-07, Merkle 2025-01 to 2026-03. A missing label does not rule a route out. Profits are gross token round trips before gas and fees. The paper reports USD figures per bot, not per sandwich.</p>
-<p>Heimbach, Solmaz, Öz, Ferreira Torres, 2026. Lookups run in your browser against the published files.</p>
+<p>Dataset: 30,607 private-flow sandwiches by 7 persistent bots, Uniswap V2–V4 only, from Heimbach, Solmaz, Öz, Ferreira Torres. <i>No Place to Hide: An Analysis on Protected Order Flow Sandwich Attacks.</i> <a href="https://arxiv.org/abs/2609.28115" target="_blank" rel="noopener">arXiv:2609.28115</a>, 2026. OFA labels are positive evidence only — a missing label doesn't rule a route out. Lookups run in your browser against the published files.</p>
 </footer>
 </main>
 
 <script>
 (()=>{
-const BOTS={
- "0x841b6ff0979f86bd76579a3cd03fa43a6a1bb697":{n:13661,twc:"1 / 67 / 33",gross:"$217,579",fees:"37%",succ:"86%",act:"Nov 2025 – Jun 2026",vic:17355,ofa:[30,14,74,3,19]},
- "0x8a5d8700dd19488d964d202e87b0cc85704054db":{n:10202,twc:"0 / 55 / 45",gross:"$240,985",fees:"86%",succ:"77%",act:"Aug 2024 – Nov 2024",vic:13400,ofa:[30,38,0,0,59]},
- "0xe87a2343f12a9d812a9e87f01118b6c7c5f6b716":{n:3031,twc:"0 / 48 / 52",gross:"$92,717",fees:"53%",succ:"74%",act:"Jul 2024 – Aug 2024",vic:4214,ofa:[30,29,0,0,67]},
- "0x69b03f6548f16c44b77cd974197e2b8b5ba00b78":{n:1563,twc:"0 / 29 / 70",gross:"$35,112",fees:"44%",succ:"81%",act:"Oct 2025 – Nov 2025",vic:1781,ofa:[53,24,64,20,14]},
- "0x013a9088670ffdeec705a3dc32d5229ab5ab15ea":{n:983,twc:"0 / 31 / 69",gross:"$14,248",fees:"56%",succ:"80%",act:"Aug 2025 – Sep 2025",vic:1101,ofa:[72,59,59,10,10]},
- "0xe9becf8c41cee2b777dee36775613209b5273e02":{n:808,twc:"0 / 23 / 77",gross:"$18,462",fees:"35%",succ:"82%",act:"Sep 2025 – Oct 2025",vic:995,ofa:[67,34,47,27,11]},
- "0xc72a44de529163b3ecd26e24f8eda50d7943859b":{n:359,twc:"0 / 55 / 45",gross:"$3,255",fees:"30%",succ:"91%",act:"Apr 2026 – Jun 2026",vic:615,ofa:[33,16,58,0,35]}
-};
 const NS=64, ES="https://etherscan.io";
 const $=id=>document.getElementById(id), out=$("out");
 const cache={};
@@ -106,122 +101,67 @@ function load(u){ if(!cache[u]) cache[u]=fetch(u).then(r=>{if(!r.ok) throw new E
 const DEC={WETH:18,ETH:18,USDC:6,USDT:6};
 function amt(x,sym){
   const d=DEC[sym]; x=Number(x);
-  if(d==null) return `${x.toExponential(3).replace("e+","e")} ${esc(sym)} <span class="muted">(raw units)</span>`;
+  if(d==null) return `${x.toExponential(3).replace("e+","e")} ${esc(sym)} <span class="muted">(raw)</span>`;
   const v=x/10**d; const s=v>=1000?v.toLocaleString("en-US",{maximumFractionDigits:2}):v.toPrecision(5).replace(/\.?0+$/,"");
   return `${s} ${esc(sym)}`;
 }
-const TYPE={tight:["tight","front leg, victim and back leg are three consecutive transactions in one block"],
-  within_block_wide:["within-block wide","all in one block, with other transactions between the legs"],
-  cross_block_wide:["cross-block wide","the legs sit in different blocks"]};
+const TYPE={tight:"tight",within_block_wide:"within-block wide",cross_block_wide:"cross-block wide"};
 
-function ofaCat(L){
-  const n=[]; if(L.s)n.push("MEV-Share"); if(L.m)n.push("MEVBlocker"); if(L.k)n.push("Blink"); if(L.r)n.push("Merkle");
-  return n;
-}
-function why(L, sole){
-  const has=ofaCat(L), S=!!L.s, M=!!L.m, K=!!L.k, R=!!L.r;
-  let t="";
-  if(K){
-    t=`<p><b>Full-transaction disclosure (Blink).</b> Blink sends the complete signed transaction to an approved set of searchers. Protection rests on who is admitted and how they behave, since a searcher on the feed needs nothing else to size a sandwich. Blink appears for 62.2% of attributed victims and 33.4% are seen only there; 89.8% of Blink-only victims were the sole victim of their sandwich.${has.length>1?" The other labels are not needed to explain how the attacker could have seen this transaction, though they may reflect other routes.":""}</p>`;
-  } else if(R){
-    t=`<p><b>Full-transaction disclosure (Merkle).</b> Merkle used the same model as Blink: full transactions to whitelisted searchers. It appears for 5.1% of attributed victims and merged into Blink in 2026.${S&&!M?" The MEV-Share label is not needed to explain the exposure.":""}</p>`;
-  } else if(S&&M){
-    t=`<p><b>Cross-OFA correlation.</b> MEV-Share publishes partial hints with a double-hashed transaction id. MEVBlocker publishes transaction hashes mixed with decoys and strips slippage from swaps. A searcher reading both feeds can double-hash MEVBlocker's hashes and match them against MEV-Share events. A match shows the MEVBlocker entry is genuine and combines what each feed withholds. This pairing covers 21.3% of attributed victims, and 88.6% of them were the sole victim of their sandwich, so incidental inclusion is unlikely.</p>`;
-  } else if(S){
-    t=`<p><b>Unresolved single-OFA exposure (MEV-Share only).</b> The paper finds no mechanism that explains an attack from MEV-Share hints alone. 70.5% of MEV-Share-only victims sit in multi-victim sandwiches, so many were likely caught incidentally. These victims spike in April 2026, during heavy Blink-linked activity, and Blink bundles that BuilderNet never saw are missing from the labels.</p>`;
-  } else if(M){
-    t=`<p><b>Unresolved single-OFA exposure (MEVBlocker only).</b> The paper finds no mechanism that explains an attack from MEVBlocker alone. These victims cluster in October–November 2024 and are nearly absent afterwards. Only 32.6% sit in multi-victim sandwiches, so incidental inclusion does not explain most of them. An OFA without labels in the dataset may be the route.</p>`;
-  } else {
-    t=`<p><b>Unattributed.</b> This transaction appears in none of the four OFA datasets. That rules nothing out: Blink labels only start in August 2025, and every source has gaps. 37.3% of private victims are unattributed, and 56.5% of those sit in multi-victim sandwiches, where the attacker may have been targeting another transaction.</p>`;
-  }
-  if(!sole) t+=`<p class="small muted">This sandwich encloses more than one private victim. The detector counts all of them, but the attacker likely targeted only one.</p>`;
+function reason(L, sole){
+  const S=!!L.s, M=!!L.m, K=!!L.k, R=!!L.r;
+  let t;
+  if(K) t="full transaction shared via Blink";
+  else if(R) t="full transaction shared via Merkle";
+  else if(S&&M) t="MEV-Share hints matched against MEVBlocker hashes";
+  else if(S) t="seen only in MEV-Share — mechanism unconfirmed";
+  else if(M) t="seen only in MEVBlocker — mechanism unconfirmed";
+  else t="not seen in any OFA dataset";
+  if(!sole) t+="; not the sole victim";
   return t;
 }
-function ofaDetail(L){
+
+function seqHTML(rec,q,X,Y){
   const rows=[];
-  const tag=(on,name)=>`<span class="tag${on?"":" off"}">${on?"■":"□"} ${name}</span>`;
-  rows.push(`<p>${tag(L.s,"MEV-Share")} ${tag(L.m,"MEVBlocker")} ${tag(L.k,"Blink")} ${tag(L.r,"Merkle")}</p>`);
-  const t=[];
-  if(L.s){
-    t.push(`<tr><th>MEV-Share</th><td>seen in ${esc(L.s.src.join(", "))}</td></tr>`);
-    if(L.s.hints!==undefined){
-      t.push(`<tr><th>&nbsp;&nbsp;hints shared</th><td>${L.s.hints?esc(L.s.hints.replaceAll(",",", ")):'<span class="muted">not recorded</span>'}</td></tr>`);
-      if(L.s.builders!=null) t.push(`<tr><th>&nbsp;&nbsp;builders shared</th><td>${L.s.builders}</td></tr>`);
-      if(L.s.refund!=null) t.push(`<tr><th>&nbsp;&nbsp;refund setting</th><td>${L.s.refund}% of back-run value to user</td></tr>`);
-    }
-  }
-  if(L.m){ const d=new Date(L.m.first);
-    t.push(`<tr><th>MEVBlocker</th><td>${L.m.n} feed ${L.m.n===1?"entry":"entries"}; first ${d.toISOString().replace("T"," ").slice(0,23)} UTC</td></tr>`); }
-  if(L.k) t.push(`<tr><th>Blink</th><td>in a BuilderNet-observed Blink bundle (full transaction shared)</td></tr>`);
-  if(L.r) t.push(`<tr><th>Merkle</th><td>in Merkle bundle data on Dune</td></tr>`);
-  if(t.length) rows.push(`<div class="scroll"><table>${t.join("")}</table></div>`);
+  const row=(role,h,detail)=>{
+    const you=h===q;
+    rows.push(`<div class="seq-row"><span class="role">${role}</span><span class="mono">${txl(h)}${you?' <span class="you">← you</span>':""}</span><span class="muted mono">${detail}</span></div>`);
+  };
+  rows.push(`<div class="block-label">Block ${n0(rec.fb)}</div>`);
+  rec.f.forEach((h,i)=>row("Front",h, i===0?`${amt(rec.fai,X)} → ${amt(rec.fao,Y)}`:"split leg"));
+  rec.V.forEach(v=>row("Victim",v.h, `private, from ${adl(v.a)}`));
+  rows.push(`<div class="gap-note">${rec.ta!=null?`${n0(rec.ta)} transactions from front leg to back leg`:`${rec.ba} block${rec.ba===1?"":"s"} between the legs`}</div>`);
+  if(rec.bb!==rec.fb) rows.push(`<div class="block-label">Block ${n0(rec.bb)} <span class="muted">(+${n0(rec.bb-rec.fb)})</span></div>`);
+  rec.b.forEach((h,i)=>row("Back",h, i===0?`${amt(rec.bai,Y)} → ${amt(rec.bao,X)}`:"split leg"));
   return rows.join("");
 }
 
 function render(rec, q){
   const inTok=rec.fin==="token0"?rec.t0:rec.t1, outTok=rec.fin==="token0"?rec.t1:rec.t0;
   const X=inTok[1], Y=outTok[1];
-  const legs=new Set([...rec.f,...rec.b]);
   const me=rec.V.find(v=>v.h===q);
-  const role=me?"victim":(rec.f.includes(q)?"front leg":"back leg");
+  const role=rec.f.includes(q)?"front leg":"back leg";
   const priv=rec.V;
-  const ty=TYPE[rec.t]||[rec.t,""];
-  let head;
-  if(me) head=`<p class="verdict hit"><span class="blink">■</span> NO. THIS TRADE WAS SANDWICHED.</p><p>This transaction never reached the public mempool, and it was still sandwiched on <b>${rec.d}</b> by bot ${adl(rec.bot)} in a <b>${ty[0]}</b> attack.</p>`;
-  else head=`<p class="verdict hit">■ ATTACKER TRANSACTION.</p><p>This is the <b>${role}</b> of a sandwich by bot ${adl(rec.bot)} on <b>${rec.d}</b>, against ${priv.length} private victim${priv.length===1?"":"s"}.</p>`;
+  const ty=TYPE[rec.t]||rec.t;
 
-  // diagram
-  const L=[]; const pad=(s,n)=>s+" ".repeat(Math.max(0,n-s.length));
-  const line=(g,lab,h,rest)=>{const mark=h===q; L.push(`${g} ${pad(lab,7)} ${mark?'<span class="you">':""}${txl(h)}${mark?" ◀ you":""}${mark?"</span>":""}   ${rest}`)};
-  L.push(`block ${n0(rec.fb)}`);
-  rec.f.forEach((h,i)=>line("  ├─","FRONT",h, i===0?`${amt(rec.fai,X)} → ${amt(rec.fao,Y)}`:"(split leg)"));
-  L.push(`  │`);
-  rec.V.forEach(v=>line("  ├─","VICTIM",v.h, `private · from ${adl(v.a)}`));
-  L.push(`  │         <span class="muted">${rec.ta!=null?`${n0(rec.ta)} transactions from front leg to back leg`:`${rec.ba} block${rec.ba===1?"":"s"} between the legs`}</span>`);
-  if(rec.bb!==rec.fb) L.push(`block ${n0(rec.bb)} <span class="muted">(+${rec.bb-rec.fb})</span>`);
-  rec.b.forEach((h,i,a)=>line(i===a.length-1?"  └─":"  ├─","BACK",h, i===0?`${amt(rec.bai,Y)} → ${amt(rec.bao,X)}`:"(split leg)"));
+  const head=me
+    ? `<p class="verdict hit">Sandwiched</p><p class="meta"><b>${rec.d}</b> · bot ${adl(rec.bot)} · ${ty} attack</p>`
+    : `<p class="verdict">Attacker leg</p><p class="meta">${role}, bot ${adl(rec.bot)}, <b>${rec.d}</b>, against ${priv.length} private victim${priv.length===1?"":"s"}</p>`;
 
-  const prof=Number(rec.p);
-  const facts=`<div class="scroll"><table>
-   <tr><th>type</th><td>${ty[0]} <span class="muted">(${ty[1]})</span></td></tr>
-   <tr><th>pool</th><td>${adl(rec.pool,true)} <span class="muted">Uniswap ${rec.v.toUpperCase()}-style, ${esc(rec.t0[1])}/${esc(rec.t1[1])}</span></td></tr>
-   <tr><th>victims' input</th><td>${amt(rec.tva,X)} <span class="muted">(all victims combined)</span></td></tr>
-   <tr><th>bot round trip</th><td>${prof>=0?"+":""}${amt(rec.p,X)} ${rec.ok?'<span class="muted">(profitable before gas)</span>':'<span style="color:var(--alert)">(lost money)</span>'}</td></tr>
-   <tr><th>victims enclosed</th><td>${priv.length}</td></tr>
-  </table></div>`;
-
-  const vics=priv.map(v=>`<div class="vic"><p class="mono">${v.h===q?"▶ ":""}${txl(v.h,true)}</p>${ofaDetail(v.L)}${why(v.L,priv.length===1)}</div>`).join("");
-
-  const B=BOTS[rec.bot];
-  const bot=B?`<div class="scroll"><table>
-   <tr><th>contract</th><td>${adl(rec.bot,true)}</td></tr>
-   <tr><th>sandwiches</th><td>${n0(B.n)} <span class="muted">(${(100*B.n/30607).toFixed(1)}% of all 30,607)</span></td></tr>
-   <tr><th>tight / within / cross</th><td>${B.twc} %</td></tr>
-   <tr><th>gross profit</th><td>${B.gross}, ${B.fees} of it spent on fees</td></tr>
-   <tr><th>success rate</th><td>${B.succ}</td></tr>
-   <tr><th>active</th><td>${B.act}</td></tr>
-   <tr><th>victims seen in</th><td>MEV-Share ${B.ofa[0]}% · MEVBlocker ${B.ofa[1]}% · Blink ${B.ofa[2]}% · Merkle ${B.ofa[3]}% · none ${B.ofa[4]}%</td></tr>
-  </table></div>
-  <p class="small">Bytecode similarity and a shared deployer (<span class="mono">0x928…2d9</span>) tie all seven protected-flow bots on Ethereum to <b>one entity</b>. Six of them hand over to the next within a single week. Figures are from Tables 4 and 5 of the paper.</p>`:"";
+  const vics=priv.map(v=>`<div class="vic"><p class="hash mono">${v.h===q?"▶ ":""}${txl(v.h)}</p><p class="reason">${reason(v.L,priv.length===1)}</p></div>`).join("");
 
   out.innerHTML=`${head}
-  <h2>Structure</h2>
-  <div class="scroll"><pre>${L.join("\n")}</pre></div>
-  ${facts}
-  <p class="small muted">A bot sandwiching private flow often cannot see exactly where the victim will land, so its legs usually sit far apart (medians 58 and 131 transactions on Ethereum) or in separate blocks. Public-mempool sandwiches are almost always tight.</p>
-  <h2>Why: OFA attribution</h2>
-  ${vics||'<p class="muted">No private victims.</p>'}
-  <h2>The bot</h2>
-  ${bot}`;
+  ${seqHTML(rec,q,X,Y)}
+  <p class="label">Exposure</p>
+  ${vics||'<p class="muted small">No private victims.</p>'}`;
 }
 
-async function lookup(raw, isExample){
+async function lookup(raw){
   const m=String(raw).toLowerCase().match(/0x[0-9a-f]{64}/);
-  if(!m&&/^\s*[1-9A-HJ-NP-Za-km-z]{86,88}\s*$/.test(String(raw))){ out.innerHTML=`<p class="verdict">?</p><p>That looks like a Solana transaction signature. This tool checks Ethereum only. The paper measures 28.0M protected-flow sandwiches on Solana, but they are not in this lookup.</p>`; return; }
-  if(!m){ out.innerHTML=`<p class="verdict">?</p><p>That is not a transaction hash. Paste 0x followed by 64 hex characters, or an Etherscan transaction link.</p>`; return; }
+  if(!m&&/^\s*[1-9A-HJ-NP-Za-km-z]{86,88}\s*$/.test(String(raw))){ out.innerHTML=`<p class="verdict">Unsupported</p><p>That looks like a Solana signature. This tool checks Ethereum only.</p>`; return; }
+  if(!m){ out.innerHTML=`<p class="verdict">Invalid</p><p>That is not a transaction hash. Paste 0x followed by 64 hex characters, or an Etherscan link.</p>`; return; }
   const q=m[0]; $("q").value=q;
   if(location.hash!=="#"+q) history.replaceState(null,"","#"+q);
-  out.innerHTML=`<p class="muted mono">searching ${short(q)}…</p>`;
+  out.innerHTML=`<p class="muted small">searching ${short(q)}…</p>`;
   try{
     const idx=await load(`idx/${q[2]}.json`);
     const ids=idx[q.slice(2,18)];
@@ -231,16 +171,15 @@ async function lookup(raw, isExample){
       const r=sh.find(x=>x.i===id);
       if(r&&(r.f.includes(q)||r.b.includes(q)||r.V.some(v=>v.h===q))){rec=r;break}
     }
-    if(!rec){ out.innerHTML=`<p class="verdict miss">□ NO SANDWICH FOUND IN OUR DATA.</p><p class="mono small">${txl(q,true)}</p><p>That does not mean your protection worked. This hash is not among the 30,607 private-flow sandwiches by the 7 persistent bots, as a victim or as a leg. The transaction may have been public, may fall outside July 2023 to June 2026, may have traded on a DEX outside Uniswap V2–V4 and forks, or may have been hit by a bot below the paper's thresholds. See the scope note below.</p>`; return; }
+    if(!rec){ out.innerHTML=`<p class="verdict clear">No match</p><p class="mono small">${txl(q,true)}</p><p class="muted small">Not among the 30,607 private-flow sandwiches. A missing hash does not mean your protection worked — it may have been public, outside the paper's window, on a different DEX, or hit by a smaller bot.</p>`; return; }
     render(rec,q);
-    if(isExample) out.insertAdjacentHTML("afterbegin",`<p class="small muted">Example lookup from the dataset. Paste your own hash above.</p>`);
-  }catch(e){ out.innerHTML=`<p class="verdict">!</p><p>The data files could not be loaded (${esc(e.message)}). Check your connection and press Look up again.</p>`; }
+  }catch(e){ out.innerHTML=`<p class="verdict">Error</p><p class="muted small">Could not load data (${esc(e.message)}). Try again.</p>`; }
 }
 $("f").addEventListener("submit",e=>{e.preventDefault(); lookup($("q").value)});
 $("q").addEventListener("paste",e=>{const t=(e.clipboardData||window.clipboardData)?.getData("text"); if(t&&/0x[0-9a-fA-F]{64}/.test(t)){e.preventDefault(); lookup(t)}});
 window.addEventListener("hashchange",()=>{const h=location.hash.slice(1); if(h) lookup(h)});
 const h0=location.hash.slice(1);
-if(/^0x[0-9a-fA-F]{64}$/.test(h0)) lookup(h0); else lookup("0x05162b2f10dcb08a44d02f2479845315c32b635b2e1d0a2ebb8f45820a28d95a",true);
+if(/^0x[0-9a-fA-F]{64}$/.test(h0)) lookup(h0); else lookup("0x05162b2f10dcb08a44d02f2479845315c32b635b2e1d0a2ebb8f45820a28d95a");
 })();
 </script>
 
