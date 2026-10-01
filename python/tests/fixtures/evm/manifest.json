@@ -1,0 +1,4039 @@
+[
+  {
+    "file": "ethereum_0x56ddf8bd2ca02c507a99e43debeae988d4d103dfeb7bbcc1a428d5c469040eaa.json",
+    "sha256": "d171154c90f180b2668eda60a06030c4fa5e337a490c4a41c376a5c61ac8f8c4",
+    "expected": {
+      "swaps": [
+        {
+          "log_index": 20,
+          "adapter": "balancer_v1",
+          "emitter": "0x9866772a9bdb4dc9d2c5a4753e8658b8b0ca1fc3",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+              "is_native": false,
+              "symbol": "WETH",
+              "decimals": 18,
+              "amount_raw": "112676493990133194",
+              "amount": "0.112676493990133194"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0x9f8f72aa9304c8b593d555f12ef6589cc3a579a2",
+              "is_native": false,
+              "symbol": "MKR",
+              "decimals": 18,
+              "amount_raw": "169032568568865342",
+              "amount": "0.169032568568865342"
+            }
+          ]
+        },
+        {
+          "log_index": 26,
+          "adapter": "algebra_integral",
+          "emitter": "0x177f07c0843776b2a6342ed6c488af64e6f2fd65",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+              "is_native": false,
+              "symbol": "WETH",
+              "decimals": 18,
+              "amount_raw": "24388436991565833",
+              "amount": "0.024388436991565833"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0x808507121b80c02388fad14726482e061b8da827",
+              "is_native": false,
+              "symbol": "PENDLE",
+              "decimals": 18,
+              "amount_raw": "27364777299779046406",
+              "amount": "27.364777299779046406"
+            }
+          ]
+        },
+        {
+          "log_index": 30,
+          "adapter": "v3",
+          "emitter": "0x14d922600ee5e9bf36328567441a17d373bc42e3",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+              "is_native": false,
+              "symbol": "WETH",
+              "decimals": 18,
+              "amount_raw": "38348545784491892",
+              "amount": "0.038348545784491892"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0x9f8f72aa9304c8b593d555f12ef6589cc3a579a2",
+              "is_native": false,
+              "symbol": "MKR",
+              "decimals": 18,
+              "amount_raw": "57497739688357059",
+              "amount": "0.057497739688357059"
+            }
+          ]
+        },
+        {
+          "log_index": 37,
+          "adapter": "v2",
+          "emitter": "0x6e41031d78eb49173cd6db393ceaeed909d56d03",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0xa250cc729bb3323e7933022a67b52200fe354767",
+              "is_native": false,
+              "symbol": "fwWETH",
+              "decimals": 18,
+              "amount_raw": "20549128717537468",
+              "amount": "0.020549128717537468"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0x953eefd5536989a4eee15c7481730410458b0835",
+              "is_native": false,
+              "symbol": "fwPENDLE",
+              "decimals": 18,
+              "amount_raw": "23083440808794222636",
+              "amount": "23.083440808794222636"
+            }
+          ]
+        },
+        {
+          "log_index": 44,
+          "adapter": "v3",
+          "emitter": "0xc7bbec68d12a0d1830360f8ec58fa599ba1b0e9b",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+              "is_native": false,
+              "symbol": "WETH",
+              "decimals": 18,
+              "amount_raw": "26722173475053873",
+              "amount": "0.026722173475053873"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0xdac17f958d2ee523a2206206994597c13d831ec7",
+              "is_native": false,
+              "symbol": "USDT",
+              "decimals": 6,
+              "amount_raw": "71787107",
+              "amount": "71.787107"
+            }
+          ]
+        },
+        {
+          "log_index": 48,
+          "adapter": "v4",
+          "emitter": "0x000000000004444c5dc75cb358380d2e3de08a90",
+          "pool_id": "0x7077defcb075e65b690690aa18eec50b7d8daf9a247b31c672f8248ba44607b4",
+          "inputs": [
+            {
+              "address": "0x9f8f72aa9304c8b593d555f12ef6589cc3a579a2",
+              "is_native": false,
+              "symbol": "MKR",
+              "decimals": 18,
+              "amount_raw": "226530308257222401",
+              "amount": "0.226530308257222401"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0x56072c95faa701256059aa122697b133aded9279",
+              "is_native": false,
+              "symbol": "SKY",
+              "decimals": 18,
+              "amount_raw": "5176552126869515749494",
+              "amount": "5176.552126869515749494"
+            }
+          ]
+        },
+        {
+          "log_index": 52,
+          "adapter": "v4",
+          "emitter": "0x000000000004444c5dc75cb358380d2e3de08a90",
+          "pool_id": "0xdc9c05579031efea5ed16baa1b720871eff7af1e339e335a9cfe294a6e814a8c",
+          "inputs": [
+            {
+              "address": "0x808507121b80c02388fad14726482e061b8da827",
+              "is_native": false,
+              "symbol": "PENDLE",
+              "decimals": 18,
+              "amount_raw": "50448218108573269042",
+              "amount": "50.448218108573269042"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0xdac17f958d2ee523a2206206994597c13d831ec7",
+              "is_native": false,
+              "symbol": "USDT",
+              "decimals": 6,
+              "amount_raw": "118488508",
+              "amount": "118.488508"
+            }
+          ]
+        },
+        {
+          "log_index": 67,
+          "adapter": "euler",
+          "emitter": "0x0bf9244f5f50d79497f58564ee3ab77ef38e28a8",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0xdac17f958d2ee523a2206206994597c13d831ec7",
+              "is_native": false,
+              "symbol": "USDT",
+              "decimals": 6,
+              "amount_raw": "64783190",
+              "amount": "64.78319"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+              "is_native": false,
+              "symbol": "USDC",
+              "decimals": 6,
+              "amount_raw": "64748605",
+              "amount": "64.748605"
+            }
+          ]
+        },
+        {
+          "log_index": 79,
+          "adapter": "balancer_v3",
+          "emitter": "0xba1333333333a1ba1108e8412f11850a5c319ba9",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0x7bc3485026ac48b6cf9baf0a377477fff5703af8",
+              "is_native": false,
+              "symbol": "waEthUSDT",
+              "decimals": 6,
+              "amount_raw": "46351413",
+              "amount": "46.351413"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0xd4fa2d31b7968e448877f69a96de69f5de8cd23e",
+              "is_native": false,
+              "symbol": "waEthUSDC",
+              "decimals": 6,
+              "amount_raw": "45914396",
+              "amount": "45.914396"
+            }
+          ]
+        },
+        {
+          "log_index": 85,
+          "adapter": "curve",
+          "emitter": "0xd51a44d3fae010294c616388b506acda1bfaae46",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0xdac17f958d2ee523a2206206994597c13d831ec7",
+              "is_native": false,
+              "symbol": "USDT",
+              "decimals": 6,
+              "amount_raw": "70922414",
+              "amount": "70.922414"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599",
+              "is_native": false,
+              "symbol": "WBTC",
+              "decimals": 8,
+              "amount_raw": "84848",
+              "amount": "0.00084848"
+            }
+          ]
+        },
+        {
+          "log_index": 88,
+          "adapter": "hashflow",
+          "emitter": "0x741c939c644576433ca03c368ade3352e3252b35",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0x56072c95faa701256059aa122697b133aded9279",
+              "is_native": false,
+              "symbol": "SKY",
+              "decimals": 18,
+              "amount_raw": "4367958893070339194317",
+              "amount": "4367.958893070339194317"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+              "is_native": false,
+              "symbol": "USDC",
+              "decimals": 6,
+              "amount_raw": "342513044",
+              "amount": "342.513044"
+            }
+          ]
+        },
+        {
+          "log_index": 105,
+          "adapter": "v3",
+          "emitter": "0x9a772018fbd77fcd2d25657e5c547baff3fd7d16",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599",
+              "is_native": false,
+              "symbol": "WBTC",
+              "decimals": 8,
+              "amount_raw": "84848",
+              "amount": "0.00084848"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+              "is_native": false,
+              "symbol": "USDC",
+              "decimals": 6,
+              "amount_raw": "70802928",
+              "amount": "70.802928"
+            }
+          ]
+        }
+      ],
+      "conversions": [
+        {
+          "log_index": 18,
+          "adapter": "weth",
+          "emitter": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": null,
+              "is_native": true,
+              "symbol": "ETH",
+              "decimals": 18,
+              "amount_raw": "222684778958782260",
+              "amount": "0.22268477895878226"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+              "is_native": false,
+              "symbol": "WETH",
+              "decimals": 18,
+              "amount_raw": "222684778958782260",
+              "amount": "0.22268477895878226"
+            }
+          ]
+        },
+        {
+          "log_index": 66,
+          "adapter": "erc4626",
+          "emitter": "0x313603fa690301b0caeef8069c065862f9162162",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0xdac17f958d2ee523a2206206994597c13d831ec7",
+              "is_native": false,
+              "symbol": "USDT",
+              "decimals": 6,
+              "amount_raw": "64786429",
+              "amount": "64.786429"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0x313603fa690301b0caeef8069c065862f9162162",
+              "is_native": false,
+              "symbol": "eUSDT-2",
+              "decimals": 6,
+              "amount_raw": "57325341",
+              "amount": "57.325341"
+            }
+          ]
+        },
+        {
+          "log_index": 78,
+          "adapter": "balancer_buffer",
+          "emitter": "0xba1333333333a1ba1108e8412f11850a5c319ba9",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0xdac17f958d2ee523a2206206994597c13d831ec7",
+              "is_native": false,
+              "symbol": "USDT",
+              "decimals": 6,
+              "amount_raw": "54566772",
+              "amount": "54.566772"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0x7bc3485026ac48b6cf9baf0a377477fff5703af8",
+              "is_native": false,
+              "symbol": "waEthUSDT",
+              "decimals": 6,
+              "amount_raw": "46351413",
+              "amount": "46.351413"
+            }
+          ]
+        },
+        {
+          "log_index": 80,
+          "adapter": "balancer_buffer",
+          "emitter": "0xba1333333333a1ba1108e8412f11850a5c319ba9",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0xd4fa2d31b7968e448877f69a96de69f5de8cd23e",
+              "is_native": false,
+              "symbol": "waEthUSDC",
+              "decimals": 6,
+              "amount_raw": "45914396",
+              "amount": "45.914396"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+              "is_native": false,
+              "symbol": "USDC",
+              "decimals": 6,
+              "amount_raw": "54533525",
+              "amount": "54.533525"
+            }
+          ]
+        }
+      ],
+      "settlements": [],
+      "route_summaries": [
+        {
+          "log_index": 109,
+          "adapter": "kyber_summary",
+          "emitter": "0x6131b5fae19ea4f9d964eac0408e4408b66337b5",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": null,
+              "is_native": true,
+              "symbol": "ETH",
+              "decimals": 18,
+              "amount_raw": "222684778958782260",
+              "amount": "0.22268477895878226"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+              "is_native": false,
+              "symbol": "USDC",
+              "decimals": 6,
+              "amount_raw": "596011939",
+              "amount": "596.011939"
+            }
+          ]
+        }
+      ],
+      "non_swap_events": []
+    }
+  },
+  {
+    "file": "base_0x86421f5404a0437dcb8115429ae8b9cba8fecdf814ff55fcedbf22c6a2c6a5f0.json",
+    "sha256": "3fa8cdbd949dde762ca73829268296bd4d93bda6a972f04b794d4a9236070b4b",
+    "expected": {
+      "swaps": [
+        {
+          "log_index": 198,
+          "adapter": "v4",
+          "emitter": "0x498581ff718922c3f8e6a244956af099b2652b2b",
+          "pool_id": "0xa222acb54fb7bd426c9c46bd13cdd3b937868a60342b4f823050fd95b005098f",
+          "inputs": [
+            {
+              "address": "0xb33af28579e86c8884e6872287ce74af6b3d01c9",
+              "is_native": false,
+              "symbol": "AMERICAN 250",
+              "decimals": 18,
+              "amount_raw": "15000000000000000000",
+              "amount": "15"
+            }
+          ],
+          "outputs": [
+            {
+              "address": null,
+              "is_native": true,
+              "symbol": "ETH",
+              "decimals": 18,
+              "amount_raw": "723348525451",
+              "amount": "0.000000723348525451"
+            }
+          ]
+        },
+        {
+          "log_index": 201,
+          "adapter": "v4",
+          "emitter": "0x498581ff718922c3f8e6a244956af099b2652b2b",
+          "pool_id": "0x2a65bc08a359d3eb2a02154f3de10b89118ab916da9c6e4ad8efaaf85d03ef6f",
+          "inputs": [
+            {
+              "address": "0xb33af28579e86c8884e6872287ce74af6b3d01c9",
+              "is_native": false,
+              "symbol": "AMERICAN 250",
+              "decimals": 18,
+              "amount_raw": "35000000000000000000",
+              "amount": "35"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+              "is_native": false,
+              "symbol": "USDC",
+              "decimals": 6,
+              "amount_raw": "55",
+              "amount": "0.000055"
+            }
+          ]
+        },
+        {
+          "log_index": 206,
+          "adapter": "v3",
+          "emitter": "0xa0ca5bebc42cdbf3623b1c09206ae4e3975b0fc7",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0x4200000000000000000000000000000000000006",
+              "is_native": false,
+              "symbol": "WETH",
+              "decimals": 18,
+              "amount_raw": "22963422288",
+              "amount": "0.000000022963422288"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0x1111111111166b7fe7bd91427724b487980afc69",
+              "is_native": false,
+              "symbol": "ZORA",
+              "decimals": 18,
+              "amount_raw": "7678661646279811",
+              "amount": "0.007678661646279811"
+            }
+          ]
+        },
+        {
+          "log_index": 208,
+          "adapter": "v4",
+          "emitter": "0x498581ff718922c3f8e6a244956af099b2652b2b",
+          "pool_id": "0xd694bd7285eeeee19d3d5da38f613859168c422d628def88a0c95dad12071f3a",
+          "inputs": [
+            {
+              "address": null,
+              "is_native": true,
+              "symbol": "ETH",
+              "decimals": 18,
+              "amount_raw": "11481412996",
+              "amount": "0.000000011481412996"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0x1111111111166b7fe7bd91427724b487980afc69",
+              "is_native": false,
+              "symbol": "ZORA",
+              "decimals": 18,
+              "amount_raw": "3822858246462433",
+              "amount": "0.003822858246462433"
+            }
+          ]
+        },
+        {
+          "log_index": 212,
+          "adapter": "v3",
+          "emitter": "0xadb8fb846dbd3bd6a23335cee65bb610c1cf0ea3",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0x4200000000000000000000000000000000000006",
+              "is_native": false,
+              "symbol": "WETH",
+              "decimals": 18,
+              "amount_raw": "28703861154",
+              "amount": "0.000000028703861154"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0x1111111111166b7fe7bd91427724b487980afc69",
+              "is_native": false,
+              "symbol": "ZORA",
+              "decimals": 18,
+              "amount_raw": "9601579521239649",
+              "amount": "0.009601579521239649"
+            }
+          ]
+        },
+        {
+          "log_index": 226,
+          "adapter": "v3",
+          "emitter": "0xb4cb800910b228ed3d0834cf79d697127bbb00e5",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0x4200000000000000000000000000000000000006",
+              "is_native": false,
+              "symbol": "WETH",
+              "decimals": 18,
+              "amount_raw": "22963378576",
+              "amount": "0.000000022963378576"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+              "is_native": false,
+              "symbol": "USDC",
+              "decimals": 6,
+              "amount_raw": "61",
+              "amount": "0.000061"
+            }
+          ]
+        },
+        {
+          "log_index": 229,
+          "adapter": "propamm",
+          "emitter": "0x5d2806b9af9e9f740b55eda02a8484af5805803a",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0x4200000000000000000000000000000000000006",
+              "is_native": false,
+              "symbol": "WETH",
+              "decimals": 18,
+              "amount_raw": "22962929283",
+              "amount": "0.000000022962929283"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+              "is_native": false,
+              "symbol": "USDC",
+              "decimals": 6,
+              "amount_raw": "61",
+              "amount": "0.000061"
+            }
+          ]
+        },
+        {
+          "log_index": 233,
+          "adapter": "v3",
+          "emitter": "0x256f399754f7ed5baa75b911ae6fd3c1a63b169c",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0x4200000000000000000000000000000000000006",
+              "is_native": false,
+              "symbol": "WETH",
+              "decimals": 18,
+              "amount_raw": "22963491657",
+              "amount": "0.000000022963491657"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+              "is_native": false,
+              "symbol": "USDC",
+              "decimals": 6,
+              "amount_raw": "61",
+              "amount": "0.000061"
+            }
+          ]
+        },
+        {
+          "log_index": 236,
+          "adapter": "pancake_v3",
+          "emitter": "0x72ab388e2e2f6facef59e3c3fa2c4e29011c2d38",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0x4200000000000000000000000000000000000006",
+              "is_native": false,
+              "symbol": "WETH",
+              "decimals": 18,
+              "amount_raw": "22963372065",
+              "amount": "0.000000022963372065"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+              "is_native": false,
+              "symbol": "USDC",
+              "decimals": 6,
+              "amount_raw": "61",
+              "amount": "0.000061"
+            }
+          ]
+        },
+        {
+          "log_index": 239,
+          "adapter": "pancake_v3",
+          "emitter": "0x11ef9c2ba20aec31e114ecd828d7514fdc944eae",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0x4200000000000000000000000000000000000006",
+              "is_native": false,
+              "symbol": "WETH",
+              "decimals": 18,
+              "amount_raw": "22963498933",
+              "amount": "0.000000022963498933"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+              "is_native": false,
+              "symbol": "USDC",
+              "decimals": 6,
+              "amount_raw": "61",
+              "amount": "0.000061"
+            }
+          ]
+        },
+        {
+          "log_index": 242,
+          "adapter": "balancer_v3",
+          "emitter": "0xba1333333333a1ba1108e8412f11850a5c319ba9",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0x4200000000000000000000000000000000000006",
+              "is_native": false,
+              "symbol": "WETH",
+              "decimals": 18,
+              "amount_raw": "22963517211",
+              "amount": "0.000000022963517211"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+              "is_native": false,
+              "symbol": "USDC",
+              "decimals": 6,
+              "amount_raw": "61",
+              "amount": "0.000061"
+            }
+          ]
+        },
+        {
+          "log_index": 247,
+          "adapter": "algebra_integral",
+          "emitter": "0x82dbe18346a8656dbb5e76f74bf3ae279cc16b29",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0x4200000000000000000000000000000000000006",
+              "is_native": false,
+              "symbol": "WETH",
+              "decimals": 18,
+              "amount_raw": "22963155812",
+              "amount": "0.000000022963155812"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+              "is_native": false,
+              "symbol": "USDC",
+              "decimals": 6,
+              "amount_raw": "61",
+              "amount": "0.000061"
+            }
+          ]
+        },
+        {
+          "log_index": 261,
+          "adapter": "v3",
+          "emitter": "0xbbd7d3f242fe8f4eb318c96b2fac0c459ecca908",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0x4200000000000000000000000000000000000006",
+              "is_native": false,
+              "symbol": "WETH",
+              "decimals": 18,
+              "amount_raw": "22963128488",
+              "amount": "0.000000022963128488"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+              "is_native": false,
+              "symbol": "USDC",
+              "decimals": 6,
+              "amount_raw": "61",
+              "amount": "0.000061"
+            }
+          ]
+        },
+        {
+          "log_index": 267,
+          "adapter": "woo",
+          "emitter": "0x5520385bfcf07ec87c4c53a7d8d65595dff69fa4",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0x4200000000000000000000000000000000000006",
+              "is_native": false,
+              "symbol": "WETH",
+              "decimals": 18,
+              "amount_raw": "22963561081",
+              "amount": "0.000000022963561081"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+              "is_native": false,
+              "symbol": "USDC",
+              "decimals": 6,
+              "amount_raw": "61",
+              "amount": "0.000061"
+            }
+          ]
+        },
+        {
+          "log_index": 274,
+          "adapter": "v2",
+          "emitter": "0x83240b049fa89b65be714aed68e5b074df6aac84",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0x4200000000000000000000000000000000000006",
+              "is_native": false,
+              "symbol": "WETH",
+              "decimals": 18,
+              "amount_raw": "22963383798",
+              "amount": "0.000000022963383798"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+              "is_native": false,
+              "symbol": "USDC",
+              "decimals": 6,
+              "amount_raw": "61",
+              "amount": "0.000061"
+            }
+          ]
+        },
+        {
+          "log_index": 277,
+          "adapter": "maverick_v2",
+          "emitter": "0xdf033790907c60c9b81ae355f76f74f52f92114a",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0x4200000000000000000000000000000000000006",
+              "is_native": false,
+              "symbol": "WETH",
+              "decimals": 18,
+              "amount_raw": "22963562313",
+              "amount": "0.000000022963562313"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+              "is_native": false,
+              "symbol": "USDC",
+              "decimals": 6,
+              "amount_raw": "61",
+              "amount": "0.000061"
+            }
+          ]
+        },
+        {
+          "log_index": 283,
+          "adapter": "solidly",
+          "emitter": "0x3548029694fbb241d45fb24ba0cd9c9d4e745f16",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0x4200000000000000000000000000000000000006",
+              "is_native": false,
+              "symbol": "WETH",
+              "decimals": 18,
+              "amount_raw": "22963380161",
+              "amount": "0.000000022963380161"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+              "is_native": false,
+              "symbol": "USDC",
+              "decimals": 6,
+              "amount_raw": "60",
+              "amount": "0.00006"
+            }
+          ]
+        },
+        {
+          "log_index": 291,
+          "adapter": "infinity_cl",
+          "emitter": "0xa0ffb9c1ce1fe56963b0321b32e7a0302114058b",
+          "pool_id": "0xf6e81e5d16a7274d273905e0068f9f607b840c20bec23b2e442976ee03b29d91",
+          "inputs": [
+            {
+              "address": null,
+              "is_native": true,
+              "symbol": "ETH",
+              "decimals": 18,
+              "amount_raw": "22963499541",
+              "amount": "0.000000022963499541"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+              "is_native": false,
+              "symbol": "USDC",
+              "decimals": 6,
+              "amount_raw": "61",
+              "amount": "0.000061"
+            }
+          ]
+        },
+        {
+          "log_index": 295,
+          "adapter": "v3",
+          "emitter": "0xdbc6998296caa1652a810dc8d3baf4a8294330f1",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0x4200000000000000000000000000000000000006",
+              "is_native": false,
+              "symbol": "WETH",
+              "decimals": 18,
+              "amount_raw": "22963514565",
+              "amount": "0.000000022963514565"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+              "is_native": false,
+              "symbol": "USDC",
+              "decimals": 6,
+              "amount_raw": "61",
+              "amount": "0.000061"
+            }
+          ]
+        },
+        {
+          "log_index": 310,
+          "adapter": "v2",
+          "emitter": "0xc868fcf8af03a2306c6b37db23b5a25b38b27eb9",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0x4200000000000000000000000000000000000006",
+              "is_native": false,
+              "symbol": "WETH",
+              "decimals": 18,
+              "amount_raw": "22963493093",
+              "amount": "0.000000022963493093"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+              "is_native": false,
+              "symbol": "USDC",
+              "decimals": 6,
+              "amount_raw": "61",
+              "amount": "0.000061"
+            }
+          ]
+        },
+        {
+          "log_index": 313,
+          "adapter": "v3",
+          "emitter": "0x331c12605938d2a9ab893c495cfd5f4e875e3313",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0x4200000000000000000000000000000000000006",
+              "is_native": false,
+              "symbol": "WETH",
+              "decimals": 18,
+              "amount_raw": "22963609207",
+              "amount": "0.000000022963609207"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+              "is_native": false,
+              "symbol": "USDC",
+              "decimals": 6,
+              "amount_raw": "61",
+              "amount": "0.000061"
+            }
+          ]
+        },
+        {
+          "log_index": 316,
+          "adapter": "pancake_v3",
+          "emitter": "0xd96abbad4b744cb7746adc908a3df39c5991aae0",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0x4200000000000000000000000000000000000006",
+              "is_native": false,
+              "symbol": "WETH",
+              "decimals": 18,
+              "amount_raw": "22963638975",
+              "amount": "0.000000022963638975"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+              "is_native": false,
+              "symbol": "USDC",
+              "decimals": 6,
+              "amount_raw": "61",
+              "amount": "0.000061"
+            }
+          ]
+        },
+        {
+          "log_index": 319,
+          "adapter": "algebra_integral",
+          "emitter": "0x82e4c6da2d953f074329481ca3c770ba74a8961a",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0x4200000000000000000000000000000000000006",
+              "is_native": false,
+              "symbol": "WETH",
+              "decimals": 18,
+              "amount_raw": "22963660191",
+              "amount": "0.000000022963660191"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+              "is_native": false,
+              "symbol": "USDC",
+              "decimals": 6,
+              "amount_raw": "61",
+              "amount": "0.000061"
+            }
+          ]
+        },
+        {
+          "log_index": 322,
+          "adapter": "v3",
+          "emitter": "0x3d5d143381916280ff91407febeb52f2b60f33cf",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0x4200000000000000000000000000000000000006",
+              "is_native": false,
+              "symbol": "WETH",
+              "decimals": 18,
+              "amount_raw": "28704486331",
+              "amount": "0.000000028704486331"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0x940181a94a35a4569e4529a3cdfb74e38fd98631",
+              "is_native": false,
+              "symbol": "AERO",
+              "decimals": 18,
+              "amount_raw": "95147420722099",
+              "amount": "0.000095147420722099"
+            }
+          ]
+        },
+        {
+          "log_index": 325,
+          "adapter": "v3",
+          "emitter": "0x82321f3beb69f503380d6b233857d5c43562e2d0",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0x4200000000000000000000000000000000000006",
+              "is_native": false,
+              "symbol": "WETH",
+              "decimals": 18,
+              "amount_raw": "28704549891",
+              "amount": "0.000000028704549891"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0x940181a94a35a4569e4529a3cdfb74e38fd98631",
+              "is_native": false,
+              "symbol": "AERO",
+              "decimals": 18,
+              "amount_raw": "95131073741198",
+              "amount": "0.000095131073741198"
+            }
+          ]
+        },
+        {
+          "log_index": 336,
+          "adapter": "v4",
+          "emitter": "0x498581ff718922c3f8e6a244956af099b2652b2b",
+          "pool_id": "0xe155c517c53f078f4b443c99436e42c1b80fd2fb1b3508f431c46b8365e4f3f0",
+          "inputs": [
+            {
+              "address": "0x4200000000000000000000000000000000000006",
+              "is_native": false,
+              "symbol": "WETH",
+              "decimals": 18,
+              "amount_raw": "28647333684",
+              "amount": "0.000000028647333684"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0xd09cf0982a32dd6856e12d6bf2f08a822ea5d91d",
+              "is_native": false,
+              "symbol": "FEY",
+              "decimals": 18,
+              "amount_raw": "145940109982873362794",
+              "amount": "145.940109982873362794"
+            }
+          ]
+        },
+        {
+          "log_index": 341,
+          "adapter": "v3",
+          "emitter": "0x3b8000cd10625abdc7370fb47ed4d4a9c6311fd5",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0x4200000000000000000000000000000000000006",
+              "is_native": false,
+              "symbol": "WETH",
+              "decimals": 18,
+              "amount_raw": "11481877175",
+              "amount": "0.000000011481877175"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0xd9aaec86b65d86f6a7b5b1b0c42ffa531710b6ca",
+              "is_native": false,
+              "symbol": "USDbC",
+              "decimals": 6,
+              "amount_raw": "30",
+              "amount": "0.00003"
+            }
+          ]
+        },
+        {
+          "log_index": 344,
+          "adapter": "maverick_v1",
+          "emitter": "0x06e6736ca9e922766279a22b75a600fe8b8473b6",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0x4200000000000000000000000000000000000006",
+              "is_native": false,
+              "symbol": "WETH",
+              "decimals": 18,
+              "amount_raw": "11481877175",
+              "amount": "0.000000011481877175"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0xd9aaec86b65d86f6a7b5b1b0c42ffa531710b6ca",
+              "is_native": false,
+              "symbol": "USDbC",
+              "decimals": 6,
+              "amount_raw": "30",
+              "amount": "0.00003"
+            }
+          ]
+        },
+        {
+          "log_index": 347,
+          "adapter": "v3",
+          "emitter": "0xedc625b74537ee3a10874f53d170e9c17a906b9c",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0x1111111111166b7fe7bd91427724b487980afc69",
+              "is_native": false,
+              "symbol": "ZORA",
+              "decimals": 18,
+              "amount_raw": "2767608178845483",
+              "amount": "0.002767608178845483"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+              "is_native": false,
+              "symbol": "USDC",
+              "decimals": 6,
+              "amount_raw": "22",
+              "amount": "0.000022"
+            }
+          ]
+        },
+        {
+          "log_index": 350,
+          "adapter": "v3",
+          "emitter": "0x36b4869995672df7e3afc36be795dbb998bc639d",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0x1111111111166b7fe7bd91427724b487980afc69",
+              "is_native": false,
+              "symbol": "ZORA",
+              "decimals": 18,
+              "amount_raw": "2767614053505195",
+              "amount": "0.002767614053505195"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+              "is_native": false,
+              "symbol": "USDC",
+              "decimals": 6,
+              "amount_raw": "22",
+              "amount": "0.000022"
+            }
+          ]
+        },
+        {
+          "log_index": 351,
+          "adapter": "v4",
+          "emitter": "0x498581ff718922c3f8e6a244956af099b2652b2b",
+          "pool_id": "0xc0fb745b5eae6fa40dee9398994c6a8571c430c0f921782f19647ebd58d26949",
+          "inputs": [
+            {
+              "address": "0x1111111111166b7fe7bd91427724b487980afc69",
+              "is_native": false,
+              "symbol": "ZORA",
+              "decimals": 18,
+              "amount_raw": "3286550119691347",
+              "amount": "0.003286550119691347"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+              "is_native": false,
+              "symbol": "USDC",
+              "decimals": 6,
+              "amount_raw": "26",
+              "amount": "0.000026"
+            }
+          ]
+        },
+        {
+          "log_index": 354,
+          "adapter": "v4",
+          "emitter": "0x498581ff718922c3f8e6a244956af099b2652b2b",
+          "pool_id": "0xd61f5c521d323c5edbe58101137561823ba2e91fa02e7cdc5a16646736f49c86",
+          "inputs": [
+            {
+              "address": "0x1111111111166b7fe7bd91427724b487980afc69",
+              "is_native": false,
+              "symbol": "ZORA",
+              "decimals": 18,
+              "amount_raw": "2940591826402634",
+              "amount": "0.002940591826402634"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+              "is_native": false,
+              "symbol": "USDC",
+              "decimals": 6,
+              "amount_raw": "23",
+              "amount": "0.000023"
+            }
+          ]
+        },
+        {
+          "log_index": 357,
+          "adapter": "v4",
+          "emitter": "0x498581ff718922c3f8e6a244956af099b2652b2b",
+          "pool_id": "0x396a74f0392c37853e5a7885ded4f357fe4aee5812f71267cb08f292bf803a78",
+          "inputs": [
+            {
+              "address": "0x1111111111166b7fe7bd91427724b487980afc69",
+              "is_native": false,
+              "symbol": "ZORA",
+              "decimals": 18,
+              "amount_raw": "3286547033359011",
+              "amount": "0.003286547033359011"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+              "is_native": false,
+              "symbol": "USDC",
+              "decimals": 6,
+              "amount_raw": "26",
+              "amount": "0.000026"
+            }
+          ]
+        },
+        {
+          "log_index": 360,
+          "adapter": "v4",
+          "emitter": "0x498581ff718922c3f8e6a244956af099b2652b2b",
+          "pool_id": "0xf060528c1cf9bf2e7fd3e757595a27062dbc51cf99f2971d532be31560a07808",
+          "inputs": [
+            {
+              "address": "0x1111111111166b7fe7bd91427724b487980afc69",
+              "is_native": false,
+              "symbol": "ZORA",
+              "decimals": 18,
+              "amount_raw": "3286558444869863",
+              "amount": "0.003286558444869863"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+              "is_native": false,
+              "symbol": "USDC",
+              "decimals": 6,
+              "amount_raw": "26",
+              "amount": "0.000026"
+            }
+          ]
+        },
+        {
+          "log_index": 365,
+          "adapter": "v3",
+          "emitter": "0x3f53f1fd5b7723ddf38d93a584d280b9b94c3111",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0x1111111111166b7fe7bd91427724b487980afc69",
+              "is_native": false,
+              "symbol": "ZORA",
+              "decimals": 18,
+              "amount_raw": "2767629757308360",
+              "amount": "0.00276762975730836"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+              "is_native": false,
+              "symbol": "USDC",
+              "decimals": 6,
+              "amount_raw": "22",
+              "amount": "0.000022"
+            }
+          ]
+        },
+        {
+          "log_index": 368,
+          "adapter": "v3",
+          "emitter": "0x611374654470457af78aa4056f34e64b9acbec8b",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0x940181a94a35a4569e4529a3cdfb74e38fd98631",
+              "is_native": false,
+              "symbol": "AERO",
+              "decimals": 18,
+              "amount_raw": "27676768133664",
+              "amount": "0.000027676768133664"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+              "is_native": false,
+              "symbol": "USDC",
+              "decimals": 6,
+              "amount_raw": "22",
+              "amount": "0.000022"
+            }
+          ]
+        },
+        {
+          "log_index": 371,
+          "adapter": "v3",
+          "emitter": "0xe5b5f522e98b5a2baae212d4da66b865b781db97",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0x940181a94a35a4569e4529a3cdfb74e38fd98631",
+              "is_native": false,
+              "symbol": "AERO",
+              "decimals": 18,
+              "amount_raw": "27676765042019",
+              "amount": "0.000027676765042019"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+              "is_native": false,
+              "symbol": "USDC",
+              "decimals": 6,
+              "amount_raw": "22",
+              "amount": "0.000022"
+            }
+          ]
+        },
+        {
+          "log_index": 374,
+          "adapter": "v3",
+          "emitter": "0x2426dc0a657bd481ab48f86c1616431905901238",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0x940181a94a35a4569e4529a3cdfb74e38fd98631",
+              "is_native": false,
+              "symbol": "AERO",
+              "decimals": 18,
+              "amount_raw": "25947014530337",
+              "amount": "0.000025947014530337"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+              "is_native": false,
+              "symbol": "USDC",
+              "decimals": 6,
+              "amount_raw": "20",
+              "amount": "0.00002"
+            }
+          ]
+        },
+        {
+          "log_index": 377,
+          "adapter": "v3",
+          "emitter": "0xbe00ff35af70e8415d0eb605a286d8a45466a4c1",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0x940181a94a35a4569e4529a3cdfb74e38fd98631",
+              "is_native": false,
+              "symbol": "AERO",
+              "decimals": 18,
+              "amount_raw": "25947104233173",
+              "amount": "0.000025947104233173"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+              "is_native": false,
+              "symbol": "USDC",
+              "decimals": 6,
+              "amount_raw": "20",
+              "amount": "0.00002"
+            }
+          ]
+        },
+        {
+          "log_index": 380,
+          "adapter": "v3",
+          "emitter": "0xccd9cc53b63662088c738b8bc06e9078fb8d9ad4",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0x940181a94a35a4569e4529a3cdfb74e38fd98631",
+              "is_native": false,
+              "symbol": "AERO",
+              "decimals": 18,
+              "amount_raw": "27676919831087",
+              "amount": "0.000027676919831087"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+              "is_native": false,
+              "symbol": "USDC",
+              "decimals": 6,
+              "amount_raw": "22",
+              "amount": "0.000022"
+            }
+          ]
+        },
+        {
+          "log_index": 383,
+          "adapter": "pancake_v3",
+          "emitter": "0x29a857629e58c531f351bb7fbd86aa46ef6af0b7",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0x940181a94a35a4569e4529a3cdfb74e38fd98631",
+              "is_native": false,
+              "symbol": "AERO",
+              "decimals": 18,
+              "amount_raw": "27676961346508",
+              "amount": "0.000027676961346508"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+              "is_native": false,
+              "symbol": "USDC",
+              "decimals": 6,
+              "amount_raw": "22",
+              "amount": "0.000022"
+            }
+          ]
+        },
+        {
+          "log_index": 386,
+          "adapter": "v3",
+          "emitter": "0xa4fdd479eda160671636e2ecf8f993cbf86258a8",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0x940181a94a35a4569e4529a3cdfb74e38fd98631",
+              "is_native": false,
+              "symbol": "AERO",
+              "decimals": 18,
+              "amount_raw": "27676961346509",
+              "amount": "0.000027676961346509"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+              "is_native": false,
+              "symbol": "USDC",
+              "decimals": 6,
+              "amount_raw": "22",
+              "amount": "0.000022"
+            }
+          ]
+        },
+        {
+          "log_index": 387,
+          "adapter": "v4",
+          "emitter": "0x498581ff718922c3f8e6a244956af099b2652b2b",
+          "pool_id": "0x6e8eff75c178b13ff48a49f3266abff58f69bdfe12217f6373be5f139ac5f901",
+          "inputs": [
+            {
+              "address": "0xd09cf0982a32dd6856e12d6bf2f08a822ea5d91d",
+              "is_native": false,
+              "symbol": "FEY",
+              "decimals": 18,
+              "amount_raw": "46997531438114657640",
+              "amount": "46.99753143811465764"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+              "is_native": false,
+              "symbol": "USDC",
+              "decimals": 6,
+              "amount_raw": "24",
+              "amount": "0.000024"
+            }
+          ]
+        },
+        {
+          "log_index": 390,
+          "adapter": "v4",
+          "emitter": "0x498581ff718922c3f8e6a244956af099b2652b2b",
+          "pool_id": "0x6427f3228edd9a133b245b30a044a1369a09ed337bcaed844101983e18175ca1",
+          "inputs": [
+            {
+              "address": "0xd09cf0982a32dd6856e12d6bf2f08a822ea5d91d",
+              "is_native": false,
+              "symbol": "FEY",
+              "decimals": 18,
+              "amount_raw": "49471289272379352577",
+              "amount": "49.471289272379352577"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+              "is_native": false,
+              "symbol": "USDC",
+              "decimals": 6,
+              "amount_raw": "25",
+              "amount": "0.000025"
+            }
+          ]
+        },
+        {
+          "log_index": 393,
+          "adapter": "v4",
+          "emitter": "0x498581ff718922c3f8e6a244956af099b2652b2b",
+          "pool_id": "0x891353016cdafeb79b376db2be1dbc68e14451b5584ff4cf571b43eef63471b5",
+          "inputs": [
+            {
+              "address": "0xd09cf0982a32dd6856e12d6bf2f08a822ea5d91d",
+              "is_native": false,
+              "symbol": "FEY",
+              "decimals": 18,
+              "amount_raw": "49471289272379352577",
+              "amount": "49.471289272379352577"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+              "is_native": false,
+              "symbol": "USDC",
+              "decimals": 6,
+              "amount_raw": "25",
+              "amount": "0.000025"
+            }
+          ]
+        },
+        {
+          "log_index": 398,
+          "adapter": "maverick_v1",
+          "emitter": "0xbb8b2da5db110ad625270061e81987ce342677c3",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0xd9aaec86b65d86f6a7b5b1b0c42ffa531710b6ca",
+              "is_native": false,
+              "symbol": "USDbC",
+              "decimals": 6,
+              "amount_raw": "60",
+              "amount": "0.00006"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+              "is_native": false,
+              "symbol": "USDC",
+              "decimals": 6,
+              "amount_raw": "60",
+              "amount": "0.00006"
+            }
+          ]
+        }
+      ],
+      "conversions": [
+        {
+          "log_index": 200,
+          "adapter": "weth",
+          "emitter": "0x4200000000000000000000000000000000000006",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": null,
+              "is_native": true,
+              "symbol": "ETH",
+              "decimals": 18,
+              "amount_raw": "723348525451",
+              "amount": "0.000000723348525451"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0x4200000000000000000000000000000000000006",
+              "is_native": false,
+              "symbol": "WETH",
+              "decimals": 18,
+              "amount_raw": "723348525451",
+              "amount": "0.000000723348525451"
+            }
+          ]
+        },
+        {
+          "log_index": 207,
+          "adapter": "weth",
+          "emitter": "0x4200000000000000000000000000000000000006",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0x4200000000000000000000000000000000000006",
+              "is_native": false,
+              "symbol": "WETH",
+              "decimals": 18,
+              "amount_raw": "11481412996",
+              "amount": "0.000000011481412996"
+            }
+          ],
+          "outputs": [
+            {
+              "address": null,
+              "is_native": true,
+              "symbol": "ETH",
+              "decimals": 18,
+              "amount_raw": "11481412996",
+              "amount": "0.000000011481412996"
+            }
+          ]
+        },
+        {
+          "log_index": 290,
+          "adapter": "weth",
+          "emitter": "0x4200000000000000000000000000000000000006",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0x4200000000000000000000000000000000000006",
+              "is_native": false,
+              "symbol": "WETH",
+              "decimals": 18,
+              "amount_raw": "22963499541",
+              "amount": "0.000000022963499541"
+            }
+          ],
+          "outputs": [
+            {
+              "address": null,
+              "is_native": true,
+              "symbol": "ETH",
+              "decimals": 18,
+              "amount_raw": "22963499541",
+              "amount": "0.000000022963499541"
+            }
+          ]
+        },
+        {
+          "log_index": 296,
+          "adapter": "weth",
+          "emitter": "0x4200000000000000000000000000000000000006",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0x4200000000000000000000000000000000000006",
+              "is_native": false,
+              "symbol": "WETH",
+              "decimals": 18,
+              "amount_raw": "22963564364",
+              "amount": "0.000000022963564364"
+            }
+          ],
+          "outputs": [
+            {
+              "address": null,
+              "is_native": true,
+              "symbol": "ETH",
+              "decimals": 18,
+              "amount_raw": "22963564364",
+              "amount": "0.000000022963564364"
+            }
+          ]
+        }
+      ],
+      "settlements": [],
+      "route_summaries": [],
+      "non_swap_events": []
+    }
+  },
+  {
+    "file": "ethereum_0xf3f41767ec04973092e1669b94bb9af973ba5a30a0bc50d10b3aaf82bd963b97.json",
+    "sha256": "ed761627a0522f9e5fabddbd7699fd577005dc21a4ab0a4d8b01a7e7e333d619",
+    "expected": {
+      "swaps": [
+        {
+          "log_index": 232,
+          "adapter": "v2",
+          "emitter": "0x05afaaf9f2341bbbded9d327d5bae7a19ce42207",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0x53fdca91fd33b9131b5ceade42a3edbd9b38edff",
+              "is_native": false,
+              "symbol": "CAT",
+              "decimals": 18,
+              "amount_raw": "1000000000000000000",
+              "amount": "1"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+              "is_native": false,
+              "symbol": "WETH",
+              "decimals": 18,
+              "amount_raw": "269073274643",
+              "amount": "0.000000269073274643"
+            }
+          ]
+        },
+        {
+          "log_index": 233,
+          "adapter": "balancer_v2",
+          "emitter": "0xba12222222228d8ba445958a75a0704d566bf2c8",
+          "pool_id": "0x0b09dea16768f0799065c475be02919503cb2a3500020000000000000000001a",
+          "inputs": [
+            {
+              "address": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+              "is_native": false,
+              "symbol": "WETH",
+              "decimals": 18,
+              "amount_raw": "269073274643",
+              "amount": "0.000000269073274643"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0x6b175474e89094c44da98b954eedeac495271d0f",
+              "is_native": false,
+              "symbol": "DAI",
+              "decimals": 18,
+              "amount_raw": "723174747266494",
+              "amount": "0.000723174747266494"
+            }
+          ]
+        },
+        {
+          "log_index": 247,
+          "adapter": "curve",
+          "emitter": "0x383e6b4437b59fff47b619cba855ca29342a8559",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+              "is_native": false,
+              "symbol": "USDC",
+              "decimals": 6,
+              "amount_raw": "723",
+              "amount": "0.000723"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0x6c3ea9036406852006290770bedfcaba0e23a0e8",
+              "is_native": false,
+              "symbol": "PYUSD",
+              "decimals": 6,
+              "amount_raw": "722",
+              "amount": "0.000722"
+            }
+          ]
+        }
+      ],
+      "conversions": [],
+      "settlements": [],
+      "route_summaries": [
+        {
+          "log_index": 241,
+          "adapter": "v4_hook_summary",
+          "emitter": "0x958942af77dcd973b815b2a16bd88a5134c46888",
+          "pool_id": "0x033c1e568baa6c8c70e7320a885027d9ec01e536391b83a5af9c565c6908ff19",
+          "inputs": [
+            {
+              "address": "0x6b175474e89094c44da98b954eedeac495271d0f",
+              "is_native": false,
+              "symbol": "DAI",
+              "decimals": 18,
+              "amount_raw": "723174747266494",
+              "amount": "0.000723174747266494"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+              "is_native": false,
+              "symbol": "USDC",
+              "decimals": 6,
+              "amount_raw": "723",
+              "amount": "0.000723"
+            }
+          ]
+        }
+      ],
+      "non_swap_events": [
+        {
+          "log_index": 242,
+          "adapter": "v4",
+          "emitter": "0x000000000004444c5dc75cb358380d2e3de08a90",
+          "pool_id": "0x033c1e568baa6c8c70e7320a885027d9ec01e536391b83a5af9c565c6908ff19",
+          "inputs": [],
+          "outputs": []
+        }
+      ]
+    }
+  },
+  {
+    "file": "ethereum_0x4fdf3f14c0dcf5f3cc86f68c2067be4c1a4a2fbff0b9c4fb92863d6f2f26dcf0.json",
+    "sha256": "9950d14f7d66d654a7b471101a1bab67bb42998274a43456d0fb2d9db4e2a459",
+    "expected": {
+      "swaps": [
+        {
+          "log_index": 795,
+          "adapter": "curve",
+          "emitter": "0xc522a6606bba746d7960404f22a3db936b6f4f50",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0x57ab1e0003f623289cd798b1824be09a793e4bec",
+              "is_native": false,
+              "symbol": "reUSD",
+              "decimals": 18,
+              "amount_raw": "17403095794073866712749",
+              "amount": "17403.095794073866712749"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0x0655977feb2f289a4ab78af67bab0d17aab84367",
+              "is_native": false,
+              "symbol": "scrvUSD",
+              "decimals": 18,
+              "amount_raw": "15537079574834163837602",
+              "amount": "15537.079574834163837602"
+            }
+          ]
+        },
+        {
+          "log_index": 798,
+          "adapter": "curve",
+          "emitter": "0xb0ef04ace97d350e24efa5139d2590d26a61a8dc",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0x57ab1e0003f623289cd798b1824be09a793e4bec",
+              "is_native": false,
+              "symbol": "reUSD",
+              "decimals": 18,
+              "amount_raw": "3315200915921638188080",
+              "amount": "3315.20091592163818808"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0x085780639cc2cacd35e474e71f4d000e2405d8f6",
+              "is_native": false,
+              "symbol": "fxUSD",
+              "decimals": 18,
+              "amount_raw": "3280649363977181436228",
+              "amount": "3280.649363977181436228"
+            }
+          ]
+        },
+        {
+          "log_index": 801,
+          "adapter": "curve",
+          "emitter": "0x48d670d189b4b48757992d36897bca6e3f889040",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0x57ab1e0003f623289cd798b1824be09a793e4bec",
+              "is_native": false,
+              "symbol": "reUSD",
+              "decimals": 18,
+              "amount_raw": "12433298748803566853416",
+              "amount": "12433.298748803566853416"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0xb45ad160634c528cc3d2926d9807104fa3157305",
+              "is_native": false,
+              "symbol": "sDOLA",
+              "decimals": 18,
+              "amount_raw": "8682849823521532437671",
+              "amount": "8682.849823521532437671"
+            }
+          ]
+        },
+        {
+          "log_index": 804,
+          "adapter": "curve",
+          "emitter": "0x5018be882dcce5e3f2f3b0913ae2096b9b3fb61f",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0x085780639cc2cacd35e474e71f4d000e2405d8f6",
+              "is_native": false,
+              "symbol": "fxUSD",
+              "decimals": 18,
+              "amount_raw": "3280649363977181436228",
+              "amount": "3280.649363977181436228"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+              "is_native": false,
+              "symbol": "USDC",
+              "decimals": 6,
+              "amount_raw": "3279324897",
+              "amount": "3279.324897"
+            }
+          ]
+        },
+        {
+          "log_index": 807,
+          "adapter": "curve",
+          "emitter": "0x76a962ba6770068bcf454d34dde17175611e6637",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0xb45ad160634c528cc3d2926d9807104fa3157305",
+              "is_native": false,
+              "symbol": "sDOLA",
+              "decimals": 18,
+              "amount_raw": "8682849823521532437671",
+              "amount": "8682.849823521532437671"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0x0655977feb2f289a4ab78af67bab0d17aab84367",
+              "is_native": false,
+              "symbol": "scrvUSD",
+              "decimals": 18,
+              "amount_raw": "11100832656004636495344",
+              "amount": "11100.832656004636495344"
+            }
+          ]
+        },
+        {
+          "log_index": 810,
+          "adapter": "curve",
+          "emitter": "0xd29f8980852c2c76fc3f6e96a7aa06e0bedcc1b1",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0x0655977feb2f289a4ab78af67bab0d17aab84367",
+              "is_native": false,
+              "symbol": "scrvUSD",
+              "decimals": 18,
+              "amount_raw": "6013135755340627431957",
+              "amount": "6013.135755340627431957"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0x9d39a5de30e57443bff2a8307a4256c8797a3497",
+              "is_native": false,
+              "symbol": "sUSDe",
+              "decimals": 18,
+              "amount_raw": "5327897092890284349812",
+              "amount": "5327.897092890284349812"
+            }
+          ]
+        },
+        {
+          "log_index": 816,
+          "adapter": "curve",
+          "emitter": "0x4dece678ceceb27446b35c672dc7d61f30bad69e",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0xf939e0a03fb07f59a73314e73794be0e57ac1b4e",
+              "is_native": false,
+              "symbol": "crvUSD",
+              "decimals": 18,
+              "amount_raw": "22864902236614405186219",
+              "amount": "22864.902236614405186219"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+              "is_native": false,
+              "symbol": "USDC",
+              "decimals": 6,
+              "amount_raw": "22851913443",
+              "amount": "22851.913443"
+            }
+          ]
+        },
+        {
+          "log_index": 817,
+          "adapter": "v4",
+          "emitter": "0x000000000004444c5dc75cb358380d2e3de08a90",
+          "pool_id": "0x56fc29b86900aa0afa6e20b020429bffba1105cfb45070492c67529b46eb48c1",
+          "inputs": [
+            {
+              "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+              "is_native": false,
+              "symbol": "USDC",
+              "decimals": 6,
+              "amount_raw": "2461876226",
+              "amount": "2461.876226"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0x4c9edd5852cd905f086c759e8383e09bff1e68b3",
+              "is_native": false,
+              "symbol": "USDe",
+              "decimals": 18,
+              "amount_raw": "2462348438538772215568",
+              "amount": "2462.348438538772215568"
+            }
+          ]
+        },
+        {
+          "log_index": 823,
+          "adapter": "ekubo_v3",
+          "emitter": "0x00000000000014aa86c5d3c41765bb24e11bd701",
+          "pool_id": "0x0fcb46a418903bca6840ea3801dc09b2f46b5f423450e5772fb1c9a0af3d4990",
+          "inputs": [
+            {
+              "address": "0x4c9edd5852cd905f086c759e8383e09bff1e68b3",
+              "is_native": false,
+              "symbol": "USDe",
+              "decimals": 18,
+              "amount_raw": "2462348438538772215568",
+              "amount": "2462.348438538772215568"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0x9d39a5de30e57443bff2a8307a4256c8797a3497",
+              "is_native": false,
+              "symbol": "sUSDe",
+              "decimals": 18,
+              "amount_raw": "1968915985328456267858",
+              "amount": "1968.915985328456267858"
+            }
+          ]
+        },
+        {
+          "log_index": 830,
+          "adapter": "fluid",
+          "emitter": "0x1dd125c32e4b5086c63cc13b3ca02c4a2a61fa9b",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0xdac17f958d2ee523a2206206994597c13d831ec7",
+              "is_native": false,
+              "symbol": "USDT",
+              "decimals": 6,
+              "amount_raw": "5747239425",
+              "amount": "5747.239425"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0x9d39a5de30e57443bff2a8307a4256c8797a3497",
+              "is_native": false,
+              "symbol": "sUSDe",
+              "decimals": 18,
+              "amount_raw": "4593451710545909000000",
+              "amount": "4593.451710545909"
+            }
+          ]
+        },
+        {
+          "log_index": 831,
+          "adapter": "v4",
+          "emitter": "0x000000000004444c5dc75cb358380d2e3de08a90",
+          "pool_id": "0xeac10ed910ed8b167bd5785954d53641705dceb46c4fd077f7c265bef455ffb8",
+          "inputs": [
+            {
+              "address": "0xdac17f958d2ee523a2206206994597c13d831ec7",
+              "is_native": false,
+              "symbol": "USDT",
+              "decimals": 6,
+              "amount_raw": "17936797390",
+              "amount": "17936.79739"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0x9d39a5de30e57443bff2a8307a4256c8797a3497",
+              "is_native": false,
+              "symbol": "sUSDe",
+              "decimals": 18,
+              "amount_raw": "14335721048293872278601",
+              "amount": "14335.721048293872278601"
+            }
+          ]
+        }
+      ],
+      "conversions": [
+        {
+          "log_index": 813,
+          "adapter": "erc4626",
+          "emitter": "0x0655977feb2f289a4ab78af67bab0d17aab84367",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0x0655977feb2f289a4ab78af67bab0d17aab84367",
+              "is_native": false,
+              "symbol": "scrvUSD",
+              "decimals": 18,
+              "amount_raw": "20624776475498172900989",
+              "amount": "20624.776475498172900989"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0xf939e0a03fb07f59a73314e73794be0e57ac1b4e",
+              "is_native": false,
+              "symbol": "crvUSD",
+              "decimals": 18,
+              "amount_raw": "22864902236614405186219",
+              "amount": "22864.902236614405186219"
+            }
+          ]
+        }
+      ],
+      "settlements": [],
+      "route_summaries": [],
+      "non_swap_events": []
+    }
+  },
+  {
+    "file": "ethereum_0x52a170389a38ca6d1802bf3b08aaa7949668f18c4f7392c6de32c8f82e087b70.json",
+    "sha256": "87c649a4cb6b7a5849544dffda7cef824e8b005bdc3e9ef4cad11212a5bddb5b",
+    "expected": {
+      "swaps": [
+        {
+          "log_index": 746,
+          "adapter": "curve",
+          "emitter": "0x4ebdf703948ddcea3b11f675b4d1fba9d2414a14",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0xd533a949740bb3306d119cc777fa900ba034cd52",
+              "is_native": false,
+              "symbol": "CRV",
+              "decimals": 18,
+              "amount_raw": "40460600600335700866",
+              "amount": "40.460600600335700866"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+              "is_native": false,
+              "symbol": "WETH",
+              "decimals": 18,
+              "amount_raw": "5958505599179314",
+              "amount": "0.005958505599179314"
+            }
+          ]
+        },
+        {
+          "log_index": 749,
+          "adapter": "curve",
+          "emitter": "0xd51a44d3fae010294c616388b506acda1bfaae46",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+              "is_native": false,
+              "symbol": "WETH",
+              "decimals": 18,
+              "amount_raw": "5958505599179314",
+              "amount": "0.005958505599179314"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599",
+              "is_native": false,
+              "symbol": "WBTC",
+              "decimals": 8,
+              "amount_raw": "19171",
+              "amount": "0.00019171"
+            }
+          ]
+        }
+      ],
+      "conversions": [
+        {
+          "log_index": 747,
+          "adapter": "weth",
+          "emitter": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": null,
+              "is_native": true,
+              "symbol": "ETH",
+              "decimals": 18,
+              "amount_raw": "5958505599179314",
+              "amount": "0.005958505599179314"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+              "is_native": false,
+              "symbol": "WETH",
+              "decimals": 18,
+              "amount_raw": "5958505599179314",
+              "amount": "0.005958505599179314"
+            }
+          ]
+        }
+      ],
+      "settlements": [],
+      "route_summaries": [
+        {
+          "log_index": 751,
+          "adapter": "curve_summary",
+          "emitter": "0x45312ea0eff7e09c83cbe249fa1d7598c4c8cd4e",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0xd533a949740bb3306d119cc777fa900ba034cd52",
+              "is_native": false,
+              "symbol": "CRV",
+              "decimals": 18,
+              "amount_raw": "40460600600335700866",
+              "amount": "40.460600600335700866"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599",
+              "is_native": false,
+              "symbol": "WBTC",
+              "decimals": 8,
+              "amount_raw": "19171",
+              "amount": "0.00019171"
+            }
+          ]
+        }
+      ],
+      "non_swap_events": []
+    }
+  },
+  {
+    "file": "ethereum_0xa7a3df77e6d3828e6bbf6b1529e61bbcd27fb39b857a7cd84bd2e1ec465f684a.json",
+    "sha256": "93fe77b048b77abd5463880414c813dae552b37c529c881d34373369ec0fd2ed",
+    "expected": {
+      "swaps": [
+        {
+          "log_index": 522,
+          "adapter": "rfq_extended",
+          "emitter": "0x5035d128ef482276aa3bcce4307fff8961ba30f9",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+              "is_native": false,
+              "symbol": "WETH",
+              "decimals": 18,
+              "amount_raw": "9057489926506343",
+              "amount": "0.009057489926506343"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0xdac17f958d2ee523a2206206994597c13d831ec7",
+              "is_native": false,
+              "symbol": "USDT",
+              "decimals": 6,
+              "amount_raw": "24319867",
+              "amount": "24.319867"
+            }
+          ]
+        },
+        {
+          "log_index": 525,
+          "adapter": "dodo_v2",
+          "emitter": "0xe02bfbd1eddd39aaf67ae1fa1fffaddb5c149522",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0xdac17f958d2ee523a2206206994597c13d831ec7",
+              "is_native": false,
+              "symbol": "USDT",
+              "decimals": 6,
+              "amount_raw": "24319867",
+              "amount": "24.319867"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0x198d14f2ad9ce69e76ea330b374de4957c3f850a",
+              "is_native": false,
+              "symbol": "NFT",
+              "decimals": 6,
+              "amount_raw": "98687462868484",
+              "amount": "98687462.868484"
+            }
+          ]
+        }
+      ],
+      "conversions": [
+        {
+          "log_index": 517,
+          "adapter": "weth",
+          "emitter": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": null,
+              "is_native": true,
+              "symbol": "ETH",
+              "decimals": 18,
+              "amount_raw": "9057489926506343",
+              "amount": "0.009057489926506343"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+              "is_native": false,
+              "symbol": "WETH",
+              "decimals": 18,
+              "amount_raw": "9057489926506343",
+              "amount": "0.009057489926506343"
+            }
+          ]
+        }
+      ],
+      "settlements": [],
+      "route_summaries": [],
+      "non_swap_events": []
+    }
+  },
+  {
+    "file": "ethereum_0x97fdf57029d64956d4e233a2cce5d0177dfd263df3d1d969cac05d9f1ee6db32.json",
+    "sha256": "3e6a2459e3cb926b3325d420130b08306a96adc1214f8464f919aeb6a8b35c6a",
+    "expected": {
+      "swaps": [
+        {
+          "log_index": 70,
+          "adapter": "rfq_order",
+          "emitter": "0x7a819fa46734a49d0112796f9377e024c350fb26",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0x4a220e6096b25eadb88358cb44068a3248254675",
+              "is_native": false,
+              "symbol": "QNT",
+              "decimals": 18,
+              "amount_raw": "10164930621700422820",
+              "amount": "10.16493062170042282"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+              "is_native": false,
+              "symbol": "WETH",
+              "decimals": 18,
+              "amount_raw": "1131342067370071800",
+              "amount": "1.1313420673700718"
+            }
+          ]
+        }
+      ],
+      "conversions": [
+        {
+          "log_index": 77,
+          "adapter": "weth",
+          "emitter": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+              "is_native": false,
+              "symbol": "WETH",
+              "decimals": 18,
+              "amount_raw": "1123109737327487349",
+              "amount": "1.123109737327487349"
+            }
+          ],
+          "outputs": [
+            {
+              "address": null,
+              "is_native": true,
+              "symbol": "ETH",
+              "decimals": 18,
+              "amount_raw": "1123109737327487349",
+              "amount": "1.123109737327487349"
+            }
+          ]
+        }
+      ],
+      "settlements": [
+        {
+          "log_index": 64,
+          "adapter": "cow",
+          "emitter": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0x4a220e6096b25eadb88358cb44068a3248254675",
+              "is_native": false,
+              "symbol": "QNT",
+              "decimals": 18,
+              "amount_raw": "10164930621700422820",
+              "amount": "10.16493062170042282"
+            }
+          ],
+          "outputs": [
+            {
+              "address": null,
+              "is_native": true,
+              "symbol": "ETH",
+              "decimals": 18,
+              "amount_raw": "1123109737327487349",
+              "amount": "1.123109737327487349"
+            }
+          ]
+        }
+      ],
+      "route_summaries": [
+        {
+          "log_index": 73,
+          "adapter": "kyber_summary",
+          "emitter": "0x6131b5fae19ea4f9d964eac0408e4408b66337b5",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0x4a220e6096b25eadb88358cb44068a3248254675",
+              "is_native": false,
+              "symbol": "QNT",
+              "decimals": 18,
+              "amount_raw": "10164930621700422820",
+              "amount": "10.16493062170042282"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+              "is_native": false,
+              "symbol": "WETH",
+              "decimals": 18,
+              "amount_raw": "1131342067370071800",
+              "amount": "1.1313420673700718"
+            }
+          ]
+        }
+      ],
+      "non_swap_events": []
+    }
+  },
+  {
+    "file": "base_0x16d2f5196e2d3e36cd0ac56ed0bafddf6833f18c5d2585d94a3a9683b4d86fe6.json",
+    "sha256": "fc31e1f8f4559b85376516bbf888dbd9612afda323988ffe55f03e8d654c3063",
+    "expected": {
+      "swaps": [
+        {
+          "log_index": 100,
+          "adapter": "oneinch_limit",
+          "emitter": "0x111111125421ca6dc452d289314280a0f8842a65",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+              "is_native": false,
+              "symbol": "USDC",
+              "decimals": 6,
+              "amount_raw": "57500000",
+              "amount": "57.5"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0x4bfaa776991e85e5f8b1255461cbbd216cfc714f",
+              "is_native": false,
+              "symbol": "HOME",
+              "decimals": 18,
+              "amount_raw": "9498997991524999449097",
+              "amount": "9498.997991524999449097"
+            }
+          ]
+        },
+        {
+          "log_index": 103,
+          "adapter": "v3",
+          "emitter": "0x098a4de96305bafaea0c0ce07cf6456e2c64982a",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0x4bfaa776991e85e5f8b1255461cbbd216cfc714f",
+              "is_native": false,
+              "symbol": "HOME",
+              "decimals": 18,
+              "amount_raw": "9498997991524999449097",
+              "amount": "9498.997991524999449097"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0x4200000000000000000000000000000000000006",
+              "is_native": false,
+              "symbol": "WETH",
+              "decimals": 18,
+              "amount_raw": "21485487768608744",
+              "amount": "0.021485487768608744"
+            }
+          ]
+        },
+        {
+          "log_index": 106,
+          "adapter": "v3",
+          "emitter": "0x4289a0666397f517c2a761652aaebaf6a4f7a693",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0x4200000000000000000000000000000000000006",
+              "is_native": false,
+              "symbol": "WETH",
+              "decimals": 18,
+              "amount_raw": "21485487768608744",
+              "amount": "0.021485487768608744"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0x820c137fa70c8691f0e44dc420a5e53c168921dc",
+              "is_native": false,
+              "symbol": "USDS",
+              "decimals": 18,
+              "amount_raw": "57543947480321817972",
+              "amount": "57.543947480321817972"
+            }
+          ]
+        },
+        {
+          "log_index": 112,
+          "adapter": "oneinch_limit",
+          "emitter": "0x111111125421ca6dc452d289314280a0f8842a65",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0x820c137fa70c8691f0e44dc420a5e53c168921dc",
+              "is_native": false,
+              "symbol": "USDS",
+              "decimals": 18,
+              "amount_raw": "200020000000000010224",
+              "amount": "200.020000000000010224"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+              "is_native": false,
+              "symbol": "USDC",
+              "decimals": 6,
+              "amount_raw": "200000000",
+              "amount": "200"
+            }
+          ]
+        }
+      ],
+      "conversions": [
+        {
+          "log_index": 110,
+          "adapter": "psm3",
+          "emitter": "0x1601843c5e9bc251a3272907010afa41fa18347e",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+              "is_native": false,
+              "symbol": "USDC",
+              "decimals": 6,
+              "amount_raw": "142500000",
+              "amount": "142.5"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0x820c137fa70c8691f0e44dc420a5e53c168921dc",
+              "is_native": false,
+              "symbol": "USDS",
+              "decimals": 18,
+              "amount_raw": "142500000000000000000",
+              "amount": "142.5"
+            }
+          ]
+        }
+      ],
+      "settlements": [],
+      "route_summaries": [],
+      "non_swap_events": []
+    }
+  },
+  {
+    "file": "base_0xd9771311ac20471e094b6b2c05b324ce7a60219c051e7dbc8200f6ff0c3122ef.json",
+    "sha256": "6adb98ed9d7cd4ac31dd43e620c7418927f4b5968508aa1fb913f4ed4961ffd2",
+    "expected": {
+      "swaps": [
+        {
+          "log_index": 755,
+          "adapter": "paraswap_rfq",
+          "emitter": "0xa003dfba51c9e1e56c67ae445b852bded7ac5eed",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+              "is_native": false,
+              "symbol": "USDC",
+              "decimals": 6,
+              "amount_raw": "500000000",
+              "amount": "500"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0x50da645f148798f68ef2d7db7c1cb22a6819bb2c",
+              "is_native": false,
+              "symbol": "SPX",
+              "decimals": 8,
+              "amount_raw": "113060850500",
+              "amount": "1130.608505"
+            }
+          ]
+        }
+      ],
+      "conversions": [],
+      "settlements": [],
+      "route_summaries": [],
+      "non_swap_events": []
+    }
+  },
+  {
+    "file": "base_0x7da567875f1fab53851c81afff24fa67cbd0390dafda1f70301534d2c9113c95.json",
+    "sha256": "ca7046550616cee87b840dde350cbc224d3c200e642b956a24ec7e10c77ed5e6",
+    "expected": {
+      "swaps": [
+        {
+          "log_index": 23,
+          "adapter": "v3",
+          "emitter": "0xb4cb800910b228ed3d0834cf79d697127bbb00e5",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+              "is_native": false,
+              "symbol": "USDC",
+              "decimals": 6,
+              "amount_raw": "2500000",
+              "amount": "2.5"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0x4200000000000000000000000000000000000006",
+              "is_native": false,
+              "symbol": "WETH",
+              "decimals": 18,
+              "amount_raw": "932910774657851",
+              "amount": "0.000932910774657851"
+            }
+          ]
+        }
+      ],
+      "conversions": [
+        {
+          "log_index": 24,
+          "adapter": "weth",
+          "emitter": "0x4200000000000000000000000000000000000006",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0x4200000000000000000000000000000000000006",
+              "is_native": false,
+              "symbol": "WETH",
+              "decimals": 18,
+              "amount_raw": "932910774657851",
+              "amount": "0.000932910774657851"
+            }
+          ],
+          "outputs": [
+            {
+              "address": null,
+              "is_native": true,
+              "symbol": "ETH",
+              "decimals": 18,
+              "amount_raw": "932910774657851",
+              "amount": "0.000932910774657851"
+            }
+          ]
+        }
+      ],
+      "settlements": [],
+      "route_summaries": [
+        {
+          "log_index": 25,
+          "adapter": "paraswap_summary",
+          "emitter": "0x59c7c832e96d2568bea6db468c1aadcbbda08a52",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+              "is_native": false,
+              "symbol": "USDC",
+              "decimals": 6,
+              "amount_raw": "2500000",
+              "amount": "2.5"
+            }
+          ],
+          "outputs": [
+            {
+              "address": null,
+              "is_native": true,
+              "symbol": "ETH",
+              "decimals": 18,
+              "amount_raw": "932910774657851",
+              "amount": "0.000932910774657851"
+            }
+          ]
+        }
+      ],
+      "non_swap_events": []
+    }
+  },
+  {
+    "file": "base_0x736c2aac4c44e70e27e414bd6cef6709c86dd0f3da7d525b44a9087e82974c14.json",
+    "sha256": "fa1cefb262933789df14c346504ce8075d1b45b6b3d22863cc2131fe148e7463",
+    "expected": {
+      "swaps": [
+        {
+          "log_index": 821,
+          "adapter": "tessera",
+          "emitter": "0x55555522005bcae1c2424d474bfd5ed477749e3e",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+              "is_native": false,
+              "symbol": "USDC",
+              "decimals": 6,
+              "amount_raw": "8359078600",
+              "amount": "8359.0786"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0x60a3e35cc302bfa44cb288bc5a4f316fdb1adb42",
+              "is_native": false,
+              "symbol": "EURC",
+              "decimals": 6,
+              "amount_raw": "7370987450",
+              "amount": "7370.98745"
+            }
+          ]
+        },
+        {
+          "log_index": 824,
+          "adapter": "v3",
+          "emitter": "0xe846373c1a92b167b4e9cd5d8e4d6b1db9e90ec7",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0x60a3e35cc302bfa44cb288bc5a4f316fdb1adb42",
+              "is_native": false,
+              "symbol": "EURC",
+              "decimals": 6,
+              "amount_raw": "7370472149",
+              "amount": "7370.472149"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+              "is_native": false,
+              "symbol": "USDC",
+              "decimals": 6,
+              "amount_raw": "8359078600",
+              "amount": "8359.0786"
+            }
+          ]
+        }
+      ],
+      "conversions": [],
+      "settlements": [],
+      "route_summaries": [],
+      "non_swap_events": []
+    }
+  },
+  {
+    "file": "base_0xb1a10e2690c67ed5baea1eb555f5b6393240e14c40ecc5a49023f24882f8c478.json",
+    "sha256": "51f8ae65eba647f13ad65d26039047fff4bd55859132c483fe607b043465c035",
+    "expected": {
+      "swaps": [
+        {
+          "log_index": 722,
+          "adapter": "v3",
+          "emitter": "0xdbc6998296caa1652a810dc8d3baf4a8294330f1",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0x4200000000000000000000000000000000000006",
+              "is_native": false,
+              "symbol": "WETH",
+              "decimals": 18,
+              "amount_raw": "11164000000000000",
+              "amount": "0.011164"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+              "is_native": false,
+              "symbol": "USDC",
+              "decimals": 6,
+              "amount_raw": "29891674",
+              "amount": "29.891674"
+            }
+          ]
+        },
+        {
+          "log_index": 723,
+          "adapter": "liquidity_book",
+          "emitter": "0x14ec8e1c2e57b2540841fd2c1d987cf611bc165d",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+              "is_native": false,
+              "symbol": "USDC",
+              "decimals": 6,
+              "amount_raw": "1621944",
+              "amount": "1.621944"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0xd9aaec86b65d86f6a7b5b1b0c42ffa531710b6ca",
+              "is_native": false,
+              "symbol": "USDbC",
+              "decimals": 6,
+              "amount_raw": "1621780",
+              "amount": "1.62178"
+            }
+          ]
+        },
+        {
+          "log_index": 724,
+          "adapter": "liquidity_book",
+          "emitter": "0x14ec8e1c2e57b2540841fd2c1d987cf611bc165d",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+              "is_native": false,
+              "symbol": "USDC",
+              "decimals": 6,
+              "amount_raw": "28268892",
+              "amount": "28.268892"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0xd9aaec86b65d86f6a7b5b1b0c42ffa531710b6ca",
+              "is_native": false,
+              "symbol": "USDbC",
+              "decimals": 6,
+              "amount_raw": "28263229",
+              "amount": "28.263229"
+            }
+          ]
+        },
+        {
+          "log_index": 728,
+          "adapter": "maverick_v2",
+          "emitter": "0xff615535e281b96022f1423c89a83744fbf3dc27",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0xd9aaec86b65d86f6a7b5b1b0c42ffa531710b6ca",
+              "is_native": false,
+              "symbol": "USDbC",
+              "decimals": 6,
+              "amount_raw": "29885009",
+              "amount": "29.885009"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0x4200000000000000000000000000000000000006",
+              "is_native": false,
+              "symbol": "WETH",
+              "decimals": 18,
+              "amount_raw": "11180455713480247",
+              "amount": "0.011180455713480247"
+            }
+          ]
+        }
+      ],
+      "conversions": [
+        {
+          "log_index": 730,
+          "adapter": "weth",
+          "emitter": "0x4200000000000000000000000000000000000006",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0x4200000000000000000000000000000000000006",
+              "is_native": false,
+              "symbol": "WETH",
+              "decimals": 18,
+              "amount_raw": "16455713480247",
+              "amount": "0.000016455713480247"
+            }
+          ],
+          "outputs": [
+            {
+              "address": null,
+              "is_native": true,
+              "symbol": "ETH",
+              "decimals": 18,
+              "amount_raw": "16455713480247",
+              "amount": "0.000016455713480247"
+            }
+          ]
+        }
+      ],
+      "settlements": [],
+      "route_summaries": [],
+      "non_swap_events": []
+    }
+  },
+  {
+    "file": "ethereum_0xb6ec70801a6ebe76d1aeb90cb6b084e179f41bcf9dd3fa46b1d96cd38a48be0d.json",
+    "sha256": "565049cff18c7d6d931bca37b245e076e9a7797beb67720d49c9b93544955061",
+    "expected": {
+      "swaps": [
+        {
+          "log_index": 422,
+          "adapter": "v2",
+          "emitter": "0xefdf4dfc4e817197851266acf0082a80dab18b24",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0x68a47fe1cf42eba4a030a10cd4d6a1031ca3ca0a",
+              "is_native": false,
+              "symbol": "TET",
+              "decimals": 8,
+              "amount_raw": "645205330",
+              "amount": "6.4520533"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+              "is_native": false,
+              "symbol": "WETH",
+              "decimals": 18,
+              "amount_raw": "719537861241276",
+              "amount": "0.000719537861241276"
+            }
+          ]
+        },
+        {
+          "log_index": 426,
+          "adapter": "smardex",
+          "emitter": "0xf3a4b8efe3e3049f6bc71b47ccb7ce6665420179",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+              "is_native": false,
+              "symbol": "WETH",
+              "decimals": 18,
+              "amount_raw": "692166074274826",
+              "amount": "0.000692166074274826"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0x5de8ab7e27f6e7a1fff3e5b337584aa43961beef",
+              "is_native": false,
+              "symbol": "SDEX",
+              "decimals": 18,
+              "amount_raw": "4353987464977368848972",
+              "amount": "4353.987464977368848972"
+            }
+          ]
+        },
+        {
+          "log_index": 429,
+          "adapter": "smardex",
+          "emitter": "0xd2df60073c0a9c0b607ca6ac809acecc0d9250bd",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0x5de8ab7e27f6e7a1fff3e5b337584aa43961beef",
+              "is_native": false,
+              "symbol": "SDEX",
+              "decimals": 18,
+              "amount_raw": "4353987464977368848972",
+              "amount": "4353.987464977368848972"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0x68a47fe1cf42eba4a030a10cd4d6a1031ca3ca0a",
+              "is_native": false,
+              "symbol": "TET",
+              "decimals": 8,
+              "amount_raw": "645205330",
+              "amount": "6.4520533"
+            }
+          ]
+        }
+      ],
+      "conversions": [
+        {
+          "log_index": 427,
+          "adapter": "weth",
+          "emitter": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+              "is_native": false,
+              "symbol": "WETH",
+              "decimals": 18,
+              "amount_raw": "27371786966450",
+              "amount": "0.00002737178696645"
+            }
+          ],
+          "outputs": [
+            {
+              "address": null,
+              "is_native": true,
+              "symbol": "ETH",
+              "decimals": 18,
+              "amount_raw": "27371786966450",
+              "amount": "0.00002737178696645"
+            }
+          ]
+        }
+      ],
+      "settlements": [],
+      "route_summaries": [],
+      "non_swap_events": []
+    }
+  },
+  {
+    "file": "ethereum_0x0945dee150ff80df44559ac464a592b405c7b2f9f26421a587cc8089e9fcb58f.json",
+    "sha256": "84efdc10d59aedb06d637cdadb7f0a3cb20bd159fd44d5316118bc2533aef56e",
+    "expected": {
+      "swaps": [
+        {
+          "log_index": 27,
+          "adapter": "carbon",
+          "emitter": "0xc537e898cd774e2dcba3b14ea6f34c93d5ea45e1",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0xdac17f958d2ee523a2206206994597c13d831ec7",
+              "is_native": false,
+              "symbol": "USDT",
+              "decimals": 6,
+              "amount_raw": "14958903",
+              "amount": "14.958903"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+              "is_native": false,
+              "symbol": "USDC",
+              "decimals": 6,
+              "amount_raw": "14948999",
+              "amount": "14.948999"
+            }
+          ]
+        }
+      ],
+      "conversions": [],
+      "settlements": [],
+      "route_summaries": [],
+      "non_swap_events": []
+    }
+  },
+  {
+    "file": "ethereum_0xde3b446c2949ad5ecc16ec28d4c3474250b580ca128e888671f1a56830eae39d.json",
+    "sha256": "942394025563cfbd938d4a42804e1d8a3b2e27f460acb4f397a634974da0bd65",
+    "expected": {
+      "swaps": [
+        {
+          "log_index": 477,
+          "adapter": "v1",
+          "emitter": "0x38577ccec0ceffd178fd3be66e1c6f531bfa410e",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": null,
+              "is_native": true,
+              "symbol": "ETH",
+              "decimals": 18,
+              "amount_raw": "216172591031435",
+              "amount": "0.000216172591031435"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0xaa7a9ca87d3694b5755f213b5d04094b8d0f0a6f",
+              "is_native": false,
+              "symbol": "TRAC",
+              "decimals": 18,
+              "amount_raw": "1208028538530120962",
+              "amount": "1.208028538530120962"
+            }
+          ]
+        },
+        {
+          "log_index": 480,
+          "adapter": "v2",
+          "emitter": "0x1a58aa618df8f1ec282748fef6185c1a1cc2faa6",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0xaa7a9ca87d3694b5755f213b5d04094b8d0f0a6f",
+              "is_native": false,
+              "symbol": "TRAC",
+              "decimals": 18,
+              "amount_raw": "1208028538530120962",
+              "amount": "1.208028538530120962"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+              "is_native": false,
+              "symbol": "WETH",
+              "decimals": 18,
+              "amount_raw": "229045429763923",
+              "amount": "0.000229045429763923"
+            }
+          ]
+        }
+      ],
+      "conversions": [],
+      "settlements": [],
+      "route_summaries": [],
+      "non_swap_events": []
+    }
+  },
+  {
+    "file": "ethereum_0xdb336d62d02b266ae32e8858402e00e4f94cdc32d49eda3c3d07db4a365ef3ec.json",
+    "sha256": "cb3e5f7554e90a906fbb32c18f9218595046400edc6a9d078fbcbcc21654a35c",
+    "expected": {
+      "swaps": [
+        {
+          "log_index": 508,
+          "adapter": "v3",
+          "emitter": "0x60594a405d53811d3bc4766596efd80fd545a270",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+              "is_native": false,
+              "symbol": "WETH",
+              "decimals": 18,
+              "amount_raw": "284922924916277248",
+              "amount": "0.284922924916277248"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0x6b175474e89094c44da98b954eedeac495271d0f",
+              "is_native": false,
+              "symbol": "DAI",
+              "decimals": 18,
+              "amount_raw": "766639418579475160342",
+              "amount": "766.639418579475160342"
+            }
+          ]
+        },
+        {
+          "log_index": 512,
+          "adapter": "saddle",
+          "emitter": "0x1116898dda4015ed8ddefb84b6e8bc24528af2d8",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0x6b175474e89094c44da98b954eedeac495271d0f",
+              "is_native": false,
+              "symbol": "DAI",
+              "decimals": 18,
+              "amount_raw": "766639403880861925376",
+              "amount": "766.639403880861925376"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0xdac17f958d2ee523a2206206994597c13d831ec7",
+              "is_native": false,
+              "symbol": "USDT",
+              "decimals": 6,
+              "amount_raw": "767049877",
+              "amount": "767.049877"
+            }
+          ]
+        },
+        {
+          "log_index": 516,
+          "adapter": "v3",
+          "emitter": "0xc7bbec68d12a0d1830360f8ec58fa599ba1b0e9b",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0xdac17f958d2ee523a2206206994597c13d831ec7",
+              "is_native": false,
+              "symbol": "USDT",
+              "decimals": 6,
+              "amount_raw": "767049874",
+              "amount": "767.049874"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+              "is_native": false,
+              "symbol": "WETH",
+              "decimals": 18,
+              "amount_raw": "285195648659051244",
+              "amount": "0.285195648659051244"
+            }
+          ]
+        }
+      ],
+      "conversions": [],
+      "settlements": [],
+      "route_summaries": [],
+      "non_swap_events": []
+    }
+  },
+  {
+    "file": "ethereum_0x2e1153ad36610e9929e5136cad90df18e683a443a69ed0bbf60d40c7ce526d42.json",
+    "sha256": "5148a5374e80ea75bda13dabfec1e901a351084de5d605fdf77e6eec25926359",
+    "expected": {
+      "swaps": [
+        {
+          "log_index": 248,
+          "adapter": "dodo_v1",
+          "emitter": "0xc9f93163c99695c6526b799ebca2207fdf7d61ad",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0xdac17f958d2ee523a2206206994597c13d831ec7",
+              "is_native": false,
+              "symbol": "USDT",
+              "decimals": 6,
+              "amount_raw": "108970000",
+              "amount": "108.97"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+              "is_native": false,
+              "symbol": "USDC",
+              "decimals": 6,
+              "amount_raw": "108393194",
+              "amount": "108.393194"
+            }
+          ]
+        },
+        {
+          "log_index": 252,
+          "adapter": "v3",
+          "emitter": "0xe0554a476a092703abdb3ef35c80e0d76d32939f",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+              "is_native": false,
+              "symbol": "USDC",
+              "decimals": 6,
+              "amount_raw": "108393194",
+              "amount": "108.393194"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+              "is_native": false,
+              "symbol": "WETH",
+              "decimals": 18,
+              "amount_raw": "40385991289789027",
+              "amount": "0.040385991289789027"
+            }
+          ]
+        }
+      ],
+      "conversions": [
+        {
+          "log_index": 254,
+          "adapter": "weth",
+          "emitter": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+              "is_native": false,
+              "symbol": "WETH",
+              "decimals": 18,
+              "amount_raw": "40385991289789027",
+              "amount": "0.040385991289789027"
+            }
+          ],
+          "outputs": [
+            {
+              "address": null,
+              "is_native": true,
+              "symbol": "ETH",
+              "decimals": 18,
+              "amount_raw": "40385991289789027",
+              "amount": "0.040385991289789027"
+            }
+          ]
+        }
+      ],
+      "settlements": [],
+      "route_summaries": [],
+      "non_swap_events": []
+    }
+  },
+  {
+    "file": "ethereum_0x8f6b3a6fdc326c67a1a19c342302126e74fb43361c8811aecebf30241c62024c.json",
+    "sha256": "73d37c589bc03c6e9aa604203fe46c5bb45295d8d8c5188fe36676fb890450b1",
+    "expected": {
+      "swaps": [
+        {
+          "log_index": 497,
+          "adapter": "bancor_v3",
+          "emitter": "0xeef417e1d5cc832e619ae18d2f140de2999dd4fb",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0x1f573d6fb3f13d689ff844b4ce37794d79a7ff1c",
+              "is_native": false,
+              "symbol": "BNT",
+              "decimals": 18,
+              "amount_raw": "239694850107684691787",
+              "amount": "239.694850107684691787"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0x4a220e6096b25eadb88358cb44068a3248254675",
+              "is_native": false,
+              "symbol": "QNT",
+              "decimals": 18,
+              "amount_raw": "289442873148368687",
+              "amount": "0.289442873148368687"
+            }
+          ]
+        },
+        {
+          "log_index": 503,
+          "adapter": "v3",
+          "emitter": "0x24ee2c6b9597f035088cda8575e9d5e15a84b9df",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0x4a220e6096b25eadb88358cb44068a3248254675",
+              "is_native": false,
+              "symbol": "QNT",
+              "decimals": 18,
+              "amount_raw": "289454079049988658",
+              "amount": "0.289454079049988658"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+              "is_native": false,
+              "symbol": "WETH",
+              "decimals": 18,
+              "amount_raw": "30997311353452727",
+              "amount": "0.030997311353452727"
+            }
+          ]
+        }
+      ],
+      "conversions": [
+        {
+          "log_index": 488,
+          "adapter": "weth",
+          "emitter": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+              "is_native": false,
+              "symbol": "WETH",
+              "decimals": 18,
+              "amount_raw": "30898081951374307",
+              "amount": "0.030898081951374307"
+            }
+          ],
+          "outputs": [
+            {
+              "address": null,
+              "is_native": true,
+              "symbol": "ETH",
+              "decimals": 18,
+              "amount_raw": "30898081951374307",
+              "amount": "0.030898081951374307"
+            }
+          ]
+        },
+        {
+          "log_index": 506,
+          "adapter": "weth",
+          "emitter": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+              "is_native": false,
+              "symbol": "WETH",
+              "decimals": 18,
+              "amount_raw": "99229402078420",
+              "amount": "0.00009922940207842"
+            }
+          ],
+          "outputs": [
+            {
+              "address": null,
+              "is_native": true,
+              "symbol": "ETH",
+              "decimals": 18,
+              "amount_raw": "99229402078420",
+              "amount": "0.00009922940207842"
+            }
+          ]
+        }
+      ],
+      "settlements": [],
+      "route_summaries": [],
+      "non_swap_events": []
+    }
+  },
+  {
+    "file": "base_0xc94bdbc207aafad0bde3c974a268a232169de5a3db28be0a7b1a1c06120b4e8c.json",
+    "sha256": "a87451e6b4e0e05587f29ddffb9a5dc21c557d2ba7041ce79be1222901c2945a",
+    "expected": {
+      "swaps": [
+        {
+          "log_index": 678,
+          "adapter": "v3",
+          "emitter": "0x37e1490f7f6f98d263f826e1244c7e7f128632f2",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0x5b2193fdc451c1f847be09ca9d13a4bf60f8c86b",
+              "is_native": false,
+              "symbol": "UP",
+              "decimals": 18,
+              "amount_raw": "2601878400000000000000",
+              "amount": "2601.8784"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0xcbb7c0000ab88b473b1f5afd9ef808440eed33bf",
+              "is_native": false,
+              "symbol": "cbBTC",
+              "decimals": 8,
+              "amount_raw": "266593",
+              "amount": "0.00266593"
+            }
+          ]
+        },
+        {
+          "log_index": 685,
+          "adapter": "elfomofi",
+          "emitter": "0xf0f0f0f0fb0d738452efd03a28e8be14c76d5f73",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0xcbb7c0000ab88b473b1f5afd9ef808440eed33bf",
+              "is_native": false,
+              "symbol": "cbBTC",
+              "decimals": 8,
+              "amount_raw": "266593",
+              "amount": "0.00266593"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+              "is_native": false,
+              "symbol": "USDC",
+              "decimals": 6,
+              "amount_raw": "223934441",
+              "amount": "223.934441"
+            }
+          ]
+        }
+      ],
+      "conversions": [],
+      "settlements": [],
+      "route_summaries": [],
+      "non_swap_events": []
+    }
+  },
+  {
+    "file": "base_0x804d451efeda1d0307b4ac9e4f655475624c7e30fa5327a555f4b72c3852ea3a.json",
+    "sha256": "71c7dda97db560addf9ea96de33b153d726d6b7353bccec035c1ac9d37b5b82f",
+    "expected": {
+      "swaps": [
+        {
+          "log_index": 1060,
+          "adapter": "pancake_v3",
+          "emitter": "0xf0c559af52bce48b3f3710604a59b4feaefd5555",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0x60a3e35cc302bfa44cb288bc5a4f316fdb1adb42",
+              "is_native": false,
+              "symbol": "EURC",
+              "decimals": 6,
+              "amount_raw": "349056409",
+              "amount": "349.056409"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0xfde4c96c8593536e31f229ea8f37b2ada2699bb2",
+              "is_native": false,
+              "symbol": "USDT",
+              "decimals": 6,
+              "amount_raw": "396052909",
+              "amount": "396.052909"
+            }
+          ]
+        },
+        {
+          "log_index": 1064,
+          "adapter": "algebra_integral",
+          "emitter": "0xc07fcce40b3afd2f795a5cb451a3f80737539983",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0x60a3e35cc302bfa44cb288bc5a4f316fdb1adb42",
+              "is_native": false,
+              "symbol": "EURC",
+              "decimals": 6,
+              "amount_raw": "90046719",
+              "amount": "90.046719"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+              "is_native": false,
+              "symbol": "USDC",
+              "decimals": 6,
+              "amount_raw": "102093262",
+              "amount": "102.093262"
+            }
+          ]
+        },
+        {
+          "log_index": 1081,
+          "adapter": "dfx",
+          "emitter": "0x2a645d27efe5c8f5afc63856d2509ea20f81a0b2",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0x60a3e35cc302bfa44cb288bc5a4f316fdb1adb42",
+              "is_native": false,
+              "symbol": "EURC",
+              "decimals": 6,
+              "amount_raw": "279674774",
+              "amount": "279.674774"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+              "is_native": false,
+              "symbol": "USDC",
+              "decimals": 6,
+              "amount_raw": "317086619",
+              "amount": "317.086619"
+            }
+          ]
+        },
+        {
+          "log_index": 1086,
+          "adapter": "v3",
+          "emitter": "0x7279c08a36333e12c3fc81747963264c100d66fb",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0x60a3e35cc302bfa44cb288bc5a4f316fdb1adb42",
+              "is_native": false,
+              "symbol": "EURC",
+              "decimals": 6,
+              "amount_raw": "62843505",
+              "amount": "62.843505"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+              "is_native": false,
+              "symbol": "USDC",
+              "decimals": 6,
+              "amount_raw": "71248618",
+              "amount": "71.248618"
+            }
+          ]
+        },
+        {
+          "log_index": 1090,
+          "adapter": "v3",
+          "emitter": "0xc5e51044eb7318950b1afb044fccfb25782c48c1",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0x60a3e35cc302bfa44cb288bc5a4f316fdb1adb42",
+              "is_native": false,
+              "symbol": "EURC",
+              "decimals": 6,
+              "amount_raw": "218378593",
+              "amount": "218.378593"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+              "is_native": false,
+              "symbol": "USDC",
+              "decimals": 6,
+              "amount_raw": "247582898",
+              "amount": "247.582898"
+            }
+          ]
+        },
+        {
+          "log_index": 1094,
+          "adapter": "v3",
+          "emitter": "0xa41bc0affba7fd420d186b84899d7ab2ac57fcd1",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0xfde4c96c8593536e31f229ea8f37b2ada2699bb2",
+              "is_native": false,
+              "symbol": "USDT",
+              "decimals": 6,
+              "amount_raw": "396052909",
+              "amount": "396.052909"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+              "is_native": false,
+              "symbol": "USDC",
+              "decimals": 6,
+              "amount_raw": "395746217",
+              "amount": "395.746217"
+            }
+          ]
+        }
+      ],
+      "conversions": [],
+      "settlements": [],
+      "route_summaries": [
+        {
+          "log_index": 1097,
+          "adapter": "kyber_summary",
+          "emitter": "0x6131b5fae19ea4f9d964eac0408e4408b66337b5",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0x60a3e35cc302bfa44cb288bc5a4f316fdb1adb42",
+              "is_native": false,
+              "symbol": "EURC",
+              "decimals": 6,
+              "amount_raw": "1000000000",
+              "amount": "1000"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+              "is_native": false,
+              "symbol": "USDC",
+              "decimals": 6,
+              "amount_raw": "1133757614",
+              "amount": "1133.757614"
+            }
+          ]
+        }
+      ],
+      "non_swap_events": []
+    }
+  },
+  {
+    "file": "ethereum_0x414cef64aac253782d1eb52cc80dc4aa6b47af81d90ab5ade3a632f7b717c76e.json",
+    "sha256": "bb99f5922cbd8ec482ad612174ebaaf3c36584577e140410b3b56aadd8023508",
+    "expected": {
+      "swaps": [
+        {
+          "log_index": 250,
+          "adapter": "ekubo_v1",
+          "emitter": "0xe0e0e08a6a4b9dc7bd67bcb7aade5cf48157d444",
+          "pool_id": "0xca5b3ef9770bb95940bd4e0bff5ead70a5973d904a8b370b52147820e61a2ff6",
+          "inputs": [
+            {
+              "address": "0xdac17f958d2ee523a2206206994597c13d831ec7",
+              "is_native": false,
+              "symbol": "USDT",
+              "decimals": 6,
+              "amount_raw": "12665805",
+              "amount": "12.665805"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+              "is_native": false,
+              "symbol": "USDC",
+              "decimals": 6,
+              "amount_raw": "12657740",
+              "amount": "12.65774"
+            }
+          ]
+        },
+        {
+          "log_index": 253,
+          "adapter": "v4",
+          "emitter": "0x000000000004444c5dc75cb358380d2e3de08a90",
+          "pool_id": "0x7f0838a546d074d40acfdf390de4026748bf2a58cd3d4cfbd61d9aabb9cbcebe",
+          "inputs": [
+            {
+              "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+              "is_native": false,
+              "symbol": "USDC",
+              "decimals": 6,
+              "amount_raw": "12657740",
+              "amount": "12.65774"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0x75e2fc69ff2ac12af65ba7d321bbf4f878c535d2",
+              "is_native": false,
+              "symbol": "STOCKER",
+              "decimals": 18,
+              "amount_raw": "2436780148950454956037",
+              "amount": "2436.780148950454956037"
+            }
+          ]
+        },
+        {
+          "log_index": 258,
+          "adapter": "dodo_v2",
+          "emitter": "0x7e3e3b94367b7302e6d302d1e770d1c385eb5462",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0xdac17f958d2ee523a2206206994597c13d831ec7",
+              "is_native": false,
+              "symbol": "USDT",
+              "decimals": 6,
+              "amount_raw": "18998708",
+              "amount": "18.998708"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0x75e2fc69ff2ac12af65ba7d321bbf4f878c535d2",
+              "is_native": false,
+              "symbol": "STOCKER",
+              "decimals": 18,
+              "amount_raw": "3655751933808503718872",
+              "amount": "3655.751933808503718872"
+            }
+          ]
+        }
+      ],
+      "conversions": [],
+      "settlements": [],
+      "route_summaries": [],
+      "non_swap_events": []
+    }
+  },
+  {
+    "file": "ethereum_0x3f25736b68efeeb6978f700e117a6d21aec5b057c8507cdb82c1be53c2ebf576.json",
+    "sha256": "547c1e9b894186073c2cb572658b22f5c7175aba584d32f22de9e31c18f29b6b",
+    "expected": {
+      "swaps": [
+        {
+          "log_index": 47,
+          "adapter": "dodo_v2",
+          "emitter": "0xba3167eda5c15ad117b860a20c020c20595dc340",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0xdac17f958d2ee523a2206206994597c13d831ec7",
+              "is_native": false,
+              "symbol": "USDT",
+              "decimals": 6,
+              "amount_raw": "6458539",
+              "amount": "6.458539"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0x1223334444a7466fbf985b14e1f4edaf3883bca6",
+              "is_native": false,
+              "symbol": "GROW",
+              "decimals": 18,
+              "amount_raw": "46650212121239306752985",
+              "amount": "46650.212121239306752985"
+            }
+          ]
+        },
+        {
+          "log_index": 48,
+          "adapter": "v4",
+          "emitter": "0x000000000004444c5dc75cb358380d2e3de08a90",
+          "pool_id": "0x37c0792f3bd853a4b3f84e7d736d54d84c9c9ca9cabd2ceb9fe61a9460af5279",
+          "inputs": [
+            {
+              "address": "0x1223334444a7466fbf985b14e1f4edaf3883bca6",
+              "is_native": false,
+              "symbol": "GROW",
+              "decimals": 18,
+              "amount_raw": "46650212121239306752985",
+              "amount": "46650.212121239306752985"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+              "is_native": false,
+              "symbol": "USDC",
+              "decimals": 6,
+              "amount_raw": "6528196",
+              "amount": "6.528196"
+            }
+          ]
+        },
+        {
+          "log_index": 52,
+          "adapter": "v1",
+          "emitter": "0x97dec872013f6b5fb443861090ad931542878126",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+              "is_native": false,
+              "symbol": "USDC",
+              "decimals": 6,
+              "amount_raw": "6528196",
+              "amount": "6.528196"
+            }
+          ],
+          "outputs": [
+            {
+              "address": null,
+              "is_native": true,
+              "symbol": "ETH",
+              "decimals": 18,
+              "amount_raw": "2427978852635749",
+              "amount": "0.002427978852635749"
+            }
+          ]
+        },
+        {
+          "log_index": 55,
+          "adapter": "v3",
+          "emitter": "0xc7bbec68d12a0d1830360f8ec58fa599ba1b0e9b",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+              "is_native": false,
+              "symbol": "WETH",
+              "decimals": 18,
+              "amount_raw": "2399607476685810",
+              "amount": "0.00239960747668581"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0xdac17f958d2ee523a2206206994597c13d831ec7",
+              "is_native": false,
+              "symbol": "USDT",
+              "decimals": 6,
+              "amount_raw": "6458539",
+              "amount": "6.458539"
+            }
+          ]
+        }
+      ],
+      "conversions": [
+        {
+          "log_index": 53,
+          "adapter": "weth",
+          "emitter": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": null,
+              "is_native": true,
+              "symbol": "ETH",
+              "decimals": 18,
+              "amount_raw": "2427978852635749",
+              "amount": "0.002427978852635749"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+              "is_native": false,
+              "symbol": "WETH",
+              "decimals": 18,
+              "amount_raw": "2427978852635749",
+              "amount": "0.002427978852635749"
+            }
+          ]
+        }
+      ],
+      "settlements": [],
+      "route_summaries": [],
+      "non_swap_events": []
+    }
+  }
+]

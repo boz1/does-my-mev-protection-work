@@ -1,0 +1,494 @@
+{
+  "chain": "base",
+  "date": "2023-08-13",
+  "timestamp_utc": "2023-08-13T17:35:01Z",
+  "date_basis": "earliest front block/slot; first supplied front if a front location is unavailable; UTC",
+  "date_range_utc": {
+    "start": "2023-08-13",
+    "end": "2023-08-13"
+  },
+  "classification": "tight",
+  "classification_label": "within-block tight",
+  "block_relation": "within_block",
+  "is_tight": true,
+  "strict_role_order": true,
+  "victims_enclosed": true,
+  "span": {
+    "front_tx_hash": "0x1aa3ed565721a3629edac9e47d00f983411e031645b2ba484111258a8335b10f",
+    "back_tx_hash": "0xd1375f77619c261bbde3968779f87092f2a77fd7ddcb8edc6ede2a5745218b40",
+    "transaction_index_distance": 2,
+    "transactions_between": 1,
+    "transactions_inclusive": 3,
+    "unlisted_transactions_between": 0,
+    "count_scope": "all block transactions, including votes/system transactions; cross-block counts not inferred"
+  },
+  "execution_order": [
+    {
+      "role": "front",
+      "tx_hash": "0x1aa3ed565721a3629edac9e47d00f983411e031645b2ba484111258a8335b10f",
+      "block_number": 2579377,
+      "transaction_index": 27
+    },
+    {
+      "role": "victim",
+      "tx_hash": "0xeaec7b56577e074cb2893c0e57fce3d8117648ba3074b337960b1897a49de7bb",
+      "block_number": 2579377,
+      "transaction_index": 28
+    },
+    {
+      "role": "back",
+      "tx_hash": "0xd1375f77619c261bbde3968779f87092f2a77fd7ddcb8edc6ede2a5745218b40",
+      "block_number": 2579377,
+      "transaction_index": 29
+    }
+  ],
+  "blocks": [
+    {
+      "number": 2579377,
+      "number_kind": "block_number",
+      "block_height": 2579377,
+      "hash": "0x7c0079bfe1de1eac1c9253d8da94a40c0ac1994357e8f71d2768afadfc8d6e68",
+      "timestamp_utc": "2023-08-13T17:35:01Z",
+      "transaction_count": 38
+    }
+  ],
+  "bot_candidates": [],
+  "bot_candidate_basis": "shared front/back transaction sender",
+  "private_submission": null,
+  "front_txs": [
+    {
+      "role": "front",
+      "input_index": 0,
+      "tx_hash": "0x1aa3ed565721a3629edac9e47d00f983411e031645b2ba484111258a8335b10f",
+      "block_number": 2579377,
+      "slot": null,
+      "block_height": 2579377,
+      "block_hash": "0x7c0079bfe1de1eac1c9253d8da94a40c0ac1994357e8f71d2768afadfc8d6e68",
+      "transaction_index": 27,
+      "transaction_index_source": "receipt",
+      "timestamp_utc": "2023-08-13T17:35:01Z",
+      "date": "2023-08-13",
+      "sender": "0xd1eae74a9bf4daf3cedf253d38731310f9be7b30",
+      "sender_kind": "transaction_sender",
+      "success": true,
+      "swaps": [
+        {
+          "log_index": 38,
+          "event": "Swap(address,uint256,uint256,uint256,uint256,address)",
+          "adapter": "v2",
+          "venue_type": "amm",
+          "emitter": "0xd79ef386f26e40b5e60e4aeb324f2678f6ebbf49",
+          "pool": "0xd79ef386f26e40b5e60e4aeb324f2678f6ebbf49",
+          "pool_id": null,
+          "protocol": "Alien",
+          "protocol_verified": true,
+          "verification": "registered_factory_membership",
+          "factory": "0x3e84d913803b02a4a7f027165e8ca42c14c0fde7",
+          "sender": "0x000000224f8364bb91259b24435881efc3752b3e",
+          "recipient": "0x000000224f8364bb91259b24435881efc3752b3e",
+          "inputs": [
+            {
+              "address": "0x4200000000000000000000000000000000000006",
+              "is_native": false,
+              "symbol": "WETH",
+              "decimals": 18,
+              "amount_raw": "110000000000000000",
+              "amount": "0.11"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0x1dd2d631c92b1acdfcdd51a0f7145a50130050c4",
+              "is_native": false,
+              "symbol": "ALB",
+              "decimals": 18,
+              "amount_raw": "2182498073237922577425",
+              "amount": "2182.498073237922577425"
+            }
+          ],
+          "input": {
+            "address": "0x4200000000000000000000000000000000000006",
+            "is_native": false,
+            "symbol": "WETH",
+            "decimals": 18,
+            "amount_raw": "110000000000000000",
+            "amount": "0.11"
+          },
+          "output": {
+            "address": "0x1dd2d631c92b1acdfcdd51a0f7145a50130050c4",
+            "is_native": false,
+            "symbol": "ALB",
+            "decimals": 18,
+            "amount_raw": "2182498073237922577425",
+            "amount": "2182.498073237922577425"
+          },
+          "amount_scope": "executed_event; may differ from net wallet receipts for taxed tokens",
+          "evidence": {
+            "source": "receipt_log",
+            "topic0": "0xd78ad95fa46c994b6551d0da85fc275fe613ce37657fb8d5e3d130840159d822",
+            "fields": {
+              "amount0In": "0",
+              "amount1In": "110000000000000000",
+              "amount0Out": "2182498073237922577425",
+              "amount1Out": "0",
+              "sender": "0x000000224f8364bb91259b24435881efc3752b3e",
+              "to": "0x000000224f8364bb91259b24435881efc3752b3e"
+            }
+          }
+        }
+      ],
+      "decoding": {
+        "chain": "base",
+        "chain_id": 8453,
+        "tx_hash": "0x1aa3ed565721a3629edac9e47d00f983411e031645b2ba484111258a8335b10f",
+        "block_number": 2579377,
+        "block_hash": "0x7c0079bfe1de1eac1c9253d8da94a40c0ac1994357e8f71d2768afadfc8d6e68",
+        "transaction_index": 27,
+        "transaction_sender": "0xd1eae74a9bf4daf3cedf253d38731310f9be7b30",
+        "transaction_to": "0x000000224f8364bb91259b24435881efc3752b3e",
+        "status": "success",
+        "conversions": [],
+        "settlements": [],
+        "route_summaries": [],
+        "non_swap_events": [],
+        "undecoded_events": [],
+        "unclassified_logs": [
+          {
+            "log_index": 37,
+            "emitter": "0xd79ef386f26e40b5e60e4aeb324f2678f6ebbf49",
+            "topics": [
+              "0x1c411e9a96e071241c2f21f7726b17ae89e3cab4c78be50e062b03a9fffbbad1"
+            ],
+            "data": "0x000000000000000000000000000000000000000000015df6b6663d5e8fde1c9700000000000000000000000000000000000000000000000483a25fa4686cd46b"
+          }
+        ],
+        "warnings": [],
+        "coverage": {
+          "all_swaps_guaranteed": false,
+          "decoded_swap_events": 1,
+          "undecoded_recognized_events": 0,
+          "unclassified_log_count": 1,
+          "scope": "implemented executed event schemas; unknown/eventless contracts may require additional adapters"
+        }
+      },
+      "error": null,
+      "warnings": []
+    }
+  ],
+  "victim_txs": [
+    {
+      "role": "victim",
+      "input_index": 0,
+      "tx_hash": "0xeaec7b56577e074cb2893c0e57fce3d8117648ba3074b337960b1897a49de7bb",
+      "block_number": 2579377,
+      "slot": null,
+      "block_height": 2579377,
+      "block_hash": "0x7c0079bfe1de1eac1c9253d8da94a40c0ac1994357e8f71d2768afadfc8d6e68",
+      "transaction_index": 28,
+      "transaction_index_source": "receipt",
+      "timestamp_utc": "2023-08-13T17:35:01Z",
+      "date": "2023-08-13",
+      "sender": "0x21bc709ad5310a86d46554da9bfcff9ebb1afba1",
+      "sender_kind": "transaction_sender",
+      "success": true,
+      "swaps": [
+        {
+          "log_index": 43,
+          "event": "Swap(address,uint256,uint256,uint256,uint256,address)",
+          "adapter": "v2",
+          "venue_type": "amm",
+          "emitter": "0xd79ef386f26e40b5e60e4aeb324f2678f6ebbf49",
+          "pool": "0xd79ef386f26e40b5e60e4aeb324f2678f6ebbf49",
+          "pool_id": null,
+          "protocol": "Alien",
+          "protocol_verified": true,
+          "verification": "registered_factory_membership",
+          "factory": "0x3e84d913803b02a4a7f027165e8ca42c14c0fde7",
+          "sender": "0x7f2ff89d3c45010c976ea6bb7715dc7098af786e",
+          "recipient": "0x21bc709ad5310a86d46554da9bfcff9ebb1afba1",
+          "inputs": [
+            {
+              "address": "0x4200000000000000000000000000000000000006",
+              "is_native": false,
+              "symbol": "WETH",
+              "decimals": 18,
+              "amount_raw": "300000000000000000",
+              "amount": "0.3"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0x1dd2d631c92b1acdfcdd51a0f7145a50130050c4",
+              "is_native": false,
+              "symbol": "ALB",
+              "decimals": 18,
+              "amount_raw": "5914824144488433957833",
+              "amount": "5914.824144488433957833"
+            }
+          ],
+          "input": {
+            "address": "0x4200000000000000000000000000000000000006",
+            "is_native": false,
+            "symbol": "WETH",
+            "decimals": 18,
+            "amount_raw": "300000000000000000",
+            "amount": "0.3"
+          },
+          "output": {
+            "address": "0x1dd2d631c92b1acdfcdd51a0f7145a50130050c4",
+            "is_native": false,
+            "symbol": "ALB",
+            "decimals": 18,
+            "amount_raw": "5914824144488433957833",
+            "amount": "5914.824144488433957833"
+          },
+          "amount_scope": "executed_event; may differ from net wallet receipts for taxed tokens",
+          "evidence": {
+            "source": "receipt_log",
+            "topic0": "0xd78ad95fa46c994b6551d0da85fc275fe613ce37657fb8d5e3d130840159d822",
+            "fields": {
+              "amount0In": "0",
+              "amount1In": "300000000000000000",
+              "amount0Out": "5914824144488433957833",
+              "amount1Out": "0",
+              "sender": "0x7f2ff89d3c45010c976ea6bb7715dc7098af786e",
+              "to": "0x21bc709ad5310a86d46554da9bfcff9ebb1afba1"
+            }
+          }
+        }
+      ],
+      "decoding": {
+        "chain": "base",
+        "chain_id": 8453,
+        "tx_hash": "0xeaec7b56577e074cb2893c0e57fce3d8117648ba3074b337960b1897a49de7bb",
+        "block_number": 2579377,
+        "block_hash": "0x7c0079bfe1de1eac1c9253d8da94a40c0ac1994357e8f71d2768afadfc8d6e68",
+        "transaction_index": 28,
+        "transaction_sender": "0x21bc709ad5310a86d46554da9bfcff9ebb1afba1",
+        "transaction_to": "0x7f2ff89d3c45010c976ea6bb7715dc7098af786e",
+        "status": "success",
+        "conversions": [
+          {
+            "log_index": 39,
+            "event": "Deposit(address,uint256)",
+            "adapter": "weth",
+            "venue_type": "wrap",
+            "emitter": "0x4200000000000000000000000000000000000006",
+            "pool": "0x4200000000000000000000000000000000000006",
+            "pool_id": null,
+            "protocol": "WETH",
+            "protocol_verified": true,
+            "verification": "registered_emitter",
+            "factory": null,
+            "sender": "0x7f2ff89d3c45010c976ea6bb7715dc7098af786e",
+            "recipient": null,
+            "inputs": [
+              {
+                "address": null,
+                "is_native": true,
+                "symbol": "ETH",
+                "decimals": 18,
+                "amount_raw": "300000000000000000",
+                "amount": "0.3"
+              }
+            ],
+            "outputs": [
+              {
+                "address": "0x4200000000000000000000000000000000000006",
+                "is_native": false,
+                "symbol": "WETH",
+                "decimals": 18,
+                "amount_raw": "300000000000000000",
+                "amount": "0.3"
+              }
+            ],
+            "input": {
+              "address": null,
+              "is_native": true,
+              "symbol": "ETH",
+              "decimals": 18,
+              "amount_raw": "300000000000000000",
+              "amount": "0.3"
+            },
+            "output": {
+              "address": "0x4200000000000000000000000000000000000006",
+              "is_native": false,
+              "symbol": "WETH",
+              "decimals": 18,
+              "amount_raw": "300000000000000000",
+              "amount": "0.3"
+            },
+            "amount_scope": "executed_event; may differ from net wallet receipts for taxed tokens",
+            "evidence": {
+              "source": "receipt_log",
+              "topic0": "0xe1fffcc4923d04b559f4d29a8bfc6cda04eb5b0d3c460751c2402c5c5cc9109c",
+              "fields": {
+                "wad": "300000000000000000",
+                "dst": "0x7f2ff89d3c45010c976ea6bb7715dc7098af786e"
+              }
+            }
+          }
+        ],
+        "settlements": [],
+        "route_summaries": [],
+        "non_swap_events": [],
+        "undecoded_events": [],
+        "unclassified_logs": [
+          {
+            "log_index": 42,
+            "emitter": "0xd79ef386f26e40b5e60e4aeb324f2678f6ebbf49",
+            "topics": [
+              "0x1c411e9a96e071241c2f21f7726b17ae89e3cab4c78be50e062b03a9fffbbad1"
+            ],
+            "data": "0x000000000000000000000000000000000000000000015cb611b99809df0260ce00000000000000000000000000000000000000000000000487cc300d810ad46b"
+          }
+        ],
+        "warnings": [],
+        "coverage": {
+          "all_swaps_guaranteed": false,
+          "decoded_swap_events": 1,
+          "undecoded_recognized_events": 0,
+          "unclassified_log_count": 1,
+          "scope": "implemented executed event schemas; unknown/eventless contracts may require additional adapters"
+        }
+      },
+      "error": null,
+      "warnings": []
+    }
+  ],
+  "back_txs": [
+    {
+      "role": "back",
+      "input_index": 0,
+      "tx_hash": "0xd1375f77619c261bbde3968779f87092f2a77fd7ddcb8edc6ede2a5745218b40",
+      "block_number": 2579377,
+      "slot": null,
+      "block_height": 2579377,
+      "block_hash": "0x7c0079bfe1de1eac1c9253d8da94a40c0ac1994357e8f71d2768afadfc8d6e68",
+      "transaction_index": 29,
+      "transaction_index_source": "receipt",
+      "timestamp_utc": "2023-08-13T17:35:01Z",
+      "date": "2023-08-13",
+      "sender": "0x1e0f6edfdbbf197d7a89a5518e1a2bd3af75afa4",
+      "sender_kind": "transaction_sender",
+      "success": true,
+      "swaps": [
+        {
+          "log_index": 47,
+          "event": "Swap(address,uint256,uint256,uint256,uint256,address)",
+          "adapter": "v2",
+          "venue_type": "amm",
+          "emitter": "0xd79ef386f26e40b5e60e4aeb324f2678f6ebbf49",
+          "pool": "0xd79ef386f26e40b5e60e4aeb324f2678f6ebbf49",
+          "pool_id": null,
+          "protocol": "Alien",
+          "protocol_verified": true,
+          "verification": "registered_factory_membership",
+          "factory": "0x3e84d913803b02a4a7f027165e8ca42c14c0fde7",
+          "sender": "0x000000224f8364bb91259b24435881efc3752b3e",
+          "recipient": "0x000000224f8364bb91259b24435881efc3752b3e",
+          "inputs": [
+            {
+              "address": "0x1dd2d631c92b1acdfcdd51a0f7145a50130050c4",
+              "is_native": false,
+              "symbol": "ALB",
+              "decimals": 18,
+              "amount_raw": "2182498073237922577424",
+              "amount": "2182.498073237922577424"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0x4200000000000000000000000000000000000006",
+              "is_native": false,
+              "symbol": "WETH",
+              "decimals": 18,
+              "amount_raw": "110438506494140449",
+              "amount": "0.110438506494140449"
+            }
+          ],
+          "input": {
+            "address": "0x1dd2d631c92b1acdfcdd51a0f7145a50130050c4",
+            "is_native": false,
+            "symbol": "ALB",
+            "decimals": 18,
+            "amount_raw": "2182498073237922577424",
+            "amount": "2182.498073237922577424"
+          },
+          "output": {
+            "address": "0x4200000000000000000000000000000000000006",
+            "is_native": false,
+            "symbol": "WETH",
+            "decimals": 18,
+            "amount_raw": "110438506494140449",
+            "amount": "0.110438506494140449"
+          },
+          "amount_scope": "executed_event; may differ from net wallet receipts for taxed tokens",
+          "evidence": {
+            "source": "receipt_log",
+            "topic0": "0xd78ad95fa46c994b6551d0da85fc275fe613ce37657fb8d5e3d130840159d822",
+            "fields": {
+              "amount0In": "2182498073237922577424",
+              "amount1In": "0",
+              "amount0Out": "0",
+              "amount1Out": "110438506494140449",
+              "sender": "0x000000224f8364bb91259b24435881efc3752b3e",
+              "to": "0x000000224f8364bb91259b24435881efc3752b3e"
+            }
+          }
+        }
+      ],
+      "decoding": {
+        "chain": "base",
+        "chain_id": 8453,
+        "tx_hash": "0xd1375f77619c261bbde3968779f87092f2a77fd7ddcb8edc6ede2a5745218b40",
+        "block_number": 2579377,
+        "block_hash": "0x7c0079bfe1de1eac1c9253d8da94a40c0ac1994357e8f71d2768afadfc8d6e68",
+        "transaction_index": 29,
+        "transaction_sender": "0x1e0f6edfdbbf197d7a89a5518e1a2bd3af75afa4",
+        "transaction_to": "0x000000224f8364bb91259b24435881efc3752b3e",
+        "status": "success",
+        "conversions": [],
+        "settlements": [],
+        "route_summaries": [],
+        "non_swap_events": [],
+        "undecoded_events": [],
+        "unclassified_logs": [
+          {
+            "log_index": 46,
+            "emitter": "0xd79ef386f26e40b5e60e4aeb324f2678f6ebbf49",
+            "topics": [
+              "0x1c411e9a96e071241c2f21f7726b17ae89e3cab4c78be50e062b03a9fffbbad1"
+            ],
+            "data": "0x000000000000000000000000000000000000000000015d2c61f85a472fdb5cde0000000000000000000000000000000000000000000000048643d4d0f3ef344a"
+          }
+        ],
+        "warnings": [],
+        "coverage": {
+          "all_swaps_guaranteed": false,
+          "decoded_swap_events": 1,
+          "undecoded_recognized_events": 0,
+          "unclassified_log_count": 1,
+          "scope": "implemented executed event schemas; unknown/eventless contracts may require additional adapters"
+        }
+      },
+      "error": null,
+      "warnings": []
+    }
+  ],
+  "counts": {
+    "front": 1,
+    "victim": 1,
+    "back": 1,
+    "swaps": 3
+  },
+  "all_legs_succeeded": true,
+  "coverage": {
+    "all_swaps_guaranteed": false,
+    "missing_transactions": 0,
+    "missing_transaction_indices": 0,
+    "decoder_or_fetch_errors": 0,
+    "undecoded_recognized_events": 0
+  },
+  "warnings": []
+}

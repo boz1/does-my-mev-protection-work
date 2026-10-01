@@ -1,0 +1,356 @@
+{
+  "chain": "solana",
+  "date": "2023-10-10",
+  "timestamp_utc": "2023-10-10T01:50:23Z",
+  "date_basis": "earliest front block/slot; first supplied front if a front location is unavailable; UTC",
+  "date_range_utc": {
+    "start": "2023-10-10",
+    "end": "2023-10-10"
+  },
+  "classification": "tight",
+  "classification_label": "within-block tight",
+  "block_relation": "within_block",
+  "is_tight": true,
+  "strict_role_order": true,
+  "victims_enclosed": true,
+  "span": {
+    "front_tx_hash": "1GuJUnoEY6ce7X5gX6F1uDEKFdHXZA7GLq9cEaacDTSUcPya4U3yB9m1feSg7kPyK1KSNVJGWJyLnEBkRUYLEkj",
+    "back_tx_hash": "3KwhkMNuYQDeEPVSNbTWdL8Aep1kuSumpirXZDVxNQUkSBzX12G55VgRZkbraEvvgcitr6RKyjKrLntqiQDQ15FP",
+    "transaction_index_distance": 2,
+    "transactions_between": 1,
+    "transactions_inclusive": 3,
+    "unlisted_transactions_between": 0,
+    "count_scope": "all block transactions, including votes/system transactions; cross-block counts not inferred"
+  },
+  "execution_order": [
+    {
+      "role": "front",
+      "tx_hash": "1GuJUnoEY6ce7X5gX6F1uDEKFdHXZA7GLq9cEaacDTSUcPya4U3yB9m1feSg7kPyK1KSNVJGWJyLnEBkRUYLEkj",
+      "block_number": 222669934,
+      "transaction_index": 455
+    },
+    {
+      "role": "victim",
+      "tx_hash": "2ar2x3anUjw8yBz5V9fhdkQpBL5pzBPsthcF1Jktcf62NG13xmKXzWm4765aU7kN6Xf4otZqWf4ndBhuLiy9if19",
+      "block_number": 222669934,
+      "transaction_index": 456
+    },
+    {
+      "role": "back",
+      "tx_hash": "3KwhkMNuYQDeEPVSNbTWdL8Aep1kuSumpirXZDVxNQUkSBzX12G55VgRZkbraEvvgcitr6RKyjKrLntqiQDQ15FP",
+      "block_number": 222669934,
+      "transaction_index": 457
+    }
+  ],
+  "blocks": [
+    {
+      "number": 222669934,
+      "number_kind": "slot",
+      "block_height": 204802408,
+      "hash": "9kNunTPMwAoWCoDJmgqQebK4yjoRopiNJMqq1qBZE1b3",
+      "timestamp_utc": "2023-10-10T01:50:23Z",
+      "transaction_count": 1501
+    }
+  ],
+  "bot_candidates": [
+    "6RfaufkM9VjSGNe1JQaR7YBvG5BhBMiPE7oHnQ1YB8qz"
+  ],
+  "bot_candidate_basis": "shared front/back fee payer; may be a relayer",
+  "private_submission": null,
+  "front_txs": [
+    {
+      "role": "front",
+      "input_index": 0,
+      "tx_hash": "1GuJUnoEY6ce7X5gX6F1uDEKFdHXZA7GLq9cEaacDTSUcPya4U3yB9m1feSg7kPyK1KSNVJGWJyLnEBkRUYLEkj",
+      "block_number": 222669934,
+      "slot": 222669934,
+      "block_height": 204802408,
+      "block_hash": "9kNunTPMwAoWCoDJmgqQebK4yjoRopiNJMqq1qBZE1b3",
+      "transaction_index": 455,
+      "transaction_index_source": "getBlock.signatures",
+      "timestamp_utc": "2023-10-10T01:50:23Z",
+      "date": "2023-10-10",
+      "sender": "6RfaufkM9VjSGNe1JQaR7YBvG5BhBMiPE7oHnQ1YB8qz",
+      "sender_kind": "fee_payer",
+      "success": true,
+      "swaps": [
+        {
+          "swap_index": 0,
+          "program_id": "675kPX9MHTjS2zt1qfr1NYHuzeLXfQM9H24wFSUt1Mp8",
+          "dex": "Raydium AMM v4",
+          "outer_instruction_index": 4,
+          "inner_instruction_index": 0,
+          "instruction": "swap_base_out",
+          "pool": "Q8W6oLSEDiKdyWbSDPpoYUeunC6zowWzg985it5GsUi",
+          "trader": "6RfaufkM9VjSGNe1JQaR7YBvG5BhBMiPE7oHnQ1YB8qz",
+          "token_in": {
+            "mint": "So11111111111111111111111111111111111111112",
+            "symbol": "WSOL",
+            "decimals": 9
+          },
+          "token_out": {
+            "mint": "DFrJxDoLMYt6bNYeNe8Wrjzj2UPUSLZLEMMYBLuTKcTk",
+            "symbol": null,
+            "decimals": 8
+          },
+          "amount_in_raw": "158673523",
+          "amount_out_raw": "10614104017138162",
+          "amount_in": "0.158673523",
+          "amount_out": "106141040.17138162",
+          "amount_basis": "gross transfers between declared user and pool accounts, net of refunds; fees paid to other accounts excluded",
+          "input_transfer_fee_raw": "0",
+          "output_transfer_fee_raw": "0",
+          "evidence": "executed_token_transfers",
+          "transfers": [
+            {
+              "source": "7ivB37BfpWu5caWWjCTmGcLJQB4RLVzvcYUDbxLNUXtK",
+              "destination": "2G6z3bRgQhiqxso58UHikh4M52ot4mvYnXZ4GSrhMPAf",
+              "mint": "So11111111111111111111111111111111111111112",
+              "fee_raw": "0",
+              "token_program": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA",
+              "outer_instruction_index": 4,
+              "inner_instruction_index": 1,
+              "amount_raw": "158673523"
+            },
+            {
+              "source": "CyDEWfZwKPBWs3R9vd4aP91XvHamLtSHKzsP7cdTU6U5",
+              "destination": "EjaP1ZKDd53ZrkDMHMsUjUFn7AMB5ysakbLB3Jxy4spS",
+              "mint": "DFrJxDoLMYt6bNYeNe8Wrjzj2UPUSLZLEMMYBLuTKcTk",
+              "fee_raw": "0",
+              "token_program": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA",
+              "outer_instruction_index": 4,
+              "inner_instruction_index": 2,
+              "amount_raw": "10614104017138162"
+            }
+          ],
+          "hop_index": 0,
+          "stack_height": 2,
+          "parent_programs": [
+            "JUP4Fb2cqiRUcaTHdrPC8h2gNsA2ETXiPDD33WcGuJB"
+          ]
+        }
+      ],
+      "decoding": {
+        "signature": "1GuJUnoEY6ce7X5gX6F1uDEKFdHXZA7GLq9cEaacDTSUcPya4U3yB9m1feSg7kPyK1KSNVJGWJyLnEBkRUYLEkj",
+        "slot": 222669934,
+        "block_time": 1696902623,
+        "timestamp_utc": "2023-10-10T01:50:23+00:00",
+        "transaction_version": "legacy",
+        "success": true,
+        "transaction_error": null,
+        "fee_lamports": 5000,
+        "fee_payer": "6RfaufkM9VjSGNe1JQaR7YBvG5BhBMiPE7oHnQ1YB8qz",
+        "signers": [
+          "6RfaufkM9VjSGNe1JQaR7YBvG5BhBMiPE7oHnQ1YB8qz"
+        ],
+        "undecoded_swaps": [],
+        "unclassified_instructions": [],
+        "non_swap_instructions": [],
+        "warnings": []
+      },
+      "error": null,
+      "warnings": []
+    }
+  ],
+  "victim_txs": [
+    {
+      "role": "victim",
+      "input_index": 0,
+      "tx_hash": "2ar2x3anUjw8yBz5V9fhdkQpBL5pzBPsthcF1Jktcf62NG13xmKXzWm4765aU7kN6Xf4otZqWf4ndBhuLiy9if19",
+      "block_number": 222669934,
+      "slot": 222669934,
+      "block_height": 204802408,
+      "block_hash": "9kNunTPMwAoWCoDJmgqQebK4yjoRopiNJMqq1qBZE1b3",
+      "transaction_index": 456,
+      "transaction_index_source": "getBlock.signatures",
+      "timestamp_utc": "2023-10-10T01:50:23Z",
+      "date": "2023-10-10",
+      "sender": "GGADZRXtbbRuJaUhH6qztc7QgGvjRdyyorfdiMNYnGxV",
+      "sender_kind": "fee_payer",
+      "success": true,
+      "swaps": [
+        {
+          "swap_index": 0,
+          "program_id": "675kPX9MHTjS2zt1qfr1NYHuzeLXfQM9H24wFSUt1Mp8",
+          "dex": "Raydium AMM v4",
+          "outer_instruction_index": 4,
+          "inner_instruction_index": null,
+          "instruction": "swap_base_in",
+          "pool": "Q8W6oLSEDiKdyWbSDPpoYUeunC6zowWzg985it5GsUi",
+          "trader": "GGADZRXtbbRuJaUhH6qztc7QgGvjRdyyorfdiMNYnGxV",
+          "token_in": {
+            "mint": "So11111111111111111111111111111111111111112",
+            "symbol": "WSOL",
+            "decimals": 9
+          },
+          "token_out": {
+            "mint": "DFrJxDoLMYt6bNYeNe8Wrjzj2UPUSLZLEMMYBLuTKcTk",
+            "symbol": null,
+            "decimals": 8
+          },
+          "amount_in_raw": "700000000",
+          "amount_out_raw": "45785525462376151",
+          "amount_in": "0.7",
+          "amount_out": "457855254.62376151",
+          "amount_basis": "gross transfers between declared user and pool accounts, net of refunds; fees paid to other accounts excluded",
+          "input_transfer_fee_raw": "0",
+          "output_transfer_fee_raw": "0",
+          "evidence": "executed_token_transfers",
+          "transfers": [
+            {
+              "source": "3LPUgVapDmZ5vcaM77LsG2v4A87zbjsUfPh3wH5YgFoJ",
+              "destination": "2G6z3bRgQhiqxso58UHikh4M52ot4mvYnXZ4GSrhMPAf",
+              "mint": "So11111111111111111111111111111111111111112",
+              "fee_raw": "0",
+              "token_program": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA",
+              "outer_instruction_index": 4,
+              "inner_instruction_index": 0,
+              "amount_raw": "700000000"
+            },
+            {
+              "source": "CyDEWfZwKPBWs3R9vd4aP91XvHamLtSHKzsP7cdTU6U5",
+              "destination": "28VzhLehxe4kat4ZJjHHPZGhbv4JtJ8KwBY4CUpMJ9CM",
+              "mint": "DFrJxDoLMYt6bNYeNe8Wrjzj2UPUSLZLEMMYBLuTKcTk",
+              "fee_raw": "0",
+              "token_program": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA",
+              "outer_instruction_index": 4,
+              "inner_instruction_index": 1,
+              "amount_raw": "45785525462376151"
+            }
+          ],
+          "hop_index": 0,
+          "stack_height": 1,
+          "parent_programs": []
+        }
+      ],
+      "decoding": {
+        "signature": "2ar2x3anUjw8yBz5V9fhdkQpBL5pzBPsthcF1Jktcf62NG13xmKXzWm4765aU7kN6Xf4otZqWf4ndBhuLiy9if19",
+        "slot": 222669934,
+        "block_time": 1696902623,
+        "timestamp_utc": "2023-10-10T01:50:23+00:00",
+        "transaction_version": 0,
+        "success": true,
+        "transaction_error": null,
+        "fee_lamports": 11788,
+        "fee_payer": "GGADZRXtbbRuJaUhH6qztc7QgGvjRdyyorfdiMNYnGxV",
+        "signers": [
+          "GGADZRXtbbRuJaUhH6qztc7QgGvjRdyyorfdiMNYnGxV"
+        ],
+        "undecoded_swaps": [],
+        "unclassified_instructions": [],
+        "non_swap_instructions": [],
+        "warnings": []
+      },
+      "error": null,
+      "warnings": []
+    }
+  ],
+  "back_txs": [
+    {
+      "role": "back",
+      "input_index": 0,
+      "tx_hash": "3KwhkMNuYQDeEPVSNbTWdL8Aep1kuSumpirXZDVxNQUkSBzX12G55VgRZkbraEvvgcitr6RKyjKrLntqiQDQ15FP",
+      "block_number": 222669934,
+      "slot": 222669934,
+      "block_height": 204802408,
+      "block_hash": "9kNunTPMwAoWCoDJmgqQebK4yjoRopiNJMqq1qBZE1b3",
+      "transaction_index": 457,
+      "transaction_index_source": "getBlock.signatures",
+      "timestamp_utc": "2023-10-10T01:50:23Z",
+      "date": "2023-10-10",
+      "sender": "6RfaufkM9VjSGNe1JQaR7YBvG5BhBMiPE7oHnQ1YB8qz",
+      "sender_kind": "fee_payer",
+      "success": true,
+      "swaps": [
+        {
+          "swap_index": 0,
+          "program_id": "675kPX9MHTjS2zt1qfr1NYHuzeLXfQM9H24wFSUt1Mp8",
+          "dex": "Raydium AMM v4",
+          "outer_instruction_index": 0,
+          "inner_instruction_index": null,
+          "instruction": "swap_base_in",
+          "pool": "Q8W6oLSEDiKdyWbSDPpoYUeunC6zowWzg985it5GsUi",
+          "trader": "6RfaufkM9VjSGNe1JQaR7YBvG5BhBMiPE7oHnQ1YB8qz",
+          "token_in": {
+            "mint": "DFrJxDoLMYt6bNYeNe8Wrjzj2UPUSLZLEMMYBLuTKcTk",
+            "symbol": null,
+            "decimals": 8
+          },
+          "token_out": {
+            "mint": "So11111111111111111111111111111111111111112",
+            "symbol": "WSOL",
+            "decimals": 9
+          },
+          "amount_in_raw": "10614104017138162",
+          "amount_out_raw": "163749394",
+          "amount_in": "106141040.17138162",
+          "amount_out": "0.163749394",
+          "amount_basis": "gross transfers between declared user and pool accounts, net of refunds; fees paid to other accounts excluded",
+          "input_transfer_fee_raw": "0",
+          "output_transfer_fee_raw": "0",
+          "evidence": "executed_token_transfers",
+          "transfers": [
+            {
+              "source": "EjaP1ZKDd53ZrkDMHMsUjUFn7AMB5ysakbLB3Jxy4spS",
+              "destination": "CyDEWfZwKPBWs3R9vd4aP91XvHamLtSHKzsP7cdTU6U5",
+              "mint": "DFrJxDoLMYt6bNYeNe8Wrjzj2UPUSLZLEMMYBLuTKcTk",
+              "fee_raw": "0",
+              "token_program": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA",
+              "outer_instruction_index": 0,
+              "inner_instruction_index": 0,
+              "amount_raw": "10614104017138162"
+            },
+            {
+              "source": "2G6z3bRgQhiqxso58UHikh4M52ot4mvYnXZ4GSrhMPAf",
+              "destination": "7ivB37BfpWu5caWWjCTmGcLJQB4RLVzvcYUDbxLNUXtK",
+              "mint": "So11111111111111111111111111111111111111112",
+              "fee_raw": "0",
+              "token_program": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA",
+              "outer_instruction_index": 0,
+              "inner_instruction_index": 1,
+              "amount_raw": "163749394"
+            }
+          ],
+          "hop_index": 0,
+          "stack_height": 1,
+          "parent_programs": []
+        }
+      ],
+      "decoding": {
+        "signature": "3KwhkMNuYQDeEPVSNbTWdL8Aep1kuSumpirXZDVxNQUkSBzX12G55VgRZkbraEvvgcitr6RKyjKrLntqiQDQ15FP",
+        "slot": 222669934,
+        "block_time": 1696902623,
+        "timestamp_utc": "2023-10-10T01:50:23+00:00",
+        "transaction_version": "legacy",
+        "success": true,
+        "transaction_error": null,
+        "fee_lamports": 5000,
+        "fee_payer": "6RfaufkM9VjSGNe1JQaR7YBvG5BhBMiPE7oHnQ1YB8qz",
+        "signers": [
+          "6RfaufkM9VjSGNe1JQaR7YBvG5BhBMiPE7oHnQ1YB8qz"
+        ],
+        "undecoded_swaps": [],
+        "unclassified_instructions": [],
+        "non_swap_instructions": [],
+        "warnings": []
+      },
+      "error": null,
+      "warnings": []
+    }
+  ],
+  "counts": {
+    "front": 1,
+    "victim": 1,
+    "back": 1,
+    "swaps": 3
+  },
+  "all_legs_succeeded": true,
+  "coverage": {
+    "all_swaps_guaranteed": false,
+    "missing_transactions": 0,
+    "missing_transaction_indices": 0,
+    "decoder_or_fetch_errors": 0,
+    "undecoded_recognized_events": 0
+  },
+  "warnings": []
+}

@@ -1,0 +1,15 @@
+2023-11-12 · solana · cross-block · shared front/back fee payer Fb5CCjLT…JEihUU
+Slots 229,589,764, 229,589,766, 229,589,767
+
+FRONT  4haTgBbv…8WCzqw  block/slot=229589764 index=661  from Fb5CCjLT…JEihUU
+       0.95 WSOL → 14905.299657 BZ5BxLwM…HXEW9B  [Raydium AMM v4]
+VICTIM 5gKdFHUX…GYCTzf  block/slot=229589766 index=334  from AgdsbHCq…3hNBTG
+       0.03 WSOL → 467.633351 BZ5BxLwM…HXEW9B  [Raydium AMM v4]
+VICTIM 5ADuTMvw…LLEqF9  block/slot=229589766 index=394  from J4WuTaRo…whJCUM
+       0.01 WSOL → 155.778105 BZ5BxLwM…HXEW9B  [Raydium AMM v4]
+BACK   24sbvgMZ…6oBqTU  block/slot=229589767 index=390  from Fb5CCjLT…JEihUU
+       14905.299657 BZ5BxLwM…HXEW9B → 0.937916785 WSOL  [Raydium AMM v4]
+
+Cross-block transaction distance not calculated.
+
+Swap coverage is limited to the installed decoders; unknown activity is retained in JSON.

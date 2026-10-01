@@ -7,3 +7,10 @@ Data: the 30,607 private-flow sandwiches by 7 persistent bots against 39,461 pri
 > Heimbach, Solmaz, Öz, Ferreira Torres. *No Place to Hide: An Analysis on Protected Order Flow Sandwich Attacks.* arXiv:2609.28115, 2026.
 
 Static site, no build step. `idx/` maps hash prefixes to sandwich ids and `s/` holds the sandwich records, so each lookup fetches two small files. Serve over HTTP (e.g. `python -m http.server`); opening `index.html` from disk will not load the data.
+
+## Python transaction tools
+
+The [Python tools](python/README.md) decode swaps on Solana, Base and Ethereum and
+summarize sandwich rows with dates, block/transaction ordering and swaps for every
+supplied leg. RPC endpoints are supplied through environment variables or explicit
+arguments. Offline examples, fixtures and tests are included.

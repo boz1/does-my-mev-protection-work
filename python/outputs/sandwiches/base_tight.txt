@@ -1,0 +1,13 @@
+2023-08-13 · base · within-block tight
+Blocks 2,579,377
+
+FRONT  0x1aa3ed…35b10f  block/slot=2579377 index=27  from 0xd1eae7…be7b30
+       0.11 WETH → 2182.498073237922577425 ALB  [Alien]
+VICTIM 0xeaec7b…9de7bb  block/slot=2579377 index=28  from 0x21bc70…1afba1
+       0.3 WETH → 5914.824144488433957833 ALB  [Alien]
+BACK   0xd1375f…218b40  block/slot=2579377 index=29  from 0x1e0f6e…75afa4
+       2182.498073237922577424 ALB → 0.110438506494140449 WETH  [Alien]
+
+Front→back index distance: 2; 1 transactions strictly between; 0 not listed in this row.
+
+Swap coverage is limited to the installed decoders; unknown activity is retained in JSON.

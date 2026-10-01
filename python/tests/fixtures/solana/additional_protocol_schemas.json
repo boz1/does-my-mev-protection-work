@@ -1,0 +1,4120 @@
+{
+  "fUSioN9YKKSa3CUC2YUc4tPkHJ5Y6XW1yz8y6F7qWz9": {
+    "name": "DefiTuna",
+    "idl_account": "GmsDDp7nRhoG254GCxEnHKpj1gLMt59XtrpTkQKpaXGR",
+    "owner": "fUSioN9YKKSa3CUC2YUc4tPkHJ5Y6XW1yz8y6F7qWz9",
+    "file": "defituna.json",
+    "sha256": "79da258e611d5b7e27d3185643e593dd0de4e1901e4b0cbce9b8988ef6827f34",
+    "instructions": [
+      {
+        "name": "swap",
+        "discriminator": [
+          248,
+          198,
+          158,
+          145,
+          225,
+          117,
+          135,
+          200
+        ],
+        "accounts": [
+          {
+            "name": "token_program_a"
+          },
+          {
+            "name": "token_program_b"
+          },
+          {
+            "name": "memo_program"
+          },
+          {
+            "name": "token_authority",
+            "signer": true
+          },
+          {
+            "name": "fusion_pool",
+            "writable": true
+          },
+          {
+            "name": "token_mint_a"
+          },
+          {
+            "name": "token_mint_b"
+          },
+          {
+            "name": "token_owner_account_a",
+            "writable": true
+          },
+          {
+            "name": "token_owner_account_b",
+            "writable": true
+          },
+          {
+            "name": "token_vault_a",
+            "writable": true
+          },
+          {
+            "name": "token_vault_b",
+            "writable": true
+          },
+          {
+            "name": "tick_array_0",
+            "writable": true
+          },
+          {
+            "name": "tick_array_1",
+            "writable": true
+          },
+          {
+            "name": "tick_array_2",
+            "writable": true
+          }
+        ],
+        "args": [
+          {
+            "name": "amount",
+            "type": "u64"
+          },
+          {
+            "name": "other_amount_threshold",
+            "type": "u64"
+          },
+          {
+            "name": "sqrt_price_limit",
+            "type": "u128"
+          },
+          {
+            "name": "amount_specified_is_input",
+            "type": "bool"
+          },
+          {
+            "name": "a_to_b",
+            "type": "bool"
+          },
+          {
+            "name": "remaining_accounts_info",
+            "type": {
+              "option": {
+                "defined": {
+                  "name": "RemainingAccountsInfo"
+                }
+              }
+            }
+          }
+        ]
+      },
+      {
+        "name": "two_hop_swap",
+        "discriminator": [
+          195,
+          96,
+          237,
+          108,
+          68,
+          162,
+          219,
+          230
+        ],
+        "accounts": [
+          {
+            "name": "fusion_pool_one",
+            "writable": true
+          },
+          {
+            "name": "fusion_pool_two",
+            "writable": true
+          },
+          {
+            "name": "token_mint_input"
+          },
+          {
+            "name": "token_mint_intermediate"
+          },
+          {
+            "name": "token_mint_output"
+          },
+          {
+            "name": "token_program_input"
+          },
+          {
+            "name": "token_program_intermediate"
+          },
+          {
+            "name": "token_program_output"
+          },
+          {
+            "name": "token_owner_account_input",
+            "writable": true
+          },
+          {
+            "name": "token_vault_one_input",
+            "writable": true
+          },
+          {
+            "name": "token_vault_one_intermediate",
+            "writable": true
+          },
+          {
+            "name": "token_vault_two_intermediate",
+            "writable": true
+          },
+          {
+            "name": "token_vault_two_output",
+            "writable": true
+          },
+          {
+            "name": "token_owner_account_output",
+            "writable": true
+          },
+          {
+            "name": "token_authority",
+            "signer": true
+          },
+          {
+            "name": "tick_array_one_0",
+            "writable": true
+          },
+          {
+            "name": "tick_array_one_1",
+            "writable": true
+          },
+          {
+            "name": "tick_array_one_2",
+            "writable": true
+          },
+          {
+            "name": "tick_array_two_0",
+            "writable": true
+          },
+          {
+            "name": "tick_array_two_1",
+            "writable": true
+          },
+          {
+            "name": "tick_array_two_2",
+            "writable": true
+          },
+          {
+            "name": "memo_program"
+          }
+        ],
+        "args": [
+          {
+            "name": "amount",
+            "type": "u64"
+          },
+          {
+            "name": "other_amount_threshold",
+            "type": "u64"
+          },
+          {
+            "name": "amount_specified_is_input",
+            "type": "bool"
+          },
+          {
+            "name": "a_to_b_one",
+            "type": "bool"
+          },
+          {
+            "name": "a_to_b_two",
+            "type": "bool"
+          },
+          {
+            "name": "sqrt_price_limit_one",
+            "type": "u128"
+          },
+          {
+            "name": "sqrt_price_limit_two",
+            "type": "u128"
+          },
+          {
+            "name": "remaining_accounts_info",
+            "type": {
+              "option": {
+                "defined": {
+                  "name": "RemainingAccountsInfo"
+                }
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "types": [
+      {
+        "name": "AccountsType",
+        "type": {
+          "kind": "enum",
+          "variants": [
+            {
+              "name": "TransferHookA"
+            },
+            {
+              "name": "TransferHookB"
+            },
+            {
+              "name": "TransferHookInput"
+            },
+            {
+              "name": "TransferHookIntermediate"
+            },
+            {
+              "name": "TransferHookOutput"
+            },
+            {
+              "name": "SupplementalTickArrays"
+            },
+            {
+              "name": "SupplementalTickArraysOne"
+            },
+            {
+              "name": "SupplementalTickArraysTwo"
+            }
+          ]
+        }
+      },
+      {
+        "name": "RemainingAccountsInfo",
+        "type": {
+          "kind": "struct",
+          "fields": [
+            {
+              "name": "slices",
+              "type": {
+                "vec": {
+                  "defined": {
+                    "name": "RemainingAccountsSlice"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "name": "RemainingAccountsSlice",
+        "type": {
+          "kind": "struct",
+          "fields": [
+            {
+              "name": "accounts_type",
+              "type": {
+                "defined": {
+                  "name": "AccountsType"
+                }
+              }
+            },
+            {
+              "name": "length",
+              "type": "u8"
+            }
+          ]
+        }
+      }
+    ],
+    "events": []
+  },
+  "8ZoPDsvLWXthQaZz6aJJEWNFBZKk2ePuygi6LHT7F7Hh": {
+    "name": "Trench",
+    "idl_account": "5Es7QfT2JqRqiHyfy8nLz2s5D3aNkUmoXhu3WdPj7aRJ",
+    "owner": "8ZoPDsvLWXthQaZz6aJJEWNFBZKk2ePuygi6LHT7F7Hh",
+    "file": "trench.json",
+    "sha256": "71e123862528394ab8be9e91bf09b4bd69c79a18d1b4a97c8e129cbb17053a05",
+    "instructions": [
+      {
+        "name": "buy",
+        "discriminator": [
+          102,
+          6,
+          61,
+          18,
+          1,
+          218,
+          235,
+          234
+        ],
+        "accounts": [
+          {
+            "name": "buyer",
+            "writable": true,
+            "signer": true
+          },
+          {
+            "name": "config"
+          },
+          {
+            "name": "authority",
+            "signer": true
+          },
+          {
+            "name": "mint"
+          },
+          {
+            "name": "bonding_curve",
+            "writable": true
+          },
+          {
+            "name": "curve_vault",
+            "writable": true
+          },
+          {
+            "name": "buyer_token_account",
+            "writable": true
+          },
+          {
+            "name": "buyer_limit",
+            "writable": true
+          },
+          {
+            "name": "creator_vault",
+            "writable": true
+          },
+          {
+            "name": "trader_cashback_vault",
+            "writable": true
+          },
+          {
+            "name": "trader_referral",
+            "writable": true
+          },
+          {
+            "name": "protocol_fee_recipient",
+            "writable": true
+          },
+          {
+            "name": "system_program",
+            "address": "11111111111111111111111111111111"
+          },
+          {
+            "name": "token_program",
+            "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+          },
+          {
+            "name": "associated_token_program",
+            "address": "ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL"
+          },
+          {
+            "name": "event_authority"
+          },
+          {
+            "name": "program"
+          }
+        ],
+        "args": [
+          {
+            "name": "params",
+            "type": {
+              "defined": {
+                "name": "BuyParams"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "name": "buy_exact_out",
+        "discriminator": [
+          24,
+          211,
+          116,
+          40,
+          105,
+          3,
+          153,
+          56
+        ],
+        "accounts": [
+          {
+            "name": "buyer",
+            "writable": true,
+            "signer": true
+          },
+          {
+            "name": "config"
+          },
+          {
+            "name": "authority",
+            "signer": true
+          },
+          {
+            "name": "mint"
+          },
+          {
+            "name": "bonding_curve",
+            "writable": true
+          },
+          {
+            "name": "curve_vault",
+            "writable": true
+          },
+          {
+            "name": "buyer_token_account",
+            "writable": true
+          },
+          {
+            "name": "buyer_limit",
+            "writable": true
+          },
+          {
+            "name": "creator_vault",
+            "writable": true
+          },
+          {
+            "name": "trader_cashback_vault",
+            "writable": true
+          },
+          {
+            "name": "trader_referral",
+            "writable": true
+          },
+          {
+            "name": "protocol_fee_recipient",
+            "writable": true
+          },
+          {
+            "name": "system_program",
+            "address": "11111111111111111111111111111111"
+          },
+          {
+            "name": "token_program",
+            "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+          },
+          {
+            "name": "associated_token_program",
+            "address": "ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL"
+          },
+          {
+            "name": "event_authority"
+          },
+          {
+            "name": "program"
+          }
+        ],
+        "args": [
+          {
+            "name": "params",
+            "type": {
+              "defined": {
+                "name": "BuyExactOutParams"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "name": "sell",
+        "discriminator": [
+          51,
+          230,
+          133,
+          164,
+          1,
+          127,
+          131,
+          173
+        ],
+        "accounts": [
+          {
+            "name": "seller",
+            "writable": true,
+            "signer": true
+          },
+          {
+            "name": "config"
+          },
+          {
+            "name": "authority",
+            "signer": true
+          },
+          {
+            "name": "mint"
+          },
+          {
+            "name": "bonding_curve",
+            "writable": true
+          },
+          {
+            "name": "curve_vault",
+            "writable": true
+          },
+          {
+            "name": "seller_token_account",
+            "writable": true
+          },
+          {
+            "name": "buyer_limit",
+            "writable": true
+          },
+          {
+            "name": "creator_vault",
+            "writable": true
+          },
+          {
+            "name": "trader_cashback_vault",
+            "writable": true
+          },
+          {
+            "name": "trader_referral",
+            "writable": true
+          },
+          {
+            "name": "protocol_fee_recipient",
+            "writable": true
+          },
+          {
+            "name": "token_program",
+            "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+          },
+          {
+            "name": "system_program",
+            "address": "11111111111111111111111111111111"
+          },
+          {
+            "name": "event_authority"
+          },
+          {
+            "name": "program"
+          }
+        ],
+        "args": [
+          {
+            "name": "params",
+            "type": {
+              "defined": {
+                "name": "SellParams"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "types": [
+      {
+        "name": "BuyEvent",
+        "type": {
+          "kind": "struct",
+          "fields": [
+            {
+              "name": "buyer",
+              "type": "pubkey"
+            },
+            {
+              "name": "mint",
+              "type": "pubkey"
+            },
+            {
+              "name": "protocol_fee_recipient",
+              "type": "pubkey"
+            },
+            {
+              "name": "creator",
+              "type": "pubkey"
+            },
+            {
+              "name": "creator_vault",
+              "type": "pubkey"
+            },
+            {
+              "name": "trader_cashback_vault",
+              "type": "pubkey"
+            },
+            {
+              "name": "sol_in",
+              "type": "u64"
+            },
+            {
+              "name": "sol_to_curve",
+              "type": "u64"
+            },
+            {
+              "name": "sol_to_fee",
+              "type": "u64"
+            },
+            {
+              "name": "sol_to_protocol_fee",
+              "type": "u64"
+            },
+            {
+              "name": "sol_to_creator_fee",
+              "type": "u64"
+            },
+            {
+              "name": "sol_to_trader_cashback",
+              "type": "u64"
+            },
+            {
+              "name": "direct_referrer_profile",
+              "type": {
+                "option": "pubkey"
+              }
+            },
+            {
+              "name": "direct_referrer_wallet",
+              "type": {
+                "option": "pubkey"
+              }
+            },
+            {
+              "name": "sol_to_direct_referrer",
+              "type": "u64"
+            },
+            {
+              "name": "partner_indirect_profile",
+              "type": {
+                "option": "pubkey"
+              }
+            },
+            {
+              "name": "partner_indirect_wallet",
+              "type": {
+                "option": "pubkey"
+              }
+            },
+            {
+              "name": "sol_to_partner_indirect",
+              "type": "u64"
+            },
+            {
+              "name": "tokens_out",
+              "type": "u64"
+            },
+            {
+              "name": "virtual_sol_reserves",
+              "type": "u64"
+            },
+            {
+              "name": "virtual_token_reserves",
+              "type": "u64"
+            },
+            {
+              "name": "real_sol_reserves",
+              "type": "u64"
+            },
+            {
+              "name": "real_token_reserves",
+              "type": "u64"
+            },
+            {
+              "name": "timestamp",
+              "type": "i64"
+            }
+          ]
+        }
+      },
+      {
+        "name": "BuyExactOutParams",
+        "type": {
+          "kind": "struct",
+          "fields": [
+            {
+              "name": "tokens_out",
+              "type": "u64"
+            },
+            {
+              "name": "max_sol_in",
+              "type": "u64"
+            }
+          ]
+        }
+      },
+      {
+        "name": "BuyParams",
+        "type": {
+          "kind": "struct",
+          "fields": [
+            {
+              "name": "max_sol_in",
+              "type": "u64"
+            },
+            {
+              "name": "min_tokens_out",
+              "type": "u64"
+            }
+          ]
+        }
+      },
+      {
+        "name": "SellEvent",
+        "type": {
+          "kind": "struct",
+          "fields": [
+            {
+              "name": "seller",
+              "type": "pubkey"
+            },
+            {
+              "name": "mint",
+              "type": "pubkey"
+            },
+            {
+              "name": "protocol_fee_recipient",
+              "type": "pubkey"
+            },
+            {
+              "name": "creator",
+              "type": "pubkey"
+            },
+            {
+              "name": "creator_vault",
+              "type": "pubkey"
+            },
+            {
+              "name": "trader_cashback_vault",
+              "type": "pubkey"
+            },
+            {
+              "name": "tokens_in",
+              "type": "u64"
+            },
+            {
+              "name": "sol_gross",
+              "type": "u64"
+            },
+            {
+              "name": "sol_to_user",
+              "type": "u64"
+            },
+            {
+              "name": "sol_to_fee",
+              "type": "u64"
+            },
+            {
+              "name": "sol_to_protocol_fee",
+              "type": "u64"
+            },
+            {
+              "name": "sol_to_creator_fee",
+              "type": "u64"
+            },
+            {
+              "name": "sol_to_trader_cashback",
+              "type": "u64"
+            },
+            {
+              "name": "direct_referrer_profile",
+              "type": {
+                "option": "pubkey"
+              }
+            },
+            {
+              "name": "direct_referrer_wallet",
+              "type": {
+                "option": "pubkey"
+              }
+            },
+            {
+              "name": "sol_to_direct_referrer",
+              "type": "u64"
+            },
+            {
+              "name": "partner_indirect_profile",
+              "type": {
+                "option": "pubkey"
+              }
+            },
+            {
+              "name": "partner_indirect_wallet",
+              "type": {
+                "option": "pubkey"
+              }
+            },
+            {
+              "name": "sol_to_partner_indirect",
+              "type": "u64"
+            },
+            {
+              "name": "virtual_sol_reserves",
+              "type": "u64"
+            },
+            {
+              "name": "virtual_token_reserves",
+              "type": "u64"
+            },
+            {
+              "name": "real_sol_reserves",
+              "type": "u64"
+            },
+            {
+              "name": "real_token_reserves",
+              "type": "u64"
+            },
+            {
+              "name": "timestamp",
+              "type": "i64"
+            }
+          ]
+        }
+      },
+      {
+        "name": "SellParams",
+        "type": {
+          "kind": "struct",
+          "fields": [
+            {
+              "name": "tokens_in",
+              "type": "u64"
+            },
+            {
+              "name": "min_sol_out",
+              "type": "u64"
+            }
+          ]
+        }
+      }
+    ],
+    "events": [
+      {
+        "name": "BuyEvent",
+        "discriminator": [
+          103,
+          244,
+          82,
+          31,
+          44,
+          245,
+          119,
+          119
+        ]
+      },
+      {
+        "name": "SellEvent",
+        "discriminator": [
+          62,
+          47,
+          55,
+          10,
+          165,
+          3,
+          220,
+          42
+        ]
+      }
+    ]
+  },
+  "5U3EU2ubXtK84QcRjWVmYt9RaDyA8gKxdUrPFXmZyaki": {
+    "name": "Virtuals",
+    "idl_account": "8iCP6E88NaDx4SfrUeWNRU8jbr1j4fSy73VwNrzouChm",
+    "owner": "5U3EU2ubXtK84QcRjWVmYt9RaDyA8gKxdUrPFXmZyaki",
+    "file": "virtuals.json",
+    "sha256": "3bdf7b76d3c306765fa52b3d06aceb715d5530bc568d94ad99b62860b7a0b028",
+    "instructions": [
+      {
+        "name": "buy",
+        "discriminator": [
+          102,
+          6,
+          61,
+          18,
+          1,
+          218,
+          235,
+          234
+        ],
+        "accounts": [
+          {
+            "name": "user",
+            "signer": true
+          },
+          {
+            "name": "vpool",
+            "writable": true
+          },
+          {
+            "name": "token_mint"
+          },
+          {
+            "name": "user_virtuals_ata",
+            "writable": true
+          },
+          {
+            "name": "user_token_ata",
+            "writable": true
+          },
+          {
+            "name": "vpool_token_ata",
+            "writable": true
+          },
+          {
+            "name": "platform_prototype",
+            "writable": true,
+            "address": "933jV351WDG23QTcHPqLFJxyYRrEPWRTR3qoPWi3jwEL"
+          },
+          {
+            "name": "platform_prototype_virtuals_ata",
+            "writable": true
+          },
+          {
+            "name": "vpool_virtuals_ata",
+            "writable": true
+          },
+          {
+            "name": "token_program",
+            "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+          }
+        ],
+        "args": [
+          {
+            "name": "amount",
+            "type": "u64"
+          },
+          {
+            "name": "max_amount_out",
+            "type": "u64"
+          }
+        ]
+      },
+      {
+        "name": "sell",
+        "discriminator": [
+          51,
+          230,
+          133,
+          164,
+          1,
+          127,
+          131,
+          173
+        ],
+        "accounts": [
+          {
+            "name": "user",
+            "signer": true
+          },
+          {
+            "name": "vpool",
+            "writable": true
+          },
+          {
+            "name": "token_mint"
+          },
+          {
+            "name": "user_virtuals_ata",
+            "writable": true
+          },
+          {
+            "name": "user_token_ata",
+            "writable": true
+          },
+          {
+            "name": "vpool_token_ata",
+            "writable": true
+          },
+          {
+            "name": "platform_prototype",
+            "writable": true,
+            "address": "933jV351WDG23QTcHPqLFJxyYRrEPWRTR3qoPWi3jwEL"
+          },
+          {
+            "name": "platform_prototype_virtuals_ata",
+            "writable": true
+          },
+          {
+            "name": "vpool_virtuals_ata",
+            "writable": true
+          },
+          {
+            "name": "token_program",
+            "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+          }
+        ],
+        "args": [
+          {
+            "name": "amount",
+            "type": "u64"
+          },
+          {
+            "name": "min_amount_out",
+            "type": "u64"
+          }
+        ]
+      }
+    ],
+    "types": [],
+    "events": []
+  },
+  "SCALEwAvEK5gtkdHiFzXfPgtk2YwJxPDzaV3aDmR7tA": {
+    "name": "Scale Amm",
+    "idl_account": "6j8EWkCswWM9dWTPcQbCfqYHqEFi6wpXy3Dc2DBWNbhn",
+    "owner": "SCALEwAvEK5gtkdHiFzXfPgtk2YwJxPDzaV3aDmR7tA",
+    "file": "scale_amm.json",
+    "sha256": "7d44f805215b651e07a5176103c37e4fd713e96156ccfde72fbaf58bca70afff",
+    "instructions": [
+      {
+        "name": "buy",
+        "discriminator": [
+          102,
+          6,
+          61,
+          18,
+          1,
+          218,
+          235,
+          234
+        ],
+        "accounts": [
+          {
+            "name": "pool",
+            "writable": true
+          },
+          {
+            "name": "user",
+            "writable": true,
+            "signer": true
+          },
+          {
+            "name": "owner"
+          },
+          {
+            "name": "mint_a"
+          },
+          {
+            "name": "mint_b"
+          },
+          {
+            "name": "user_ta_a",
+            "writable": true
+          },
+          {
+            "name": "user_ta_b",
+            "writable": true
+          },
+          {
+            "name": "vault_a",
+            "writable": true
+          },
+          {
+            "name": "vault_b",
+            "writable": true
+          },
+          {
+            "name": "platform_fee_ta_a",
+            "writable": true
+          },
+          {
+            "name": "token_program_a"
+          },
+          {
+            "name": "token_program_b"
+          },
+          {
+            "name": "system_program",
+            "address": "11111111111111111111111111111111"
+          },
+          {
+            "name": "config"
+          }
+        ],
+        "args": [
+          {
+            "name": "params",
+            "type": {
+              "defined": {
+                "name": "SwapParams"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "name": "sell",
+        "discriminator": [
+          51,
+          230,
+          133,
+          164,
+          1,
+          127,
+          131,
+          173
+        ],
+        "accounts": [
+          {
+            "name": "pool",
+            "writable": true
+          },
+          {
+            "name": "user",
+            "writable": true,
+            "signer": true
+          },
+          {
+            "name": "owner"
+          },
+          {
+            "name": "mint_a"
+          },
+          {
+            "name": "mint_b"
+          },
+          {
+            "name": "user_ta_a",
+            "writable": true
+          },
+          {
+            "name": "user_ta_b",
+            "writable": true
+          },
+          {
+            "name": "vault_a",
+            "writable": true
+          },
+          {
+            "name": "vault_b",
+            "writable": true
+          },
+          {
+            "name": "platform_fee_ta_a",
+            "writable": true
+          },
+          {
+            "name": "token_program_a"
+          },
+          {
+            "name": "token_program_b"
+          },
+          {
+            "name": "system_program",
+            "address": "11111111111111111111111111111111"
+          },
+          {
+            "name": "config"
+          }
+        ],
+        "args": [
+          {
+            "name": "params",
+            "type": {
+              "defined": {
+                "name": "SwapParams"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "types": [
+      {
+        "name": "SwapParams",
+        "type": {
+          "kind": "struct",
+          "fields": [
+            {
+              "name": "amount",
+              "type": "u64"
+            },
+            {
+              "name": "limit",
+              "type": "u64"
+            }
+          ]
+        }
+      }
+    ],
+    "events": []
+  },
+  "WooFif76YGRNjk1pA8wCsN67aQsD9f9iLsz4NcJ1AVb": {
+    "name": "Woofi",
+    "idl_account": "4jnshyUHBJ4pWs9nYmmtq9epQHUaprEXSmWZsNX2NH7i",
+    "owner": "WooFif76YGRNjk1pA8wCsN67aQsD9f9iLsz4NcJ1AVb",
+    "file": "woofi.json",
+    "sha256": "e2be1a4e98af9a65e7c6f12a3c252be9a510da2d79dbf0e5360e13559c214925",
+    "instructions": [
+      {
+        "name": "swap",
+        "accounts": [
+          {
+            "name": "wooconfig",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "tokenProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "payer",
+            "isMut": false,
+            "isSigner": true
+          },
+          {
+            "name": "wooracleFrom",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "woopoolFrom",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "tokenOwnerAccountFrom",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "tokenVaultFrom",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "priceUpdateFrom",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "wooracleTo",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "woopoolTo",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "tokenOwnerAccountTo",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "tokenVaultTo",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "priceUpdateTo",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "woopoolQuote",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "quotePriceUpdate",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "quoteTokenVault",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "rebateTo",
+            "isMut": false,
+            "isSigner": false
+          }
+        ],
+        "args": [
+          {
+            "name": "fromAmount",
+            "type": "u128"
+          },
+          {
+            "name": "minToAmount",
+            "type": "u128"
+          }
+        ]
+      }
+    ],
+    "types": [],
+    "events": []
+  },
+  "MSwapi3WhNKMUGm9YrxGhypgUEt7wYQH3ZgG32XoWzH": {
+    "name": "M Swap",
+    "idl_account": "8QFK5ctrB8vDhK2mMeuPqBPvp2hjbsUAyAG2ENWbLn5W",
+    "owner": "MSwapi3WhNKMUGm9YrxGhypgUEt7wYQH3ZgG32XoWzH",
+    "file": "m_swap.json",
+    "sha256": "2ff58b56306841d13273fe8f638a71cbb558b13dd18e1c0ed38d06049f32abcc",
+    "instructions": [
+      {
+        "name": "swap",
+        "discriminator": [
+          248,
+          198,
+          158,
+          145,
+          225,
+          117,
+          135,
+          200
+        ],
+        "accounts": [
+          {
+            "name": "signer",
+            "signer": true
+          },
+          {
+            "name": "wrap_authority",
+            "signer": true,
+            "optional": true
+          },
+          {
+            "name": "unwrap_authority",
+            "signer": true,
+            "optional": true
+          },
+          {
+            "name": "swap_global"
+          },
+          {
+            "name": "from_global",
+            "writable": true
+          },
+          {
+            "name": "to_global",
+            "writable": true
+          },
+          {
+            "name": "from_mint",
+            "writable": true
+          },
+          {
+            "name": "to_mint",
+            "writable": true
+          },
+          {
+            "name": "m_mint"
+          },
+          {
+            "name": "from_token_account",
+            "writable": true
+          },
+          {
+            "name": "to_token_account",
+            "writable": true
+          },
+          {
+            "name": "swap_m_account",
+            "writable": true
+          },
+          {
+            "name": "from_m_vault_auth"
+          },
+          {
+            "name": "to_m_vault_auth"
+          },
+          {
+            "name": "from_mint_authority"
+          },
+          {
+            "name": "to_mint_authority"
+          },
+          {
+            "name": "from_m_vault",
+            "writable": true
+          },
+          {
+            "name": "to_m_vault",
+            "writable": true
+          },
+          {
+            "name": "from_token_program"
+          },
+          {
+            "name": "to_token_program"
+          },
+          {
+            "name": "m_token_program"
+          },
+          {
+            "name": "from_ext_program"
+          },
+          {
+            "name": "to_ext_program"
+          },
+          {
+            "name": "system_program",
+            "address": "11111111111111111111111111111111"
+          }
+        ],
+        "args": [
+          {
+            "name": "amount",
+            "type": "u64"
+          },
+          {
+            "name": "remaining_accounts_split_idx",
+            "type": "u8"
+          }
+        ]
+      }
+    ],
+    "types": [],
+    "events": []
+  },
+  "PERPHjGBqRHArX4DySjwM6UJHiR3sWAatqfdBS2qQJu": {
+    "name": "Perps",
+    "idl_account": "38GK1i4cQPAxqrbfKX4RRMNfXpKRn5PgLFHVJeXm1C8Y",
+    "owner": "PERPHjGBqRHArX4DySjwM6UJHiR3sWAatqfdBS2qQJu",
+    "file": "perps.json",
+    "sha256": "9e29411850d443e990dfae93d9c1efcec8b2b8c8c816ef5821492204874b0484",
+    "instructions": [
+      {
+        "name": "swap2",
+        "accounts": [
+          {
+            "name": "owner",
+            "isMut": false,
+            "isSigner": true
+          },
+          {
+            "name": "fundingAccount",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "receivingAccount",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "transferAuthority",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "perpetuals",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "pool",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "receivingCustody",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "receivingCustodyDovesPriceAccount",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "receivingCustodyPythnetPriceAccount",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "receivingCustodyTokenAccount",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "dispensingCustody",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "dispensingCustodyDovesPriceAccount",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "dispensingCustodyPythnetPriceAccount",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "dispensingCustodyTokenAccount",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "tokenProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "eventAuthority",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "program",
+            "isMut": false,
+            "isSigner": false
+          }
+        ],
+        "args": [
+          {
+            "name": "params",
+            "type": {
+              "defined": "Swap2Params"
+            }
+          }
+        ]
+      },
+      {
+        "name": "swapWithTokenLedger",
+        "accounts": [
+          {
+            "name": "owner",
+            "isMut": false,
+            "isSigner": true
+          },
+          {
+            "name": "fundingAccount",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "receivingAccount",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "transferAuthority",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "perpetuals",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "pool",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "receivingCustody",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "receivingCustodyDovesPriceAccount",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "receivingCustodyTokenAccount",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "dispensingCustody",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "dispensingCustodyDovesPriceAccount",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "dispensingCustodyTokenAccount",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "tokenLedger",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "tokenProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "instruction",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "eventAuthority",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "program",
+            "isMut": false,
+            "isSigner": false
+          }
+        ],
+        "args": [
+          {
+            "name": "params",
+            "type": {
+              "defined": "SwapWithTokenLedgerParams"
+            }
+          }
+        ]
+      }
+    ],
+    "types": [
+      {
+        "name": "Swap2Params",
+        "type": {
+          "kind": "struct",
+          "fields": [
+            {
+              "name": "amountIn",
+              "type": "u64"
+            },
+            {
+              "name": "minAmountOut",
+              "type": "u64"
+            }
+          ]
+        }
+      },
+      {
+        "name": "SwapWithTokenLedgerParams",
+        "type": {
+          "kind": "struct",
+          "fields": [
+            {
+              "name": "minAmountOut",
+              "type": "u64"
+            }
+          ]
+        }
+      }
+    ],
+    "events": []
+  },
+  "HYEXCHtHkBagdStcJCp3xbbb9B7sdMdWXFNj6mdsG4hn": {
+    "name": "Hylo Exchange",
+    "idl_account": "43rLJBs9dsDVinGbzjrCu1RrVuVqm1zCDUszshMzs5uY",
+    "owner": "HYEXCHtHkBagdStcJCp3xbbb9B7sdMdWXFNj6mdsG4hn",
+    "file": "hylo_exchange.json",
+    "sha256": "948fd1dc25a80b90ac3ffeb331f5438cd2f976438949ea7cd78e313d9e8cee0b",
+    "instructions": [
+      {
+        "name": "swap_exo_to_usdc",
+        "discriminator": [
+          234,
+          79,
+          247,
+          244,
+          61,
+          125,
+          18,
+          51
+        ],
+        "accounts": [
+          {
+            "name": "user",
+            "signer": true
+          },
+          {
+            "name": "hylo"
+          },
+          {
+            "name": "pool_config"
+          },
+          {
+            "name": "exo_pair",
+            "writable": true
+          },
+          {
+            "name": "usdc_pair",
+            "writable": true
+          },
+          {
+            "name": "stablecoin_mint_auth"
+          },
+          {
+            "name": "vault_auth"
+          },
+          {
+            "name": "usdc_vault_auth"
+          },
+          {
+            "name": "pool_auth"
+          },
+          {
+            "name": "settlement_auth"
+          },
+          {
+            "name": "collateral_vault",
+            "writable": true
+          },
+          {
+            "name": "usdc_collateral_vault",
+            "writable": true
+          },
+          {
+            "name": "stablecoin_pool",
+            "writable": true
+          },
+          {
+            "name": "user_collateral_ta",
+            "writable": true
+          },
+          {
+            "name": "user_usdc_ta",
+            "writable": true
+          },
+          {
+            "name": "collateral_mint"
+          },
+          {
+            "name": "usdc_mint",
+            "address": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
+          },
+          {
+            "name": "stablecoin_mint",
+            "writable": true
+          },
+          {
+            "name": "levercoin_mint"
+          },
+          {
+            "name": "collateral_usd_pyth_feed"
+          },
+          {
+            "name": "usdc_usd_pyth_feed"
+          },
+          {
+            "name": "token_program",
+            "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+          },
+          {
+            "name": "earn_pool",
+            "address": "HysTabVUfmQBFcmzu1ctRd1Y1fxd66RBpboy1bmtDSQQ"
+          },
+          {
+            "name": "event_authority"
+          },
+          {
+            "name": "program"
+          }
+        ],
+        "args": [
+          {
+            "name": "amount",
+            "type": "u64"
+          },
+          {
+            "name": "slippage_config",
+            "type": {
+              "option": {
+                "defined": {
+                  "name": "SlippageConfig"
+                }
+              }
+            }
+          }
+        ]
+      },
+      {
+        "name": "swap_exo_to_usdc_all",
+        "discriminator": [
+          107,
+          69,
+          100,
+          203,
+          188,
+          190,
+          159,
+          74
+        ],
+        "accounts": [
+          {
+            "name": "user",
+            "signer": true
+          },
+          {
+            "name": "hylo"
+          },
+          {
+            "name": "pool_config"
+          },
+          {
+            "name": "exo_pair",
+            "writable": true
+          },
+          {
+            "name": "usdc_pair",
+            "writable": true
+          },
+          {
+            "name": "stablecoin_mint_auth"
+          },
+          {
+            "name": "vault_auth"
+          },
+          {
+            "name": "usdc_vault_auth"
+          },
+          {
+            "name": "pool_auth"
+          },
+          {
+            "name": "settlement_auth"
+          },
+          {
+            "name": "collateral_vault",
+            "writable": true
+          },
+          {
+            "name": "usdc_collateral_vault",
+            "writable": true
+          },
+          {
+            "name": "stablecoin_pool",
+            "writable": true
+          },
+          {
+            "name": "user_collateral_ta",
+            "writable": true
+          },
+          {
+            "name": "user_usdc_ta",
+            "writable": true
+          },
+          {
+            "name": "collateral_mint"
+          },
+          {
+            "name": "usdc_mint",
+            "address": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
+          },
+          {
+            "name": "stablecoin_mint",
+            "writable": true
+          },
+          {
+            "name": "levercoin_mint"
+          },
+          {
+            "name": "collateral_usd_pyth_feed"
+          },
+          {
+            "name": "usdc_usd_pyth_feed"
+          },
+          {
+            "name": "token_program",
+            "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+          },
+          {
+            "name": "earn_pool",
+            "address": "HysTabVUfmQBFcmzu1ctRd1Y1fxd66RBpboy1bmtDSQQ"
+          },
+          {
+            "name": "event_authority"
+          },
+          {
+            "name": "program"
+          }
+        ],
+        "args": [
+          {
+            "name": "slippage_config",
+            "type": {
+              "option": {
+                "defined": {
+                  "name": "SlippageConfig"
+                }
+              }
+            }
+          }
+        ]
+      },
+      {
+        "name": "swap_lst_to_lst",
+        "discriminator": [
+          105,
+          39,
+          155,
+          165,
+          242,
+          2,
+          235,
+          99
+        ],
+        "accounts": [
+          {
+            "name": "user",
+            "signer": true
+          },
+          {
+            "name": "hylo",
+            "writable": true
+          },
+          {
+            "name": "lst_a_mint"
+          },
+          {
+            "name": "lst_a_user_ta",
+            "writable": true
+          },
+          {
+            "name": "lst_a_vault_auth"
+          },
+          {
+            "name": "lst_a_vault",
+            "writable": true
+          },
+          {
+            "name": "lst_a_header"
+          },
+          {
+            "name": "lst_b_mint"
+          },
+          {
+            "name": "lst_b_user_ta",
+            "writable": true
+          },
+          {
+            "name": "lst_b_vault_auth"
+          },
+          {
+            "name": "lst_b_vault",
+            "writable": true
+          },
+          {
+            "name": "lst_b_header"
+          },
+          {
+            "name": "fee_auth"
+          },
+          {
+            "name": "fee_vault",
+            "writable": true
+          },
+          {
+            "name": "token_program",
+            "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+          },
+          {
+            "name": "event_authority"
+          },
+          {
+            "name": "program"
+          }
+        ],
+        "args": [
+          {
+            "name": "amount_lst_a",
+            "type": "u64"
+          },
+          {
+            "name": "slippage_config",
+            "type": {
+              "option": {
+                "defined": {
+                  "name": "SlippageConfig"
+                }
+              }
+            }
+          }
+        ],
+        "returns": {
+          "defined": {
+            "name": "SwapLstToLstEvent"
+          }
+        }
+      },
+      {
+        "name": "swap_lst_to_usdc",
+        "discriminator": [
+          102,
+          186,
+          134,
+          205,
+          139,
+          114,
+          218,
+          70
+        ],
+        "accounts": [
+          {
+            "name": "user",
+            "signer": true
+          },
+          {
+            "name": "hylo",
+            "writable": true
+          },
+          {
+            "name": "pool_config"
+          },
+          {
+            "name": "lst_header"
+          },
+          {
+            "name": "pool_state"
+          },
+          {
+            "name": "usdc_pair",
+            "writable": true
+          },
+          {
+            "name": "stablecoin_mint_auth"
+          },
+          {
+            "name": "lst_vault_auth"
+          },
+          {
+            "name": "usdc_vault_auth"
+          },
+          {
+            "name": "pool_auth"
+          },
+          {
+            "name": "settlement_auth"
+          },
+          {
+            "name": "lst_vault",
+            "writable": true
+          },
+          {
+            "name": "usdc_vault",
+            "writable": true
+          },
+          {
+            "name": "stablecoin_pool",
+            "writable": true
+          },
+          {
+            "name": "user_lst_ta",
+            "writable": true
+          },
+          {
+            "name": "user_usdc_ta",
+            "writable": true
+          },
+          {
+            "name": "lst_mint"
+          },
+          {
+            "name": "usdc_mint",
+            "address": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
+          },
+          {
+            "name": "stablecoin_mint",
+            "writable": true
+          },
+          {
+            "name": "sol_usd_pyth_feed"
+          },
+          {
+            "name": "usdc_usd_pyth_feed"
+          },
+          {
+            "name": "token_program",
+            "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+          },
+          {
+            "name": "earn_pool",
+            "address": "HysTabVUfmQBFcmzu1ctRd1Y1fxd66RBpboy1bmtDSQQ"
+          },
+          {
+            "name": "event_authority"
+          },
+          {
+            "name": "program"
+          }
+        ],
+        "args": [
+          {
+            "name": "amount",
+            "type": "u64"
+          },
+          {
+            "name": "slippage_config",
+            "type": {
+              "option": {
+                "defined": {
+                  "name": "SlippageConfig"
+                }
+              }
+            }
+          }
+        ]
+      },
+      {
+        "name": "swap_lst_to_usdc_all",
+        "discriminator": [
+          10,
+          169,
+          147,
+          185,
+          122,
+          163,
+          185,
+          119
+        ],
+        "accounts": [
+          {
+            "name": "user",
+            "signer": true
+          },
+          {
+            "name": "hylo",
+            "writable": true
+          },
+          {
+            "name": "pool_config"
+          },
+          {
+            "name": "lst_header"
+          },
+          {
+            "name": "pool_state"
+          },
+          {
+            "name": "usdc_pair",
+            "writable": true
+          },
+          {
+            "name": "stablecoin_mint_auth"
+          },
+          {
+            "name": "lst_vault_auth"
+          },
+          {
+            "name": "usdc_vault_auth"
+          },
+          {
+            "name": "pool_auth"
+          },
+          {
+            "name": "settlement_auth"
+          },
+          {
+            "name": "lst_vault",
+            "writable": true
+          },
+          {
+            "name": "usdc_vault",
+            "writable": true
+          },
+          {
+            "name": "stablecoin_pool",
+            "writable": true
+          },
+          {
+            "name": "user_lst_ta",
+            "writable": true
+          },
+          {
+            "name": "user_usdc_ta",
+            "writable": true
+          },
+          {
+            "name": "lst_mint"
+          },
+          {
+            "name": "usdc_mint",
+            "address": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
+          },
+          {
+            "name": "stablecoin_mint",
+            "writable": true
+          },
+          {
+            "name": "sol_usd_pyth_feed"
+          },
+          {
+            "name": "usdc_usd_pyth_feed"
+          },
+          {
+            "name": "token_program",
+            "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+          },
+          {
+            "name": "earn_pool",
+            "address": "HysTabVUfmQBFcmzu1ctRd1Y1fxd66RBpboy1bmtDSQQ"
+          },
+          {
+            "name": "event_authority"
+          },
+          {
+            "name": "program"
+          }
+        ],
+        "args": [
+          {
+            "name": "slippage_config",
+            "type": {
+              "option": {
+                "defined": {
+                  "name": "SlippageConfig"
+                }
+              }
+            }
+          }
+        ]
+      },
+      {
+        "name": "swap_usdc_to_exo",
+        "discriminator": [
+          14,
+          223,
+          70,
+          192,
+          229,
+          196,
+          113,
+          166
+        ],
+        "accounts": [
+          {
+            "name": "user",
+            "signer": true
+          },
+          {
+            "name": "hylo"
+          },
+          {
+            "name": "pool_config"
+          },
+          {
+            "name": "exo_pair",
+            "writable": true
+          },
+          {
+            "name": "usdc_pair",
+            "writable": true
+          },
+          {
+            "name": "stablecoin_mint_auth"
+          },
+          {
+            "name": "vault_auth"
+          },
+          {
+            "name": "usdc_vault_auth"
+          },
+          {
+            "name": "pool_auth"
+          },
+          {
+            "name": "settlement_auth"
+          },
+          {
+            "name": "collateral_vault",
+            "writable": true
+          },
+          {
+            "name": "usdc_collateral_vault",
+            "writable": true
+          },
+          {
+            "name": "stablecoin_pool",
+            "writable": true
+          },
+          {
+            "name": "user_collateral_ta",
+            "writable": true
+          },
+          {
+            "name": "user_usdc_ta",
+            "writable": true
+          },
+          {
+            "name": "collateral_mint"
+          },
+          {
+            "name": "usdc_mint",
+            "address": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
+          },
+          {
+            "name": "stablecoin_mint",
+            "writable": true
+          },
+          {
+            "name": "levercoin_mint"
+          },
+          {
+            "name": "collateral_usd_pyth_feed"
+          },
+          {
+            "name": "usdc_usd_pyth_feed"
+          },
+          {
+            "name": "token_program",
+            "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+          },
+          {
+            "name": "earn_pool",
+            "address": "HysTabVUfmQBFcmzu1ctRd1Y1fxd66RBpboy1bmtDSQQ"
+          },
+          {
+            "name": "event_authority"
+          },
+          {
+            "name": "program"
+          }
+        ],
+        "args": [
+          {
+            "name": "amount",
+            "type": "u64"
+          },
+          {
+            "name": "slippage_config",
+            "type": {
+              "option": {
+                "defined": {
+                  "name": "SlippageConfig"
+                }
+              }
+            }
+          }
+        ]
+      },
+      {
+        "name": "swap_usdc_to_lst",
+        "discriminator": [
+          207,
+          138,
+          100,
+          190,
+          125,
+          72,
+          37,
+          64
+        ],
+        "accounts": [
+          {
+            "name": "user",
+            "signer": true
+          },
+          {
+            "name": "hylo",
+            "writable": true
+          },
+          {
+            "name": "pool_config"
+          },
+          {
+            "name": "lst_header"
+          },
+          {
+            "name": "pool_state"
+          },
+          {
+            "name": "usdc_pair",
+            "writable": true
+          },
+          {
+            "name": "stablecoin_mint_auth"
+          },
+          {
+            "name": "lst_vault_auth"
+          },
+          {
+            "name": "usdc_vault_auth"
+          },
+          {
+            "name": "pool_auth"
+          },
+          {
+            "name": "settlement_auth"
+          },
+          {
+            "name": "lst_vault",
+            "writable": true
+          },
+          {
+            "name": "usdc_vault",
+            "writable": true
+          },
+          {
+            "name": "stablecoin_pool",
+            "writable": true
+          },
+          {
+            "name": "user_lst_ta",
+            "writable": true
+          },
+          {
+            "name": "user_usdc_ta",
+            "writable": true
+          },
+          {
+            "name": "lst_mint"
+          },
+          {
+            "name": "usdc_mint",
+            "address": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
+          },
+          {
+            "name": "stablecoin_mint",
+            "writable": true
+          },
+          {
+            "name": "sol_usd_pyth_feed"
+          },
+          {
+            "name": "usdc_usd_pyth_feed"
+          },
+          {
+            "name": "token_program",
+            "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+          },
+          {
+            "name": "earn_pool",
+            "address": "HysTabVUfmQBFcmzu1ctRd1Y1fxd66RBpboy1bmtDSQQ"
+          },
+          {
+            "name": "event_authority"
+          },
+          {
+            "name": "program"
+          }
+        ],
+        "args": [
+          {
+            "name": "amount",
+            "type": "u64"
+          },
+          {
+            "name": "slippage_config",
+            "type": {
+              "option": {
+                "defined": {
+                  "name": "SlippageConfig"
+                }
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "types": [
+      {
+        "name": "SlippageConfig",
+        "docs": [
+          "Client specified slippage tolerance paired with expected token amount."
+        ],
+        "type": {
+          "kind": "struct",
+          "fields": [
+            {
+              "name": "expected_token_out",
+              "type": {
+                "defined": {
+                  "name": "UFixValue64"
+                }
+              }
+            },
+            {
+              "name": "slippage_tolerance",
+              "type": {
+                "defined": {
+                  "name": "UFixValue64"
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "name": "SwapLstToLstEvent",
+        "type": {
+          "kind": "struct",
+          "fields": [
+            {
+              "name": "lst_a_mint",
+              "type": "pubkey"
+            },
+            {
+              "name": "lst_a_in",
+              "type": {
+                "defined": {
+                  "name": "UFixValue64"
+                }
+              }
+            },
+            {
+              "name": "lst_a_fees_extracted",
+              "type": {
+                "defined": {
+                  "name": "UFixValue64"
+                }
+              }
+            },
+            {
+              "name": "lst_b_mint",
+              "type": "pubkey"
+            },
+            {
+              "name": "lst_b_out",
+              "type": {
+                "defined": {
+                  "name": "UFixValue64"
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "name": "UFixValue64",
+        "docs": [
+          "A value-space `Fix` where base is always 10 and bits are a concrete type.",
+          "Intended for serialized storage in Solana accounts where generics won't work."
+        ],
+        "type": {
+          "kind": "struct",
+          "fields": [
+            {
+              "name": "bits",
+              "type": "u64"
+            },
+            {
+              "name": "exp",
+              "type": "i8"
+            }
+          ]
+        }
+      }
+    ],
+    "events": []
+  },
+  "jupZ4m2GqUCJ5iueMfzQf8khFfH31d4XAQt3RzCT9Vd": {
+    "name": "JupLend AMM",
+    "idl_account": "84tF4Ms1Q7aUsDDW8HeuKm3BCMYhDFH6mf852PdTwYro",
+    "owner": "jupZ4m2GqUCJ5iueMfzQf8khFfH31d4XAQt3RzCT9Vd",
+    "file": "juplend_amm.json",
+    "sha256": "b5612edb625c0203030b8dfe7c73a5b29cca5e2e69aa685d7ba81c298372e6bd",
+    "instructions": [
+      {
+        "name": "swap_in",
+        "discriminator": [
+          141,
+          172,
+          10,
+          208,
+          69,
+          9,
+          56,
+          154
+        ],
+        "accounts": [
+          {
+            "name": "signer",
+            "writable": true,
+            "signer": true
+          },
+          {
+            "name": "dex",
+            "writable": true
+          },
+          {
+            "name": "user_token_0_account",
+            "writable": true
+          },
+          {
+            "name": "user_token_1_account",
+            "writable": true
+          },
+          {
+            "name": "recipient",
+            "optional": true
+          },
+          {
+            "name": "recipient_token_0_account",
+            "writable": true,
+            "optional": true
+          },
+          {
+            "name": "recipient_token_1_account",
+            "writable": true,
+            "optional": true
+          },
+          {
+            "name": "token_0"
+          },
+          {
+            "name": "token_1"
+          },
+          {
+            "name": "token_0_reserve",
+            "writable": true
+          },
+          {
+            "name": "token_1_reserve",
+            "writable": true
+          },
+          {
+            "name": "token_0_rate_model"
+          },
+          {
+            "name": "token_1_rate_model"
+          },
+          {
+            "name": "token_0_vault",
+            "writable": true
+          },
+          {
+            "name": "token_1_vault",
+            "writable": true
+          },
+          {
+            "name": "dex_supply_position_token_0",
+            "writable": true,
+            "optional": true
+          },
+          {
+            "name": "dex_supply_position_token_1",
+            "writable": true,
+            "optional": true
+          },
+          {
+            "name": "dex_borrow_position_token_0",
+            "writable": true,
+            "optional": true
+          },
+          {
+            "name": "dex_borrow_position_token_1",
+            "writable": true,
+            "optional": true
+          },
+          {
+            "name": "liquidity"
+          },
+          {
+            "name": "liquidity_program"
+          },
+          {
+            "name": "token_0_program"
+          },
+          {
+            "name": "token_1_program"
+          },
+          {
+            "name": "oracle_program"
+          },
+          {
+            "name": "associated_token_program",
+            "address": "ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL"
+          }
+        ],
+        "args": [
+          {
+            "name": "swap0to1",
+            "type": "bool"
+          },
+          {
+            "name": "amount_in",
+            "type": "u64"
+          },
+          {
+            "name": "amount_out_min",
+            "type": "u64"
+          }
+        ],
+        "returns": "u64"
+      },
+      {
+        "name": "swap_out",
+        "discriminator": [
+          206,
+          36,
+          149,
+          14,
+          163,
+          132,
+          148,
+          1
+        ],
+        "accounts": [
+          {
+            "name": "signer",
+            "writable": true,
+            "signer": true
+          },
+          {
+            "name": "dex",
+            "writable": true
+          },
+          {
+            "name": "user_token_0_account",
+            "writable": true
+          },
+          {
+            "name": "user_token_1_account",
+            "writable": true
+          },
+          {
+            "name": "recipient",
+            "optional": true
+          },
+          {
+            "name": "recipient_token_0_account",
+            "writable": true,
+            "optional": true
+          },
+          {
+            "name": "recipient_token_1_account",
+            "writable": true,
+            "optional": true
+          },
+          {
+            "name": "token_0"
+          },
+          {
+            "name": "token_1"
+          },
+          {
+            "name": "token_0_reserve",
+            "writable": true
+          },
+          {
+            "name": "token_1_reserve",
+            "writable": true
+          },
+          {
+            "name": "token_0_rate_model"
+          },
+          {
+            "name": "token_1_rate_model"
+          },
+          {
+            "name": "token_0_vault",
+            "writable": true
+          },
+          {
+            "name": "token_1_vault",
+            "writable": true
+          },
+          {
+            "name": "dex_supply_position_token_0",
+            "writable": true,
+            "optional": true
+          },
+          {
+            "name": "dex_supply_position_token_1",
+            "writable": true,
+            "optional": true
+          },
+          {
+            "name": "dex_borrow_position_token_0",
+            "writable": true,
+            "optional": true
+          },
+          {
+            "name": "dex_borrow_position_token_1",
+            "writable": true,
+            "optional": true
+          },
+          {
+            "name": "liquidity"
+          },
+          {
+            "name": "liquidity_program"
+          },
+          {
+            "name": "token_0_program"
+          },
+          {
+            "name": "token_1_program"
+          },
+          {
+            "name": "oracle_program"
+          },
+          {
+            "name": "associated_token_program",
+            "address": "ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL"
+          }
+        ],
+        "args": [
+          {
+            "name": "swap0to1",
+            "type": "bool"
+          },
+          {
+            "name": "amount_out",
+            "type": "u64"
+          },
+          {
+            "name": "amount_in_max",
+            "type": "u64"
+          }
+        ],
+        "returns": "u64"
+      }
+    ],
+    "types": [],
+    "events": []
+  },
+  "FUTARELBfJfQ8RDGhg1wdhddq1odMAJUePHFuBYfUxKq": {
+    "name": "MetaDAO",
+    "idl_account": "Cgg4TGESEzsewehRcFnbDaGmBznwkH23Ro1HqWz5VdtG",
+    "owner": "FUTARELBfJfQ8RDGhg1wdhddq1odMAJUePHFuBYfUxKq",
+    "file": "metadao.json",
+    "sha256": "385fce09744805d9ed8b51e1b9384baa9ad26dde1ea82c50bfe13739b4e070d0",
+    "instructions": [
+      {
+        "name": "spotSwap",
+        "accounts": [
+          {
+            "name": "dao",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "userBaseAccount",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "userQuoteAccount",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "ammBaseVault",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "ammQuoteVault",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "user",
+            "isMut": false,
+            "isSigner": true
+          },
+          {
+            "name": "tokenProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "eventAuthority",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "program",
+            "isMut": false,
+            "isSigner": false
+          }
+        ],
+        "args": [
+          {
+            "name": "params",
+            "type": {
+              "defined": "SpotSwapParams"
+            }
+          }
+        ]
+      }
+    ],
+    "types": [
+      {
+        "name": "SpotSwapParams",
+        "type": {
+          "kind": "struct",
+          "fields": [
+            {
+              "name": "inputAmount",
+              "type": "u64"
+            },
+            {
+              "name": "swapType",
+              "type": {
+                "defined": "SwapType"
+              }
+            },
+            {
+              "name": "minOutputAmount",
+              "type": "u64"
+            }
+          ]
+        }
+      },
+      {
+        "name": "SwapType",
+        "type": {
+          "kind": "enum",
+          "variants": [
+            {
+              "name": "Buy"
+            },
+            {
+              "name": "Sell"
+            }
+          ]
+        }
+      }
+    ],
+    "events": []
+  },
+  "save8RQVPMWNTzU18t3GBvBkN9hT7jsGjiCQ28FpD9H": {
+    "name": "Perena Star V2",
+    "idl_account": "Cikg8QzgZapdoHxt7ajxJLxySxDzYKYLDHNe64rZTZfY",
+    "owner": "save8RQVPMWNTzU18t3GBvBkN9hT7jsGjiCQ28FpD9H",
+    "file": "perena_star_v2.json",
+    "sha256": "057e70ef40ce00ce333a6afbe203a0ed9ffbd9c70dce2fa104b5fcffb9e5160e",
+    "instructions": [
+      {
+        "name": "execute_share_swap",
+        "discriminator": [
+          127,
+          53,
+          127,
+          156,
+          151,
+          80,
+          135,
+          67
+        ],
+        "accounts": [
+          {
+            "name": "user",
+            "writable": true,
+            "signer": true
+          },
+          {
+            "name": "vault",
+            "writable": true
+          },
+          {
+            "name": "vault_oracle"
+          },
+          {
+            "name": "vault_tranche_state",
+            "writable": true
+          },
+          {
+            "name": "share_mint",
+            "writable": true
+          },
+          {
+            "name": "tranche_share_mint",
+            "writable": true
+          },
+          {
+            "name": "user_share_ata",
+            "writable": true
+          },
+          {
+            "name": "user_tranche_share_ata",
+            "writable": true
+          },
+          {
+            "name": "share_token_program"
+          },
+          {
+            "name": "tranche_share_token_program"
+          },
+          {
+            "name": "associated_token_program",
+            "address": "ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL"
+          },
+          {
+            "name": "system_program",
+            "address": "11111111111111111111111111111111"
+          }
+        ],
+        "args": [
+          {
+            "name": "kind",
+            "type": {
+              "defined": {
+                "name": "TrancheKind"
+              }
+            }
+          },
+          {
+            "name": "share_amount",
+            "type": "u64"
+          }
+        ]
+      }
+    ],
+    "types": [
+      {
+        "name": "TrancheKind",
+        "docs": [
+          "How a vault's underlying assets are deployed.",
+          "",
+          "Tranche receipt token class for tranched vault flows."
+        ],
+        "repr": {
+          "kind": "rust"
+        },
+        "type": {
+          "kind": "enum",
+          "variants": [
+            {
+              "name": "Junior"
+            },
+            {
+              "name": "Senior"
+            }
+          ]
+        }
+      }
+    ],
+    "events": []
+  },
+  "omnixgS8fnqHfCcTGKWj6JtKjzpJZ1Y5y9pyFkQDkYE": {
+    "name": "Omnipair",
+    "idl_account": "4EjYPP6Jiyzn8Kx8K5rNi2ACbb7f7i47F58uAbvuLoX9",
+    "owner": "omnixgS8fnqHfCcTGKWj6JtKjzpJZ1Y5y9pyFkQDkYE",
+    "file": "omnipair.json",
+    "sha256": "783f12357f6c6712c449cf2b2c9069d447c3bedb05f26ba834c1c9852f0ac831",
+    "instructions": [
+      {
+        "name": "swap",
+        "discriminator": [
+          248,
+          198,
+          158,
+          145,
+          225,
+          117,
+          135,
+          200
+        ],
+        "accounts": [
+          {
+            "name": "pair",
+            "writable": true
+          },
+          {
+            "name": "rate_model",
+            "writable": true
+          },
+          {
+            "name": "futarchy_authority"
+          },
+          {
+            "name": "token_in_vault",
+            "writable": true
+          },
+          {
+            "name": "token_out_vault",
+            "writable": true
+          },
+          {
+            "name": "user_token_in_account",
+            "writable": true
+          },
+          {
+            "name": "user_token_out_account",
+            "writable": true
+          },
+          {
+            "name": "token_in_mint"
+          },
+          {
+            "name": "token_out_mint"
+          },
+          {
+            "name": "user",
+            "signer": true
+          },
+          {
+            "name": "token_program",
+            "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+          },
+          {
+            "name": "token_2022_program",
+            "address": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb"
+          },
+          {
+            "name": "event_authority"
+          },
+          {
+            "name": "program"
+          }
+        ],
+        "args": [
+          {
+            "name": "args",
+            "type": {
+              "defined": {
+                "name": "SwapArgs"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "types": [
+      {
+        "name": "SwapArgs",
+        "type": {
+          "kind": "struct",
+          "fields": [
+            {
+              "name": "amount_in",
+              "type": "u64"
+            },
+            {
+              "name": "min_amount_out",
+              "type": "u64"
+            }
+          ]
+        }
+      }
+    ],
+    "events": []
+  },
+  "Gswppe6ERWKpUTXvRPfXdzHhiCyJvLadVvXGfdpBqcE1": {
+    "name": "Guacswap",
+    "idl_account": "BBvVcNCC2X4qp4gTUCTxfkMt5VteNG2ynEmahmdCcEUK",
+    "owner": "Gswppe6ERWKpUTXvRPfXdzHhiCyJvLadVvXGfdpBqcE1",
+    "file": "guacswap.json",
+    "sha256": "400d38fbfbc34ce7e45968891ccb7d4c3476cb1e38897617f577e7bb3e100e45",
+    "instructions": [
+      {
+        "name": "swap",
+        "accounts": [
+          {
+            "name": "state",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "pool",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "tokenX",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "tokenY",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "poolXAccount",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "poolYAccount",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "swapperXAccount",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "swapperYAccount",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "swapper",
+            "isMut": true,
+            "isSigner": true
+          },
+          {
+            "name": "referrerXAccount",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "referrerYAccount",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "referrer",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "programAuthority",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "systemProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "tokenProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "associatedTokenProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "rent",
+            "isMut": false,
+            "isSigner": false
+          }
+        ],
+        "args": [
+          {
+            "name": "deltaIn",
+            "type": {
+              "defined": "Token"
+            }
+          },
+          {
+            "name": "priceLimit",
+            "type": {
+              "defined": "FixedPoint"
+            }
+          },
+          {
+            "name": "xToY",
+            "type": "bool"
+          }
+        ]
+      }
+    ],
+    "types": [
+      {
+        "name": "FixedPoint",
+        "type": {
+          "kind": "struct",
+          "fields": [
+            {
+              "name": "v",
+              "type": "u128"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Token",
+        "type": {
+          "kind": "struct",
+          "fields": [
+            {
+              "name": "v",
+              "type": "u64"
+            }
+          ]
+        }
+      }
+    ],
+    "events": []
+  },
+  "SCALEWoRSpVZpMRqHEcDfNvBh3nUSe34jDr9r689gLa": {
+    "name": "Scale Vmm",
+    "idl_account": "EiFkLpJdXocvbrZKh6LoRRMs3ZwKvZ1JuUpRePgco1rd",
+    "owner": "SCALEWoRSpVZpMRqHEcDfNvBh3nUSe34jDr9r689gLa",
+    "file": "scale_vmm.json",
+    "sha256": "c747324eb6f4b519f40e53f83da47e9089e4810070c67c5af04f5900486906cd",
+    "instructions": [
+      {
+        "name": "buy",
+        "discriminator": [
+          102,
+          6,
+          61,
+          18,
+          1,
+          218,
+          235,
+          234
+        ],
+        "accounts": [
+          {
+            "name": "pair",
+            "writable": true
+          },
+          {
+            "name": "user",
+            "writable": true,
+            "signer": true
+          },
+          {
+            "name": "mint_a"
+          },
+          {
+            "name": "mint_b"
+          },
+          {
+            "name": "user_ta_a",
+            "writable": true
+          },
+          {
+            "name": "user_ta_b",
+            "writable": true
+          },
+          {
+            "name": "vault_a",
+            "writable": true
+          },
+          {
+            "name": "vault_b",
+            "writable": true
+          },
+          {
+            "name": "platform_fee_ta_a",
+            "writable": true
+          },
+          {
+            "name": "token_program_a"
+          },
+          {
+            "name": "token_program_b"
+          },
+          {
+            "name": "system_program",
+            "address": "11111111111111111111111111111111"
+          },
+          {
+            "name": "config"
+          },
+          {
+            "name": "amm_program",
+            "address": "SCALEwAvEK5gtkdHiFzXfPgtk2YwJxPDzaV3aDmR7tA"
+          },
+          {
+            "name": "amm_pool",
+            "writable": true
+          },
+          {
+            "name": "amm_vault_a",
+            "writable": true
+          },
+          {
+            "name": "amm_vault_b",
+            "writable": true
+          },
+          {
+            "name": "amm_config"
+          }
+        ],
+        "args": [
+          {
+            "name": "params",
+            "type": {
+              "defined": {
+                "name": "SwapParams"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "name": "sell",
+        "discriminator": [
+          51,
+          230,
+          133,
+          164,
+          1,
+          127,
+          131,
+          173
+        ],
+        "accounts": [
+          {
+            "name": "pair",
+            "writable": true
+          },
+          {
+            "name": "user",
+            "writable": true,
+            "signer": true
+          },
+          {
+            "name": "mint_a"
+          },
+          {
+            "name": "mint_b"
+          },
+          {
+            "name": "user_ta_a",
+            "writable": true
+          },
+          {
+            "name": "user_ta_b",
+            "writable": true
+          },
+          {
+            "name": "vault_a",
+            "writable": true
+          },
+          {
+            "name": "vault_b",
+            "writable": true
+          },
+          {
+            "name": "platform_fee_ta_a",
+            "writable": true
+          },
+          {
+            "name": "token_program_a"
+          },
+          {
+            "name": "token_program_b"
+          },
+          {
+            "name": "system_program",
+            "address": "11111111111111111111111111111111"
+          },
+          {
+            "name": "config"
+          },
+          {
+            "name": "amm_program",
+            "address": "SCALEwAvEK5gtkdHiFzXfPgtk2YwJxPDzaV3aDmR7tA"
+          },
+          {
+            "name": "amm_pool",
+            "writable": true
+          },
+          {
+            "name": "amm_vault_a",
+            "writable": true
+          },
+          {
+            "name": "amm_vault_b",
+            "writable": true
+          },
+          {
+            "name": "amm_config"
+          }
+        ],
+        "args": [
+          {
+            "name": "params",
+            "type": {
+              "defined": {
+                "name": "SwapParams"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "types": [
+      {
+        "name": "SwapParams",
+        "type": {
+          "kind": "struct",
+          "fields": [
+            {
+              "name": "amount",
+              "type": "u64"
+            },
+            {
+              "name": "limit",
+              "type": "u64"
+            }
+          ]
+        }
+      }
+    ],
+    "events": []
+  },
+  "CURVEmPpijXDTNdqrA9PGP1io2rkgiVXH26xdXVGLLfz": {
+    "name": "Trends",
+    "idl_account": "A66SjFD23xu9WSUp9kn4nPohwyejWfutmrrTLjfowBSs",
+    "owner": "CURVEmPpijXDTNdqrA9PGP1io2rkgiVXH26xdXVGLLfz",
+    "file": "trends.json",
+    "sha256": "0aa314eb351c1d98506a2badbecd8fe32422d32ee40fecd246c86710c4e57833",
+    "instructions": [
+      {
+        "name": "swap",
+        "discriminator": [
+          248,
+          198,
+          158,
+          145,
+          225,
+          117,
+          135,
+          200
+        ],
+        "accounts": [
+          {
+            "name": "config"
+          },
+          {
+            "name": "pool",
+            "writable": true
+          },
+          {
+            "name": "pool_authority",
+            "address": "C6B7knNSF8X8YfW54D8jQvM3VUCifsphHEQZSCyAERoE"
+          },
+          {
+            "name": "input_token_account",
+            "writable": true
+          },
+          {
+            "name": "output_token_account",
+            "writable": true
+          },
+          {
+            "name": "base_mint"
+          },
+          {
+            "name": "quote_mint",
+            "address": "So11111111111111111111111111111111111111112"
+          },
+          {
+            "name": "base_vault",
+            "writable": true
+          },
+          {
+            "name": "quote_vault",
+            "writable": true
+          },
+          {
+            "name": "trader",
+            "signer": true
+          },
+          {
+            "name": "base_token_program"
+          },
+          {
+            "name": "quote_token_program"
+          },
+          {
+            "name": "referral_token_account",
+            "writable": true,
+            "optional": true
+          },
+          {
+            "name": "event_authority"
+          },
+          {
+            "name": "program"
+          }
+        ],
+        "args": [
+          {
+            "name": "params",
+            "type": {
+              "defined": {
+                "name": "SwapParams"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "types": [
+      {
+        "name": "SwapParams",
+        "type": {
+          "kind": "struct",
+          "fields": [
+            {
+              "name": "amount_in",
+              "type": "u64"
+            },
+            {
+              "name": "min_amount_out",
+              "type": "u64"
+            }
+          ]
+        }
+      }
+    ],
+    "events": []
+  },
+  "fd3nMFYTQjX1yr5ER8u7tPdHJB7qt8RpDpNtLQX2Br5": {
+    "name": "JupiterRfqV2",
+    "idl_account": "34UvKvH4bmtoG7X3kLYVpfhpuvTTDdXkA93gN4pQ8Q8P",
+    "owner": "fd3nMFYTQjX1yr5ER8u7tPdHJB7qt8RpDpNtLQX2Br5",
+    "file": "jupiterrfqv2.json",
+    "sha256": "f471f46118bdec9133f5e7c234208b42fbc4658172a7c65f5e3e1f31c492f510",
+    "instructions": [
+      {
+        "name": "fill_exact_in",
+        "discriminator": [
+          222,
+          208,
+          6,
+          209,
+          154,
+          163,
+          54,
+          94
+        ],
+        "accounts": [
+          {
+            "name": "user",
+            "signer": true
+          },
+          {
+            "name": "fill_authority",
+            "signer": true
+          },
+          {
+            "name": "user_base_token_account",
+            "writable": true
+          },
+          {
+            "name": "user_quote_token_account",
+            "writable": true
+          },
+          {
+            "name": "maker_base_token_account",
+            "writable": true
+          },
+          {
+            "name": "maker_quote_token_account",
+            "writable": true
+          },
+          {
+            "name": "base_mint"
+          },
+          {
+            "name": "quote_mint"
+          },
+          {
+            "name": "base_token_program"
+          },
+          {
+            "name": "quote_token_program"
+          },
+          {
+            "name": "instructions_sysvar",
+            "address": "Sysvar1nstructions1111111111111111111111111"
+          }
+        ],
+        "args": [
+          {
+            "name": "taker_side",
+            "type": {
+              "defined": {
+                "name": "Side"
+              }
+            }
+          },
+          {
+            "name": "amount_in_atoms",
+            "type": "u64"
+          },
+          {
+            "name": "params",
+            "type": {
+              "defined": {
+                "name": "FillExactInParams"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "types": [
+      {
+        "name": "FillExactInParams",
+        "type": {
+          "kind": "struct",
+          "fields": [
+            {
+              "name": "expire_at",
+              "type": "u64"
+            },
+            {
+              "name": "tick_size_qpb",
+              "type": "u64"
+            },
+            {
+              "name": "lot_size_base",
+              "type": "u64"
+            },
+            {
+              "name": "levels",
+              "type": {
+                "vec": {
+                  "defined": {
+                    "name": "Level"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "name": "Level",
+        "type": {
+          "kind": "struct",
+          "fields": [
+            {
+              "name": "px_ticks",
+              "type": "u64"
+            },
+            {
+              "name": "qty_lots",
+              "type": "u64"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Side",
+        "type": {
+          "kind": "enum",
+          "variants": [
+            {
+              "name": "Bid"
+            },
+            {
+              "name": "Ask"
+            }
+          ]
+        }
+      }
+    ],
+    "events": []
+  },
+  "ghosty4ZU1Qk1HN7Ymz4pZ15QfspzJZgSYFkdKN6ZLK": {
+    "name": "Stableswap",
+    "idl_account": "FzB8t8tWBTEp1XbwXwPzNthUXc4RuJTfUYY51cXUWzny",
+    "owner": "ghosty4ZU1Qk1HN7Ymz4pZ15QfspzJZgSYFkdKN6ZLK",
+    "file": "stableswap.json",
+    "sha256": "a78ff8afa0d56b8123eb401cfea6407da5af14daa8e4663a1f30d3cb8544fc66",
+    "instructions": [
+      {
+        "name": "swap",
+        "discriminator": [
+          248,
+          198,
+          158,
+          145,
+          225,
+          117,
+          135,
+          200
+        ],
+        "accounts": [
+          {
+            "name": "user",
+            "signer": true
+          },
+          {
+            "name": "exchange_state",
+            "writable": true
+          },
+          {
+            "name": "mint_in"
+          },
+          {
+            "name": "mint_out"
+          },
+          {
+            "name": "token_state_in"
+          },
+          {
+            "name": "token_state_out"
+          },
+          {
+            "name": "token_vault_in",
+            "writable": true
+          },
+          {
+            "name": "token_vault_out",
+            "writable": true
+          },
+          {
+            "name": "user_token_account_in",
+            "writable": true
+          },
+          {
+            "name": "recipient_token_account_out",
+            "writable": true
+          },
+          {
+            "name": "pair_state"
+          },
+          {
+            "name": "instructions",
+            "optional": true,
+            "address": "Sysvar1nstructions1111111111111111111111111"
+          },
+          {
+            "name": "system_program",
+            "address": "11111111111111111111111111111111"
+          },
+          {
+            "name": "associated_token_program",
+            "address": "ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL"
+          },
+          {
+            "name": "token_program_in"
+          },
+          {
+            "name": "token_program_out"
+          }
+        ],
+        "args": [
+          {
+            "name": "amount_in",
+            "type": "u64"
+          },
+          {
+            "name": "minimum_amount_out",
+            "type": "u64"
+          }
+        ]
+      }
+    ],
+    "types": [],
+    "events": []
+  },
+  "REALQqNEomY6cQGZJUGwywTBD2UmDT32rZcNnfxQ5N2": {
+    "name": "Byreal",
+    "idl_account": "6WEaY6LvFDGwzb2k9po2PnSYUL2a78biakjjR5aMQSCo",
+    "owner": "REALQqNEomY6cQGZJUGwywTBD2UmDT32rZcNnfxQ5N2",
+    "file": "byreal.json",
+    "sha256": "a330bf99e66e5c7712ade84d9dd929de4d60fa2a183821efb7dae11f41fce6a5",
+    "instructions": [
+      {
+        "name": "swap",
+        "discriminator": [
+          248,
+          198,
+          158,
+          145,
+          225,
+          117,
+          135,
+          200
+        ],
+        "accounts": [
+          {
+            "name": "payer",
+            "signer": true
+          },
+          {
+            "name": "amm_config"
+          },
+          {
+            "name": "pool_state",
+            "writable": true
+          },
+          {
+            "name": "input_token_account",
+            "writable": true
+          },
+          {
+            "name": "output_token_account",
+            "writable": true
+          },
+          {
+            "name": "input_vault",
+            "writable": true
+          },
+          {
+            "name": "output_vault",
+            "writable": true
+          },
+          {
+            "name": "observation_state",
+            "writable": true
+          },
+          {
+            "name": "token_program",
+            "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+          },
+          {
+            "name": "tick_array",
+            "writable": true
+          }
+        ],
+        "args": [
+          {
+            "name": "amount",
+            "type": "u64"
+          },
+          {
+            "name": "other_amount_threshold",
+            "type": "u64"
+          },
+          {
+            "name": "sqrt_price_limit_x64",
+            "type": "u128"
+          },
+          {
+            "name": "is_base_input",
+            "type": "bool"
+          }
+        ]
+      },
+      {
+        "name": "swap_v2",
+        "discriminator": [
+          43,
+          4,
+          237,
+          11,
+          26,
+          201,
+          30,
+          98
+        ],
+        "accounts": [
+          {
+            "name": "payer",
+            "signer": true
+          },
+          {
+            "name": "amm_config"
+          },
+          {
+            "name": "pool_state",
+            "writable": true
+          },
+          {
+            "name": "input_token_account",
+            "writable": true
+          },
+          {
+            "name": "output_token_account",
+            "writable": true
+          },
+          {
+            "name": "input_vault",
+            "writable": true
+          },
+          {
+            "name": "output_vault",
+            "writable": true
+          },
+          {
+            "name": "observation_state",
+            "writable": true
+          },
+          {
+            "name": "token_program",
+            "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+          },
+          {
+            "name": "token_program_2022",
+            "address": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb"
+          },
+          {
+            "name": "memo_program",
+            "address": "MemoSq4gqABAXKb96qnH8TysNcWxMyWCqXgDLGmfcHr"
+          },
+          {
+            "name": "input_vault_mint"
+          },
+          {
+            "name": "output_vault_mint"
+          }
+        ],
+        "args": [
+          {
+            "name": "amount",
+            "type": "u64"
+          },
+          {
+            "name": "other_amount_threshold",
+            "type": "u64"
+          },
+          {
+            "name": "sqrt_price_limit_x64",
+            "type": "u128"
+          },
+          {
+            "name": "is_base_input",
+            "type": "bool"
+          }
+        ]
+      },
+      {
+        "name": "swap_v3_dyn",
+        "discriminator": [
+          229,
+          46,
+          213,
+          132,
+          105,
+          40,
+          40,
+          228
+        ],
+        "accounts": [
+          {
+            "name": "payer",
+            "signer": true
+          },
+          {
+            "name": "amm_config"
+          },
+          {
+            "name": "pool_state",
+            "writable": true
+          },
+          {
+            "name": "input_token_account",
+            "writable": true
+          },
+          {
+            "name": "output_token_account",
+            "writable": true
+          },
+          {
+            "name": "input_vault",
+            "writable": true
+          },
+          {
+            "name": "output_vault",
+            "writable": true
+          },
+          {
+            "name": "observation_state",
+            "writable": true
+          },
+          {
+            "name": "token_program",
+            "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+          },
+          {
+            "name": "token_program_2022",
+            "address": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb"
+          },
+          {
+            "name": "memo_program",
+            "address": "MemoSq4gqABAXKb96qnH8TysNcWxMyWCqXgDLGmfcHr"
+          },
+          {
+            "name": "input_vault_mint"
+          },
+          {
+            "name": "output_vault_mint"
+          }
+        ],
+        "args": [
+          {
+            "name": "amount",
+            "type": "u64"
+          },
+          {
+            "name": "other_amount_threshold",
+            "type": "u64"
+          },
+          {
+            "name": "sqrt_price_limit_x64",
+            "type": "u128"
+          },
+          {
+            "name": "is_base_input",
+            "type": "bool"
+          }
+        ]
+      }
+    ],
+    "types": [],
+    "events": []
+  }
+}

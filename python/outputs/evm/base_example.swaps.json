@@ -1,0 +1,173 @@
+{
+  "chain": "base",
+  "chain_id": 8453,
+  "tx_hash": "0x3c7f8b013f2bf875cc6fec2a85e6e46a0182cc2d9ae74af9d7860166259e9b9e",
+  "block_number": 52000865,
+  "block_hash": "0x363fa38591b7c035396785c8227cbea5386109c6a5bd5b4256b3372dfa5d9129",
+  "transaction_index": 230,
+  "transaction_sender": "0x013d5349eae975bdd54fe5f70627df3e5f0cd423",
+  "transaction_to": "0xfdf682f51fe81aa4898f0ae2163d8a55c127fbc7",
+  "status": "success",
+  "swaps": [
+    {
+      "log_index": 822,
+      "event": "Swap(bytes32,address,int128,int128,uint160,uint128,int24,uint24)",
+      "adapter": "v4",
+      "venue_type": "amm",
+      "emitter": "0x498581ff718922c3f8e6a244956af099b2652b2b",
+      "pool": "0x498581ff718922c3f8e6a244956af099b2652b2b",
+      "pool_id": "0x727b2741ac2b2df8bc9185e1de972661519fc07b156057eeed9b07c50e08829b",
+      "protocol": "Uniswap v4",
+      "protocol_verified": true,
+      "verification": "registered_emitter",
+      "factory": null,
+      "sender": "0xfdf682f51fe81aa4898f0ae2163d8a55c127fbc7",
+      "recipient": null,
+      "inputs": [
+        {
+          "address": null,
+          "is_native": true,
+          "symbol": "ETH",
+          "decimals": 18,
+          "amount_raw": "32757102492123090",
+          "amount": "0.03275710249212309"
+        }
+      ],
+      "outputs": [
+        {
+          "address": "0x09be1692ca16e06f536f0038ff11d1da8524adb1",
+          "is_native": false,
+          "symbol": "TEL",
+          "decimals": 2,
+          "amount_raw": "3664262",
+          "amount": "36642.62"
+        }
+      ],
+      "input": {
+        "address": null,
+        "is_native": true,
+        "symbol": "ETH",
+        "decimals": 18,
+        "amount_raw": "32757102492123090",
+        "amount": "0.03275710249212309"
+      },
+      "output": {
+        "address": "0x09be1692ca16e06f536f0038ff11d1da8524adb1",
+        "is_native": false,
+        "symbol": "TEL",
+        "decimals": 2,
+        "amount_raw": "3664262",
+        "amount": "36642.62"
+      },
+      "amount_scope": "pool_swap_delta_before_external_hook_adjustments",
+      "evidence": {
+        "source": "receipt_log",
+        "topic0": "0x40e9cecb9f5f1f1c5b9c97dec2917b7ee92e57ba5563708daca94dd84ad7112f",
+        "fields": {
+          "amount0": "-32757102492123090",
+          "amount1": "3664262",
+          "sqrtPriceX96": "839044656724239533575698",
+          "liquidity": "859007887936961",
+          "tick": "-229124",
+          "fee": "3000",
+          "id": "0x727b2741ac2b2df8bc9185e1de972661519fc07b156057eeed9b07c50e08829b",
+          "sender": "0xfdf682f51fe81aa4898f0ae2163d8a55c127fbc7"
+        }
+      },
+      "pool_key": {
+        "currency0": "0x0000000000000000000000000000000000000000",
+        "currency1": "0x09be1692ca16e06f536f0038ff11d1da8524adb1",
+        "fee": "3000",
+        "tickSpacing": "60",
+        "hooks": "0x23ab2e6d4ab0c5f872567098671f1ffb46fd2500"
+      }
+    },
+    {
+      "log_index": 823,
+      "event": "Swap(bytes32,address,int128,int128,uint160,uint128,int24,uint24)",
+      "adapter": "v4",
+      "venue_type": "amm",
+      "emitter": "0x498581ff718922c3f8e6a244956af099b2652b2b",
+      "pool": "0x498581ff718922c3f8e6a244956af099b2652b2b",
+      "pool_id": "0x48719249515f0283a3230ceddfa29262a48df6783c7ad4363f70a299940ea0dd",
+      "protocol": "Uniswap v4",
+      "protocol_verified": true,
+      "verification": "registered_emitter",
+      "factory": null,
+      "sender": "0xfdf682f51fe81aa4898f0ae2163d8a55c127fbc7",
+      "recipient": null,
+      "inputs": [
+        {
+          "address": "0x60a3e35cc302bfa44cb288bc5a4f316fdb1adb42",
+          "is_native": false,
+          "symbol": "EURC",
+          "decimals": 6,
+          "amount_raw": "78272428",
+          "amount": "78.272428"
+        }
+      ],
+      "outputs": [
+        {
+          "address": null,
+          "is_native": true,
+          "symbol": "ETH",
+          "decimals": 18,
+          "amount_raw": "32757102492123090",
+          "amount": "0.03275710249212309"
+        }
+      ],
+      "input": {
+        "address": "0x60a3e35cc302bfa44cb288bc5a4f316fdb1adb42",
+        "is_native": false,
+        "symbol": "EURC",
+        "decimals": 6,
+        "amount_raw": "78272428",
+        "amount": "78.272428"
+      },
+      "output": {
+        "address": null,
+        "is_native": true,
+        "symbol": "ETH",
+        "decimals": 18,
+        "amount_raw": "32757102492123090",
+        "amount": "0.03275710249212309"
+      },
+      "amount_scope": "pool_swap_delta_before_external_hook_adjustments",
+      "evidence": {
+        "source": "receipt_log",
+        "topic0": "0x40e9cecb9f5f1f1c5b9c97dec2917b7ee92e57ba5563708daca94dd84ad7112f",
+        "fields": {
+          "amount0": "32757102492123090",
+          "amount1": "-78272428",
+          "sqrtPriceX96": "3876194736078442213881294",
+          "liquidity": "305683739132061",
+          "tick": "-198515",
+          "fee": "3499",
+          "id": "0x48719249515f0283a3230ceddfa29262a48df6783c7ad4363f70a299940ea0dd",
+          "sender": "0xfdf682f51fe81aa4898f0ae2163d8a55c127fbc7"
+        }
+      },
+      "pool_key": {
+        "currency0": "0x0000000000000000000000000000000000000000",
+        "currency1": "0x60a3e35cc302bfa44cb288bc5a4f316fdb1adb42",
+        "fee": "3000",
+        "tickSpacing": "60",
+        "hooks": "0x0000000000000000000000000000000000000000"
+      }
+    }
+  ],
+  "conversions": [],
+  "settlements": [],
+  "route_summaries": [],
+  "non_swap_events": [],
+  "undecoded_events": [],
+  "unclassified_logs": [],
+  "warnings": [],
+  "coverage": {
+    "all_swaps_guaranteed": false,
+    "decoded_swap_events": 2,
+    "undecoded_recognized_events": 0,
+    "unclassified_log_count": 0,
+    "scope": "implemented executed event schemas; unknown/eventless contracts may require additional adapters"
+  }
+}
