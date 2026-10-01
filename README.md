@@ -6,7 +6,7 @@ Data: the 30,607 private-flow sandwiches by 7 persistent bots against 39,461 pri
 
 > Heimbach, Solmaz, Öz, Ferreira Torres. *No Place to Hide: An Analysis on Protected Order Flow Sandwich Attacks.* arXiv:2609.28115, 2026.
 
-Static site, no build step. `idx/` maps hash prefixes to sandwich ids and `s/` holds the sandwich records, so each lookup fetches two small files. Serve over HTTP (e.g. `python -m http.server`); opening `index.html` from disk will not load the data.
+Static site, no build step. Each dataset is a sibling folder with the same two-file layout: `<folder>/idx/` maps hash prefixes to sandwich ids, `<folder>/s/` holds the sandwich records, so each lookup fetches two small files. `ethereum/` is the private-flow dataset the page queries today; `base/`, `tron/` and `eth_reorg/` hold the paper's other datasets in the same format, not yet wired into the lookup. Serve over HTTP (e.g. `python -m http.server`); opening `index.html` from disk will not load the data.
 
 ## Python transaction tools
 
