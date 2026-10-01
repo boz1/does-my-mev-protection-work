@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import argparse
 from concurrent.futures import ThreadPoolExecutor
+from copy import deepcopy
 from datetime import datetime, timezone
 import json
 import os
@@ -27,6 +28,9 @@ CHAINS = ('solana', 'base', 'ethereum')
 ROLES = ('front', 'back', 'victim')  # The input file's order, NOT execution order.
 FORMAT = 'sandwich-raw-v1'
 TxGroup = str | Sequence[str]
+EXPOSURE_SOURCES = {'s': 'MEV-Share', 'm': 'MEVBlocker', 'k': 'Blink', 'r': 'Merkle'}
+EXPOSURE_NOTE = ('Exposure labels are observations from the input dataset, not proof of which route caused '
+                 'the attack. Missing labels do not rule out a route.')
 
 
 class SummaryError(ValueError):
@@ -85,6 +89,54 @@ def safe_error(exc: Exception) -> str:
     return type(exc).__name__
 
 
+def _validate_exposure_labels(value: dict, victims: Sequence[str]) -> dict:
+    """Validate dataset evidence and bind it to victim hashes, including on replay."""
+    if not isinstance(value, dict):
+        raise SummaryError('Exposure labels must map victim transaction hashes to label objects')
+    result = {}
+    for tx_hash, labels in value.items():
+        if not isinstance(tx_hash, str) or tx_hash.lower() not in victims:
+            raise SummaryError('Exposure labels refer to a transaction outside the victim group')
+        tx_hash = tx_hash.lower()
+        if tx_hash in result:
+            raise SummaryError('Duplicate victim hash in exposure labels')
+        if not isinstance(labels, dict):
+            raise SummaryError('Victim exposure labels (L) must be an object')
+        for key in ('s', 'm'):
+            if key in labels and not isinstance(labels[key], dict):
+                raise SummaryError('MEV-Share/MEVBlocker exposure evidence must be an object')
+        for key in ('k', 'r'):
+            if key in labels and (not isinstance(labels[key], (bool, int)) or labels[key] not in (0, 1)):
+                raise SummaryError('Blink/Merkle exposure labels must be 0 or 1')
+        result[tx_hash] = deepcopy(labels)
+    return result
+
+
+def _record_exposure(source_record: dict | None, row: list, chain: str) -> dict | None:
+    if source_record is None:
+        return None
+    if not isinstance(source_record, dict):
+        raise SummaryError('source_record must be a website dataset record')
+    source_row = normalize_row(source_record, chain)
+    if any(set(a) != set(b) for a, b in zip(source_row, row)):
+        raise SummaryError('Source record does not match the supplied front/back/victim groups')
+    if chain != 'ethereum':
+        return None
+    labels = {v['h']: v['L'] for v in source_record['V'] if 'L' in v}
+    return _validate_exposure_labels(labels, row[2])
+
+
+def _exposure(labels: dict | None) -> dict:
+    sources = [name for key, name in EXPOSURE_SOURCES.items()
+               if labels is not None and key in labels and
+               (key in ('s', 'm') or labels[key] == 1)]
+    status = ('not_provided' if labels is None else 'observed' if sources else
+              'unrecognized_labels' if any(k not in EXPOSURE_SOURCES for k in labels) else 'no_labels')
+    return {'status': status, 'sources': sources,
+            'evidence_origin': 'input_dataset' if labels is not None else None,
+            'raw_labels': deepcopy(labels)}
+
+
 def _prepare_transaction(chain: str, tx_hash: str, rpc_url: str, timeout: float) -> tuple[dict, list[str]]:
     """Fetch and populate decoder metadata so later summarization is offline."""
     warnings = []
@@ -111,9 +163,11 @@ def _prepare_transaction(chain: str, tx_hash: str, rpc_url: str, timeout: float)
 
 def fetch_sandwich(front: TxGroup, back: TxGroup, victims: TxGroup, *,
                    chain: str = 'solana', rpc_url: str | None = None,
-                   timeout: float = 30, workers: int = 4) -> dict:
+                   timeout: float = 30, workers: int = 4,
+                   source_record: dict | None = None) -> dict:
     """Return a credential-free raw bundle, including complete block ordering."""
     row = normalize_row([front, back, victims], chain)
+    exposure_labels = _record_exposure(source_record, row, chain)
     if timeout <= 0 or not 1 <= workers <= 16:
         raise SummaryError('Timeout must be positive and workers must be between 1 and 16')
     url = rpc_url or os.environ.get(chain.upper() + '_RPC_URL')
@@ -124,6 +178,8 @@ def fetch_sandwich(front: TxGroup, back: TxGroup, victims: TxGroup, *,
     result = {'format': FORMAT, 'chain': chain, 'row': row,
               'transactions': {}, 'blocks': {}, 'errors': {'transactions': {}, 'blocks': {}},
               'warnings': {}}
+    if exposure_labels is not None:
+        result['exposure_labels'] = exposure_labels
     hashes = [h for group in row for h in group]
 
     def fetch_one(h):
@@ -304,9 +360,14 @@ def summarize_bundle(raw_bundle: dict) -> dict:
         raise SummaryError('Not a sandwich-raw-v1 bundle; use --raw-output to create one')
     chain = raw_bundle['chain']
     row = normalize_row(raw_bundle['row'], chain)
+    exposure_labels = (_validate_exposure_labels(raw_bundle.get('exposure_labels', {}), row[2])
+                       if chain == 'ethereum' else {})
     groups = [[_leg(raw_bundle, h, role, i) for i, h in enumerate(hashes)]
               for role, hashes in zip(ROLES, row)]
     front, back, victims = groups
+    if chain == 'ethereum':
+        for victim in victims:
+            victim['exposure'] = _exposure(exposure_labels.get(victim['tx_hash']))
     legs = front + victims + back
     classified = classify_legs(front, back, victims)
     # Date belongs to the earliest front in ledger order, not the first victim.
@@ -340,6 +401,7 @@ def summarize_bundle(raw_bundle: dict) -> dict:
             'bot_candidates': candidates,
             'bot_candidate_basis': 'shared front/back fee payer; may be a relayer' if chain == 'solana' else 'shared front/back transaction sender',
             'private_submission': None,  # Cannot be established from ordinary mined transaction RPC data.
+            **({'exposure_note': EXPOSURE_NOTE} if chain == 'ethereum' else {}),
             'front_txs': front, 'victim_txs': victims, 'back_txs': back,
             'counts': {'front': len(front), 'victim': len(victims), 'back': len(back),
                        'swaps': sum(len(x['swaps']) for x in legs)},
@@ -354,15 +416,21 @@ def summarize_bundle(raw_bundle: dict) -> dict:
 
 def summarize_sandwich(front: TxGroup, back: TxGroup, victims: TxGroup, *,
                        chain: str = 'solana', rpc_url: str | None = None,
-                       timeout: float = 30, workers: int = 4) -> dict:
+                       timeout: float = 30, workers: int = 4,
+                       source_record: dict | None = None) -> dict:
     """Summarize one sandwich; group order is FRONT, BACK, VICTIMS."""
     return summarize_bundle(fetch_sandwich(front, back, victims, chain=chain,
-                            rpc_url=rpc_url, timeout=timeout, workers=workers))
+                            rpc_url=rpc_url, timeout=timeout, workers=workers,
+                            source_record=source_record))
 
 
 def summarize_row(row: Sequence | dict, **kwargs) -> dict:
     """Accept a parsed row directly, including rows with several front/back legs."""
     normalized = normalize_row(row, kwargs.get('chain', 'solana'))
+    if isinstance(row, dict):
+        if kwargs.get('source_record') is not None:
+            raise SummaryError('Pass a website row or source_record, not both')
+        kwargs['source_record'] = row
     return summarize_sandwich(*normalized, **kwargs)
 
 
@@ -406,6 +474,21 @@ def render_text(summary: dict) -> str:
                 out = ' + '.join(_asset_text(x) for x in swap['outputs'])
                 venue = swap['protocol']
             lines.append(f'       {inp} → {out}  [{venue}]')
+        exposure = leg.get('exposure')
+        if exposure:
+            if exposure['status'] == 'observed':
+                names = [name + (' (full transaction)' if name in ('Blink', 'Merkle') else '')
+                         for name in exposure['sources']]
+                detail = ', '.join(names)
+                if any(k not in EXPOSURE_SOURCES for k in exposure['raw_labels']):
+                    detail += '; additional unrecognized labels in JSON'
+                lines.append('       Exposure (dataset): ' + detail)
+            elif exposure['status'] == 'no_labels':
+                lines.append('       Exposure (dataset): no labels supplied; source unknown')
+            elif exposure['status'] == 'unrecognized_labels':
+                lines.append('       Exposure (dataset): unrecognized labels; see JSON')
+            else:
+                lines.append('       Exposure: not provided in input')
         decoded = leg['decoding'] or {}
         unknown = decoded.get('undecoded_swaps', decoded.get('undecoded_events', []))
         if unknown:
@@ -418,6 +501,8 @@ def render_text(summary: dict) -> str:
     elif summary['block_relation'] == 'cross_block':
         lines += ['', 'Cross-block transaction distance not calculated.']
     lines += ['WARNING: '+w for w in summary['warnings']]
+    if summary.get('exposure_note'):
+        lines += ['', summary['exposure_note']]
     lines += ['', 'Swap coverage is limited to the installed decoders; unknown activity is retained in JSON.']
     return '\n'.join(lines) + '\n'
 
@@ -427,7 +512,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument('file', nargs='?', type=Path, help='JSONL rows, website JSON shard or Solana binary part')
     parser.add_argument('--row', type=int, default=1, help='One-based record number; physical line for JSONL (default 1)')
     parser.add_argument('--input-format', choices=dataset.FORMATS, default='auto', help='Default: infer from file extension')
-    parser.add_argument('--row-json', help='One inline [front, back, victims] JSON row')
+    parser.add_argument('--row-json', help='One inline [front, back, victims] row or website JSON record')
     parser.add_argument('--front', nargs='+', help='One or more front transaction hashes')
     parser.add_argument('--back', nargs='+', help='One or more back transaction hashes')
     parser.add_argument('--victim', nargs='+', help='One or more victim transaction hashes')
@@ -453,9 +538,15 @@ def main(argv: list[str] | None = None) -> int:
             chain = args.chain or 'solana'
             if args.file and dataset.input_format(args.file, args.input_format) == 'solana-binary' and chain != 'solana':
                 raise SummaryError('Solana binary parts require --chain solana')
-            row = read_row(args.file, args.row, input_format=args.input_format) if args.file else json.loads(args.row_json) if args.row_json else [args.front, args.back, args.victim]
+            if args.file:
+                record = dataset.read_record(args.file, args.row, format=args.input_format)
+                row = record.metadata if record.metadata is not None else record.row
+            else:
+                row = json.loads(args.row_json) if args.row_json else [args.front, args.back, args.victim]
+            source_record = row if isinstance(row, dict) else None
             row = normalize_row(row, chain)
-            raw = fetch_sandwich(*row, chain=chain, rpc_url=args.rpc_url, timeout=args.timeout, workers=args.workers)
+            raw = fetch_sandwich(*row, chain=chain, rpc_url=args.rpc_url, timeout=args.timeout, workers=args.workers,
+                                 source_record=source_record)
         summary = summarize_bundle(raw)
         if args.raw_output:
             args.raw_output.parent.mkdir(parents=True, exist_ok=True)
