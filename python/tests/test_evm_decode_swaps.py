@@ -173,6 +173,29 @@ class DecoderTests(unittest.TestCase):
                 self.assertEqual(o['undecoded_events'], [])
                 self.assertEqual(amounts(o['swaps'][0]), ([(A,'11')],[(B,'22')]))
 
+    def test_clipper_indexed_layout_and_legacy_layout_both_decode(self):
+        # Construct the deployed ABI independently of our event registry. The
+        # three indexed addresses have the SAME topic0 as the older plain ABI.
+        log = {'address': POOL, 'topics': [d.topic('Swapped(address,address,address,uint256,uint256,bytes)'),
+               '0x'+static('address', A).hex(), '0x'+static('address', B).hex(),
+               '0x'+static('address', USER).hex()],
+               'data': '0x'+(uint(11)+uint(22)+uint(96)+uint(5)+b'proof'+bytes(27)).hex(),
+               'logIndex': '0x0'}
+        decoded = d.decode_transaction(bundle([log]))
+        self.assertFalse(decoded['undecoded_events'])
+        self.assertEqual(amounts(decoded['swaps'][0]), ([(A,'11')],[(B,'22')]))
+        self.assertEqual(decoded['swaps'][0]['recipient'], USER)
+        legacy = event_log('clipper', {'inAsset': A, 'outAsset': B, 'inAmount': 11,
+                                     'outAmount': 22, 'auxiliaryData': b'proof'})
+        self.assertEqual(len(legacy['topics']), 1)
+        self.assertEqual(amounts(d.decode_transaction(bundle([legacy]))['swaps'][0]),
+                         amounts(decoded['swaps'][0]))
+        broken = copy.deepcopy(log)
+        broken['data'] = '0x' + (uint(11) + uint(22) + uint(99999)).hex()
+        rejected = d.decode_transaction(bundle([broken]))
+        self.assertFalse(rejected['swaps'])
+        self.assertEqual(len(rejected['undecoded_events']), 1)
+
     def test_summaries_conversions_and_settlements_are_separate(self):
         logs = [event_log('dodo_summary', {'fromToken': A, 'toToken': B, 'fromAmount': 11, 'returnAmount': 22}, index=0),
                 event_log('angle', {'tokenIn': A, 'tokenOut': B, 'amountIn': 11, 'amountOut': 22}, index=1),
@@ -381,6 +404,171 @@ class RealTransactionTests(unittest.TestCase):
                 broken=d.decode_transaction(b)
                 self.assertTrue(any('ekubo' in e['possible_adapters'] for e in broken['undecoded_events']))
         self.assertEqual(checked,{'ekubo_v1','ekubo_v3'})
+
+
+class DatasetAdapterTests(unittest.TestCase):
+    FLUID = '0xbbcb91440523216e2b87052a99f69c604a7b6e00'
+    PSM = '0xf6e72db5454dd049d0788e411b06cfaf16853042'
+
+    def fluid_log(self, key, direction, ain, aout, decimals, index=0):
+        # Independent packing from Fluid's event/storage specification.
+        key_bytes = b''.join(static(t, v) for t, v in zip(('address', 'address', 'bytes32'), key))
+        di, do = decimals if direction else decimals[::-1]
+        packed = (int.from_bytes(d.keccak256(key_bytes)[:8], 'big') | (int(direction) << 64) |
+                  ((ain * 10**9 // 10**di) << 65) | ((aout * 10**9 // 10**do) << 125))
+        log = {'address': self.FLUID,
+               'topics': ['0xfbce846c23a724e6e61161894819ec46c90a8d3dd96e90e7342c6ef49ffb539c'],
+               'data': '0x' + (uint(packed) + uint((decimals[0] << 126) | (decimals[1] << 131))).hex(),
+               'logIndex': hex(index), 'index': hex(index), 'transactionHash': HASH,
+               'blockHash': BLOCK, 'blockNumber': '0x123', 'removed': False}
+        return log, key_bytes
+
+    def fluid_single(self, exact_input=True):
+        # Both cases preserve the 17-wei remainder absent from the packed event.
+        key = [A, B, '0x' + '00' * 32]
+        direction = exact_input
+        ain, aout = (4 * 10**18 + 17, 3_000_007) if exact_input else (3_000_007, 4 * 10**18 + 17)
+        log, key_bytes = self.fluid_log(key, direction, ain, aout, (18, 6))
+        specified, limit, returned = (ain, 1, aout) if exact_input else (-aout, 10**30, ain)
+        args = key_bytes + uint(direction) + uint(specified) + uint(limit) + static('address', USER)
+        args += uint(0) + uint(320) + uint(352) + uint(0) + uint(0)
+        b = bundle([log])
+        b['trace'] = {'type': 'CALL', 'to': self.FLUID, 'from': USER,
+                      'input': '0x7fc9d4ad' + args.hex(), 'output': '0x' + uint(returned).hex(), 'logs': [log]}
+        return b, ain, aout
+
+    def test_fluid_exact_input_and_output_preserve_dust(self):
+        for exact_input in (True, False):
+            with self.subTest(exact_input=exact_input):
+                b, ain, aout = self.fluid_single(exact_input)
+                out = d.decode_transaction(b)
+                self.assertEqual(out['undecoded_events'], [])
+                s = out['swaps'][0]
+                self.assertEqual((s['input']['amount_raw'], s['output']['amount_raw']), (str(ain), str(aout)))
+                self.assertEqual(s['input']['address'], A if exact_input else B)
+                self.assertTrue(s['protocol_verified'])
+
+    def test_fluid_rejects_wrong_return_key_failed_scope_and_duplicates(self):
+        for change in ('return', 'key', 'failed', 'duplicate', 'no_trace', 'unknown_emitter'):
+            with self.subTest(change=change):
+                b, _, _ = self.fluid_single()
+                if change == 'return': b['trace']['output'] = '0x' + uint(1).hex()
+                if change == 'key': b['trace']['input'] = b['trace']['input'][:10] + static('address', USER).hex() + b['trace']['input'][74:]
+                if change == 'failed': b['trace']['error'] = 'execution reverted'
+                if change == 'duplicate': b['trace'] = {'type': 'CALL', 'calls': [b['trace'], copy.deepcopy(b['trace'])]}
+                if change == 'no_trace': del b['trace']
+                if change == 'unknown_emitter': b['receipt']['logs'][0]['address'] = POOL
+                out = d.decode_transaction(b)
+                self.assertEqual(out['swaps'], [])
+                self.assertEqual(len(out['undecoded_events']), 1)
+
+    def test_fluid_two_hops_follow_executed_amounts_in_both_directions(self):
+        C = '0x' + '55' * 20
+        salt = '0x' + '00' * 32
+        keys = [[A, B, salt], [B, C, salt]]
+        for exact_input in (True, False):
+            with self.subTest(exact_input=exact_input):
+                ain, middle, aout = 4 * 10**18, 3_000_007, 2 * 10**18
+                l0, k0 = self.fluid_log(keys[0], True, ain, middle, (18, 6), 0 if exact_input else 1)
+                l1, k1 = self.fluid_log(keys[1], True, middle, aout, (6, 18), 1 if exact_input else 0)
+                logs = [l0, l1] if exact_input else [l1, l0]
+                route = uint(3) + b''.join(static('address', a) for a in (A, B, C))
+                pools = uint(2) + k0 + k1
+                limits = uint(2) + uint(1 if exact_input else 10**30) * 2
+                transfer = static('address', USER) + uint(0) + uint(128) + uint(160) + uint(0) * 2
+                args = uint(160) + uint(160 + len(route)) + uint(ain if exact_input else -aout)
+                args += uint(160 + len(route) + len(pools)) + uint(160 + len(route) + len(pools) + len(limits))
+                args += route + pools + limits + transfer
+                b = bundle(logs)
+                b['trace'] = {'type': 'CALL', 'from': USER, 'to': self.FLUID, 'logs': logs,
+                              'input': d.selector('swapHop(address[],(address,address,bytes32)[],int256,uint256[],(address,bool,bytes,bytes))') + args.hex(),
+                              'output': '0x' + uint(aout if exact_input else ain).hex()}
+                out = d.decode_transaction(b)
+                self.assertEqual(out['undecoded_events'], [])
+                legs = sorted(out['swaps'], key=lambda s: s['hop_index'])
+                self.assertEqual([s['input']['amount_raw'] for s in legs], [str(ain), str(middle)])
+                self.assertEqual([s['output']['amount_raw'] for s in legs], [str(middle), str(aout)])
+
+    def test_lite_psm_fee_and_decimal_directions(self):
+        for name, expected in [('BuyGem', (10**18 + 123, 10**6)), ('SellGem', (10**6, 10**18 - 123))]:
+            log = event_log('maker_psm', {'owner': USER, 'value': 10**6, 'fee': 123}, name=name, emitter=self.PSM)
+            b = bundle([log])
+            cached(b, self.PSM, 'dai()', static('address', A))
+            cached(b, self.PSM, 'gem()', static('address', B))
+            cached(b, self.PSM, 'to18ConversionFactor()', uint(10**12))
+            out = d.decode_transaction(b)
+            self.assertEqual(out['undecoded_events'], [])
+            self.assertEqual(out['swaps'], [])
+            s = out['conversions'][0]
+            self.assertEqual((s['input']['amount_raw'], s['output']['amount_raw']), tuple(map(str, expected)))
+            self.assertEqual(s['recipient'], USER)
+
+    def test_v3utils_is_a_guarded_route_summary_not_usual_conversion(self):
+        for emitter in ('0xae8999da4d81cb81b42288b12176fe20d7ead578', POOL):
+            log = event_log('v3utils_summary', {'tokenIn': A, 'tokenOut': B, 'amountIn': 100, 'amountOut': 90}, emitter=emitter)
+            out = d.decode_transaction(bundle([log]))
+            self.assertEqual(out['swaps'], [])
+            self.assertEqual(out['conversions'], [])
+            self.assertEqual(len(out['route_summaries']), int(emitter != POOL))
+            self.assertEqual(len(out['undecoded_events']), int(emitter == POOL))
+
+    def test_original_maker_psm_resolves_collateral_through_join(self):
+        psm = '0x89b78cfa322f6c5de0abceecab66aee45393cc5a'
+        log = event_log('maker_psm', {'owner': USER, 'value': 10**6, 'fee': 123}, name='BuyGem', emitter=psm)
+        b = bundle([log])
+        cached(b, psm, 'dai()', static('address', A))
+        cached(b, psm, 'gemJoin()', static('address', POOL))
+        cached(b, POOL, 'gem()', static('address', B))
+        cached(b, POOL, 'dec()', uint(6))
+        out = d.decode_transaction(b)
+        self.assertEqual(out['undecoded_events'], [])
+        self.assertEqual(out['conversions'][0]['input']['amount_raw'], str(10**18 + 123))
+
+    def test_zero_value_weth_deposit_is_not_a_missing_swap(self):
+        log = event_log('weth', {'dst': USER, 'wad': 0}, name='Deposit', emitter=d.WETH[1])
+        out = d.decode_transaction(bundle([log]))
+        self.assertEqual(out['undecoded_events'], [])
+        self.assertEqual(out['conversions'], [])
+        self.assertEqual(out['non_swap_events'][0]['venue_type'], 'zero_value_wrap_or_unwrap')
+
+    def test_dexaggregator_summary_uses_executed_amounts_and_preserves_fees(self):
+        # Thirteen ABI heads followed by three one-element dynamic arrays.
+        heads = b''.join(static('address', a) for a in (USER, USER, A, B))
+        heads += b''.join(uint(n) for n in (100, 90, 999, 5, 7)) + bytes(32)
+        heads += uint(416) + uint(480) + uint(544)
+        tail = uint(1) + static('address', A) + uint(1) + static('address', USER) + uint(1) + uint(3)
+        spec = next(e for e in d.EVENTS if e.family == 'dexaggregator_summary')
+        log = {'address': '0x20f6ee51340adeed01a59b0e65cb3703f3dc860c', 'topics': [spec.topic],
+               'data': '0x' + (heads + tail).hex(), 'logIndex': '0x0'}
+        for chain in (1, 8453):
+            out = d.decode_transaction(bundle([log], chain=chain))
+            self.assertEqual(out['undecoded_events'], [])
+            self.assertEqual(out['swaps'], [])
+            s = out['route_summaries'][0]
+            self.assertEqual((s['input']['amount_raw'], s['output']['amount_raw']), ('100', '90'))
+            self.assertEqual(s['evidence']['fields']['swapFeeAmounts'], ['3'])
+
+    def test_bought_v3_uses_received_amount_not_expected_amount(self):
+        log = event_log('paraswap_summary', {'uuid': '0x' + '01' * 16, 'partner': USER, 'initiator': USER,
+                        'beneficiary': USER, 'srcToken': A, 'destToken': B, 'srcAmount': 100,
+                        'receivedAmount': 90, 'expectedAmount': 999}, name='BoughtV3')
+        out = d.decode_transaction(bundle([log]))
+        self.assertEqual(out['swaps'], [])
+        self.assertEqual(out['route_summaries'][0]['output']['amount_raw'], '90')
+
+    def test_native_rfq_uses_executed_event_amounts_without_a_quote_or_trace(self):
+        emitter = '0x5d1a34369686ae59ac97ae4e1df5635ffda9ee7c'
+        raw = b''.join(static('address', a) for a in (USER, A, B))
+        raw += uint(125) + uint(93) + bytes.fromhex('ab' * 16) + bytes(16) + static('address', POOL)
+        log = {'address': emitter, 'logIndex': '0x0', 'data': '0x' + raw.hex(),
+               'topics': ['0xc82975a4eae9f14416813a0bd7312edf547928cd25ae9b8597ee4c92fa6862d2']}
+        out = d.decode_transaction(bundle([log]))
+        self.assertEqual(out['undecoded_events'], [])
+        s = out['swaps'][0]
+        self.assertEqual(amounts(s), ([(A, '125')], [(B, '93')]))
+        self.assertTrue(s['protocol_verified'])
+        self.assertEqual(s['maker'], POOL)
+        self.assertEqual(s['recipient'], USER)
 
 
 if __name__ == '__main__':

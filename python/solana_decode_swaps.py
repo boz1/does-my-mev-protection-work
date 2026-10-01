@@ -310,7 +310,10 @@ def swap_layout(node: Instruction, raw: bytes) -> dict | None:
     program, a = node.program, node.ix.get("accounts", [])
     name, pool, user, source, dest, vaults = None, None, None, None, None, ()
     if program == RAYDIUM and raw[:1] in {b"\x09", b"\x0b"}:
-        if len(a) not in {17, 18} or len(raw) != 17:
+        # Raydium reads the tag and two u64s, leaving the remaining bytes
+        # unused. Historical callers append suffixes (including two-byte
+        # nonces). Retain account/scope checks and derive amounts from CPIs.
+        if len(a) not in {17, 18} or len(raw) < 17:
             raise DecodeError("Unrecognized Raydium AMM v4 swap layout")
         name = "swap_base_in" if raw[0] == 9 else "swap_base_out"
         pool, user, source, dest = 1, -1, -3, -2

@@ -51,6 +51,10 @@ for single-transaction groups.
 python3 summarize_sandwich.py sandwiches.jsonl --row 1 --chain solana \
   --output summary.json --raw-output summary.raw.json
 python3 summarize_sandwich.py --from-json summary.raw.json --format text
+
+# Website shards and binary-packed Solana signatures:
+python3 summarize_sandwich.py base/s/0.json --chain base --row 1
+python3 summarize_sandwich.py solana/part-0001.bin --chain solana --row 1
 ```
 
 Or import it:
@@ -71,6 +75,23 @@ These decoders cover implemented protocol variants; they do not guarantee every
 possible swap. Unsupported activity and missing evidence are retained in output.
 The summary describes supplied candidate legs and does not independently prove
 economic causality or profitability.
+
+`sandwich_dataset.py` streams binary and JSONL records and reads website JSON
+shards. Binary records contain little-endian `<BBH` front/back/victim counts,
+then 64-byte signatures in that order; their length is `4 + 64 × (F + B + V)`.
+See the [input format and audit guide](SANDWICH_SUMMARIES.md#website-json-and-binary-input).
+
+Audit a dataset in resumable batches with RPC URLs configured above:
+
+```sh
+python3 audit_swap_dataset.py base/s --chain base --state base-audit.sqlite \
+  --max-transactions 100 --report base-audit.json
+```
+
+Repeat to resume; `--max-transactions 0` removes the per-run limit. SQLite state
+deduplicates transactions, preserves progress and records unresolved swaps and
+missing expected pool swaps. Completing the input scan does not certify that all
+swaps were recognized.
 
 ## Offline examples and tests
 

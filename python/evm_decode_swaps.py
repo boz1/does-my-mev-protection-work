@@ -425,6 +425,7 @@ EVENTS = [
     Event('zeroex', 'LimitOrderFilled', (('orderHash', 'bytes32', False), ('maker', 'address', False), ('taker', 'address', False), ('feeRecipient', 'address', False), ('makerToken', 'address', False), ('takerToken', 'address', False), ('takerTokenFilledAmount', 'uint128', False), ('makerTokenFilledAmount', 'uint128', False), ('takerTokenFeeFilledAmount', 'uint128', False), ('protocolFeePaid', 'uint256', False), ('pool', 'bytes32', False)), 'https://github.com/0xProject/protocol/blob/development/contracts/zero-ex/contracts/src/features/interfaces/INativeOrdersEvents.sol'),
     Event('zeroex', 'RfqOrderFilled', (('orderHash', 'bytes32', False), ('maker', 'address', False), ('taker', 'address', False), ('makerToken', 'address', False), ('takerToken', 'address', False), ('takerTokenFilledAmount', 'uint128', False), ('makerTokenFilledAmount', 'uint128', False), ('pool', 'bytes32', False)), 'https://github.com/0xProject/protocol/blob/development/contracts/zero-ex/contracts/src/features/interfaces/INativeOrdersEvents.sol'),
     Event('clipper', 'Swapped', (('inAsset', 'address', False), ('outAsset', 'address', False), ('recipient', 'address', False), ('inAmount', 'uint256', False), ('outAmount', 'uint256', False), ('auxiliaryData', 'bytes', False)), 'https://github.com/shipyard-software/clipper-dex-contracts/blob/main/contracts/ClipperExchangeInterface.sol'),
+    Event('clipper', 'Swapped', (('inAsset', 'address', True), ('outAsset', 'address', True), ('recipient', 'address', True), ('inAmount', 'uint256', False), ('outAmount', 'uint256', False), ('auxiliaryData', 'bytes', False)), 'https://sourcify.dev/server/v2/contract/1/0x655edce464cc797526600a462a8154650eee4b77?fields=abi'),
     Event('infinity_cl', 'Initialize', (('id', 'bytes32', True), ('currency0', 'address', True), ('currency1', 'address', True), ('hooks', 'address', False), ('fee', 'uint24', False), ('parameters', 'bytes32', False), ('sqrtPriceX96', 'uint160', False), ('tick', 'int24', False)), 'https://github.com/pancakeswap/infinity-core/blob/main/src/pool-cl/interfaces/ICLPoolManager.sol'),
     Event('infinity_cl', 'Swap', (('id', 'bytes32', True), ('sender', 'address', True), ('amount0', 'int128', False), ('amount1', 'int128', False), ('sqrtPriceX96', 'uint160', False), ('liquidity', 'uint128', False), ('tick', 'int24', False), ('fee', 'uint24', False), ('protocolFee', 'uint16', False)), 'https://github.com/pancakeswap/infinity-core/blob/main/src/pool-cl/interfaces/ICLPoolManager.sol'),
     Event('infinity_bin', 'Initialize', (('id', 'bytes32', True), ('currency0', 'address', True), ('currency1', 'address', True), ('hooks', 'address', False), ('fee', 'uint24', False), ('parameters', 'bytes32', False), ('activeId', 'uint24', False)), 'https://github.com/pancakeswap/infinity-core/blob/main/src/pool-bin/interfaces/IBinPoolManager.sol'),
@@ -440,6 +441,13 @@ FACTORIES = {1: {'0x5c69bee701ef814a2b6a3edd4b1652cb9cc5aa6f': {'name': 'Uniswap
 # Singleton deployments from the official integration/deployment references.
 EMITTERS = {
     1: {
+        '0xbbcb91440523216e2b87052a99f69c604a7b6e00': ('Fluid Dex Lite', 'fluid_lite'),
+        '0x5d1a34369686ae59ac97ae4e1df5635ffda9ee7c': ('Native RFQ', 'native_rfq'),
+        '0xf6e72db5454dd049d0788e411b06cfaf16853042': ('Maker/Sky Lite PSM', 'maker_psm'),
+        '0x89b78cfa322f6c5de0abceecab66aee45393cc5a': ('Maker PSM USDC', 'maker_psm'),
+        '0xae8999da4d81cb81b42288b12176fe20d7ead578': ('Revert V3Utils', 'v3utils_summary'),
+        '0x410b72ccfeacbb20a31785edaa358d25a07e143d': ('Revert V3Utils', 'v3utils_summary'),
+        '0x20f6ee51340adeed01a59b0e65cb3703f3dc860c': ('DexAggregator', 'dexaggregator_summary'),
         '0x000000000004444c5dc75cb358380d2e3de08a90': ('Uniswap v4', 'v4'),
         '0xba12222222228d8ba445958a75a0704d566bf2c8': ('Balancer v2', 'balancer_v2'),
         '0xba1333333333a1ba1108e8412f11850a5c319ba9': ('Balancer v3', 'balancer_v3'),
@@ -452,6 +460,7 @@ EMITTERS = {
         '0x5979458912f80b96d30d4220af8e2e4925a33320': ('Fermi', 'propamm'),
     },
     8453: {
+        '0x20f6ee51340adeed01a59b0e65cb3703f3dc860c': ('DexAggregator', 'dexaggregator_summary'),
         '0x498581ff718922c3f8e6a244956af099b2652b2b': ('Uniswap v4', 'v4'),
         '0xba12222222228d8ba445958a75a0704d566bf2c8': ('Balancer v2', 'balancer_v2'),
         '0xba1333333333a1ba1108e8412f11850a5c319ba9': ('Balancer v3', 'balancer_v3'),
@@ -497,6 +506,18 @@ EVENTS += [
 ]
 
 # WETH Deposit shares its signature with one event in the ERC4626 artifact.
+EVENTS += [
+    Event('fluid_lite', 'LogSwap', (('swapData', 'uint256', False), ('dexVariables', 'uint256', False)), 'https://github.com/Instadapp/fluid-contracts-public/blob/main/contracts/protocols/dexLite/other/events.sol'),
+    Event('native_rfq', 'RFQTrade', (('recipient', 'address', False), ('sellerToken', 'address', False), ('buyerToken', 'address', False), ('sellerTokenAmount', 'uint256', False), ('buyerTokenAmount', 'uint256', False), ('quoteId', 'bytes16', False), ('signer', 'address', False)), 'https://sourcify.dev/server/v2/contract/1/0x5d1a34369686ae59ac97ae4e1df5635ffda9ee7c?fields=compilation,sources'),
+    Event('maker_psm', 'BuyGem', (('owner', 'address', True), ('value', 'uint256', False), ('fee', 'uint256', False)), 'https://github.com/makerdao/dss-lite-psm/blob/master/src/DssLitePsm.sol'),
+    Event('maker_psm', 'SellGem', (('owner', 'address', True), ('value', 'uint256', False), ('fee', 'uint256', False)), 'https://github.com/makerdao/dss-lite-psm/blob/master/src/DssLitePsm.sol'),
+    Event('paraswap_summary', 'BoughtV3', (('uuid', 'bytes16', False), ('partner', 'address', False), ('feePercent', 'uint256', False), ('initiator', 'address', False), ('beneficiary', 'address', True), ('srcToken', 'address', True), ('destToken', 'address', True), ('srcAmount', 'uint256', False), ('receivedAmount', 'uint256', False), ('expectedAmount', 'uint256', False)), 'https://github.com/VeloraDEX/paraswap-dex-lib/blob/master/src/abi/IParaswap.json'),
+    # Swap(address,address,uint256,uint256) also describes unrelated protocols.
+    # V3Utils is accepted only at its verified deployment, never by topic alone.
+    Event('v3utils_summary', 'Swap', (('tokenIn', 'address', True), ('tokenOut', 'address', True), ('amountIn', 'uint256', False), ('amountOut', 'uint256', False)), 'https://sourcify.dev/server/v2/contract/1/0xae8999da4d81cb81b42288b12176fe20d7ead578?fields=compilation,sources'),
+    Event('dexaggregator_summary', 'Swap', (('fromAddress', 'address', False), ('toAddress', 'address', False), ('fromAssetAddress', 'address', False), ('toAssetAddress', 'address', False), ('amountIn', 'uint256', False), ('amountOut', 'uint256', False), ('expectedAmountOut', 'uint256', False), ('amountInSurplus', 'uint256', False), ('amountOutSurplus', 'uint256', False), ('consumerId', 'bytes32', False), ('swapFeeAssetAddresses', 'address[]', False), ('swapFeeReceivers', 'address[]', False), ('swapFeeAmounts', 'uint256[]', False)), 'https://sourcify.dev/server/v2/contract/1/0x20f6ee51340adeed01a59b0e65cb3703f3dc860c?fields=compilation,sources'),
+]
+
 EVENTS = [e for e in EVENTS if not (e.family == 'erc4626' and len(e.fields) == 2)]
 EVENT_BY_TOPIC: dict[str, list[Event]] = {}
 for _event in EVENTS:
@@ -526,18 +547,111 @@ def successful_calls(trace: dict, path: tuple[int, ...] = ()):
         yield from successful_calls(child, path + (i,))
 
 
+def execution_context_logs(frame: dict):
+    if frame.get('error') or frame.get('revertReason'):
+        return
+    yield from frame.get('logs', [])
+    for child in frame.get('calls', []):
+        if child.get('type', '').upper() in ('DELEGATECALL', 'CALLCODE'):
+            yield from execution_context_logs(child)
+
+
 def own_log_matches(call: dict, log: dict) -> bool:
-    def context_logs(frame):
-        if frame.get('error'):
-            return
-        yield from frame.get('logs', [])
-        for child in frame.get('calls', []):
-            if child.get('type', '').upper() in ('DELEGATECALL', 'CALLCODE'):
-                yield from context_logs(child)
     return any(l.get('address', '').lower() == log['address'].lower() and
                [t.lower() for t in l.get('topics', [])] == [t.lower() for t in log.get('topics', [])] and
                l.get('data', '').lower() == log.get('data', '').lower()
-               for l in context_logs(call))
+               for l in execution_context_logs(call))
+
+
+def fluid_lite_fill(meta: Metadata, log: dict) -> dict:
+    """Resolve packed 9-decimal amounts against successful single/hop calls.
+
+    Scaling the event alone loses input/output dust. The specified amount comes
+    from the executed call; the other side must equal its actual return value.
+    Hop intermediates use the same integer scaling as the deployed contract.
+    """
+    manager = address(log['address'])
+    if EMITTERS.get(meta.chain_id, {}).get(manager, (None, None))[1] != 'fluid_lite':
+        raise DecodeError('Fluid Dex Lite requires a registered emitter')
+    single = selector('swapSingle((address,address,bytes32),bool,int256,uint256,address,bool,bytes,bytes)')
+    hop = selector('swapHop(address[],(address,address,bytes32)[],int256,uint256[],(address,bool,bytes,bytes))')
+    spec = next(e for e in EVENTS if e.family == 'fluid_lite')
+    matches = []
+    for path, call in successful_calls(meta.trace()):
+        data = call.get('input', '').lower()
+        if call.get('to', '').lower() != manager or data[:10] not in (single, hop) or not own_log_matches(call, log):
+            continue
+        if data[:10] == single:
+            key, direction, specified, limit, recipient, _, _, _ = abi_decode(
+                ['(address,address,bytes32)', 'bool', 'int256', 'uint256', 'address', 'bool', 'bytes', 'bytes'], hex_bytes(data)[4:])
+            keys, directions, limits = [key], [direction], [limit]
+        else:
+            route, keys, specified, limits, transfer = abi_decode(
+                ['address[]', '(address,address,bytes32)[]', 'int256', 'uint256[]', '(address,bool,bytes,bytes)'], hex_bytes(data)[4:])
+            if not keys or len(route) != len(keys) + 1 or len(limits) != len(keys):
+                raise DecodeError('Invalid Fluid Dex Lite hop path')
+            directions = []
+            for i, key in enumerate(keys):
+                if (route[i], route[i + 1]) not in (tuple(key[:2]), tuple(key[:2][::-1])):
+                    raise DecodeError('Fluid Dex Lite hop tokens differ from pool key')
+                directions.append(route[i] == key[0])
+            recipient = transfer[0]
+        if not specified:
+            raise DecodeError('Fluid Dex Lite specified amount is zero')
+        returned = abi_decode(['uint256'], hex_bytes(call.get('output', '0x')))[0]
+        logs = [l for l in execution_context_logs(call)
+                if l.get('address', '').lower() == manager and l.get('topics', []) == [spec.topic]]
+        if len(logs) != len(keys):
+            raise DecodeError('Fluid Dex Lite call/log count mismatch')
+        if all('index' in l for l in logs):
+            logs.sort(key=lambda l: quantity(l['index']))
+        elif call.get('calls') and any(c.get('type', '').upper() in ('DELEGATECALL', 'CALLCODE') for c in call['calls']) and len(logs) > 1:
+            raise MetadataError('Fluid Dex Lite hop needs ordered trace log indexes')
+        order = list(range(len(keys))) if specified > 0 else list(reversed(range(len(keys))))
+        current, selected = abs(specified), []
+        for i, executed_log in zip(order, logs):
+            key, direction = keys[i], directions[i]
+            packed = spec.decode(executed_log)
+            swap, variables = packed['swapData'], packed['dexVariables']
+            key_hash = keccak256(bytes.fromhex(''.join(map(word, key))))
+            if swap & ((1 << 64) - 1) != int.from_bytes(key_hash[:8], 'big') or bool((swap >> 64) & 1) != direction:
+                raise DecodeError('Fluid Dex Lite event/key/direction mismatch')
+            if key[0] >= key[1] or swap >> 185:
+                raise DecodeError('Invalid Fluid Dex Lite key or packed event')
+            decimals = ((variables >> 126) & 31, (variables >> 131) & 31)
+            if any(x < 6 or x > 18 for x in decimals):
+                raise DecodeError('Invalid Fluid Dex Lite packed token decimals')
+            a, b = key[:2] if direction else key[:2][::-1]
+            da, db = decimals if direction else decimals[::-1]
+            adjusted_in, adjusted_out = (swap >> 65) & ((1 << 60) - 1), (swap >> 125) & ((1 << 60) - 1)
+            if specified > 0:
+                ain, aout = current, adjusted_out * 10**db // 10**9
+                if ain * 10**9 // 10**da != adjusted_in or aout < limits[i]:
+                    raise DecodeError('Fluid Dex Lite exact-input execution/event mismatch')
+                current = aout
+            else:
+                ain, aout = adjusted_in * 10**da // 10**9, current
+                if aout * 10**9 // 10**db != adjusted_out or ain > limits[i]:
+                    raise DecodeError('Fluid Dex Lite exact-output execution/event mismatch')
+                current = ain
+            if executed_log.get('data', '').lower() == log.get('data', '').lower():
+                selected.append({'inputs': [(a, ain)], 'outputs': [(b, aout)],
+                                 'pool_id': '0x' + key_hash.hex(),
+                                 'sender': address(call['from']),
+                                 'recipient': (address(call['from']) if recipient == ZERO else recipient) if i == len(keys) - 1 else None,
+                                 'pool_key': dict(zip(('token0', 'token1', 'salt'), key)),
+                                 'trace_address': list(path), 'hop_index': i,
+                                 'amount_scope': 'executed_call_and_packed_pool_event_with_return_validation'})
+        if current != returned:
+            raise DecodeError('Fluid Dex Lite packed amounts differ from executed return value')
+        if len(selected) != 1:
+            raise DecodeError('Ambiguous Fluid Dex Lite log within call')
+        matches.extend(selected)
+    if not matches:
+        raise MetadataError('Fluid Dex Lite requires a successful matching swap trace')
+    if len(matches) != 1:
+        raise DecodeError('Ambiguous Fluid Dex Lite execution scope')
+    return matches[0]
 
 
 def successful_logs(call: dict):
@@ -772,6 +886,9 @@ def decode_event(event: Event, log: dict, meta: Metadata) -> tuple[str, dict] | 
     recipient = d.get('recipient', d.get('to', d.get('receiver')))
     tokens, inputs, outputs, pool_id = None, [], [], None
     extra: dict = {}
+    if family in ('maker_psm', 'v3utils_summary', 'dexaggregator_summary'):
+        if EMITTERS.get(meta.chain_id, {}).get(pool, (None, None))[1] != family:
+            raise DecodeError('This event layout requires a registered emitter; topic alone is ambiguous')
     if family in ('v2', 'solidly', 'euler'):
         tokens = pair_tokens(meta, pool, family)
         inputs = [(t, d[f'amount{i}In']) for i, t in enumerate(tokens) if d[f'amount{i}In'] > 0]
@@ -820,6 +937,10 @@ def decode_event(event: Event, log: dict, meta: Metadata) -> tuple[str, dict] | 
         zero_in = d['tokenAIn'] if family == 'maverick_v1' else d['params'][1] if family == 'maverick_v2' else d['swap0to1']
         a, b = tokens if zero_in else tokens[::-1]
         inputs, outputs = [(a, d['amountIn'])], [(b, d['amountOut'])]
+    elif family == 'fluid_lite':
+        extra = fluid_lite_fill(meta, log)
+        inputs, outputs = extra.pop('inputs'), extra.pop('outputs')
+        sender, recipient, pool_id = extra.pop('sender'), extra.pop('recipient'), extra.pop('pool_id')
     elif family in ('woo', 'dodo_v2', 'wombat'):
         inputs, outputs = [(d['fromToken'], d['fromAmount'])], [(d['toToken'], d['toAmount'])]
     elif family == 'dodo_v1':
@@ -838,9 +959,39 @@ def decode_event(event: Event, log: dict, meta: Metadata) -> tuple[str, dict] | 
         a, b = (d['tokenIn'], d['tokenOut']) if family == 'angle' else (d['assetIn'], d['assetOut'])
         inputs, outputs = [(a, d['amountIn'])], [(b, d['amountOut'])]
         category, kind = 'conversions', 'token_conversion'
+    elif family == 'maker_psm':
+        dai = meta.call(pool, 'dai()')
+        if pool == '0x89b78cfa322f6c5de0abceecab66aee45393cc5a':
+            # Original DssPsm keeps the factor internal; its immutable gemJoin
+            # exposes the collateral and the decimals used by the constructor.
+            join = meta.call(pool, 'gemJoin()')
+            gem = meta.call(join, 'gem()')
+            decimals = meta.call(join, 'dec()', returns=('uint256',))
+            if not 0 <= decimals <= 18:
+                raise DecodeError('Invalid Maker PSM collateral decimals')
+            factor = 10**(18 - decimals)
+        else:
+            gem = meta.call(pool, 'gem()')
+            factor = meta.call(pool, 'to18ConversionFactor()', returns=('uint256',))
+        if factor not in {10**i for i in range(19)}:
+            raise DecodeError('Invalid Lite PSM decimal conversion factor')
+        gross = d['value'] * factor
+        if name == 'BuyGem':
+            inputs, outputs = [(dai, gross + d['fee'])], [(gem, d['value'])]
+        else:
+            inputs, outputs = [(gem, d['value'])], [(dai, gross - d['fee'])]
+        category, kind, recipient = 'conversions', 'peg_stability_conversion', d['owner']
+        extra['fee_amount_raw'] = str(d['fee'])
+        extra['fee_token'] = dai
+        extra['amount_scope'] = 'executed_gem_event_and_dai_fee; uses_immutable_decimal_factor'
     elif family == 'clipper':
         inputs, outputs = [(d['inAsset'], d['inAmount'])], [(d['outAsset'], d['outAmount'])]
         kind = 'rfq_pool'
+    elif family == 'native_rfq':
+        inputs, outputs = [(d['sellerToken'], d['sellerTokenAmount'])], [(d['buyerToken'], d['buyerTokenAmount'])]
+        kind = 'rfq_pool'
+        extra['maker'] = d['signer']
+        extra['amount_scope'] = 'executed_effective_input_and_adjusted_output; event_normalizes_native_ETH_to_WETH'
     elif family == 'mstable':
         amount, evidence = scoped_input_transfer(meta, log, d['input'], d['swapper'])
         inputs, outputs = [(d['input'], amount)], [(d['output'], d['outputAmount'])]
@@ -936,11 +1087,24 @@ def decode_event(event: Event, log: dict, meta: Metadata) -> tuple[str, dict] | 
             raise DecodeError('Deposit/Withdrawal emitter is not this chain\'s canonical WETH')
         inputs, outputs = ([(NATIVE, d['wad'])], [(pool, d['wad'])]) if name == 'Deposit' else ([(pool, d['wad'])], [(NATIVE, d['wad'])])
         category, kind = 'conversions', 'wrap' if name == 'Deposit' else 'unwrap'
+        if not d['wad']:
+            category, kind = 'non_swap_events', 'zero_value_wrap_or_unwrap'
         sender = d.get('src', d.get('dst'))
     elif family == 'paraswap_summary':
         inputs, outputs = [(d['srcToken'], d['srcAmount'])], [(d['destToken'], d['receivedAmount'])]
         category, kind = 'route_summaries', 'aggregator_summary'
         sender, recipient = d['initiator'], d['beneficiary']
+    elif family == 'v3utils_summary':
+        inputs, outputs = [(d['tokenIn'], d['amountIn'])], [(d['tokenOut'], d['amountOut'])]
+        category, kind = 'route_summaries', 'aggregator_summary'
+        extra['amount_scope'] = 'V3Utils_router_balance_deltas; may_overlap_underlying_pool_swaps'
+    elif family == 'dexaggregator_summary':
+        inputs, outputs = [(d['fromAssetAddress'], d['amountIn'])], [(d['toAssetAddress'], d['amountOut'])]
+        category, kind = 'route_summaries', 'aggregator_summary'
+        sender, recipient = d['fromAddress'], d['toAddress']
+        if not (len(d['swapFeeAssetAddresses']) == len(d['swapFeeReceivers']) == len(d['swapFeeAmounts'])):
+            raise DecodeError('DexAggregator fee arrays have different lengths')
+        extra['amount_scope'] = 'router_spent_input_and_recipient_output_balance_delta'
     elif family == 'kyber_summary':
         inputs, outputs = [(d['srcToken'], d['spentAmount'])], [(d['dstToken'], d['returnAmount'])]
         category, kind, recipient = 'route_summaries', 'aggregator_summary', d['dstReceiver']
@@ -1143,7 +1307,8 @@ def decode_transaction(bundle: dict, rpc: Rpc | None = None) -> dict:
 
 def protocol_catalog() -> dict:
     return {'chains': CHAIN_IDS, 'event_schemas': [
-        {'adapter': e.family, 'event': e.signature, 'topic0': e.topic, 'source': e.source}
+        {'adapter': e.family, 'event': e.signature, 'topic0': e.topic, 'source': e.source,
+         'indexed_fields': [name for name, _, indexed in e.fields if indexed]}
         for e in EVENTS if e.name not in ('Initialize', 'PoolInitialized')],
         'anonymous_schemas': [
             {'adapter': 'ekubo_' + version, 'event': 'anonymous 116-byte packed Swap',

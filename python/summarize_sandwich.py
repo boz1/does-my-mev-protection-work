@@ -2,8 +2,8 @@
 """Summarize one [front transactions, back transactions, victim transactions] row.
 
 Python API: summarize_sandwich(front, back, victims, chain="solana"). Front
-and back may each be a string or a list. CLI accepts a JSONL file and --row N,
-an inline --row-json value, or --front/--back/--victim. RPCs come from
+and back may each be a string or a list. CLI accepts JSONL, website JSON shards,
+Solana binary parts and --row N, an inline --row-json value, or explicit legs. RPCs come from
 SOLANA_RPC_URL, BASE_RPC_URL, or ETHEREUM_RPC_URL. See SANDWICH_SUMMARIES.md.
 """
 from __future__ import annotations
@@ -20,6 +20,7 @@ from typing import Sequence
 
 import evm_decode_swaps as evm
 import solana_decode_swaps as solana
+import sandwich_dataset as dataset
 
 
 CHAINS = ('solana', 'base', 'ethereum')
@@ -32,10 +33,14 @@ class SummaryError(ValueError):
     pass
 
 
-def normalize_row(row: Sequence, chain: str = 'solana') -> list[list[str]]:
+def normalize_row(row: Sequence | dict, chain: str = 'solana') -> list[list[str]]:
     """Validate all legs and preserve multiple fronts, backs and victims."""
     if chain not in CHAINS:
         raise SummaryError('Chain must be solana, base, or ethereum')
+    try:
+        row = dataset.row_from_record(row)
+    except dataset.DatasetError as exc:
+        raise SummaryError(str(exc)) from None
     if not isinstance(row, (list, tuple)) or len(row) != 3:
         raise SummaryError('A row must be [front_txs, back_txs, victim_txs]')
     result, seen = [], set()
@@ -65,23 +70,17 @@ def normalize_row(row: Sequence, chain: str = 'solana') -> list[list[str]]:
     return result
 
 
-def read_row(path: str | Path, line_number: int = 1) -> list:
-    """Read a one-based physical JSONL line without loading the whole dataset."""
-    if line_number < 1:
-        raise SummaryError('--row must be at least 1 (one-based line number)')
-    with Path(path).open() as source:
-        for number, line in enumerate(source, 1):
-            if number == line_number:
-                try:
-                    return json.loads(line)
-                except ValueError:
-                    raise SummaryError('Selected line is not valid JSON') from None
-    raise SummaryError('Selected row is beyond the end of the file')
+def read_row(path: str | Path, line_number: int = 1, *, input_format: str = 'auto') -> list:
+    """Read one record; for JSONL the number remains a physical line number."""
+    try:
+        return dataset.read_record(path, line_number, format=input_format).row
+    except dataset.DatasetError as exc:
+        raise SummaryError(str(exc)) from None
 
 
 def safe_error(exc: Exception) -> str:
     # Existing decoder/RPC exceptions already suppress endpoint credentials.
-    if isinstance(exc, (SummaryError, solana.DecodeError, evm.DecodeError, evm.RpcError)):
+    if isinstance(exc, (SummaryError, dataset.DatasetError, solana.DecodeError, evm.DecodeError, evm.RpcError)):
         return str(exc)
     return type(exc).__name__
 
@@ -361,7 +360,7 @@ def summarize_sandwich(front: TxGroup, back: TxGroup, victims: TxGroup, *,
                             rpc_url=rpc_url, timeout=timeout, workers=workers))
 
 
-def summarize_row(row: Sequence, **kwargs) -> dict:
+def summarize_row(row: Sequence | dict, **kwargs) -> dict:
     """Accept a parsed row directly, including rows with several front/back legs."""
     normalized = normalize_row(row, kwargs.get('chain', 'solana'))
     return summarize_sandwich(*normalized, **kwargs)
@@ -425,8 +424,9 @@ def render_text(summary: dict) -> str:
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('file', nargs='?', type=Path, help='JSONL dataset')
-    parser.add_argument('--row', type=int, default=1, help='One-based line number (default 1)')
+    parser.add_argument('file', nargs='?', type=Path, help='JSONL rows, website JSON shard or Solana binary part')
+    parser.add_argument('--row', type=int, default=1, help='One-based record number; physical line for JSONL (default 1)')
+    parser.add_argument('--input-format', choices=dataset.FORMATS, default='auto', help='Default: infer from file extension')
     parser.add_argument('--row-json', help='One inline [front, back, victims] JSON row')
     parser.add_argument('--front', nargs='+', help='One or more front transaction hashes')
     parser.add_argument('--back', nargs='+', help='One or more back transaction hashes')
@@ -444,14 +444,16 @@ def main(argv: list[str] | None = None) -> int:
         modes = sum(bool(x) for x in (args.file, args.row_json, args.from_json,
                                      args.front or args.back or args.victim))
         if modes != 1:
-            raise SummaryError('Choose exactly one: JSONL file, --row-json, --from-json, or --front/--back/--victim')
+            raise SummaryError('Choose exactly one: dataset file, --row-json, --from-json, or --front/--back/--victim')
         if args.from_json:
             raw = json.loads(args.from_json.read_text())
             if args.chain and raw.get('chain') != args.chain:
                 raise SummaryError('Saved bundle does not match --chain')
         else:
             chain = args.chain or 'solana'
-            row = read_row(args.file, args.row) if args.file else json.loads(args.row_json) if args.row_json else [args.front, args.back, args.victim]
+            if args.file and dataset.input_format(args.file, args.input_format) == 'solana-binary' and chain != 'solana':
+                raise SummaryError('Solana binary parts require --chain solana')
+            row = read_row(args.file, args.row, input_format=args.input_format) if args.file else json.loads(args.row_json) if args.row_json else [args.front, args.back, args.victim]
             row = normalize_row(row, chain)
             raw = fetch_sandwich(*row, chain=chain, rpc_url=args.rpc_url, timeout=args.timeout, workers=args.workers)
         summary = summarize_bundle(raw)

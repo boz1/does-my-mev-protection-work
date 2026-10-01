@@ -67,6 +67,29 @@ class DecodeSwapsTest(unittest.TestCase):
         self.assertEqual(swap["token_out"]["mint"], decoder.WSOL)
         self.assertEqual(swap["amount_out"], "0.163749394")
 
+    def test_raydium_ignored_trailing_bytes_preserve_executed_amounts(self):
+        # Both exact-input and exact-output instructions use prefix parsing in
+        # Raydium. Extra caller bytes must not hide a successfully executed swap.
+        for name in ("raydium_back.json", "raydium_jupiter_legacy.json"):
+            for suffix in (b"\xa0\x08", bytes(range(32))):
+                tx = fixture(name)
+                expected = decoder.decode_transaction(tx)
+                nodes = decoder.instruction_tree(tx, [])
+                ray = next(n for n in nodes if n.program == decoder.RAYDIUM)
+                ray.ix["data"] = decoder.b58encode(decoder.b58decode(ray.ix["data"]) + suffix)
+                with self.subTest(fixture=name, suffix_bytes=len(suffix)):
+                    self.assertEqual(decoder.decode_transaction(tx), expected)
+
+    def test_raydium_truncated_prefix_still_rejected(self):
+        for name in ("raydium_back.json", "raydium_jupiter_legacy.json"):
+            tx = fixture(name)
+            ray = next(n for n in decoder.instruction_tree(tx, []) if n.program == decoder.RAYDIUM)
+            ray.ix["data"] = decoder.b58encode(decoder.b58decode(ray.ix["data"])[:16])
+            decoded = decoder.decode_transaction(tx)
+            with self.subTest(fixture=name):
+                self.assertFalse(decoded["swaps"])
+                self.assertEqual(len(decoded["undecoded_swaps"]), 1)
+
     def test_two_swaps_in_same_router_keep_distinct_amounts_and_boundaries(self):
         result = decoder.decode_transaction(routed_two_swaps())
         self.assertFalse(result["warnings"])

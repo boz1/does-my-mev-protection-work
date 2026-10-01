@@ -12,7 +12,9 @@ accepted for individual front/back hashes. This summarizes a supplied candidate;
 it is not a detector or proof that an attack was profitable.
 
 The code supports Solana, Base, and Ethereum through the existing swap decoders.
-Keep their Python modules beside this script. No new packages are required.
+Keep their Python modules and `sandwich_dataset.py` beside this script. No new
+packages are required. Website JSON records with `f`, `b`, and `V[*].h` fields
+and Solana binary parts are also supported, including multiple legs in every group.
 
 ## Python usage
 
@@ -62,6 +64,75 @@ bundle includes transactions, decoder metadata/traces, block ordering, and any
 fetch errors. In Python, use `fetch_sandwich(...)` and `summarize_bundle(bundle)`
 to fetch once and repeatedly summarize offline.
 
+## Website JSON and binary input
+
+```sh
+# --row is a one-based array position in a website JSON shard:
+python3 summarize_sandwich.py base/s/0.json --row 1 --chain base
+python3 summarize_sandwich.py s/0.json --row 1 --chain ethereum
+python3 summarize_sandwich.py eth_reorg/s/0.json --row 1 --chain ethereum
+
+# --row is a one-based record number inside this Solana part:
+python3 summarize_sandwich.py solana/part-0001.bin --row 1 --chain solana
+```
+
+The filename extension selects the reader; `--input-format jsonl|json|solana-binary`
+overrides it. JSONL numbering remains a physical line number. `summarize_row()`
+and `--row-json` accept the website object directly. The mapping is:
+
+```python
+[record['f'], record['b'], [victim['h'] for victim in record['V']]]
+```
+
+A Solana binary part is a sequence of records, with no file header or separator:
+
+| Bytes | Meaning |
+| --- | --- |
+| 1 | Unsigned front count `F` |
+| 1 | Unsigned back count `B` |
+| 2 | Unsigned victim count `V`, little-endian |
+| `64 × F` | Front signatures |
+| `64 × B` | Back signatures |
+| `64 × V` | Victim signatures |
+
+Record size is `4 + 64 × (F + B + V)`. One front, one back, three victims occupy
+324 bytes. Base58-encode each raw 64-byte signature to obtain a Solana transaction
+ID. Records never span parts. Dates, slots, transaction positions and swap details
+are fetched from RPC; they are not present in these binary files. The reader streams
+one record at a time and rejects empty groups and truncated headers/signatures.
+
+`sandwich_dataset.iter_records(path)` yields rows plus their record numbers and
+binary byte offsets. Manifest checksum verification is separate from parsing;
+the reader does not claim that a downloaded file matches a manifest automatically.
+
+## Resumable dataset validation
+
+```sh
+# A bounded run; repeat the same command to resume:
+python3 audit_swap_dataset.py base/s --chain base --state base-audit.sqlite \
+  --max-transactions 100 --report base-audit.json
+
+# Entire directory, with no per-run transaction limit:
+python3 audit_swap_dataset.py solana --chain solana --state solana-audit.sqlite \
+  --max-transactions 0 --report solana-audit.json
+
+python3 audit_swap_dataset.py s --chain ethereum --state ethereum-audit.sqlite
+python3 audit_swap_dataset.py eth_reorg/s --chain ethereum --state ethereum-audit.sqlite
+```
+
+The auditor deduplicates transactions by chain and hash, saves record checkpoints
+in SQLite, and resumes safely even when a limit stops halfway through a sandwich.
+A decoder change invalidates old results. Changed input files require a new state
+file. `--retry-incomplete` retries saved fetch failures and unresolved recognized
+swaps; `--raw-dir` optionally saves full evidence for offline decoding. Unknown
+logs/instructions remain review items. The `record_issues` table also flags website
+legs whose stated pool is absent from decoded swaps.
+
+`input_scan_complete` means all supplied records were attempted, including those
+with failures. It does **not** mean every swap was decoded. Totals cover all inputs
+for the selected chain in the state file; endpoint URLs are never stored. Running
+the full population can require millions of RPC requests and substantial time.
+
 ## Returned information
 
 | Field | Meaning |
@@ -100,6 +171,12 @@ Classification rules:
 - **Unknown:** available data cannot establish the block relationship. If block
   equality is known but transaction indices are missing, the relationship is
   `within_block` and `is_tight` is null, rather than assuming wide or tight.
+
+Some source datasets reserve `tight` for exactly one front, one victim and one
+back. Their labels therefore differ from this summarizer for consecutive multiple
+victims. Dates are always computed from RPC timestamps in UTC, even if a source
+record's date label differs. Private-order-flow hints remain source evidence and
+are not inferred from ordinary transaction RPC data.
 
 Some supplied rows interleave fronts and victims. These remain intact and are
 labeled as interleaved; their actual execution order remains visible. Failed

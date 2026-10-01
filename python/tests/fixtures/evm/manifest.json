@@ -1770,7 +1770,7 @@
   },
   {
     "file": "ethereum_0xf3f41767ec04973092e1669b94bb9af973ba5a30a0bc50d10b3aaf82bd963b97.json",
-    "sha256": "ed761627a0522f9e5fabddbd7699fd577005dc21a4ab0a4d8b01a7e7e333d619",
+    "sha256": "00218ce2aea068b15f56eb088b89578975bd1c6e2841b75399edd2dca6b158ed",
     "expected": {
       "swaps": [
         {
@@ -1852,7 +1852,34 @@
           ]
         }
       ],
-      "conversions": [],
+      "conversions": [
+        {
+          "log_index": 239,
+          "adapter": "maker_psm",
+          "emitter": "0xf6e72db5454dd049d0788e411b06cfaf16853042",
+          "pool_id": null,
+          "inputs": [
+            {
+              "address": "0x6b175474e89094c44da98b954eedeac495271d0f",
+              "is_native": false,
+              "symbol": "DAI",
+              "decimals": 18,
+              "amount_raw": "723000000000000",
+              "amount": "0.000723"
+            }
+          ],
+          "outputs": [
+            {
+              "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+              "is_native": false,
+              "symbol": "USDC",
+              "decimals": 6,
+              "amount_raw": "723",
+              "amount": "0.000723"
+            }
+          ]
+        }
+      ],
       "settlements": [],
       "route_summaries": [
         {
