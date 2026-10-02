@@ -208,20 +208,17 @@ function amt(x,tok){
 }
 const TYPE={tight:"tight",within_block_wide:"within-block wide",cross_block_wide:"cross-block wide"};
 
-function reason(L, sole){
+function reason(L){
   const S=!!L.s, M=!!L.m, K=!!L.k, R=!!L.r;
-  let t;
-  if(K) t="full transaction shared via Blink";
-  else if(R) t="full transaction shared via Merkle";
-  else if(S&&M) t="MEV-Share hints matched against MEVBlocker hashes";
-  else if(S) t="seen only in MEV-Share — mechanism unconfirmed";
-  else if(M) t="seen only in MEVBlocker — mechanism unconfirmed";
-  else t="not seen in any OFA dataset";
-  if(!sole) t+=" (not the sole victim)";
-  return t;
+  if(K) return "full transaction shared via Blink";
+  if(R) return "full transaction shared via Merkle";
+  if(S&&M) return "MEV-Share hints matched against MEVBlocker hashes";
+  if(S) return "seen only in MEV-Share — mechanism unconfirmed";
+  if(M) return "seen only in MEVBlocker — mechanism unconfirmed";
+  return "not seen in any OFA dataset";
 }
 
-function seqHTML(rec,q,X,Y){
+function seqHTML(rec,q,X,Y,ty){
   const rows=[];
   const row=(role,h,detail)=>{
     const you=h===q;
@@ -230,7 +227,7 @@ function seqHTML(rec,q,X,Y){
   rows.push(`<div class="block-label">Block ${n0(rec.fb)}</div>`);
   rec.f.forEach((h,i)=>row("Front",h, i===0?`${amt(rec.fai,X)} → ${amt(rec.fao,Y)}`:"split leg"));
   rec.V.forEach(v=>row("Victim",v.h, `${chain===CHAINS.ethereum?"private, ":""}from ${adl(v.a)}`));
-  rows.push(`<div class="gap-note">${rec.ta!=null?`${n0(rec.ta)} transactions from front leg to back leg`:`${rec.ba} block${rec.ba===1?"":"s"} between the legs`}</div>`);
+  rows.push(`<div class="gap-note">${ty} · ${rec.ta!=null?`${n0(rec.ta)} transactions from front leg to back leg`:`${rec.ba} block${rec.ba===1?"":"s"} between the legs`}</div>`);
   if(rec.bb!==rec.fb) rows.push(`<div class="block-label">Block ${n0(rec.bb)} <span class="muted">(+${n0(rec.bb-rec.fb)})</span></div>`);
   rec.b.forEach((h,i)=>row("Back",h, i===0?`${amt(rec.bai,Y)} → ${amt(rec.bao,X)}`:"split leg"));
   return rows.join("");
@@ -243,29 +240,29 @@ function render(rec, q, viaReorg){
   const role=rec.f.includes(q)?"front leg":"back leg";
   const priv=rec.V;
   const ty=TYPE[rec.t]||rec.t;
-  const via=viaReorg?" · exposed via chain reorg":"";
 
   const sole=priv.length===1;
-  const cause=v=>viaReorg ? "exposed by a reorged block: the block carrying it was broadcast, then reorged out"+(sole?"":" (not the sole victim)")
-    : chain.causes ? (chain.causes[rec.bot]||"cause not attributed")+(sole?"":" (not the sole victim)")
-    : chain.cause ? chain.cause+(sole?"":" (not the sole victim)")
-    : reason(v.L,sole);
+  const cause=v=>viaReorg ? "exposed by a reorged block: the block carrying it was broadcast, then reorged out"
+    : chain.causes ? (chain.causes[rec.bot]||"cause not attributed")
+    : chain.cause ? chain.cause
+    : reason(v.L);
   const nv=`${priv.length}${chain===CHAINS.ethereum?" private":""} victim${sole?"":"s"}`;
   const summary=me
     ? `<p class="summary hit">Sandwiched on ${rec.d} by bot ${adl(rec.bot)} in a ${ty} attack${chain.cause?`, ${chain.cause}`:""}.</p>`
     : `<p class="summary">${role[0].toUpperCase()+role.slice(1)} of a ${ty} sandwich on ${rec.d} against ${nv}${viaReorg?", exposed through a chain reorg":""}${rec.p==null?"":`. The bot ${rec.p<0?"lost":"made"} ${amt(Math.abs(rec.p),X)} before fees`}.</p>`;
 
   const head=me
-    ? `<p class="verdict hit">Sandwiched</p>${summary}<p class="meta"><b>${rec.d}</b> · bot ${adl(rec.bot)} · ${ty} attack${via}</p>`
-    : `<p class="verdict">Attacker leg</p>${summary}<p class="meta">${role}, bot ${adl(rec.bot)}, <b>${rec.d}</b>, against ${nv}${via}</p>`;
+    ? `<p class="verdict hit">Sandwiched</p>${summary}`
+    : `<p class="verdict">Attacker leg</p>${summary}`;
 
   const vics=priv.map(v=>`<div class="vic"><p class="hash mono">${v.h===q?"▶ ":""}${txl(v.h)}</p><p class="reason">${cause(v)}</p></div>`).join("");
 
   /* Exposure is attributed per victim on Ethereum (OFA labels, reorgs) and per bot on Base only. */
   const exposure=chain===CHAINS.ethereum||chain===CHAINS.base;
   out.innerHTML=`${head}
-  ${seqHTML(rec,q,X,Y)}
+  ${seqHTML(rec,q,X,Y,ty)}
   ${exposure?`<p class="label">Exposure</p>
+  ${sole?"":'<p class="muted small">This sandwich encloses multiple victims; the attacker likely targeted only one.</p>'}
   ${vics||'<p class="muted small">No private victims.</p>'}`:""}`;
 }
 
