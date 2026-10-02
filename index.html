@@ -156,17 +156,17 @@ const CHAINS={
     label:"Base", example:"0xeaec7b56577e074cb2893c0e57fce3d8117648ba3074b337960b1897a49de7bb", protection:"Protection: a private mempool, where pending transactions are visible only to the sequencer until they are included.", idx:"base/idx", s:"base/s", ns:64, count:1889, bots:4,
     /* Per-bot exposure, as attributed in the paper (Base section). */
     causes:{
-      "0x000000224f8364bb91259b24435881efc3752b3e":"transaction-pool leak: this bot was active during the August 2023 Base incident that exposed pending transactions",
-      "0x14d676cbaac800c5b0297cd1226770b5d2d2bb75":"predictable behavior: the victims trade in a fixed, recurring loop, so the next swap can be anticipated",
-      "0xc9cc0e1ecf0ae9af9439933b0c38ee843977b41b":"predictable behavior: recurring, funding-linked victim trades. The bot's close fee matching suggests some transaction visibility as well",
-      "0xfcf103349cb306c0234c4171559150f385745a26":"predictable behavior: recurring, funding-linked victim trades. The bot's close fee matching suggests some transaction visibility as well",
+      "0x000000224f8364bb91259b24435881efc3752b3e":"transaction-pool leak: active only during the August 2023 Base incident that exposed pending transactions",
+      "0x14d676cbaac800c5b0297cd1226770b5d2d2bb75":"predictable behavior: victims trade in a fixed, recurring loop, so the next swap can be anticipated",
+      "0xc9cc0e1ecf0ae9af9439933b0c38ee843977b41b":"predictable behavior: victims trade in recurring, funding-linked patterns; the bot's close fee matching suggests some additional transaction visibility",
+      "0xfcf103349cb306c0234c4171559150f385745a26":"predictable behavior: victims trade in recurring, funding-linked patterns; the bot's close fee matching suggests some additional transaction visibility",
     },
     txUrl:h=>`https://basescan.org/tx/${h}`,
     addrUrl:h=>`https://basescan.org/address/${h}`,
   },
   tron:{
     label:"Tron", example:"0xf177a23562708b6304e9350287933300fe58a214c104aa772dfde5d3b4f7ec70", protection:"Protection: first-come-first-served ordering. The public mempool is ordered by arrival time, so fees can\u2019t buy an earlier position.", idx:"tron/idx", s:"tron/s", ns:64, count:38567, bots:12, bareHex:true,
-    cause:"probably a latency race",
+    cause:"latency race: Tron's public mempool lets attackers observe pending swaps and race the front-run to the block producer",
     txUrl:h=>`https://tronscan.org/#/transaction/${h.slice(2)}`,
   },
   /* Solana is too large for this site (9.4 GB), so it is read from the Hugging
@@ -210,12 +210,12 @@ const TYPE={tight:"tight",within_block_wide:"within-block wide",cross_block_wide
 
 function reason(L){
   const S=!!L.s, M=!!L.m, K=!!L.k, R=!!L.r;
-  if(K) return "full transaction shared via Blink";
-  if(R) return "full transaction shared via Merkle";
-  if(S&&M) return "MEV-Share hints matched against MEVBlocker hashes";
-  if(S) return "seen only in MEV-Share — mechanism unconfirmed";
-  if(M) return "seen only in MEVBlocker — mechanism unconfirmed";
-  return "not seen in any OFA dataset";
+  if(K) return "full-transaction disclosure: observed only in Blink, which shares full transactions with approved searchers";
+  if(R) return "full-transaction disclosure: observed only in Merkle, which shares full transactions with approved searchers";
+  if(S&&M) return "cross-OFA correlation: observed in both MEV-Share and MEVBlocker, whose identifiers can be cross-matched to reveal the genuine transaction";
+  if(S) return "observed only in MEV-Share: exposure mechanism unclear";
+  if(M) return "observed only in MEVBlocker: exposure mechanism unclear";
+  return "exposure source unknown: not observed in any OFA dataset we have";
 }
 
 function seqHTML(rec,q,X,Y,ty){
@@ -242,8 +242,8 @@ function render(rec, q, viaReorg){
   const ty=TYPE[rec.t]||rec.t;
 
   const sole=priv.length===1;
-  const cause=v=>viaReorg ? "exposed by a reorged block: the block carrying it was broadcast, then reorged out"
-    : chain.causes ? (chain.causes[rec.bot]||"cause not attributed")
+  const cause=v=>viaReorg ? "reorg exposure: the block carrying it was broadcast, then reorged out; never seen individually in the public mempool"
+    : chain.causes ? (chain.causes[rec.bot]||"exposure source not attributed")
     : chain.cause ? chain.cause
     : reason(v.L);
   const nv=`${priv.length}${chain===CHAINS.ethereum?" private":""} victim${sole?"":"s"}`;
