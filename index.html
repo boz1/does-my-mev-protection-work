@@ -186,6 +186,13 @@ const CHAINS={
     txUrl:h=>`https://solscan.io/tx/${h}`,
   },
 };
+/* Ethereum and Base/Tron hashes look identical, so a bare #hash link is read
+   as Ethereum by default. Links to any other chain carry a "key:" prefix
+   (e.g. #base:0x...) so they reopen on the right chain instead of silently
+   failing on Ethereum. Solana signatures are self-distinguishing by format
+   and keep the old bare-hash links working. */
+const CHAIN_KEY=new Map(Object.entries(CHAINS).map(([k,v])=>[v,k]));
+const hashUrl=q=>{ const k=CHAIN_KEY.get(chain); return (k==="ethereum"||k==="solana")?q:`${k}:${q}`; };
 const $=id=>document.getElementById(id), out=$("out");
 const cache={};
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
@@ -443,7 +450,7 @@ async function lookupSol(raw){
   const m=String(raw).match(SOL_SIG);
   if(!m){ o.innerHTML=`<p class="verdict">Invalid</p><p>That is not a Solana transaction signature. Paste it directly, or a Solscan link.</p>`; return; }
   const q=m[0]; $("q").value=q;
-  if(location.hash!=="#"+q) history.replaceState(null,"","#"+q);
+  if(location.hash!=="#"+hashUrl(q)) history.replaceState(null,"","#"+hashUrl(q));
   o.innerHTML=`<p class="muted small">searching ${short(q)}…</p>`;
   try{
     const hits=await solSearch(q);
@@ -486,7 +493,7 @@ async function lookup(raw){
     o.innerHTML=`<p class="verdict">Invalid</p><p>That is not a ${chain.label} transaction hash. Paste it directly, or an explorer link.</p>`; return;
   }
   $("q").value=q;
-  if(location.hash!=="#"+q) history.replaceState(null,"","#"+q);
+  if(location.hash!=="#"+hashUrl(q)) history.replaceState(null,"","#"+hashUrl(q));
   o.innerHTML=`<p class="muted small">searching ${short(q)}…</p>`;
   try{
     let rec=await searchSet(chain.idx, chain.s, chain.ns, q);
@@ -504,12 +511,20 @@ $("chain-sel").addEventListener("change",e=>{ setChain(e.target.value); $("q").v
 $("f").addEventListener("submit",e=>{e.preventDefault(); lookup($("q").value)});
 $("ex").addEventListener("click",example);
 $("q").addEventListener("paste",e=>{const t=(e.clipboardData||window.clipboardData)?.getData("text"); if(t&&(/(0x)?[0-9a-fA-F]{64}/.test(t)||SOL_SIG.test(t))){e.preventDefault(); lookup(t)}});
-window.addEventListener("hashchange",()=>{const h=location.hash.slice(1); if(h) lookup(h)});
+/* A "key:" prefix (written by hashUrl) picks the chain before parsing the
+   rest as a hash, so a link to a Base or Tron sandwich reopens on that
+   chain instead of failing silently against the default Ethereum data. */
+function openLocation(h){
+  const m=h.match(/^([a-z]+):(.*)$/);
+  if(m&&CHAINS[m[1]]){ setChain(m[1]); lookup(m[2]); }
+  else if(/^0x[0-9a-fA-F]{64}$/.test(h)) lookup(h);
+  else if(/^[1-9A-HJ-NP-Za-km-z]{86,88}$/.test(h)){ setChain("solana"); lookup(h); }
+  else lookup(h);
+}
+window.addEventListener("hashchange",()=>{ const h=location.hash.slice(1); if(h) openLocation(h); });
 updateScope();
 const h0=location.hash.slice(1);
-if(/^0x[0-9a-fA-F]{64}$/.test(h0)) lookup(h0);
-else if(/^[1-9A-HJ-NP-Za-km-z]{86,88}$/.test(h0)){ setChain("solana"); lookup(h0); }
-else lookup(CHAINS.ethereum.example);
+if(h0) openLocation(h0); else lookup(CHAINS.ethereum.example);
 })();
 </script>
 
