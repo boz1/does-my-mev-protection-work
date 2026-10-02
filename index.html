@@ -129,7 +129,7 @@ footer a{white-space:nowrap}
 
 <footer>
 <p>Heimbach, Solmaz, Öz, Ferreira Torres. <i>No Place to Hide: An Analysis on Protected Order Flow Sandwich Attacks.</i> <a href="https://arxiv.org/abs/2609.28115" target="_blank" rel="noopener">arXiv:2609.28115</a>, 2026.</p>
-<p>Ethereum, Base and Tron data are served from this site, and Solana data from the <a href="https://huggingface.co/datasets/Lioba/solana_sandwich_attack_dataset" target="_blank" rel="noopener">Hugging Face dataset</a>.</p>
+<p>Ethereum, Base and Tron data are served from this site, and Solana data from the <a href="https://huggingface.co/datasets/Lioba/solana_sandwich_attack_dataset" target="_blank" rel="noopener">Hugging Face dataset</a>, with token names from <a href="https://jup.ag" target="_blank" rel="noopener">Jupiter</a>.</p>
 <p>OFA attribution (MEV-Share, MEVBlocker, Blink, Merkle) covers Ethereum only, and a missing label doesn't rule a route out. Lookups run in your browser against the published files.</p>
 </footer>
 </main>
@@ -363,7 +363,26 @@ async function solSearch(sig){
 }
 
 const solAcct=h=>`<a href="https://solscan.io/account/${h}" target="_blank" rel="noopener">${short(h)}</a>`;
-const solTok=m=>SOL_TOKENS[m]||`<a href="https://solscan.io/token/${m}" target="_blank" rel="noopener">${short(m)}</a>`;
+const solTok=m=>SOL_TOKENS[m]||`<a href="https://solscan.io/token/${m}" target="_blank" rel="noopener" data-mint="${m}">${short(m)}</a>`;
+/* Token symbols for Solana mints, from Jupiter's public token list (one request
+   per result for all its mints). Unknown mints keep their short address; names
+   are set as text, never as HTML. */
+const MINT_NAMES={};
+async function nameMints(){
+  const els=[...out.querySelectorAll("[data-mint]")];
+  const need=[...new Set(els.map(e=>e.dataset.mint))].filter(m=>!(m in MINT_NAMES)).slice(0,100);
+  if(need.length){
+    try{
+      const r=await fetch(`https://lite-api.jup.ag/tokens/v2/search?query=${need.join(",")}`);
+      if(r.ok) for(const t of await r.json()) if(t&&t.id&&t.symbol) MINT_NAMES[t.id]={s:String(t.symbol), n:String(t.name||t.symbol)};
+    }catch(e){ return; }   // keep short addresses; retry on the next lookup
+    for(const m of need) if(!(m in MINT_NAMES)) MINT_NAMES[m]=null;
+  }
+  for(const e of out.querySelectorAll("[data-mint]")){
+    const t=MINT_NAMES[e.dataset.mint];
+    if(t){ e.textContent=t.s; e.title=`${t.n} · ${e.dataset.mint}`; }
+  }
+}
 function solAmt(x,m){
   const s=x>=1000?x.toLocaleString("en-US",{maximumFractionDigits:2}):x>=1e-4?String(Number(x.toPrecision(5))):x.toExponential(3).replace("e-","e−");
   return `${s} ${solTok(m)}`;
@@ -375,7 +394,7 @@ const word=n=>WORDS[n]??n0(n), cap=t=>t[0].toUpperCase()+t.slice(1);
 /* Summary amounts: SOL to 3 decimals; other tokens as solAmt, unlinked. Sign is the caller's. */
 function sumAmt(x,m){
   const a=Math.abs(x);
-  if(m!==SOL_MINT) return solAmt(a,m).replace(/<a [^>]*>([^<]*)<\/a>/,"$1");
+  if(m!==SOL_MINT) return solAmt(a,m).replace(/<a [^>]*data-mint="([^"]+)"[^>]*>([^<]*)<\/a>/,'<span data-mint="$1">$2</span>');
   return (a>=5e-4||a===0?a.toLocaleString("en-US",{minimumFractionDigits:3,maximumFractionDigits:3}):String(Number(a.toPrecision(2))))+" SOL";
 }
 const made=(x,m)=>`${x<0?"lost":"made"} ${sumAmt(x,m)}`;
@@ -419,6 +438,7 @@ function renderSol(hits, q){
       (p==null?".":`. The bot ${made(p,hits[0].mintIn)} before fees.`);
   }
   out.innerHTML=`<p class="verdict${victim?" hit":""}">${victim?"Sandwiched":"Attacker leg"}</p><p class="summary${victim?" hit":""}">${summary}</p>${blocks}`;
+  nameMints();
 }
 
 async function lookupSol(raw){
