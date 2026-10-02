@@ -11,7 +11,7 @@ or back transactions, so none of those legs are discarded. Strings are also
 accepted for individual front/back hashes. This summarizes a supplied candidate;
 it is not a detector or proof that an attack was profitable.
 
-The code supports Solana, Base, and Ethereum through the existing swap decoders.
+The code supports Solana, Base, Ethereum, and TRON through the existing swap decoders.
 Keep their Python modules and `sandwich_dataset.py` beside this script. No new
 packages are required. Website JSON records with `f`, `b`, and `V[*].h` fields
 and Solana binary parts are also supported, including multiple legs in every group.
@@ -35,7 +35,7 @@ summary = summarize_sandwich(*row, chain='solana')
 summary = summarize_sandwich(front_hash, back_hash, victim_hashes, chain='base')
 ```
 
-Set `SOLANA_RPC_URL`, `BASE_RPC_URL`, or `ETHEREUM_RPC_URL` to your endpoint before
+Set `SOLANA_RPC_URL`, `BASE_RPC_URL`, `ETHEREUM_RPC_URL`, or `TRON_RPC_URL` to your endpoint before
 running. You can instead pass `rpc_url=...`. URLs/credentials are not saved in
 the summary or raw bundle. RPC calls are read-only. `timeout=30` and `workers=4`
 are configurable; one block-order lookup is shared by all legs in that block.
@@ -68,12 +68,13 @@ to fetch once and repeatedly summarize offline.
 
 ```sh
 # --row is a one-based array position in a website JSON shard:
-python3 summarize_sandwich.py base/s/0.json --row 1 --chain base
-python3 summarize_sandwich.py s/0.json --row 1 --chain ethereum
-python3 summarize_sandwich.py eth_reorg/s/0.json --row 1 --chain ethereum
+python3 summarize_sandwich.py ../base/s/0.json --row 1 --chain base
+python3 summarize_sandwich.py ../ethereum/s/0.json --row 1 --chain ethereum
+python3 summarize_sandwich.py ../tron/s/0.json --row 1 --chain tron
+python3 summarize_sandwich.py ../eth_reorg/s/0.json --row 1 --chain ethereum
 
 # --row is a one-based record number inside this Solana part:
-python3 summarize_sandwich.py solana/part-0001.bin --row 1 --chain solana
+python3 summarize_sandwich.py ../solana/part-0001.bin --row 1 --chain solana
 ```
 
 The filename extension selects the reader; `--input-format jsonl|json|solana-binary`
@@ -109,15 +110,15 @@ the reader does not claim that a downloaded file matches a manifest automaticall
 
 ```sh
 # A bounded run; repeat the same command to resume:
-python3 audit_swap_dataset.py base/s --chain base --state base-audit.sqlite \
+python3 audit_swap_dataset.py ../base/s --chain base --state base-audit.sqlite \
   --max-transactions 100 --report base-audit.json
 
 # Entire directory, with no per-run transaction limit:
-python3 audit_swap_dataset.py solana --chain solana --state solana-audit.sqlite \
+python3 audit_swap_dataset.py ../solana --chain solana --state solana-audit.sqlite \
   --max-transactions 0 --report solana-audit.json
 
-python3 audit_swap_dataset.py s --chain ethereum --state ethereum-audit.sqlite
-python3 audit_swap_dataset.py eth_reorg/s --chain ethereum --state ethereum-audit.sqlite
+python3 audit_swap_dataset.py ../ethereum/s --chain ethereum --state ethereum-audit.sqlite
+python3 audit_swap_dataset.py ../eth_reorg/s --chain ethereum --state ethereum-audit.sqlite
 ```
 
 The auditor deduplicates transactions by chain and hash, saves record checkpoints
@@ -132,6 +133,10 @@ legs whose stated pool is absent from decoded swaps.
 with failures. It does **not** mean every swap was decoded. Totals cover all inputs
 for the selected chain in the state file; endpoint URLs are never stored. Running
 the full population can require millions of RPC requests and substantial time.
+
+TRON transaction IDs may have or omit `0x`. Its receipt/block ordering follows the
+same checks as Base and Ethereum, but its contract metadata uses latest state.
+See [TRON_SWAPS.md](TRON_SWAPS.md) for supported venues and this limitation.
 
 ## Returned information
 

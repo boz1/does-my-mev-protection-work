@@ -145,6 +145,10 @@ explicitly to audit that subset; transaction cache entries are shared by chain.
         path = path / 'solana'
     elif chain == 'base' and (path / 'base/s').is_dir():
         path = path / 'base/s'
+    elif chain == 'tron' and (path / 'tron/s').is_dir():
+        path = path / 'tron/s'
+    elif chain == 'ethereum' and (path / 'ethereum/s').is_dir():
+        path = path / 'ethereum/s'
     elif (path / 's').is_dir():
         path = path / 's'
     paths = [p for p in path.iterdir() if p.is_file() and p.suffix.lower() in ('.bin', '.jsonl', '.json')]

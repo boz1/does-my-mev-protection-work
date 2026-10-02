@@ -1,0 +1,57 @@
+{
+  "provenance": "Public SUN documentation examples (Curve) and public pool logs from SUN documented factories (V1/V3); not selected from a private dataset",
+  "cases": [
+    {
+      "fixture": "curve_underlying.raw.json",
+      "tx_hash": "0xbf90d65562d95f3f209505fc59406846453a72e5efd635493c4988e80cb9ba71",
+      "protocols": [
+        "SunCurve"
+      ],
+      "amounts": [
+        [
+          "10800000000",
+          "10825855676"
+        ]
+      ]
+    },
+    {
+      "fixture": "v3.raw.json",
+      "tx_hash": "0x3af103fc8c3982462a660f297943d0393cdeacac55b5ef135c90722a8d4dc340",
+      "protocols": [
+        "SunSwapV3"
+      ],
+      "amounts": [
+        [
+          "3867800000",
+          "1286551632"
+        ]
+      ]
+    },
+    {
+      "fixture": "v1.raw.json",
+      "tx_hash": "0xb40ba8bcbbb43ec1151e0b8014045b791db880590e97dcc318cd3c2caa61a878",
+      "protocols": [
+        "SunSwapV1"
+      ],
+      "amounts": [
+        [
+          "49850000",
+          "16596918"
+        ]
+      ]
+    },
+    {
+      "fixture": "curve.raw.json",
+      "tx_hash": "0x4355461b1594d82c5a78f96f4eada0b9cd710194eea690b73111fbcf87469c67",
+      "protocols": [
+        "SunCurve"
+      ],
+      "amounts": [
+        [
+          "16000000000000000000",
+          "16027146"
+        ]
+      ]
+    }
+  ]
+}

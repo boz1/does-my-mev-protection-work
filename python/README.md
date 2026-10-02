@@ -17,10 +17,11 @@ cd python
 export SOLANA_RPC_URL='your Solana RPC URL'
 export BASE_RPC_URL='your Base RPC URL'
 export ETHEREUM_RPC_URL='your Ethereum RPC URL'
+export TRON_RPC_URL='your TRON JSON-RPC URL'
 ```
 
 Missing configuration produces an error; there is no default public RPC fallback.
-The EVM decoder also accepts `EVM_RPC_URL`. EVM and sandwich CLIs accept
+Base and Ethereum also accept `EVM_RPC_URL`; TRON requires `TRON_RPC_URL`. EVM and sandwich CLIs accept
 `--rpc-url`, and Python fetch/summarize functions accept an explicit RPC argument.
 Prefer environment variables to keep credentials out of shell arguments.
 No endpoint is written to decoded JSON or saved raw bundles. Calls are read-only.
@@ -31,9 +32,10 @@ No endpoint is written to decoded JSON or saved raw bundles. Calls are read-only
 python3 solana_decode_swaps.py TRANSACTION_SIGNATURE
 python3 base_decode_swaps.py 0xTRANSACTION_HASH
 python3 ethereum_decode_swaps.py 0xTRANSACTION_HASH
+python3 tron_decode_swaps.py TRANSACTION_ID
 ```
 
-Base and Ethereum share `evm_decode_swaps.py`. Solana uses
+Base, Ethereum and TRON share `evm_decode_swaps.py`. Solana uses
 `solana_swap_protocols.py` and `solana_registry_protocols.py`; keep those files
 beside their respective entry scripts.
 
@@ -53,8 +55,9 @@ python3 summarize_sandwich.py sandwiches.jsonl --row 1 --chain solana \
 python3 summarize_sandwich.py --from-json summary.raw.json --format text
 
 # Website shards and binary-packed Solana signatures:
-python3 summarize_sandwich.py base/s/0.json --chain base --row 1
-python3 summarize_sandwich.py solana/part-0001.bin --chain solana --row 1
+python3 summarize_sandwich.py ../base/s/0.json --chain base --row 1
+python3 summarize_sandwich.py ../tron/s/0.json --chain tron --row 1
+python3 summarize_sandwich.py ../solana/part-0001.bin --chain solana --row 1
 ```
 
 Or import it:
@@ -71,13 +74,8 @@ per leg, and `tight`, `within_block`, `cross_block` or `unknown` classification.
 Tight means one same-block consecutive sequence of all fronts, then all victims,
 then all backs. Interleaved roles and missing data remain explicit.
 
-Ethereum website rows also retain the per-victim `V[].L` exposure labels from
-MEV-Share, MEVBlocker, Blink, and Merkle. Each victim's JSON `exposure` includes
-the source names and original evidence; text output prints the sources below
-that victim. Saved bundles retain this evidence for offline replay. Empty or
-missing labels remain unknown, and observed routes are not proof of causality.
-See [Ethereum exposure sources](SANDWICH_SUMMARIES.md#ethereum-exposure-sources)
-for the Python API and status fields.
+TRON uses receipt amounts and latest-state token/factory metadata; this is
+explicit in its output. See [TRON_SWAPS.md](TRON_SWAPS.md) for supported events.
 
 These decoders cover implemented protocol variants; they do not guarantee every
 possible swap. Unsupported activity and missing evidence are retained in output.
@@ -92,7 +90,7 @@ See the [input format and audit guide](SANDWICH_SUMMARIES.md#website-json-and-bi
 Audit a dataset in resumable batches with RPC URLs configured above:
 
 ```sh
-python3 audit_swap_dataset.py base/s --chain base --state base-audit.sqlite \
+python3 audit_swap_dataset.py ../base/s --chain base --state base-audit.sqlite \
   --max-transactions 100 --report base-audit.json
 ```
 
@@ -109,12 +107,13 @@ These commands need no RPC environment variables or network access:
 python3 solana_decode_swaps.py --from-json outputs/solana/example_transaction.json
 python3 base_decode_swaps.py --from-json outputs/evm/base_example.raw.json
 python3 ethereum_decode_swaps.py --from-json outputs/evm/ethereum_example.raw.json
+python3 tron_decode_swaps.py --from-json tests/fixtures/tron/v3.raw.json
 python3 summarize_sandwich.py --from-json outputs/sandwiches/solana_row_1.raw.json --format text
 python3 -m unittest discover -s tests
 ```
 
 Protocol details and limitations: [Solana](SOLANA_SWAPS.md),
-[EVM](EVM_SWAPS.md), [sandwich summaries](SANDWICH_SUMMARIES.md).
+[EVM](EVM_SWAPS.md), [TRON](TRON_SWAPS.md), [sandwich summaries](SANDWICH_SUMMARIES.md).
 `tests/fixtures/` contains the offline transaction and schema fixtures. Curated
 examples and coverage reports are in `outputs/`; the full sandwich datasets and
 the Solana audit's 1,876 per-transaction records are not bundled.
