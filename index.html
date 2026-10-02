@@ -4,6 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Does my MEV protection work?</title>
+<meta name="description" content="Paste a transaction hash from Ethereum, Base, Tron or Solana to check whether it was sandwiched as protected order flow.">
+<meta property="og:title" content="Does my MEV protection work?">
+<meta property="og:description" content="Paste a transaction hash from Ethereum, Base, Tron or Solana to check whether it was sandwiched as protected order flow.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://liobaheimba.ch/does-my-mev-protection-work/">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cstyle%3Erect%7Bfill:%231a1a1a%7D.m%7Bfill:%23b3261e%7D@media(prefers-color-scheme:dark)%7Brect%7Bfill:%23ededed%7D.m%7Bfill:%23ff7a6e%7D%7D%3C/style%3E%3Crect x='1' y='2' width='14' height='4' rx='2'/%3E%3Crect class='m' x='1' y='7' width='14' height='2'/%3E%3Crect x='1' y='10' width='14' height='4' rx='2'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap">
@@ -28,7 +35,7 @@ body{
 }
 main{max-width:620px;margin-inline:auto}
 h1{font-size:1.4rem;line-height:1.3;margin:0 0 14px;font-weight:700;text-wrap:balance}
-p{margin:.6em 0;max-width:58ch}
+p{margin:.6em 0;text-wrap:pretty}
 b{font-weight:700}
 a{color:inherit;text-decoration:underline;text-decoration-color:var(--muted);text-underline-offset:2px}
 a:hover{text-decoration-color:currentColor}
@@ -45,35 +52,62 @@ input#q{flex:1 1 220px;min-width:0;border:none;border-bottom:1px solid var(--mut
 input#q:focus-visible{outline:none;border-bottom-color:var(--fg)}
 button#go{border:1px solid var(--fg);background:transparent;color:var(--fg);border-radius:3px;padding:7px 14px;font:14px var(--sans);cursor:pointer;flex:none}
 button#go:hover{background:var(--fg);color:var(--bg)}
+button#ex{border:none;background:transparent;color:var(--muted);padding:7px 2px;font:13px var(--sans);cursor:pointer;flex:none;text-decoration:underline;text-decoration-color:var(--muted);text-underline-offset:2px}
+button#ex:hover{color:var(--fg)}
 .scope{font-size:13px;color:var(--muted);margin:0 0 8px}
+.scope.protect{margin-top:-4px;text-wrap:pretty}
 
 .verdict{font:700 1.15rem var(--sans);margin:28px 0 4px}
 .verdict.hit{color:var(--red)}
 .verdict.clear{color:var(--green)}
 .meta{font-size:13.5px;color:var(--muted);margin:0 0 20px}
+.meta a,.seq-row a,.gap-note a{white-space:nowrap}
 .meta b{color:var(--fg);font-weight:500}
 
 .label{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin:24px 0 8px}
 .block-label{font-size:12.5px;color:var(--muted);margin:14px 0 6px}
 .block-label:first-child{margin-top:0}
-.seq-row{display:flex;gap:12px;flex-wrap:wrap;align-items:baseline;padding:3px 0;font-size:14px}
-.seq-row .role{width:52px;flex:none;color:var(--muted);font-weight:600;text-transform:uppercase;font-size:11.5px;letter-spacing:.04em}
+/* Wrapped detail lines start under the hash, not under the role. */
+.seq-row{display:flex;gap:0 12px;flex-wrap:wrap;align-items:baseline;padding:3px 0 3px 64px;font-size:14px}
+.seq-row .role{width:52px;margin-left:-64px;flex:none;color:var(--muted);font-weight:600;text-transform:uppercase;font-size:11.5px;letter-spacing:.04em}
 .seq-row .you{color:var(--red);font-weight:700}
+.seq-row>:last-child{text-wrap:pretty}
 .gap-note{font-size:13px;color:var(--muted);margin:6px 0}
 
 .vic{margin:0 0 14px}
 .vic .hash{font-size:14px}
 .vic .reason{font-size:13.5px;color:var(--muted);margin-top:2px}
 
-footer{margin-top:40px;font-size:13px;color:var(--muted)}
-footer p{max-width:58ch}
+/* One-sentence answer under the verdict: a thin rule, nothing more. */
+.summary{margin:2px 0 22px;padding:1px 0 1px 12px;border-left:2px solid color-mix(in srgb,var(--muted) 50%,transparent);font-size:15px;text-wrap:pretty}
+.summary.hit{border-left-color:color-mix(in srgb,var(--red) 65%,transparent)}
+.summary a{white-space:nowrap}
+
+/* Further Solana sandwiches fold into one line each, split by hairlines. */
+details.more{border-top:1px solid color-mix(in srgb,var(--fg) 12%,transparent)}
+details.more:last-of-type{border-bottom:1px solid color-mix(in srgb,var(--fg) 12%,transparent)}
+details.more:first-of-type{margin-top:26px}
+details.more>summary{list-style:none;cursor:pointer;padding:9px 0 9px 1.2em;text-indent:-1.2em;font-size:14px;font-variant-numeric:tabular-nums}
+details.more>summary::-webkit-details-marker{display:none}
+details.more>summary::before{content:"▸";display:inline-block;width:1.2em;text-indent:0;color:var(--muted)}
+details.more[open]>summary::before{content:"▾"}
+details.more>summary:hover{color:var(--fg);background:color-mix(in srgb,var(--fg) 4%,transparent)}
+details.more>summary:focus-visible{outline:2px solid var(--fg);outline-offset:2px}
+details.more>summary .sep{color:var(--muted)}
+details.more>summary .nw,.scope .nw{white-space:nowrap}
+details.more>.body{padding:0 0 16px}
+details.more>.body>.label:first-child{margin-top:6px}
+
+footer{margin-top:44px;font-size:13px;color:var(--muted)}
+footer p{margin:.45em 0}
+footer a{white-space:nowrap}
 </style>
 </head>
 <body>
 
 <main>
 <h1>Does my MEV protection work?</h1>
-<p>Paste a tx hash to check whether it was sandwiched as private order flow.</p>
+<p>Paste a tx hash to check whether it was sandwiched as protected order flow.</p>
 
 <form id="f" autocomplete="off" class="search">
   <label for="chain-sel" class="qlabel">chain</label>
@@ -81,17 +115,22 @@ footer p{max-width:58ch}
     <option value="ethereum">Ethereum</option>
     <option value="base">Base</option>
     <option value="tron">Tron</option>
+    <option value="solana">Solana</option>
   </select>
   <label for="q" class="qlabel">tx hash</label>
   <input id="q" name="q" spellcheck="false" placeholder="0x…">
   <button id="go" type="submit">Look up</button>
+  <button id="ex" type="button">Show an example</button>
 </form>
 <p class="scope" id="scope"></p>
+<p class="scope protect" id="protect"></p>
 
 <div id="out" aria-live="polite"><p class="muted">Loading…</p></div>
 
 <footer>
-<p>From Heimbach, Solmaz, Öz, Ferreira Torres. <i>No Place to Hide: An Analysis on Protected Order Flow Sandwich Attacks.</i> <a href="https://arxiv.org/abs/2609.28115" target="_blank" rel="noopener">arXiv:2609.28115</a>, 2026. OFA attribution (MEV-Share, MEVBlocker, Blink, Merkle) is available for Ethereum only; a missing label doesn't rule a route out. Lookups run in your browser against the published files.</p>
+<p>Heimbach, Solmaz, Öz, Ferreira Torres. <i>No Place to Hide: An Analysis on Protected Order Flow Sandwich Attacks.</i> <a href="https://arxiv.org/abs/2609.28115" target="_blank" rel="noopener">arXiv:2609.28115</a>, 2026.</p>
+<p>Ethereum, Base and Tron data are served from this site, and Solana data from the <a href="https://huggingface.co/datasets/Lioba/solana_sandwich_attack_dataset" target="_blank" rel="noopener">Hugging Face dataset</a>.</p>
+<p>OFA attribution (MEV-Share, MEVBlocker, Blink, Merkle) covers Ethereum only, and a missing label doesn't rule a route out. Lookups run in your browser against the published files.</p>
 </footer>
 </main>
 
@@ -108,19 +147,43 @@ footer p{max-width:58ch}
    library), so addrUrl is left unset and they render as plain text. */
 const CHAINS={
   ethereum:{
-    label:"Ethereum", idx:"ethereum/idx", s:"ethereum/s", ns:64, count:30607,
+    label:"Ethereum", example:"0x05162b2f10dcb08a44d02f2479845315c32b635b2e1d0a2ebb8f45820a28d95a", protection:"Protection: private submission (private RPCs, order-flow auctions) that skips the public mempool. Only transactions that never reached the public mempool are covered, so a public transaction won\u2019t show here even if it was sandwiched.", idx:"ethereum/idx", s:"ethereum/s", ns:64, count:30607, bots:7,
     fallback:{idx:"eth_reorg/idx", s:"eth_reorg/s", ns:64},
     txUrl:h=>`https://etherscan.io/tx/${h}`,
     addrUrl:h=>`https://etherscan.io/address/${h}`,
   },
   base:{
-    label:"Base", idx:"base/idx", s:"base/s", ns:64, count:1889,
+    label:"Base", example:"0xeaec7b56577e074cb2893c0e57fce3d8117648ba3074b337960b1897a49de7bb", protection:"Protection: a private mempool, where pending transactions are visible only to the sequencer until they are included.", idx:"base/idx", s:"base/s", ns:64, count:1889, bots:4,
+    /* Per-bot exposure, as attributed in the paper (Base section). */
+    causes:{
+      "0x000000224f8364bb91259b24435881efc3752b3e":"transaction-pool leak: this bot was active during the August 2023 Base incident that exposed pending transactions",
+      "0x14d676cbaac800c5b0297cd1226770b5d2d2bb75":"predictable behavior: the victims trade in a fixed, recurring loop, so the next swap can be anticipated",
+      "0xc9cc0e1ecf0ae9af9439933b0c38ee843977b41b":"predictable behavior: recurring, funding-linked victim trades. The bot's close fee matching suggests some transaction visibility as well",
+      "0xfcf103349cb306c0234c4171559150f385745a26":"predictable behavior: recurring, funding-linked victim trades. The bot's close fee matching suggests some transaction visibility as well",
+    },
     txUrl:h=>`https://basescan.org/tx/${h}`,
     addrUrl:h=>`https://basescan.org/address/${h}`,
   },
   tron:{
-    label:"Tron", idx:"tron/idx", s:"tron/s", ns:64, count:38567, bareHex:true,
+    label:"Tron", example:"0xf177a23562708b6304e9350287933300fe58a214c104aa772dfde5d3b4f7ec70", protection:"Protection: first-come-first-served ordering. The public mempool is ordered by arrival time, so fees can\u2019t buy an earlier position.", idx:"tron/idx", s:"tron/s", ns:64, count:38567, bots:12, bareHex:true,
+    cause:"probably a latency race",
     txUrl:h=>`https://tronscan.org/#/transaction/${h.slice(2)}`,
+  },
+  /* Solana is too large for this site (9.4 GB), so it is read from the Hugging
+     Face dataset, which serves CORS and byte ranges. index/XXX.bin (XXX = first
+     12 bits of the raw signature) holds sorted 16-byte entries: u64 key (first
+     8 signature bytes, big-endian), u8 part, u8 role (0 front, 1 back, 2 victim),
+     u16 record length, u32 record offset (little-endian). A record in
+     data_v2/part-NNNN.bin is u8 n_front, u8 n_back, u16 n_victims, u32 front and
+     back slot, u16 day (since 2023-01-01), u8 type, u8 flags (1 profitable,
+     2 evasive), u8 program, a reserved byte, then 32-byte bot, pool, mint in,
+     mint out (+ back-leg wallet if evasive), five f64 amounts (front in/out,
+     back in/out, profit; token units), then the 64-byte signatures (front legs,
+     back legs, victims). Written by export_solana_site_v2.py. */
+  solana:{
+    label:"Solana", example:"4DLVgYoEZx1nrNjC44hGTkGLvWmGybjuzXdWV1gUT2DbLwFf6VqR9xex9zgamXaC8DWPTUxGUCECgZw59jbEs41u", protection:"Protection: no public mempool. Transactions are forwarded only to the upcoming leaders.", count:28042725, bots:8631, solana:true, rec:"data_v2", idx:"index_v2",
+    data:"https://huggingface.co/datasets/Lioba/solana_sandwich_attack_dataset/resolve/main/",
+    txUrl:h=>`https://solscan.io/tx/${h}`,
   },
 };
 const $=id=>document.getElementById(id), out=$("out");
@@ -137,8 +200,8 @@ const adl=(h,full)=>{
 const n0=x=>Number(x).toLocaleString("en-US");
 function load(u){ if(!cache[u]) cache[u]=fetch(u).then(r=>{if(!r.ok) throw new Error(r.status); return r.json()}).catch(e=>{delete cache[u]; throw e}); return cache[u]; }
 const DEC={WETH:18,ETH:18,USDC:6,USDT:6};
-function amt(x,sym){
-  const d=DEC[sym]; x=Number(x);
+function amt(x,tok){
+  const sym=tok[1]??"token", d=tok[2]??DEC[sym]; x=Number(x);
   if(d==null) return `${x.toExponential(3).replace("e+","e")} ${esc(sym)} <span class="muted">(raw)</span>`;
   const v=x/10**d; const s=v>=1000?v.toLocaleString("en-US",{maximumFractionDigits:2}):v.toPrecision(5).replace(/\.?0+$/,"");
   return `${s} ${esc(sym)}`;
@@ -154,7 +217,7 @@ function reason(L, sole){
   else if(S) t="seen only in MEV-Share — mechanism unconfirmed";
   else if(M) t="seen only in MEVBlocker — mechanism unconfirmed";
   else t="not seen in any OFA dataset";
-  if(!sole) t+="; not the sole victim";
+  if(!sole) t+=" (not the sole victim)";
   return t;
 }
 
@@ -166,7 +229,7 @@ function seqHTML(rec,q,X,Y){
   };
   rows.push(`<div class="block-label">Block ${n0(rec.fb)}</div>`);
   rec.f.forEach((h,i)=>row("Front",h, i===0?`${amt(rec.fai,X)} → ${amt(rec.fao,Y)}`:"split leg"));
-  rec.V.forEach(v=>row("Victim",v.h, `private, from ${adl(v.a)}`));
+  rec.V.forEach(v=>row("Victim",v.h, `${chain===CHAINS.ethereum?"private, ":""}from ${adl(v.a)}`));
   rows.push(`<div class="gap-note">${rec.ta!=null?`${n0(rec.ta)} transactions from front leg to back leg`:`${rec.ba} block${rec.ba===1?"":"s"} between the legs`}</div>`);
   if(rec.bb!==rec.fb) rows.push(`<div class="block-label">Block ${n0(rec.bb)} <span class="muted">(+${n0(rec.bb-rec.fb)})</span></div>`);
   rec.b.forEach((h,i)=>row("Back",h, i===0?`${amt(rec.bai,Y)} → ${amt(rec.bao,X)}`:"split leg"));
@@ -175,23 +238,35 @@ function seqHTML(rec,q,X,Y){
 
 function render(rec, q, viaReorg){
   const inTok=rec.fin==="token0"?rec.t0:rec.t1, outTok=rec.fin==="token0"?rec.t1:rec.t0;
-  const X=inTok[1], Y=outTok[1];
+  const X=inTok, Y=outTok;
   const me=rec.V.find(v=>v.h===q);
   const role=rec.f.includes(q)?"front leg":"back leg";
   const priv=rec.V;
   const ty=TYPE[rec.t]||rec.t;
   const via=viaReorg?" · exposed via chain reorg":"";
 
+  const sole=priv.length===1;
+  const cause=v=>viaReorg ? "exposed by a reorged block: the block carrying it was broadcast, then reorged out"+(sole?"":" (not the sole victim)")
+    : chain.causes ? (chain.causes[rec.bot]||"cause not attributed")+(sole?"":" (not the sole victim)")
+    : chain.cause ? chain.cause+(sole?"":" (not the sole victim)")
+    : reason(v.L,sole);
+  const nv=`${priv.length}${chain===CHAINS.ethereum?" private":""} victim${sole?"":"s"}`;
+  const summary=me
+    ? `<p class="summary hit">Sandwiched on ${rec.d} by bot ${adl(rec.bot)} in a ${ty} attack${chain.cause?`, ${chain.cause}`:""}.</p>`
+    : `<p class="summary">${role[0].toUpperCase()+role.slice(1)} of a ${ty} sandwich on ${rec.d} against ${nv}${viaReorg?", exposed through a chain reorg":""}${rec.p==null?"":`. The bot ${rec.p<0?"lost":"made"} ${amt(Math.abs(rec.p),X)} before fees`}.</p>`;
+
   const head=me
-    ? `<p class="verdict hit">Sandwiched</p><p class="meta"><b>${rec.d}</b> · bot ${adl(rec.bot)} · ${ty} attack${via}</p>`
-    : `<p class="verdict">Attacker leg</p><p class="meta">${role}, bot ${adl(rec.bot)}, <b>${rec.d}</b>, against ${priv.length} private victim${priv.length===1?"":"s"}${via}</p>`;
+    ? `<p class="verdict hit">Sandwiched</p>${summary}<p class="meta"><b>${rec.d}</b> · bot ${adl(rec.bot)} · ${ty} attack${via}</p>`
+    : `<p class="verdict">Attacker leg</p>${summary}<p class="meta">${role}, bot ${adl(rec.bot)}, <b>${rec.d}</b>, against ${nv}${via}</p>`;
 
-  const vics=priv.map(v=>`<div class="vic"><p class="hash mono">${v.h===q?"▶ ":""}${txl(v.h)}</p><p class="reason">${reason(v.L,priv.length===1)}</p></div>`).join("");
+  const vics=priv.map(v=>`<div class="vic"><p class="hash mono">${v.h===q?"▶ ":""}${txl(v.h)}</p><p class="reason">${cause(v)}</p></div>`).join("");
 
+  /* Exposure is attributed per victim on Ethereum (OFA labels, reorgs) and per bot on Base only. */
+  const exposure=chain===CHAINS.ethereum||chain===CHAINS.base;
   out.innerHTML=`${head}
   ${seqHTML(rec,q,X,Y)}
-  <p class="label">Exposure</p>
-  ${vics||'<p class="muted small">No private victims.</p>'}`;
+  ${exposure?`<p class="label">Exposure</p>
+  ${vics||'<p class="muted small">No private victims.</p>'}`:""}`;
 }
 
 function parseHash(raw, c){
@@ -214,20 +289,188 @@ async function searchSet(idxDir, sDir, ns, q){
   return null;
 }
 
+/* The paper's study window; the same for every chain. */
+const WINDOW="Jul 2023 – Jun 2026";
 function updateScope(){
-  $("scope").textContent=`${n0(chain.count)} private-flow sandwiches on ${chain.label}.`;
-  $("q").placeholder=chain.bareHex?"hex id…":"0x…";
+  $("scope").innerHTML=`<span class="nw">${n0(chain.count)} sandwiches</span> <span class="nw">by ${n0(chain.bots)} bot${chain.bots===1?"":"s"}</span> · <span class="nw">${WINDOW}</span>`;
+  $("protect").textContent=chain.protection;
+  $("q").placeholder=chain.solana?"signature…":chain.bareHex?"hex id…":"0x…";
+}
+
+const B58="123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz";
+const SOL_SIG=/[1-9A-HJ-NP-Za-km-z]{86,88}/;
+function b58decode(s){
+  let n=0n;
+  for(const c of s){ const d=B58.indexOf(c); if(d<0) return null; n=n*58n+BigInt(d); }
+  const out=new Uint8Array(64);
+  for(let i=63;i>=0;i--){ out[i]=Number(n&255n); n>>=8n; }
+  return n===0n?out:null;
+}
+function b58encode(b){
+  let n=0n; for(const x of b) n=(n<<8n)|BigInt(x);
+  let s=""; while(n>0n){ s=B58[Number(n%58n)]+s; n/=58n; }
+  for(const x of b){ if(x) break; s="1"+s; }
+  return s;
+}
+const solBin={};
+function loadBin(u){ if(!solBin[u]) solBin[u]=fetch(u).then(r=>{if(!r.ok) throw new Error(r.status); return r.arrayBuffer()}).catch(e=>{delete solBin[u]; throw e}); return solBin[u]; }
+
+const SOL_TYPES=["tight","within-slot wide","cross-slot wide"];
+const SOL_PROGRAMS=["Raydium AMM v4","Pump.fun AMM","Pump.fun AMM v2","Raydium CPMM","Raydium LaunchLab","Raydium CLMM","Orca Whirlpool","Meteora DLMM","Obric v2","SolFi"];
+const SOL_TOKENS={So11111111111111111111111111111111111111112:"SOL",EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v:"USDC",Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB:"USDT",USD1ttGY1N17NEEHLmELoaybftRBUSErhqYiQzvEmuB:"USD1"};
+
+/* One data_v2 record -> {f, b, V, ...fields}. */
+function parseSol(rec){
+  const dv=new DataView(rec.buffer, rec.byteOffset, rec.length);
+  const nf=rec[0], nb=rec[1], nv=dv.getUint16(2,true), flags=rec[15];
+  const key=i=>b58encode(rec.subarray(i,i+32));
+  let i=18;
+  const bot=key(i), pool=key(i+32), mintIn=key(i+64), mintOut=key(i+96); i+=128;
+  let botBack=bot; if(flags&2){ botBack=key(i); i+=32; }
+  const a=[0,1,2,3,4].map(k=>dv.getFloat64(i+8*k,true)); i+=40;
+  const sigs=[]; for(let k=0;k<nf+nb+nv;k++) sigs.push(b58encode(rec.subarray(i+64*k,i+64*(k+1))));
+  if(i+64*(nf+nb+nv)!==rec.length) throw new Error("bad record");
+  return {f:sigs.slice(0,nf), b:sigs.slice(nf,nf+nb), V:sigs.slice(nf+nb),
+    fs:dv.getUint32(4,true), bs:dv.getUint32(8,true),
+    d:new Date(Date.UTC(2023,0,1)+dv.getUint16(12,true)*864e5).toISOString().slice(0,10),
+    t:SOL_TYPES[rec[14]], ok:!!(flags&1), evasive:!!(flags&2), prog:SOL_PROGRAMS[rec[16]],
+    bot, botBack, pool, mintIn, mintOut, fai:a[0], fao:a[1], bai:a[2], bao:a[3], p:a[4]};
+}
+async function solRecord(part, off, len){
+  const r=await fetch(`${chain.data}${chain.rec}/part-${String(part).padStart(4,"0")}.bin`,{headers:{Range:`bytes=${off}-${off+len-1}`}});
+  if(r.status!==206) throw new Error(`range read ${r.status}`);
+  const rec=new Uint8Array(await r.arrayBuffer());
+  if(rec.length!==len) throw new Error("short range read");
+  return parseSol(rec);
+}
+
+/* All sandwiches containing the signature: [{role, ...record}], role 0/1/2. */
+async function solSearch(sig){
+  const raw=b58decode(sig);
+  if(!raw||b58encode(raw)!==sig) return null;
+  const shard=((raw[0]<<4)|(raw[1]>>4)).toString(16).padStart(3,"0");
+  const idx=new Uint8Array(await loadBin(`${chain.data}${chain.idx}/${shard}.bin`));
+  const n=idx.length/16, cmp=i=>{ for(let k=0;k<8;k++){ const d=idx[i*16+k]-raw[k]; if(d) return d; } return 0; };
+  let lo=0, hi=n;
+  while(lo<hi){ const m=(lo+hi)>>1; if(cmp(m)<0) lo=m+1; else hi=m; }
+  const hits=[];
+  for(let i=lo;i<n&&cmp(i)===0;i++){
+    const e=new DataView(idx.buffer, i*16, 16), role=e.getUint8(9);
+    const g=await solRecord(e.getUint8(8), e.getUint32(12,true), e.getUint16(10,true));
+    if([g.f,g.b,g.V][role].includes(sig)) hits.push({role,...g});
+  }
+  return hits;
+}
+
+const solAcct=h=>`<a href="https://solscan.io/account/${h}" target="_blank" rel="noopener">${short(h)}</a>`;
+const solTok=m=>SOL_TOKENS[m]||`<a href="https://solscan.io/token/${m}" target="_blank" rel="noopener">${short(m)}</a>`;
+function solAmt(x,m){
+  const s=x>=1000?x.toLocaleString("en-US",{maximumFractionDigits:2}):x>=1e-4?String(Number(x.toPrecision(5))):x.toExponential(3).replace("e-","e−");
+  return `${s} ${solTok(m)}`;
+}
+
+const SOL_MINT="So11111111111111111111111111111111111111112";
+const WORDS=["zero","one","two","three","four","five","six","seven","eight","nine","ten","eleven","twelve"];
+const word=n=>WORDS[n]??n0(n), cap=t=>t[0].toUpperCase()+t.slice(1);
+/* Summary amounts: SOL to 3 decimals; other tokens as solAmt, unlinked. Sign is the caller's. */
+function sumAmt(x,m){
+  const a=Math.abs(x);
+  if(m!==SOL_MINT) return solAmt(a,m).replace(/<a [^>]*>([^<]*)<\/a>/,"$1");
+  return (a>=5e-4||a===0?a.toLocaleString("en-US",{minimumFractionDigits:3,maximumFractionDigits:3}):String(Number(a.toPrecision(2))))+" SOL";
+}
+const made=(x,m)=>`${x<0?"lost":"made"} ${sumAmt(x,m)}`;
+const dateSpan=hs=>{ const ds=hs.map(h=>h.d).sort(); return ds[0]===ds[ds.length-1]?`on ${ds[0]}`:`between ${ds[0]} and ${ds[ds.length-1]}`; };
+
+function renderSol(hits, q){
+  const victim=hits.some(h=>h.role===2);
+  const roleName=["front leg","back leg","victim"];
+  const row=(role,h,detail="")=>`<div class="seq-row"><span class="role">${role}</span><span class="mono">${txl(h)}${h===q?' <span class="you">← you</span>':""}</span><span class="muted mono">${detail}</span></div>`;
+  const block=(h,i)=>{
+    const head=hits.length>1?`<p class="label">Sandwich ${i+1} of ${hits.length}</p>`:"";
+    const meta=`<p class="meta"><b>${h.d}</b> · bot ${solAcct(h.bot)} · ${h.t} attack on ${h.prog} · pool ${solAcct(h.pool)}</p>`;
+    const front=h.f.map((x,k)=>row("Front",x, k===0?`${solAmt(h.fai,h.mintIn)} → ${solAmt(h.fao,h.mintOut)}${h.f.length>1?` (all ${h.f.length} legs)`:""}`:"split leg")).join("");
+    const back=h.b.map((x,k)=>row("Back",x, k===0?`${solAmt(h.bai,h.mintOut)} → ${solAmt(h.bao,h.mintIn)}${h.b.length>1?` (all ${h.b.length} legs)`:""}`:"split leg")).join("");
+    const gap=h.bs===h.fs?"same slot":`${n0(h.bs-h.fs)} slot${h.bs-h.fs===1?"":"s"} later`;
+    const evasive=h.evasive?`<div class="gap-note">evasive: back leg from linked wallet ${solAcct(h.botBack)}</div>`:"";
+    const profit=`<div class="gap-note">bot ${h.ok?"profit":"result"} ${h.p>=0?"+":""}${solAmt(h.p,h.mintIn)} before fees</div>`;
+    return `${head}${meta}<div class="block-label">Slot ${n0(h.fs)}</div>${front}${h.V.map(x=>row("Victim",x)).join("")}`+
+      `<div class="block-label">Slot ${n0(h.bs)} <span class="muted">(${gap})</span></div>${back}${evasive}${profit}`;
+  };
+  /* Sandwich 1 in full; each further one folds into a one-line disclosure holding the same block. */
+  const sep=' <span class="sep">·</span> ';
+  const blocks=hits.map((h,i)=>i===0?block(h,i):
+    `<details class="more"><summary>Sandwich ${i+1}${sep}<span class="nw">bot <span class="mono">${short(h.bot)}</span></span>${sep}<span class="nw">${sumAmt(h.fai,h.mintIn)} → ${sumAmt(h.bao,h.mintIn)}</span>${sep}<span class="nw">${h.p<0?"−":"+"}${sumAmt(h.p,h.mintIn)}</span></summary><div class="body">${block(h,i)}</div></details>`).join("");
+
+  /* Profits are summed only when every sandwich is denominated in SOL. */
+  const sum=hs=>hs.length===1||hs.every(h=>h.mintIn===SOL_MINT)?hs.reduce((t,h)=>t+h.p,0):null;
+  let summary;
+  if(victim){
+    const vh=hits.filter(h=>h.role===2), bots=[...new Set(vh.map(h=>h.bot))];
+    if(vh.length===1) summary=`Sandwiched ${dateSpan(vh)} by bot ${solAcct(vh[0].bot)}, which ${made(vh[0].p,vh[0].mintIn)} before fees.`;
+    else{
+      const p=sum(vh), one=bots.length===1;
+      const who=one?`bot ${solAcct(bots[0])}`:`${word(bots.length)} bots`;
+      summary=`Sandwiched ${vh.length===2?"twice":`${word(vh.length)} times`} ${dateSpan(vh)} by ${who}`+
+        (p==null?".":`, which ${p<0?"lost":"made"} ${sumAmt(Math.abs(p),SOL_MINT)}${one?"":" between them"} before fees.`);
+    }
+  }else{
+    const nv=hits.reduce((t,h)=>t+h.V.length,0), p=sum(hits);
+    summary=`${cap(roleName[hits[0].role])} of ${hits.length===1?"a sandwich":`${word(hits.length)} sandwiches`} ${dateSpan(hits)} against ${nv} victim${nv===1?"":"s"}${hits.length>1?" in total":""}`+
+      (p==null?".":`. The bot ${made(p,hits[0].mintIn)} before fees.`);
+  }
+  out.innerHTML=`<p class="verdict${victim?" hit":""}">${victim?"Sandwiched":"Attacker leg"}</p><p class="summary${victim?" hit":""}">${summary}</p>${blocks}`;
+}
+
+async function lookupSol(raw){
+  const my=++seq, o={set innerHTML(h){ if(my===seq) out.innerHTML=h; }};
+  const m=String(raw).match(SOL_SIG);
+  if(!m){ o.innerHTML=`<p class="verdict">Invalid</p><p>That is not a Solana transaction signature. Paste it directly, or a Solscan link.</p>`; return; }
+  const q=m[0]; $("q").value=q;
+  if(location.hash!=="#"+q) history.replaceState(null,"","#"+q);
+  o.innerHTML=`<p class="muted small">searching ${short(q)}…</p>`;
+  try{
+    const hits=await solSearch(q);
+    if(hits===null){ o.innerHTML=`<p class="verdict">Invalid</p><p>That is not a valid Solana transaction signature.</p>`; return; }
+    if(!hits.length){ o.innerHTML=`<p class="verdict clear">No match</p><p class="mono small">${txl(q,true)}</p><p class="muted small">Not among the ${n0(chain.count)} Solana protected order flow sandwiches in this dataset. A missing signature does not mean your protection worked — it may be outside the paper's window, on a different DEX, or hit by a smaller bot.</p>`; return; }
+    if(my===seq) renderSol(hits,q);
+  }catch(e){ o.innerHTML=`<p class="verdict">Error</p><p class="muted small">Could not load data (${esc(e.message)}). Try again.</p>`; }
+}
+
+/* Lookups are async; only the most recent one may write to #out. */
+let seq=0;
+function setChain(key){ chain=CHAINS[key]; $("chain-sel").value=key; updateScope(); }
+
+const pick=a=>a[Math.floor(Math.random()*a.length)];
+/* A random victim on the selected chain, looked up like a pasted hash. */
+async function example(){
+  const my=++seq, o={set innerHTML(h){ if(my===seq) out.innerHTML=h; }};
+  o.innerHTML=`<p class="muted small">picking an example…</p>`;
+  try{
+    let h;
+    if(chain.solana){
+      const shard=Math.floor(Math.random()*4096).toString(16).padStart(3,"0");
+      const idx=new Uint8Array(await loadBin(`${chain.data}${chain.idx}/${shard}.bin`));
+      const e=new DataView(idx.buffer, Math.floor(Math.random()*(idx.length/16))*16, 16);
+      h=pick((await solRecord(e.getUint8(8), e.getUint32(12,true), e.getUint16(10,true))).V);
+    }else{
+      const sh=await load(`${chain.s}/${Math.floor(Math.random()*chain.ns)}.json`);
+      h=pick(pick(sh).V).h;
+    }
+    $("q").value=h; lookup(h);
+  }catch(e){ o.innerHTML=`<p class="verdict">Error</p><p class="muted small">Could not load data (${esc(e.message)}). Try again.</p>`; }
 }
 
 async function lookup(raw){
+  const my=++seq, o={set innerHTML(h){ if(my===seq) out.innerHTML=h; }};
+  if(!chain.solana&&!/[0-9a-fA-F]{64}/.test(String(raw))&&SOL_SIG.test(String(raw))) setChain("solana");
+  if(chain.solana) return lookupSol(raw);
   const q=parseHash(raw, chain);
   if(!q){
-    if(/^\s*[1-9A-HJ-NP-Za-km-z]{86,88}\s*$/.test(String(raw))){ out.innerHTML=`<p class="verdict">Unsupported</p><p>That looks like a Solana signature. This tool covers Ethereum, Base and Tron.</p>`; return; }
-    out.innerHTML=`<p class="verdict">Invalid</p><p>That is not a ${chain.label} transaction hash. Paste it directly, or an explorer link.</p>`; return;
+    o.innerHTML=`<p class="verdict">Invalid</p><p>That is not a ${chain.label} transaction hash. Paste it directly, or an explorer link.</p>`; return;
   }
   $("q").value=q;
   if(location.hash!=="#"+q) history.replaceState(null,"","#"+q);
-  out.innerHTML=`<p class="muted small">searching ${short(q)}…</p>`;
+  o.innerHTML=`<p class="muted small">searching ${short(q)}…</p>`;
   try{
     let rec=await searchSet(chain.idx, chain.s, chain.ns, q);
     let viaReorg=false;
@@ -235,17 +478,21 @@ async function lookup(raw){
       rec=await searchSet(chain.fallback.idx, chain.fallback.s, chain.fallback.ns, q);
       viaReorg=!!rec;
     }
-    if(!rec){ out.innerHTML=`<p class="verdict clear">No match</p><p class="mono small">${txl(q,true)}</p><p class="muted small">Not among the ${n0(chain.count)} ${chain.label} private-flow sandwiches in this dataset. A missing hash does not mean your protection worked — it may have been public, outside the paper's window, on a different DEX, or hit by a smaller bot.</p>`; return; }
-    render(rec,q,viaReorg);
-  }catch(e){ out.innerHTML=`<p class="verdict">Error</p><p class="muted small">Could not load data (${esc(e.message)}). Try again.</p>`; }
+    if(!rec){ o.innerHTML=`<p class="verdict clear">No match</p><p class="mono small">${txl(q,true)}</p><p class="muted small">Not among the ${n0(chain.count)} ${chain.label} ${chain===CHAINS.ethereum?"private-flow":"protected order flow"} sandwiches in this dataset. A missing hash does not mean your protection worked — it may ${chain===CHAINS.ethereum?"have been public, be ":"be "}outside the paper's window, on a different DEX, or hit by a smaller bot.</p>`; return; }
+    if(my===seq) render(rec,q,viaReorg);
+  }catch(e){ o.innerHTML=`<p class="verdict">Error</p><p class="muted small">Could not load data (${esc(e.message)}). Try again.</p>`; }
 }
-$("chain-sel").addEventListener("change",e=>{ chain=CHAINS[e.target.value]; updateScope(); });
+/* Switching chains shows that chain's example sandwich. */
+$("chain-sel").addEventListener("change",e=>{ setChain(e.target.value); $("q").value=chain.example; lookup(chain.example); });
 $("f").addEventListener("submit",e=>{e.preventDefault(); lookup($("q").value)});
-$("q").addEventListener("paste",e=>{const t=(e.clipboardData||window.clipboardData)?.getData("text"); if(t&&/(0x)?[0-9a-fA-F]{64}/.test(t)){e.preventDefault(); lookup(t)}});
+$("ex").addEventListener("click",example);
+$("q").addEventListener("paste",e=>{const t=(e.clipboardData||window.clipboardData)?.getData("text"); if(t&&(/(0x)?[0-9a-fA-F]{64}/.test(t)||SOL_SIG.test(t))){e.preventDefault(); lookup(t)}});
 window.addEventListener("hashchange",()=>{const h=location.hash.slice(1); if(h) lookup(h)});
 updateScope();
 const h0=location.hash.slice(1);
-if(/^0x[0-9a-fA-F]{64}$/.test(h0)) lookup(h0); else lookup("0x05162b2f10dcb08a44d02f2479845315c32b635b2e1d0a2ebb8f45820a28d95a");
+if(/^0x[0-9a-fA-F]{64}$/.test(h0)) lookup(h0);
+else if(/^[1-9A-HJ-NP-Za-km-z]{86,88}$/.test(h0)){ setChain("solana"); lookup(h0); }
+else lookup(CHAINS.ethereum.example);
 })();
 </script>
 
