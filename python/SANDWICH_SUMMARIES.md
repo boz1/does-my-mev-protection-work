@@ -150,6 +150,8 @@ the full population can require millions of RPC requests and substantial time.
 | `span` | Precisely defined same-block index distance and transaction counts |
 | `bot_candidates` | Shared front/back transaction senders or Solana fee payers; a fee payer can be a relayer |
 | `private_submission` | Null: ordinary mined-transaction RPC data does not establish whether submission was private |
+| `victim_txs[].exposure` | Ethereum only: observed source names, status, and the original per-victim dataset labels |
+| `exposure_note` | Ethereum only: explains the limits of source attribution and missing labels |
 | `coverage`, `warnings` | Missing transactions/indices, decoder failures, unresolved recognized swaps, and ordering caveats |
 
 Each transaction includes its hash/signature, block/slot, transaction index,
@@ -157,6 +159,53 @@ UTC timestamp, sender or fee payer, success flag, and complete native `swaps`
 array from the chain decoder. `decoding` retains the other decoder fields,
 including warnings, unsupported activity, EVM conversions/settlements/summaries,
 and execution evidence. Raw token amounts remain exact strings.
+
+### Ethereum exposure sources
+
+For Ethereum website records, the CLI and `summarize_row(record, chain='ethereum')`
+preserve each victim's `V[].L` evidence. JSON output includes:
+
+```json
+{
+  "status": "observed",
+  "sources": ["MEV-Share", "MEVBlocker"],
+  "evidence_origin": "input_dataset",
+  "raw_labels": {"s": {"hints": "hash"}, "m": {"n": 2}}
+}
+```
+
+The label mapping is `s` → MEV-Share, `m` → MEVBlocker, `k: 1` → Blink,
+and `r: 1` → Merkle. Blink and Merkle labels indicate full-transaction sharing
+according to the dataset. Multiple sources are retained; no single route is
+chosen as the cause of the attack. All original evidence, including MEV-Share
+sources/hints/builders/refund and MEVBlocker observation counts/timestamps, stays
+in `raw_labels`. Future label keys are also preserved.
+
+Text output adds a line below each Ethereum victim, for example:
+
+```text
+       Exposure (dataset): MEV-Share, MEVBlocker
+```
+
+`status` is `observed` when a known source is labeled, `no_labels` for an empty
+label object or disabled flags, `not_provided` when input evidence is absent,
+and `unrecognized_labels` when only unknown label keys are supplied. Empty or
+missing labels do not imply public submission, effective protection, or that a
+route was ruled out. These are dataset observations, not independently verified
+causal attribution; the separate `private_submission` field remains null.
+
+For the explicit hash API, pass the original website record as
+`summarize_sandwich(front, back, victims, chain='ethereum', source_record=record)`.
+`fetch_sandwich` accepts the same optional argument. Every leg group must match
+the source record; evidence is attached by normalized victim hash, not array
+position. Invalid labels or a mismatched record fail before RPC requests.
+
+`--raw-output` saves the optional `exposure_labels` mapping inside the existing
+`sandwich-raw-v1` bundle, so `--from-json` retains the labels without network
+access. Older bundles and hash-only inputs remain supported and report
+`not_provided`; RPC data alone cannot reconstruct this evidence. Reading a full
+website record is necessary: `read_row()` intentionally returns only hash groups.
+Base, Solana, and other chains do not interpret the Ethereum-specific labels.
 
 Classification rules:
 

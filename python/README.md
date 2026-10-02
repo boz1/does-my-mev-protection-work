@@ -71,6 +71,14 @@ per leg, and `tight`, `within_block`, `cross_block` or `unknown` classification.
 Tight means one same-block consecutive sequence of all fronts, then all victims,
 then all backs. Interleaved roles and missing data remain explicit.
 
+Ethereum website rows also retain the per-victim `V[].L` exposure labels from
+MEV-Share, MEVBlocker, Blink, and Merkle. Each victim's JSON `exposure` includes
+the source names and original evidence; text output prints the sources below
+that victim. Saved bundles retain this evidence for offline replay. Empty or
+missing labels remain unknown, and observed routes are not proof of causality.
+See [Ethereum exposure sources](SANDWICH_SUMMARIES.md#ethereum-exposure-sources)
+for the Python API and status fields.
+
 These decoders cover implemented protocol variants; they do not guarantee every
 possible swap. Unsupported activity and missing evidence are retained in output.
 The summary describes supplied candidate legs and does not independently prove

@@ -73,6 +73,149 @@ class InputTests(unittest.TestCase):
                 with self.assertRaises(s.SummaryError):s.read_row(p,n)
 
 
+class EthereumExposureTests(unittest.TestCase):
+    def record(self, raw, labels):
+        return {'f': raw['row'][0], 'b': raw['row'][1],
+                'V': [dict(h=h, **({'L': value} if value is not None else {}))
+                      for h, value in zip(raw['row'][2], labels, strict=True)]}
+
+    def test_all_sources_and_details_survive_fetch_and_attach_by_hash(self):
+        raw = evm_bundle([(100, i) for i in range(4)], chain='ethereum')
+        labels = {'s': {'src': ['Protect', 'event stream'], 'hints': 'hash,special_logs',
+                        'builders': 1, 'refund': 0.0},
+                  'm': {'n': 4, 'first': 1725494400123}, 'k': 1, 'r': 1}
+        record = self.record(raw, [labels, {}])
+        record['V'].reverse()  # Evidence follows the hash, never the array position.
+        original = copy.deepcopy(record)
+        with patch.object(s, '_prepare_transaction', side_effect=lambda chain, h, url, timeout:
+                          (copy.deepcopy(raw['transactions'][h]), [])), \
+             patch.object(s.evm.Rpc, 'call', return_value=raw['blocks']['100']):
+            fetched = s.fetch_sandwich(*raw['row'], chain='ethereum', source_record=record,
+                                      rpc_url='https://example.invalid/secret')
+        self.assertNotIn('secret', json.dumps(fetched))
+        out = s.summarize_bundle(json.loads(json.dumps(fetched)))
+        exposure = out['victim_txs'][0]['exposure']
+        self.assertEqual(exposure['sources'], ['MEV-Share', 'MEVBlocker', 'Blink', 'Merkle'])
+        self.assertEqual(exposure['raw_labels'], labels)
+        self.assertEqual(exposure['status'], 'observed')
+        self.assertEqual(exposure['evidence_origin'], 'input_dataset')
+        self.assertEqual(out['victim_txs'][1]['exposure']['status'], 'no_labels')
+        self.assertIsNone(out['private_submission'])
+        self.assertNotIn('exposure', out['front_txs'][0])
+        self.assertIn('not proof', out['exposure_note'])
+        text = s.render_text(out)
+        self.assertIn('Exposure (dataset): MEV-Share, MEVBlocker, Blink (full transaction), Merkle (full transaction)', text)
+        self.assertIn('no labels supplied; source unknown', text)
+        exposure['raw_labels']['s']['src'].append('changed')
+        self.assertEqual(record, original)
+        self.assertEqual(fetched['exposure_labels'][raw['row'][2][0]], labels)
+
+    def test_absent_empty_future_and_false_labels_remain_distinct(self):
+        raw = evm_bundle([(100, i) for i in range(6)], chain='ethereum')
+        supplied = [None, {}, {'future_route': {'observed': True}}, {'k': 0, 'r': False}]
+        raw['exposure_labels'] = {h: labels for h, labels in zip(raw['row'][2], supplied)
+                                  if labels is not None}
+        out = s.summarize_bundle(raw)
+        exposures = [v['exposure'] for v in out['victim_txs']]
+        self.assertEqual([v['status'] for v in exposures],
+                         ['not_provided', 'no_labels', 'unrecognized_labels', 'no_labels'])
+        self.assertEqual([v['raw_labels'] for v in exposures], supplied)
+        self.assertTrue(all(not v['sources'] for v in exposures))
+        self.assertIsNone(exposures[0]['evidence_origin'])
+        text = s.render_text(out)
+        self.assertIn('Exposure: not provided in input', text)
+        self.assertIn('unrecognized labels; see JSON', text)
+
+    def test_empty_observation_details_still_indicate_the_named_source(self):
+        raw = evm_bundle([(100, i) for i in range(3)], chain='ethereum')
+        raw['exposure_labels'] = {raw['row'][2][0]: {'s': {}, 'm': {}, 'future_route': 1}}
+        out = s.summarize_bundle(raw)
+        self.assertEqual(out['victim_txs'][0]['exposure']['sources'], ['MEV-Share', 'MEVBlocker'])
+        self.assertIn('additional unrecognized labels in JSON', s.render_text(out))
+
+    def test_old_hash_only_bundles_and_other_chains_do_not_gain_attribution(self):
+        for chain in ('base', 'ethereum'):
+            out = s.summarize_bundle(evm_bundle([(100, i) for i in range(3)], chain=chain))
+            if chain == 'ethereum':
+                self.assertEqual(out['victim_txs'][0]['exposure']['status'], 'not_provided')
+            else:
+                self.assertNotIn('exposure', out['victim_txs'][0])
+                self.assertNotIn('Exposure', s.render_text(out))
+        out = s.summarize_bundle(json.loads(FIXTURE.read_text()))
+        self.assertNotIn('exposure', out['victim_txs'][0])
+
+    def test_wrong_record_and_malformed_labels_rejected_before_rpc(self):
+        raw = evm_bundle([(100, i) for i in range(3)], chain='ethereum')
+        record = self.record(raw, [{'k': 1}])
+        bad = []
+        for key in ('f', 'b'):
+            other = copy.deepcopy(record); other[key] = [tx_hash(90)]; bad.append(other)
+        other = copy.deepcopy(record); other['V'][0]['h'] = tx_hash(90); bad.append(other)
+        for labels in (None, [], {'s': 'yes'}, {'m': 1}, {'k': '1'}, {'r': 2}):
+            other = copy.deepcopy(record); other['V'][0]['L'] = labels; bad.append(other)
+        with patch.object(s, '_prepare_transaction') as fetch:
+            for other in bad:
+                with self.subTest(record=other), self.assertRaises(s.SummaryError):
+                    s.fetch_sandwich(*raw['row'], chain='ethereum', source_record=other,
+                                    rpc_url='https://example.invalid')
+            fetch.assert_not_called()
+
+    def test_replay_rejects_labels_for_non_victim_hashes(self):
+        raw = evm_bundle([(100, i) for i in range(3)], chain='ethereum')
+        for labels in ({tx_hash(90): {}}, {raw['row'][0][0]: {}}, {raw['row'][2][0]: []}, []):
+            raw['exposure_labels'] = labels
+            with self.subTest(labels=labels), self.assertRaises(s.SummaryError):
+                s.summarize_bundle(raw)
+
+    def test_hash_case_normalized_and_duplicate_evidence_rejected(self):
+        raw = evm_bundle([(100, i) for i in range(12)], groups=[[0], [11], [10]], chain='ethereum')
+        h = raw['row'][2][0]
+        upper = '0x' + h[2:].upper()
+        raw['exposure_labels'] = {upper: {'r': True}}
+        self.assertEqual(s.summarize_bundle(raw)['victim_txs'][0]['exposure']['sources'], ['Merkle'])
+        raw['exposure_labels'][h] = {'k': 1}
+        with self.assertRaisesRegex(s.SummaryError, 'Duplicate victim hash'):
+            s.summarize_bundle(raw)
+
+    def test_python_apis_preserve_record_evidence_even_when_rpc_fails(self):
+        raw = evm_bundle([(100, i) for i in range(3)], chain='ethereum')
+        record = self.record(raw, [{'k': 1}])
+        with patch.object(s, '_prepare_transaction', side_effect=s.evm.RpcError('RPC error')):
+            a = s.summarize_row(record, chain='ethereum', rpc_url='https://example.invalid')
+            b = s.summarize_sandwich(*raw['row'], chain='ethereum', source_record=record,
+                                    rpc_url='https://example.invalid')
+        self.assertEqual(a, b)
+        self.assertEqual(a['coverage']['missing_transactions'], 3)
+        self.assertEqual(a['victim_txs'][0]['exposure']['sources'], ['Blink'])
+        self.assertIn('Blink (full transaction)', s.render_text(a))
+
+    def test_cli_json_jsonl_inline_and_saved_replay_preserve_labels(self):
+        raw = evm_bundle([(100, i) for i in range(3)], chain='ethereum')
+        record = self.record(raw, [{'s': {'hints': 'hash'}, 'm': {'n': 2}}])
+        other = self.record(raw, [{}])
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp = Path(tmp)
+            shard = tmp/'shard.json'; shard.write_text(json.dumps([other, record]))
+            jsonl = tmp/'rows.jsonl'; jsonl.write_text(json.dumps(other)+'\n'+json.dumps(record)+'\n')
+            saved, output, replay = tmp/'raw.json', tmp/'summary.json', tmp/'replay.json'
+            for argv in ([str(shard), '--row', '2'], [str(jsonl), '--row', '2'],
+                         ['--row-json', json.dumps(record)]):
+                with self.subTest(argv=argv), \
+                     patch.object(s, '_prepare_transaction', side_effect=lambda chain, h, url, timeout:
+                                  (copy.deepcopy(raw['transactions'][h]), [])), \
+                     patch.object(s.evm.Rpc, 'call', return_value=raw['blocks']['100']):
+                    self.assertEqual(s.main([*argv, '--chain', 'ethereum', '--rpc-url', 'https://example.invalid',
+                                             '--raw-output', str(saved), '--output', str(output)]), 0)
+                summary = json.loads(output.read_text())
+                self.assertEqual(summary['victim_txs'][0]['exposure']['sources'], ['MEV-Share', 'MEVBlocker'])
+                with patch.object(s, '_prepare_transaction', side_effect=AssertionError('offline')), \
+                     patch.object(s.evm.Rpc, 'call', side_effect=AssertionError('offline')):
+                    self.assertEqual(s.main(['--from-json', str(saved), '--output', str(replay)]), 0)
+                    self.assertEqual(json.loads(replay.read_text()), summary)
+                    self.assertEqual(s.main(['--from-json', str(saved), '--format', 'text', '--output', str(replay)]), 0)
+                self.assertIn('Exposure (dataset): MEV-Share, MEVBlocker', replay.read_text())
+
+
 class ClassificationTests(unittest.TestCase):
     def test_tight_single_victim_and_exact_span_counts(self):
         o=s.summarize_bundle(evm_bundle([(100,10),(100,11),(100,12)]))
