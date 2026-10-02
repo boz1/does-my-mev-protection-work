@@ -242,7 +242,7 @@ function render(rec, q, viaReorg){
   const ty=TYPE[rec.t]||rec.t;
 
   const sole=priv.length===1;
-  const cause=v=>viaReorg ? "reorg exposure: the block carrying it was broadcast, then reorged out; never seen individually in the public mempool"
+  const cause=v=>viaReorg ? "reorg exposure: the block carrying it was broadcast, then reorged out"
     : chain.causes ? (chain.causes[rec.bot]||"exposure source not attributed")
     : chain.cause ? chain.cause
     : reason(v.L);
