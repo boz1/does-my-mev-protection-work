@@ -255,7 +255,7 @@ function render(rec, q, viaReorg){
     : reason(v.L);
   const nv=`${priv.length}${chain===CHAINS.ethereum?" private":""} victim${sole?"":"s"}`;
   const summary=me
-    ? `<p class="summary hit">Sandwiched on ${rec.d} by bot ${adl(rec.bot)} in a ${ty} attack${chain.cause?`, ${chain.cause}`:""}.</p>`
+    ? `<p class="summary hit">Sandwiched on ${rec.d} by bot ${adl(rec.bot)} in a ${ty} attack.</p>`
     : `<p class="summary">${role[0].toUpperCase()+role.slice(1)} of a ${ty} sandwich on ${rec.d} against ${nv}${viaReorg?", exposed through a chain reorg":""}${rec.p==null?"":`. The bot ${rec.p<0?"lost":"made"} ${amt(Math.abs(rec.p),X)} before fees`}.</p>`;
 
   const head=me
