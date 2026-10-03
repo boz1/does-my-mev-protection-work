@@ -264,8 +264,10 @@ function render(rec, q, viaReorg){
 
   const vics=priv.map(v=>`<div class="vic"><p class="hash mono">${v.h===q?"▶ ":""}${txl(v.h)}</p><p class="reason">${cause(v)}</p></div>`).join("");
 
-  /* Exposure is attributed per victim on Ethereum (OFA labels, reorgs) and per bot on Base only. */
-  const exposure=chain===CHAINS.ethereum||chain===CHAINS.base;
+  /* render() only serves Ethereum/Base/Tron (Solana has its own renderSol), and all
+     three attribute exposure: per victim on Ethereum (OFA labels, reorgs), per bot
+     on Base, per chain on Tron. */
+  const exposure=true;
   out.innerHTML=`${head}
   ${seqHTML(rec,q,X,Y,ty)}
   ${exposure?`<p class="label">Exposure</p>
@@ -410,7 +412,13 @@ function renderSol(hits, q){
   const row=(role,h,detail="")=>`<div class="seq-row"><span class="role">${role}</span><span class="mono">${txl(h)}${h===q?' <span class="you">← you</span>':""}</span><span class="muted mono">${detail}</span></div>`;
   const block=(h,i)=>{
     const head=hits.length>1?`<p class="label">Sandwich ${i+1} of ${hits.length}</p>`:"";
-    const meta=`<p class="meta"><b>${h.d}</b> · bot ${solAcct(h.bot)} · ${h.t} attack on ${h.prog} · pool ${solAcct(h.pool)}</p>`;
+    /* With one sandwich the summary sentence already states the date, bot,
+       type and program; repeat only pool, which it doesn't cover. With
+       several, each block needs its own full line since the summary only
+       gives the aggregate. */
+    const meta=hits.length>1
+      ? `<p class="meta"><b>${h.d}</b> · bot ${solAcct(h.bot)} · ${h.t} attack on ${h.prog} · pool ${solAcct(h.pool)}</p>`
+      : `<p class="meta">pool ${solAcct(h.pool)}</p>`;
     const front=h.f.map((x,k)=>row("Front",x, k===0?`${solAmt(h.fai,h.mintIn)} → ${solAmt(h.fao,h.mintOut)}${h.f.length>1?` (all ${h.f.length} legs)`:""}`:"split leg")).join("");
     const back=h.b.map((x,k)=>row("Back",x, k===0?`${solAmt(h.bai,h.mintOut)} → ${solAmt(h.bao,h.mintIn)}${h.b.length>1?` (all ${h.b.length} legs)`:""}`:"split leg")).join("");
     const gap=h.bs===h.fs?"same slot":`${n0(h.bs-h.fs)} slot${h.bs-h.fs===1?"":"s"} later`;
@@ -429,7 +437,7 @@ function renderSol(hits, q){
   let summary;
   if(victim){
     const vh=hits.filter(h=>h.role===2), bots=[...new Set(vh.map(h=>h.bot))];
-    if(vh.length===1) summary=`Sandwiched ${dateSpan(vh)} by bot ${solAcct(vh[0].bot)}, which ${made(vh[0].p,vh[0].mintIn)} before fees.`;
+    if(vh.length===1) summary=`Sandwiched ${dateSpan(vh)} by bot ${solAcct(vh[0].bot)} in a ${vh[0].t} attack on ${vh[0].prog}, which ${made(vh[0].p,vh[0].mintIn)} before fees.`;
     else{
       const p=sum(vh), one=bots.length===1;
       const who=one?`bot ${solAcct(bots[0])}`:`${word(bots.length)} bots`;
@@ -437,8 +445,9 @@ function renderSol(hits, q){
         (p==null?".":`, which ${p<0?"lost":"made"} ${sumAmt(Math.abs(p),SOL_MINT)}${one?"":" between them"} before fees.`);
     }
   }else{
-    const nv=hits.reduce((t,h)=>t+h.V.length,0), p=sum(hits);
-    summary=`${cap(roleName[hits[0].role])} of ${hits.length===1?"a sandwich":`${word(hits.length)} sandwiches`} ${dateSpan(hits)} against ${nv} victim${nv===1?"":"s"}${hits.length>1?" in total":""}`+
+    const nv=hits.reduce((t,h)=>t+h.V.length,0), p=sum(hits), one=hits.length===1;
+    const detail=one?` in a ${hits[0].t} attack on ${hits[0].prog}`:"";
+    summary=`${cap(roleName[hits[0].role])} of ${one?"a sandwich":`${word(hits.length)} sandwiches`}${detail} ${dateSpan(hits)} against ${nv} victim${nv===1?"":"s"}${hits.length>1?" in total":""}`+
       (p==null?".":`. The bot ${made(p,hits[0].mintIn)} before fees.`);
   }
   out.innerHTML=`<p class="verdict${victim?" hit":""}">${victim?"Sandwiched":"Attacker leg"}</p><p class="summary${victim?" hit":""}">${summary}</p>${blocks}`;
