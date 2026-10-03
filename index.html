@@ -174,14 +174,15 @@ const CHAINS={
      12 bits of the raw signature) holds sorted 16-byte entries: u64 key (first
      8 signature bytes, big-endian), u8 part, u8 role (0 front, 1 back, 2 victim),
      u16 record length, u32 record offset (little-endian). A record in
-     data_v2/part-NNNN.bin is u8 n_front, u8 n_back, u16 n_victims, u32 front and
+     data_v3/part-NNNN.bin is u8 n_front, u8 n_back, u16 n_victims, u32 front and
      back slot, u16 day (since 2023-01-01), u8 type, u8 flags (1 profitable,
      2 evasive), u8 program, a reserved byte, then 32-byte bot, pool, mint in,
      mint out (+ back-leg wallet if evasive), five f64 amounts (front in/out,
      back in/out, profit; token units), then the 64-byte signatures (front legs,
-     back legs, victims). Written by export_solana_site_v2.py. */
+     back legs, victims), then per signature an i16 slot offset from the front slot
+     and a u16 position in the slot. Written by export_solana_site_v3.py. */
   solana:{
-    label:"Solana", example:"4DLVgYoEZx1nrNjC44hGTkGLvWmGybjuzXdWV1gUT2DbLwFf6VqR9xex9zgamXaC8DWPTUxGUCECgZw59jbEs41u", protection:"Protection: no public mempool. Transactions are forwarded only to the upcoming leaders.", count:28042725, bots:8631, solana:true, rec:"data_v2", idx:"index_v2",
+    label:"Solana", example:"4DLVgYoEZx1nrNjC44hGTkGLvWmGybjuzXdWV1gUT2DbLwFf6VqR9xex9zgamXaC8DWPTUxGUCECgZw59jbEs41u", protection:"Protection: no public mempool. Transactions are forwarded only to the upcoming leaders.", count:28042725, bots:8631, solana:true, rec:"data_v3", idx:"index_v3",
     data:"https://huggingface.co/datasets/Lioba/solana_sandwich_attack_dataset/resolve/main/",
     txUrl:h=>`https://solscan.io/tx/${h}`,
   },
@@ -231,12 +232,20 @@ function seqHTML(rec,q,X,Y,ty){
     const you=h===q;
     rows.push(`<div class="seq-row"><span class="role">${role}</span><span class="mono">${txl(h)}${you?' <span class="you">← you</span>':""}</span><span class="muted mono">${detail}</span></div>`);
   };
-  rows.push(`<div class="block-label">Block ${n0(rec.fb)}</div>`);
-  rec.f.forEach((h,i)=>row("Front",h, i===0?`${amt(rec.fai,X)} → ${amt(rec.fao,Y)}`:"split leg"));
-  rec.V.forEach(v=>row("Victim",v.h, `${chain===CHAINS.ethereum?"private, ":""}from ${adl(v.a)}`));
-  rows.push(`<div class="gap-note">${ty} · ${rec.ta!=null?`${n0(rec.ta)} transactions from front leg to back leg`:`${rec.ba} block${rec.ba===1?"":"s"} between the legs`}</div>`);
-  if(rec.bb!==rec.fb) rows.push(`<div class="block-label">Block ${n0(rec.bb)} <span class="muted">(+${n0(rec.bb-rec.fb)})</span></div>`);
-  rec.b.forEach((h,i)=>row("Back",h, i===0?`${amt(rec.bai,Y)} → ${amt(rec.bao,X)}`:"split leg"));
+  const gap=`<div class="gap-note">${ty} · ${rec.ta!=null?`${n0(rec.ta)} transactions from front leg to back leg`:`${rec.ba} block${rec.ba===1?"":"s"} between the legs`}</div>`;
+  /* Every transaction under the block it landed in, in execution order
+     (fp/bp/V[i].p: [block, position]); the gap note sits before the back leg. */
+  const items=[
+    ...rec.f.map((h,i)=>({role:"Front",h,p:rec.fp[i],d:i===0?`${amt(rec.fai,X)} → ${amt(rec.fao,Y)}`:"split leg"})),
+    ...rec.V.map(v=>({role:"Victim",h:v.h,p:v.p,d:`${chain===CHAINS.ethereum?"private, ":""}from ${adl(v.a)}`})),
+    ...rec.b.map((h,i)=>({role:"Back",h,p:rec.bp[i],d:i===0?`${amt(rec.bai,Y)} → ${amt(rec.bao,X)}`:"split leg"})),
+  ].sort((a,b)=>a.p[0]-b.p[0]||a.p[1]-b.p[1]);
+  const b0=items[0].p[0]; let cur=null, gapDone=false;
+  for(const it of items){
+    if(it.role==="Back"&&!gapDone){ rows.push(gap); gapDone=true; }
+    if(it.p[0]!==cur){ cur=it.p[0]; rows.push(`<div class="block-label">Block ${n0(cur)}${cur===b0?"":` <span class="muted">(+${n0(cur-b0)})</span>`}</div>`); }
+    row(it.role,it.h,it.d);
+  }
   return rows.join("");
 }
 
@@ -334,10 +343,15 @@ function parseSol(rec){
   const bot=key(i), pool=key(i+32), mintIn=key(i+64), mintOut=key(i+96); i+=128;
   let botBack=bot; if(flags&2){ botBack=key(i); i+=32; }
   const a=[0,1,2,3,4].map(k=>dv.getFloat64(i+8*k,true)); i+=40;
-  const sigs=[]; for(let k=0;k<nf+nb+nv;k++) sigs.push(b58encode(rec.subarray(i+64*k,i+64*(k+1))));
-  if(i+64*(nf+nb+nv)!==rec.length) throw new Error("bad record");
+  const n=nf+nb+nv, fs=dv.getUint32(4,true);
+  const sigs=[]; for(let k=0;k<n;k++) sigs.push(b58encode(rec.subarray(i+64*k,i+64*(k+1))));
+  i+=64*n;
+  /* Per signature: slot offset from the front slot (i16) and position in the slot (u16). */
+  const pos=[]; for(let k=0;k<n;k++) pos.push([fs+dv.getInt16(i+4*k,true), dv.getUint16(i+4*k+2,true)]);
+  if(i+4*n!==rec.length) throw new Error("bad record");
   return {f:sigs.slice(0,nf), b:sigs.slice(nf,nf+nb), V:sigs.slice(nf+nb),
-    fs:dv.getUint32(4,true), bs:dv.getUint32(8,true),
+    fp:pos.slice(0,nf), bp:pos.slice(nf,nf+nb), vp:pos.slice(nf+nb),
+    fs, bs:dv.getUint32(8,true),
     d:new Date(Date.UTC(2023,0,1)+dv.getUint16(12,true)*864e5).toISOString().slice(0,10),
     t:SOL_TYPES[rec[14]], ok:!!(flags&1), evasive:!!(flags&2), prog:SOL_PROGRAMS[rec[16]],
     bot, botBack, pool, mintIn, mintOut, fai:a[0], fao:a[1], bai:a[2], bao:a[3], p:a[4]};
@@ -418,15 +432,21 @@ function renderSol(hits, q){
     const meta=hits.length>1
       ? `<p class="meta"><b>${h.d}</b> · bot ${solAcct(h.bot)} · ${h.t} attack on ${h.prog} · pool ${solAcct(h.pool)}</p>`
       : "";
-    const front=h.f.map((x,k)=>row("Front",x, k===0?`${solAmt(h.fai,h.mintIn)} → ${solAmt(h.fao,h.mintOut)}${h.f.length>1?` (all ${h.f.length} legs)`:""}`:"split leg")).join("");
-    const back=h.b.map((x,k)=>row("Back",x, k===0?`${solAmt(h.bai,h.mintOut)} → ${solAmt(h.bao,h.mintIn)}${h.b.length>1?` (all ${h.b.length} legs)`:""}`:"split leg")).join("");
     const evasive=h.evasive?`<div class="gap-note">evasive: back leg from linked wallet ${solAcct(h.botBack)}</div>`:"";
     const profit=`<div class="gap-note">bot ${h.ok?"profit":"result"} ${h.p>=0?"+":""}${solAmt(h.p,h.mintIn)} before fees</div>`;
-    /* Match the EVM chains' convention: one block/slot label when front and
-       back share it, a second "(+N)" label only when they don't. */
-    const slot2=h.bs===h.fs?"":`<div class="block-label">Slot ${n0(h.bs)} <span class="muted">(+${n0(h.bs-h.fs)})</span></div>`;
-    return `${head}${meta}<div class="block-label">Slot ${n0(h.fs)}</div>${front}${h.V.map(x=>row("Victim",x)).join("")}`+
-      `${slot2}${back}${evasive}${profit}`;
+    /* Same convention as the EVM chains: every transaction under the slot it
+       landed in, in execution order, "(+N)" for each later slot. */
+    const items=[
+      ...h.f.map((x,k)=>({role:"Front",x,p:h.fp[k],d:k===0?`${solAmt(h.fai,h.mintIn)} → ${solAmt(h.fao,h.mintOut)}${h.f.length>1?` (all ${h.f.length} legs)`:""}`:"split leg"})),
+      ...h.V.map((x,k)=>({role:"Victim",x,p:h.vp[k],d:""})),
+      ...h.b.map((x,k)=>({role:"Back",x,p:h.bp[k],d:k===0?`${solAmt(h.bai,h.mintOut)} → ${solAmt(h.bao,h.mintIn)}${h.b.length>1?` (all ${h.b.length} legs)`:""}`:"split leg"})),
+    ].sort((a,b)=>a.p[0]-b.p[0]||a.p[1]-b.p[1]);
+    let seqh="", cur=null; const s0=items[0].p[0];
+    for(const it of items){
+      if(it.p[0]!==cur){ cur=it.p[0]; seqh+=`<div class="block-label">Slot ${n0(cur)}${cur===s0?"":` <span class="muted">(+${n0(cur-s0)})</span>`}</div>`; }
+      seqh+=row(it.role,it.x,it.d);
+    }
+    return `${head}${meta}${seqh}${evasive}${profit}`;
   };
   /* Sandwich 1 in full; each further one folds into a one-line disclosure holding the same block. */
   const sep=' <span class="sep">·</span> ';
