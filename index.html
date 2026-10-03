@@ -421,11 +421,13 @@ function renderSol(hits, q){
       : `<p class="meta">pool ${solAcct(h.pool)}</p>`;
     const front=h.f.map((x,k)=>row("Front",x, k===0?`${solAmt(h.fai,h.mintIn)} → ${solAmt(h.fao,h.mintOut)}${h.f.length>1?` (all ${h.f.length} legs)`:""}`:"split leg")).join("");
     const back=h.b.map((x,k)=>row("Back",x, k===0?`${solAmt(h.bai,h.mintOut)} → ${solAmt(h.bao,h.mintIn)}${h.b.length>1?` (all ${h.b.length} legs)`:""}`:"split leg")).join("");
-    const gap=h.bs===h.fs?"same slot":`${n0(h.bs-h.fs)} slot${h.bs-h.fs===1?"":"s"} later`;
     const evasive=h.evasive?`<div class="gap-note">evasive: back leg from linked wallet ${solAcct(h.botBack)}</div>`:"";
     const profit=`<div class="gap-note">bot ${h.ok?"profit":"result"} ${h.p>=0?"+":""}${solAmt(h.p,h.mintIn)} before fees</div>`;
+    /* Match the EVM chains' convention: one block/slot label when front and
+       back share it, a second "(+N)" label only when they don't. */
+    const slot2=h.bs===h.fs?"":`<div class="block-label">Slot ${n0(h.bs)} <span class="muted">(+${n0(h.bs-h.fs)})</span></div>`;
     return `${head}${meta}<div class="block-label">Slot ${n0(h.fs)}</div>${front}${h.V.map(x=>row("Victim",x)).join("")}`+
-      `<div class="block-label">Slot ${n0(h.bs)} <span class="muted">(${gap})</span></div>${back}${evasive}${profit}`;
+      `${slot2}${back}${evasive}${profit}`;
   };
   /* Sandwich 1 in full; each further one folds into a one-line disclosure holding the same block. */
   const sep=' <span class="sep">·</span> ';
