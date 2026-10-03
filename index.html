@@ -413,12 +413,11 @@ function renderSol(hits, q){
   const block=(h,i)=>{
     const head=hits.length>1?`<p class="label">Sandwich ${i+1} of ${hits.length}</p>`:"";
     /* With one sandwich the summary sentence already states the date, bot,
-       type and program; repeat only pool, which it doesn't cover. With
-       several, each block needs its own full line since the summary only
-       gives the aggregate. */
+       type, program and pool. With several, each block needs its own full
+       line since the summary only gives the aggregate. */
     const meta=hits.length>1
       ? `<p class="meta"><b>${h.d}</b> · bot ${solAcct(h.bot)} · ${h.t} attack on ${h.prog} · pool ${solAcct(h.pool)}</p>`
-      : `<p class="meta">pool ${solAcct(h.pool)}</p>`;
+      : "";
     const front=h.f.map((x,k)=>row("Front",x, k===0?`${solAmt(h.fai,h.mintIn)} → ${solAmt(h.fao,h.mintOut)}${h.f.length>1?` (all ${h.f.length} legs)`:""}`:"split leg")).join("");
     const back=h.b.map((x,k)=>row("Back",x, k===0?`${solAmt(h.bai,h.mintOut)} → ${solAmt(h.bao,h.mintIn)}${h.b.length>1?` (all ${h.b.length} legs)`:""}`:"split leg")).join("");
     const evasive=h.evasive?`<div class="gap-note">evasive: back leg from linked wallet ${solAcct(h.botBack)}</div>`:"";
@@ -439,7 +438,7 @@ function renderSol(hits, q){
   let summary;
   if(victim){
     const vh=hits.filter(h=>h.role===2), bots=[...new Set(vh.map(h=>h.bot))];
-    if(vh.length===1) summary=`Sandwiched ${dateSpan(vh)} by bot ${solAcct(vh[0].bot)} in a ${vh[0].t} attack on ${vh[0].prog}, which ${made(vh[0].p,vh[0].mintIn)} before fees.`;
+    if(vh.length===1) summary=`Sandwiched ${dateSpan(vh)} by bot ${solAcct(vh[0].bot)} in a ${vh[0].t} attack on ${vh[0].prog} (pool ${solAcct(vh[0].pool)}), which ${made(vh[0].p,vh[0].mintIn)} before fees.`;
     else{
       const p=sum(vh), one=bots.length===1;
       const who=one?`bot ${solAcct(bots[0])}`:`${word(bots.length)} bots`;
@@ -448,7 +447,7 @@ function renderSol(hits, q){
     }
   }else{
     const nv=hits.reduce((t,h)=>t+h.V.length,0), p=sum(hits), one=hits.length===1;
-    const detail=one?` in a ${hits[0].t} attack on ${hits[0].prog}`:"";
+    const detail=one?` in a ${hits[0].t} attack on ${hits[0].prog} (pool ${solAcct(hits[0].pool)})`:"";
     summary=`${cap(roleName[hits[0].role])} of ${one?"a sandwich":`${word(hits.length)} sandwiches`}${detail} ${dateSpan(hits)} against ${nv} victim${nv===1?"":"s"}${hits.length>1?" in total":""}`+
       (p==null?".":`. The bot ${made(p,hits[0].mintIn)} before fees.`);
   }
